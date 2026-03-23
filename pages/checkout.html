@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | AsolStore</title>
+    <meta property="og:title" content="Checkout | AsolStore">
+    <meta property="og:description" content="AsolStore — Gaming, Arte, Ropa y Accesorios con garantía oficial.">
+    <meta property="og:image" content="../assets/logo.svg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages.css">
+    <link rel="icon" type="image/svg+xml" href="../assets/logo.svg">
+    <link rel="stylesheet" href="../css/features.css">
+    <link rel="stylesheet" href="../css/extras.css">
+</head>
+
+<body class="checkout-body">
+
+
+    <header id="mainHeader">
+        <!-- Barra superior roja: logo + typewriter + solo iconos redes -->
+        <div class="header-top">
+            <a href="../index.html" class="header-top-logo-link">
+                <svg class="header-top-logo-svg" viewBox="0 0 680 680" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="680" height="680" fill="transparent" />
+                    <rect x="140" y="140" width="400" height="400" rx="32" fill="#fff" fill-opacity="0.15" />
+                    <path d="M290 140 Q290 118 305 118 L375 118 Q390 118 390 140" fill="none" stroke="#fff"
+                        stroke-width="20" stroke-linecap="round" />
+                    <rect x="155" y="285" width="370" height="230" rx="16" fill="#fff" fill-opacity="0.10" />
+                    <rect x="155" y="277" width="370" height="14" rx="4" fill="rgba(255,255,255,0.25)" />
+                    <text x="340" y="375" text-anchor="middle" font-family="Arial Black,Impact,sans-serif"
+                        font-weight="900" font-size="74" fill="#fff" letter-spacing="3">ASOL</text>
+                    <rect x="175" y="392" width="330" height="2" rx="1" fill="rgba(255,255,255,0.5)" />
+                    <text x="340" y="468" text-anchor="middle" font-family="Arial Black,Impact,sans-serif"
+                        font-weight="900" font-size="48" fill="#fff" letter-spacing="12">STORE</text>
+                </svg>
+            </a>
+            <div class="header-top-marquee">
+                <span class="typewriter-phrase" id="typewriterPhrase"></span>
+                <span class="typewriter-cursor">|</span>
+            </div>
+            <div class="header-top-socials">
+                <a href="https://instagram.com" target="_blank" class="social-link" title="Instagram">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                        <rect x="2" y="2" width="20" height="20" rx="6" stroke="#fff" stroke-width="2" />
+                        <circle cx="12" cy="12" r="5" stroke="#fff" stroke-width="2" />
+                        <circle cx="17.5" cy="6.5" r="1.5" fill="#fff" />
+                    </svg>
+                </a>
+                <a href="https://tiktok.com" target="_blank" class="social-link" title="TikTok">
+                    <svg width="18" height="18" viewBox="0 0 48 48" fill="none">
+                        <path
+                            d="M34 6v2.5c0 3.6 2.9 6.5 6.5 6.5H43v6.5c-2.2.2-4.4-.1-6.5-.8V32c0 6.6-5.4 12-12 12s-12-5.4-12-12 5.4-12 12-12c.7 0 1.4.1 2 .2V26c-.6-.1-1.3-.2-2-.2-3.3 0-6 2.7-6 6s2.7 6 6 6 6-2.7 6-6V6h6z"
+                            fill="#fff" />
+                    </svg>
+                </a>
+                <a href="https://wa.me/51999999999" target="_blank" class="social-link" title="WhatsApp">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                        <path d="M20 12a8 8 0 1 0-14.32 5.906L4 21l3.19-.836A8 8 0 0 0 20 12Z" stroke="#fff"
+                            stroke-width="2" fill="none" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <!-- Navbar: hamburguesa + logo en h1 + búsqueda + iconos -->
+        <div class="header-mid">
+            <button id="menu-toggle" class="hamburger-btn" aria-label="Menú">
+                <span></span><span></span><span></span>
+            </button>
+            <h1 style="line-height:1;margin:0;">
+                <a href="../index.html" class="brand-logo-link">
+                    <img src="../assets/logo.svg" alt="AsolStore" class="brand-logo">
+                </a>
+            </h1>
+            <form class="header-search" action="#" method="get">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="M21 21l-4.35-4.35" />
+                </svg>
+                <input type="text" name="q" placeholder="Busca gaming, arte, ropa...">
+            </form>
+            <div class="header-icons-group">
+                <button class="header-icon-link" id="loginBtn" title="Ingresar">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                    <span>Ingresar</span>
+                </button>
+                <button class="header-icon-link cart-icon-wrap" id="cart-icon" title="Carrito">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                        <line x1="3" y1="6" x2="21" y2="6" />
+                        <path d="M16 10a4 4 0 01-8 0" />
+                    </svg>
+                    <span>Carrito</span>
+                    <span id="cart-badge" style="display:none;">0</span>
+                </button>
+            </div>
+        </div>
+        <!-- Cat-bar acordeón: sin iconos, solo texto + flecha -->
+        <!-- Cat-bar eliminada -->
+        <div class="cat-bar">
+            <div class="cat-accordion">
+                <button class="cat-bar-link">Gaming <svg class="cat-arrow" width="12" height="12" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg></button>
+                <div class="cat-dropdown"><a href="categoria.html?cat=gaming">Consolas</a><a
+                        href="categoria.html?cat=gaming">Accesorios gaming</a><a
+                        href="categoria.html?cat=gaming">Juegos</a></div>
+            </div>
+            <div class="cat-accordion">
+                <button class="cat-bar-link">Arte <svg class="cat-arrow" width="12" height="12" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg></button>
+                <div class="cat-dropdown"><a href="categoria.html?cat=arte">Posters</a><a
+                        href="categoria.html?cat=arte">Figuras</a><a href="categoria.html?cat=arte">Ilustraciones</a>
+                </div>
+            </div>
+            <div class="cat-accordion">
+                <button class="cat-bar-link">Ropa <svg class="cat-arrow" width="12" height="12" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg></button>
+                <div class="cat-dropdown"><a href="categoria.html?cat=ropa">Hoodies</a><a
+                        href="categoria.html?cat=ropa">Camisetas</a><a href="categoria.html?cat=ropa">Gorros</a></div>
+            </div>
+            <div class="cat-accordion">
+                <button class="cat-bar-link">Accesorios <svg class="cat-arrow" width="12" height="12"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9l6 6 6-6" />
+                    </svg></button>
+                <div class="cat-dropdown"><a href="categoria.html?cat=accesorios">Mochilas</a><a
+                        href="categoria.html?cat=accesorios">Llaveros</a><a
+                        href="categoria.html?cat=accesorios">Pins</a></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="checkout-layout">
+
+        <!-- Formulario izquierdo -->
+        <div class="checkout-form-col">
+
+            <!-- Paso 1: Datos personales -->
+            <div class="checkout-step-panel active" id="panel1">
+                <h2 class="checkout-section-title">Datos de entrega</h2>
+                <div class="checkout-form">
+                    <div class="cf-row two">
+                        <div class="cf-field"><label>Nombre</label><input type="text" placeholder="Tu nombre"
+                                id="cfNombre"></div>
+                        <div class="cf-field"><label>Apellido</label><input type="text" placeholder="Tu apellido"
+                                id="cfApellido"></div>
+                    </div>
+                    <div class="cf-field"><label>Correo electrónico</label><input type="email"
+                            placeholder="tu@email.com" id="cfEmail"></div>
+                    <div class="cf-field"><label>Teléfono</label><input type="tel" placeholder="+51 999 999 999"
+                            id="cfTel"></div>
+                    <div class="cf-field"><label>Dirección</label><input type="text" placeholder="Av. Lima 123, Dpto 4B"
+                            id="cfDir"></div>
+                    <div class="cf-row two">
+                        <div class="cf-field"><label>Distrito</label><input type="text" placeholder="Miraflores"
+                                id="cfDistrito"></div>
+                        <div class="cf-field"><label>Ciudad</label><input type="text" placeholder="Lima" id="cfCiudad">
+                        </div>
+                    </div>
+                    <div class="cf-field">
+                        <label>Tipo de envío</label>
+                        <div class="shipping-options">
+                            <label class="shipping-opt active">
+                                <input type="radio" name="shipping" value="24h" checked>
+                                <div class="shipping-opt-inner">
+                                    <span class="shipping-name">Express 24h</span>
+                                    <span class="shipping-price">S/ 12.00</span>
+                                </div>
+                            </label>
+                            <label class="shipping-opt">
+                                <input type="radio" name="shipping" value="48h">
+                                <div class="shipping-opt-inner">
+                                    <span class="shipping-name">Estándar 48h</span>
+                                    <span class="shipping-price">S/ 7.00</span>
+                                </div>
+                            </label>
+                            <label class="shipping-opt">
+                                <input type="radio" name="shipping" value="free">
+                                <div class="shipping-opt-inner">
+                                    <span class="shipping-name">Gratis +S/99</span>
+                                    <span class="shipping-price free">Gratis</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <button class="checkout-next-btn" id="goStep2">Continuar al pago →</button>
+                </div>
+            </div>
+
+            <!-- Paso 2: Pago -->
+            <div class="checkout-step-panel" id="panel2">
+                <h2 class="checkout-section-title">Método de pago</h2>
+                <div class="payment-methods" style="padding:0 0 16px;">
+                    <div class="payment-grid" style="grid-template-columns:repeat(4,1fr);">
+                        <button class="payment-method active" data-method="tarjeta">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="1" y="4" width="22" height="16" rx="2" />
+                                <line x1="1" y1="10" x2="23" y2="10" />
+                            </svg>
+                            <span>Tarjeta</span>
+                        </button>
+                        <button class="payment-method" data-method="yape">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="5" y="2" width="14" height="20" rx="2" />
+                                <circle cx="12" cy="17" r="1" />
+                            </svg>
+                            <span>Yape</span>
+                        </button>
+                        <button class="payment-method" data-method="plin">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 2a10 10 0 100 20A10 10 0 0012 2z" />
+                            </svg>
+                            <span>Plin</span>
+                        </button>
+                        <button class="payment-method" data-method="efectivo">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="2" y="6" width="20" height="12" rx="2" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                            <span>Efectivo</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="checkout-payment-form" id="cpf-tarjeta">
+                    <div class="cf-field"><label>Número de tarjeta</label><input type="text"
+                            placeholder="1234 5678 9012 3456" maxlength="19" id="coCardNum"></div>
+                    <div class="cf-row two">
+                        <div class="cf-field"><label>Vencimiento</label><input type="text" placeholder="MM/AA"
+                                maxlength="5" id="coCardExp"></div>
+                        <div class="cf-field"><label>CVV</label><input type="text" placeholder="123" maxlength="4">
+                        </div>
+                    </div>
+                    <div class="cf-field"><label>Nombre en la tarjeta</label><input type="text"
+                            placeholder="Como aparece en tu tarjeta"></div>
+                </div>
+
+                <div class="checkout-payment-form hidden" id="cpf-yape">
+                    <div class="qr-box">
+                        <div class="qr-placeholder"><svg width="80" height="80" viewBox="0 0 24 24" fill="none"
+                                stroke="#ccc" stroke-width="1">
+                                <rect x="3" y="3" width="7" height="7" />
+                                <rect x="14" y="3" width="7" height="7" />
+                                <rect x="3" y="14" width="7" height="7" />
+                                <rect x="14" y="14" width="3" height="3" />
+                            </svg></div>
+                        <p>Escanea con Yape</p><span>Número: <strong>999 999 999</strong></span>
+                    </div>
+                </div>
+                <div class="checkout-payment-form hidden" id="cpf-plin">
+                    <div class="qr-box">
+                        <div class="qr-placeholder"><svg width="80" height="80" viewBox="0 0 24 24" fill="none"
+                                stroke="#ccc" stroke-width="1">
+                                <rect x="3" y="3" width="7" height="7" />
+                                <rect x="14" y="3" width="7" height="7" />
+                                <rect x="3" y="14" width="7" height="7" />
+                            </svg></div>
+                        <p>Escanea con Plin</p><span>Número: <strong>999 999 999</strong></span>
+                    </div>
+                </div>
+                <div class="checkout-payment-form hidden" id="cpf-efectivo">
+                    <div class="efectivo-box"><svg width="40" height="40" viewBox="0 0 24 24" fill="none"
+                            stroke="#22c55e" stroke-width="1.5">
+                            <rect x="2" y="6" width="20" height="12" rx="2" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
+                        <p>Pago contra entrega</p><span>Nuestro repartidor tendrá un POS disponible.</span>
+                    </div>
+                </div>
+
+                <div class="checkout-btn-row">
+                    <button class="checkout-back-btn" id="backStep1">← Volver</button>
+                    <button class="checkout-next-btn" id="goStep3">Confirmar pedido →</button>
+                </div>
+            </div>
+
+            <!-- Paso 3: Confirmación -->
+            <div class="checkout-step-panel" id="panel3">
+                <div class="checkout-success">
+                    <div class="success-circle">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M9 12l2 2 4-4" />
+                        </svg>
+                    </div>
+                    <h2>¡Pedido confirmado!</h2>
+                    <p>Tu pedido fue procesado correctamente. Recibirás un correo de confirmación en breve.</p>
+                    <div class="order-number">Pedido #<span id="orderNum">AS-2026-0001</span></div>
+                    <a href="../index.html" class="checkout-next-btn"
+                        style="display:inline-block;text-decoration:none;text-align:center;">Volver a la tienda</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resumen del pedido -->
+        <div class="checkout-summary-col">
+            <div class="order-summary">
+                <h3 class="summary-title">Resumen del pedido</h3>
+                <div class="summary-items" id="summaryItems">
+                    <div class="summary-item">
+                        <div class="si-img bp-gaming-card"><span>🎮</span></div>
+                        <div class="si-info"><span class="si-name">Nintendo Switch Joy-Con</span><span
+                                class="si-qty">×1</span></div>
+                        <span class="si-price">S/ 89.00</span>
+                    </div>
+                    <div class="summary-item">
+                        <div class="si-img bp-arte-card"><span>🎨</span></div>
+                        <div class="si-info"><span class="si-name">Poster El Viajero</span><span
+                                class="si-qty">×2</span></div>
+                        <span class="si-price">S/ 70.00</span>
+                    </div>
+                </div>
+                <div class="summary-divider"></div>
+                <div class="summary-line"><span>Subtotal</span><span>S/ 159.00</span></div>
+                <div class="summary-line"><span>Envío</span><span id="summaryShipping">S/ 12.00</span></div>
+                <div class="summary-line discount"><span>Descuento</span><span>− S/ 0.00</span></div>
+                <div class="summary-divider"></div>
+                <div class="summary-total"><span>Total</span><span id="summaryTotal">S/ 171.00</span></div>
+                <div class="summary-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    Pago 100% seguro
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp flotante -->
+    <a href="https://wa.me/51999999999" target="_blank" class="whatsapp-fab">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+    </a>
+    <!-- car-buy.js SIN defer para exponer window.addToCart/renderCart de inmediato -->
+    <script src="../js/car-buy.js"></script>
+    <script src="../js/app.js" defer></script>
+    <script src="../js/features.js" defer></script>
+</body>
+
+</html>

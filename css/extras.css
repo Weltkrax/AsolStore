@@ -1,0 +1,1123 @@
+/* ================================================================
+   extras.css — Estilos para elementos nuevos
+   Importar después de main.css, pages.css, features.css
+================================================================ */
+
+/* ── Cat-bar enlace directo (sin dropdown) ── */
+.cat-bar-direct {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text, #e2e8f0);
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: color 0.2s, background 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.cat-bar-direct:hover {
+    color: var(--red, #FF0D2A);
+    background: rgba(255, 13, 42, 0.06);
+}
+
+/* ── Bento grid — 3+2 simétrico ── */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 16px;
+    padding: 0 24px;
+}
+
+/* Fila 1: 3 boxes iguales */
+.bento-box.box1,
+.bento-box.box2,
+.bento-box.box3 {
+    grid-column: span 1;
+}
+
+/* Fila 2: 2 boxes más anchos centrados */
+.bento-box.box4 {
+    grid-column: 1 / 2;
+}
+
+.bento-box.box5 {
+    grid-column: 2 / 4;
+}
+
+@media (max-width: 768px) {
+    .bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bento-box.box3 {
+        grid-column: 1 / 3;
+    }
+
+    .bento-box.box4 {
+        grid-column: 1;
+    }
+
+    .bento-box.box5 {
+        grid-column: 2;
+    }
+}
+
+@media (max-width: 480px) {
+    .bento-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ════════════════════════════════════════════════════════════
+   SECCIÓN VISTOS RECIENTEMENTE — paleta rojo/blanco
+════════════════════════════════════════════════════════════ */
+.historial-section {
+    padding: 40px 0 32px;
+    background: linear-gradient(180deg, #fff 0%, #fff0f2 100%);
+    border-top: 2px solid rgba(255, 13, 42, 0.08);
+}
+
+.historial-section.hidden {
+    display: none;
+}
+
+/* Header de la sección */
+.historial-section .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    margin-bottom: 20px;
+}
+
+.historial-section .section-title {
+    font-size: 22px;
+}
+
+.historial-section .section-title span {
+    color: #FF0D2A;
+}
+
+/* Grupo de botones */
+.historial-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Botón Ver lista — rojo sólido */
+.historial-btn-open {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 2px solid #FF0D2A;
+    background: #FF0D2A;
+    color: #fff;
+    transition: all 0.18s;
+    font-family: inherit;
+}
+
+.historial-btn-open:hover {
+    background: #CC0020;
+    border-color: #CC0020;
+}
+
+/* Botón Limpiar — borde rojo, texto rojo, hover rojo sólido */
+.historial-btn-clear {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 2px solid #FF0D2A;
+    background: transparent;
+    color: #FF0D2A;
+    transition: all 0.18s;
+    font-family: inherit;
+}
+
+.historial-btn-clear:hover {
+    background: #FF0D2A;
+    color: #fff;
+}
+
+/* ── AsolStore hero ── */
+.asolstore-hero {
+    background: linear-gradient(135deg, var(--navy, #0f172a) 0%, #1a1f3a 50%, #1e1025 100%);
+    padding: 64px 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    position: relative;
+    overflow: hidden;
+}
+
+.asolstore-hero::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 13, 42, 0.10) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.asolstore-hero-inner {
+    max-width: 700px;
+}
+
+.asolstore-hero-badge {
+    display: inline-block;
+    background: rgba(255, 13, 42, 0.12);
+    color: var(--red, #FF0D2A);
+    border: 1px solid rgba(255, 13, 42, 0.25);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 16px;
+}
+
+.asolstore-hero-title {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    margin: 0 0 16px;
+}
+
+.asolstore-hero-title span {
+    color: var(--red, #FF0D2A);
+}
+
+.asolstore-hero-sub {
+    color: #94a3b8;
+    font-size: 16px;
+    margin-bottom: 32px;
+    line-height: 1.6;
+}
+
+.asolstore-hero-stats {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+
+.ah-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.ah-stat strong {
+    font-size: 22px;
+    font-weight: 800;
+    color: #fff;
+}
+
+.ah-stat span {
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* ── AsolStore section ── */
+.asolstore-section {
+    padding: 40px 0;
+}
+
+/* ── Category grid — 3 columnas fijas ── */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 0 24px;
+}
+
+@media (max-width: 900px) {
+    .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 560px) {
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── Target card — cursor pointer + hover ── */
+.target-card[data-slug] {
+    cursor: pointer;
+}
+
+.target-card[data-slug]:hover {
+    transform: translateY(-3px);
+}
+
+/* ── Panel historial lateral (usa estilos de cart-menu) ── */
+#historialOverlay {
+    z-index: 1100;
+}
+
+#historialPanel {
+    z-index: 1101;
+}
+
+/* ── FIX: related-section con slider en lugar de grid ──
+   pages.css define .related-grid como display:grid de 4 columnas.
+   Como el HTML ya no usa .related-grid sino un slider con
+   .carousel-track, sobreescribimos para que .related-section
+   no interfiera con el layout del slider.
+── */
+.related-section {
+    padding: 32px 0 48px;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.related-section .slider-wrapper {
+    padding: 0 40px;
+}
+
+.related-section .carousel-container {
+    overflow: hidden;
+}
+
+.related-section .carousel-track {
+    display: flex;
+    gap: 14px;
+    transition: transform 0.35s ease;
+}
+
+.related-section .target-card {
+    min-width: 220px;
+    flex-shrink: 0;
+}
+
+/* ════════════════════════════════════════════════════════════
+   BUSCADOR EN TIEMPO REAL
+════════════════════════════════════════════════════════════ */
+.search-results-overlay {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+    z-index: 3000;
+    display: none;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    border-top: none;
+}
+
+.search-results-overlay.open {
+    display: block;
+}
+
+.sro-inner {
+    padding: 8px;
+}
+
+.sro-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.sro-item:hover {
+    background: #f8fafc;
+}
+
+.sro-img {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.sro-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.sro-nombre {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a1a;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sro-cat {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 2px;
+}
+
+.sro-precio {
+    font-size: 14px;
+    font-weight: 800;
+    color: #1a1a1a;
+    white-space: nowrap;
+}
+
+.sro-empty {
+    padding: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+/* El header-search necesita position relative para el overlay */
+.header-search {
+    position: relative;
+}
+
+/* ════════════════════════════════════════════════════════════
+   TARJETAS DEL CATEGORY-GRID — diseño horizontal diferenciado
+   Son distintas a las del slider: layout en fila con imagen
+   a la izquierda, info a la derecha, y borde rojo en hover.
+════════════════════════════════════════════════════════════ */
+@keyframes fadeInCard {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Sobreescribir el layout de las tarjetas SOLO dentro del grid de categoría */
+.category-grid .target-card {
+    flex-direction: row;
+    /* horizontal en lugar de vertical */
+    align-items: stretch;
+    animation: fadeInCard 0.25s ease both;
+    border-radius: 12px;
+    overflow: hidden;
+    min-height: 130px;
+    background: #fff;
+    border: 1.5px solid #e8e8e8;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    position: relative;
+}
+
+.category-grid .target-card:hover {
+    border-color: #FF0D2A;
+    box-shadow: 0 6px 24px rgba(255, 13, 42, 0.10);
+    transform: translateY(-2px);
+}
+
+/* Imagen — columna izquierda fija de 120px */
+.category-grid .target-card .target-card-img-wrap {
+    width: 120px;
+    min-width: 120px;
+    height: auto;
+    border-radius: 0;
+    flex-shrink: 0;
+    font-size: 36px;
+}
+
+/* Contenido — ocupa el resto del ancho */
+.category-grid .target-card .target-card-content {
+    flex: 1;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 4px;
+    min-width: 0;
+}
+
+.category-grid .target-card .target-card-brand {
+    font-size: 10px;
+    font-weight: 700;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.category-grid .target-card .target-card-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: #1a1a1a;
+    line-height: 1.3;
+    margin: 2px 0;
+}
+
+.category-grid .target-card .target-card-desc {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.4;
+    flex: 1;
+}
+
+.category-grid .target-card .target-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.category-grid .target-card .target-card-price {
+    font-size: 20px;
+    font-weight: 900;
+    color: #1a1a1a;
+}
+
+.category-grid .target-card .target-card-btn {
+    padding: 8px 18px;
+    font-size: 12px;
+    font-weight: 700;
+    background: #FF0D2A;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.18s;
+    white-space: nowrap;
+}
+
+.category-grid .target-card .target-card-btn:hover {
+    background: #CC0020;
+}
+
+/* Badges posicionados sobre la imagen */
+.category-grid .target-card .badge-oferta,
+.category-grid .target-card .badge-nuevo {
+    top: 8px;
+    left: 8px;
+    font-size: 10px;
+    padding: 2px 7px;
+}
+
+/* Delays de animación */
+.category-grid .target-card:nth-child(2) {
+    animation-delay: 0.04s;
+}
+
+.category-grid .target-card:nth-child(3) {
+    animation-delay: 0.08s;
+}
+
+.category-grid .target-card:nth-child(4) {
+    animation-delay: 0.12s;
+}
+
+.category-grid .target-card:nth-child(5) {
+    animation-delay: 0.16s;
+}
+
+.category-grid .target-card:nth-child(6) {
+    animation-delay: 0.20s;
+}
+
+.category-grid .target-card:nth-child(7) {
+    animation-delay: 0.24s;
+}
+
+.category-grid .target-card:nth-child(8) {
+    animation-delay: 0.28s;
+}
+
+/* En mobile vuelven a ser verticales */
+@media (max-width: 560px) {
+    .category-grid .target-card {
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    .category-grid .target-card .target-card-img-wrap {
+        width: 100%;
+        height: 140px;
+    }
+}
+
+/* ════════════════════════════════════════════════════════════
+   CHECKOUT — indicadores de paso mejorados
+════════════════════════════════════════════════════════════ */
+.checkout-steps {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 28px;
+}
+
+.cstep {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #94a3b8;
+    padding: 10px 16px;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.cstep.active {
+    color: #FF0D2A;
+    background: rgba(255, 13, 42, 0.06);
+}
+
+.cstep-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.cstep.active .cstep-num {
+    background: #FF0D2A;
+    color: #fff;
+}
+
+.cstep-sep {
+    color: #e2e8f0;
+    font-size: 18px;
+}
+
+/* ════════════════════════════════════════════════════════════
+   MOBILE — mejoras responsive
+════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+    /* Bento 2 columnas simétrico en mobile */
+    .bento-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        padding: 0 16px;
+    }
+
+    .bento-box.box1,
+    .bento-box.box2 {
+        grid-column: span 1;
+    }
+
+    .bento-box.box3 {
+        grid-column: 1 / 3;
+    }
+
+    .bento-box.box4 {
+        grid-column: 1;
+    }
+
+    .bento-box.box5 {
+        grid-column: 2;
+    }
+
+    /* Grid categoria 2 col en mobile */
+    .category-grid {
+        grid-template-columns: 1fr 1fr;
+        padding: 0 16px;
+        gap: 12px;
+    }
+
+    /* AsolStore hero mobile */
+    .asolstore-hero {
+        padding: 36px 20px;
+    }
+
+    .asolstore-hero-stats {
+        gap: 20px;
+    }
+
+    /* Historial botones en columna */
+    .historial-section .section-header {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 12px;
+        padding: 0 16px !important;
+    }
+
+    /* Slider wrapper padding reducido */
+    .related-section .slider-wrapper,
+    .historial-section .slider-wrapper {
+        padding: 0 16px;
+    }
+
+    /* Checkout layout mobile */
+    .checkout-steps {
+        overflow-x: auto;
+        padding-bottom: 4px;
+    }
+
+    .cstep span:last-child {
+        display: none;
+    }
+
+    .cstep.active span:last-child {
+        display: inline;
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* Grid 1 col en móvil pequeño */
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Bento 1 col */
+    .bento-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bento-box.box1,
+    .bento-box.box2,
+    .bento-box.box3,
+    .bento-box.box4,
+    .bento-box.box5 {
+        grid-column: span 1;
+    }
+
+    /* Búsqueda overlay full width */
+    .search-results-overlay {
+        left: -20px;
+        right: -20px;
+        border-radius: 0 0 12px 12px;
+    }
+
+    /* Filtros scroll horizontal */
+    .category-filters {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 4px;
+    }
+
+    .category-filters::-webkit-scrollbar {
+        display: none;
+    }
+
+    .filter-chip {
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    /* Checkout mobile */
+    .checkout-layout {
+        padding: 16px !important;
+    }
+
+    .payment-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* ════════════════════════════════════════════════════════════
+   PANEL LATERAL — VISTOS RECIENTEMENTE
+   Rediseño completo con paleta rojo/blanco
+════════════════════════════════════════════════════════════ */
+
+/* Header del panel */
+.hist-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px 16px;
+    border-bottom: 2px solid #FF0D2A;
+    background: #fff;
+    flex-shrink: 0;
+}
+
+.hist-panel-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.hist-panel-icon {
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 13, 42, 0.08);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.hist-panel-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: #1a1a1a;
+    line-height: 1.2;
+}
+
+.hist-panel-sub {
+    font-size: 11px;
+    color: #999;
+    margin-top: 1px;
+}
+
+.hist-panel-close {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: #f5f5f5;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    transition: all 0.18s;
+    flex-shrink: 0;
+}
+
+.hist-panel-close:hover {
+    background: #fee2e2;
+    color: #FF0D2A;
+    transform: rotate(90deg);
+}
+
+/* Área scrolleable */
+.hist-panel-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #fafafa;
+}
+
+.hist-panel-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.hist-panel-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.hist-panel-content::-webkit-scrollbar-thumb {
+    background: #e2e2e2;
+    border-radius: 4px;
+}
+
+/* Estado vacío */
+.hist-panel-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.hist-panel-empty p {
+    font-size: 15px;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+}
+
+.hist-panel-empty span {
+    font-size: 13px;
+    color: #aaa;
+    line-height: 1.5;
+}
+
+/* Item del historial */
+.hist-panel-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: #fff;
+    border-radius: 12px;
+    border: 1.5px solid #e8e8e8;
+    cursor: pointer;
+    transition: all 0.18s;
+}
+
+.hist-panel-item:hover {
+    border-color: #FF0D2A;
+    background: #fff0f2;
+    transform: translateX(3px);
+}
+
+/* Imagen del item */
+.hist-item-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
+}
+
+/* Badge sobre la imagen */
+.hist-item-badge {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    background: #FF0D2A;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 800;
+    padding: 2px 5px;
+    border-radius: 4px;
+    line-height: 1.2;
+    letter-spacing: 0.3px;
+}
+
+/* Info del item */
+.hist-item-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.hist-item-cat {
+    font-size: 10px;
+    font-weight: 700;
+    color: #FF0D2A;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.hist-item-nombre {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hist-item-precios {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-top: 2px;
+}
+
+.hist-item-precio {
+    font-size: 15px;
+    font-weight: 900;
+    color: #1a1a1a;
+}
+
+.hist-item-old {
+    font-size: 11px;
+    color: #bbb;
+    text-decoration: line-through;
+}
+
+/* Flecha de acción */
+.hist-item-action {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 13, 42, 0.08);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FF0D2A;
+    flex-shrink: 0;
+    transition: all 0.18s;
+}
+
+.hist-panel-item:hover .hist-item-action {
+    background: #FF0D2A;
+    color: #fff;
+}
+
+/* Footer del panel */
+.hist-panel-footer {
+    padding: 16px 20px;
+    border-top: 1px solid #e8e8e8;
+    background: #fff;
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.hist-panel-clear-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 11px 16px;
+    background: transparent;
+    border: 2px solid #FF0D2A;
+    color: #FF0D2A;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.18s;
+}
+
+.hist-panel-clear-btn:hover {
+    background: #FF0D2A;
+    color: #fff;
+}
+
+.hist-panel-explore-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 16px;
+    background: #FF0D2A;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.18s;
+}
+
+.hist-panel-explore-btn:hover {
+    background: #CC0020;
+}
+
+/* Override — panel del historial no usa h2::before del carrito */
+#historialPanel h2::before {
+    content: '';
+}
+
+/* ════════════════════════════════════════════════════════════
+   BADGE BOUNCE — animación al añadir al carrito
+════════════════════════════════════════════════════════════ */
+@keyframes badgeBounce {
+    0% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(1.55);
+        background: #CC0020;
+    }
+
+    60% {
+        transform: scale(0.88);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+#cart-badge.badge-bounce {
+    animation: badgeBounce 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+/* ════════════════════════════════════════════════════════════
+   MODAL AUTH — optimizado para mobile
+════════════════════════════════════════════════════════════ */
+@media (max-width: 600px) {
+    .auth-modal-overlay {
+        align-items: flex-end !important;
+        padding: 0 !important;
+    }
+
+    .auth-modal {
+        width: 100% !important;
+        max-width: 100% !important;
+        border-radius: 20px 20px 0 0 !important;
+        max-height: 92vh;
+        overflow-y: auto;
+    }
+}
+
+/* ════════════════════════════════════════════════════════════
+   PANEL HISTORIAL — mobile full width
+════════════════════════════════════════════════════════════ */
+@media (max-width: 600px) {
+    #historialPanel {
+        width: 100% !important;
+        min-width: unset !important;
+        max-width: unset !important;
+    }
+
+    .hist-item-nombre {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: unset;
+    }
+}
+
+/* ════════════════════════════════════════════════════════════
+   PAGINACIÓN — botones funcionales con estilo
+════════════════════════════════════════════════════════════ */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 32px 24px;
+}
+
+.page-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    border: 1.5px solid #e8e8e8;
+    background: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.18s;
+    font-family: inherit;
+}
+
+.page-btn:hover {
+    border-color: #FF0D2A;
+    color: #FF0D2A;
+}
+
+.page-btn.active {
+    background: #FF0D2A;
+    border-color: #FF0D2A;
+    color: #fff;
+}
+
+.page-btn.dots {
+    cursor: default;
+    border-color: transparent;
+    background: transparent;
+}
