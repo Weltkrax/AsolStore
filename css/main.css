@@ -3341,26 +3341,9 @@ button {
         padding-right: 12px;
     }
 
-    .carousel-container {
-        overflow: hidden;
-    }
-
-    .carousel-track {
-        display: flex;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        gap: 12px;
-        padding-bottom: 4px;
-    }
-
-    .carousel-track::-webkit-scrollbar { display: none; }
-
     .carousel-track .target-card {
-        min-width: calc(75vw);
-        max-width: calc(75vw);
-        scroll-snap-align: start;
+        min-width: calc(72vw);
+        max-width: calc(72vw);
         flex-shrink: 0;
     }
 
