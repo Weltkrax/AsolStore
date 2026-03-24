@@ -59,6 +59,32 @@ document.addEventListener('DOMContentLoaded', () => {
             chip.addEventListener('click', () => {
                 filterBar.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
                 chip.classList.add('active');
+
+                const filter = chip.dataset.filter;
+                const track = document.getElementById('mainTrack');
+                if (!track) return;
+
+                const db = window.PRODUCTOS_DB || [];
+                let visibleCount = 0;
+
+                track.querySelectorAll('.product-card, [data-slug]').forEach(card => {
+                    const slug = card.dataset.slug || '';
+                    const prod = db.find(p => p.slug === slug);
+                    const cat  = prod ? prod.categoriaSlug : (card.dataset.categoria || '');
+                    const badge = card.querySelector('.badge-oferta, .badge-new');
+                    const isOferta = badge && badge.classList.contains('badge-oferta');
+
+                    const show = filter === 'all'
+                        || cat === filter
+                        || (filter === 'oferta' && isOferta);
+
+                    card.style.display = show ? '' : 'none';
+                    if (show) visibleCount++;
+                });
+
+                // Reset slider position
+                track.style.transform = 'translateX(0)';
+                if (track._sliderIndex !== undefined) track._sliderIndex = 0;
             });
         });
     }
