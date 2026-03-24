@@ -1,7 +1,7 @@
 (function () {
     /* ── Configuración de redes sociales — editar aquí ── */
     window.ASOL_CONFIG = window.ASOL_CONFIG || {
-        whatsapp:  'https://wa.me/51999999999',
+        whatsapp:  'https://wa.me/51991450553',
         instagram: 'https://instagram.com',
         tiktok:    'https://tiktok.com',
     };
@@ -49,7 +49,16 @@
         <div class="header-mid">
             <button id="menu-toggle" class="hamburger-btn" aria-label="Menú"><span></span><span></span><span></span></button>
             <a href="${r}index.html" class="brand-logo-link">
-                <img src="${r}assets/logo.svg" alt="AsolStore" class="brand-logo">
+                <svg class="brand-logo" viewBox="0 0 680 680" xmlns="http://www.w3.org/2000/svg" aria-label="AsolStore">
+  <rect width="680" height="680" fill="#fff" rx="80"/>
+  <rect x="140" y="140" width="400" height="400" rx="32" fill="#FF0D2A"/>
+  <path d="M290 140 Q290 118 305 118 L375 118 Q390 118 390 140" fill="none" stroke="#FF0D2A" stroke-width="20" stroke-linecap="round"/>
+  <rect x="155" y="285" width="370" height="230" rx="16" fill="#CC0020"/>
+  <rect x="155" y="277" width="370" height="14" rx="4" fill="rgba(255,255,255,0.25)"/>
+  <text x="340" y="375" text-anchor="middle" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="74" fill="#fff" letter-spacing="3">ASOL</text>
+  <rect x="175" y="392" width="330" height="2" rx="1" fill="rgba(255,255,255,0.5)"/>
+  <text x="340" y="468" text-anchor="middle" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="48" fill="#fff" letter-spacing="12">STORE</text>
+</svg>
             </a>
             <form class="header-search" action="#" method="get">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
@@ -85,7 +94,16 @@
     <div class="side-overlay" id="sideOverlay"></div>
     <nav class="side-menu" id="side-menu">
         <div class="side-menu-header">
-            <img src="${r}assets/logo.svg" alt="AsolStore" class="side-logo">
+            <svg class="side-logo" viewBox="0 0 680 680" xmlns="http://www.w3.org/2000/svg" aria-label="AsolStore">
+  <rect width="680" height="680" fill="#fff" rx="80"/>
+  <rect x="140" y="140" width="400" height="400" rx="32" fill="#FF0D2A"/>
+  <path d="M290 140 Q290 118 305 118 L375 118 Q390 118 390 140" fill="none" stroke="#FF0D2A" stroke-width="20" stroke-linecap="round"/>
+  <rect x="155" y="285" width="370" height="230" rx="16" fill="#CC0020"/>
+  <rect x="155" y="277" width="370" height="14" rx="4" fill="rgba(255,255,255,0.25)"/>
+  <text x="340" y="375" text-anchor="middle" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="74" fill="#fff" letter-spacing="3">ASOL</text>
+  <rect x="175" y="392" width="330" height="2" rx="1" fill="rgba(255,255,255,0.5)"/>
+  <text x="340" y="468" text-anchor="middle" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="48" fill="#fff" letter-spacing="12">STORE</text>
+</svg>
             <button class="side-close" id="sideClose">&times;</button>
         </div>
         <div class="side-menu-body">
@@ -146,7 +164,16 @@
                 </div>
                 <div class="auth-form active" id="tab-login">
                     <div class="auth-logo">
-                        <img src="${r}assets/logo.svg" alt="AsolStore" style="width:48px;height:48px;border-radius:10px;">
+                        <svg style="width:48px;height:48px;border-radius:10px;" viewBox="0 0 680 680" xmlns="http://www.w3.org/2000/svg" aria-label="AsolStore">
+  <rect width="680" height="680" fill="#fff" rx="80"/>
+  <rect x="140" y="140" width="400" height="400" rx="32" fill="#FF0D2A"/>
+  <path d="M290 140 Q290 118 305 118 L375 118 Q390 118 390 140" fill="none" stroke="#FF0D2A" stroke-width="20" stroke-linecap="round"/>
+  <rect x="155" y="285" width="370" height="230" rx="16" fill="#CC0020"/>
+  <rect x="155" y="277" width="370" height="14" rx="4" fill="rgba(255,255,255,0.25)"/>
+  <text x="340" y="375" text-anchor="middle" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="74" fill="#fff" letter-spacing="3">ASOL</text>
+  <rect x="175" y="392" width="330" height="2" rx="1" fill="rgba(255,255,255,0.5)"/>
+  <text x="340" y="468" text-anchor="middle" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="48" fill="#fff" letter-spacing="12">STORE</text>
+</svg>
                         <span>Bienvenido a AsolStore</span>
                     </div>
                     <div class="auth-field"><label>Correo electrónico</label><input type="email" id="loginEmail" placeholder="tu@email.com"></div>
@@ -158,7 +185,16 @@
                 </div>
                 <div class="auth-form" id="tab-register">
                     <div class="auth-logo">
-                        <img src="${r}assets/logo.svg" alt="AsolStore" style="width:48px;height:48px;border-radius:10px;">
+                        <svg style="width:48px;height:48px;border-radius:10px;" viewBox="0 0 680 680" xmlns="http://www.w3.org/2000/svg" aria-label="AsolStore">
+  <rect width="680" height="680" fill="#fff" rx="80"/>
+  <rect x="140" y="140" width="400" height="400" rx="32" fill="#FF0D2A"/>
+  <path d="M290 140 Q290 118 305 118 L375 118 Q390 118 390 140" fill="none" stroke="#FF0D2A" stroke-width="20" stroke-linecap="round"/>
+  <rect x="155" y="285" width="370" height="230" rx="16" fill="#CC0020"/>
+  <rect x="155" y="277" width="370" height="14" rx="4" fill="rgba(255,255,255,0.25)"/>
+  <text x="340" y="375" text-anchor="middle" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="74" fill="#fff" letter-spacing="3">ASOL</text>
+  <rect x="175" y="392" width="330" height="2" rx="1" fill="rgba(255,255,255,0.5)"/>
+  <text x="340" y="468" text-anchor="middle" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="48" fill="#fff" letter-spacing="12">STORE</text>
+</svg>
                         <span>Crea tu cuenta</span>
                     </div>
                     <div class="auth-field"><label>Nombre</label><input type="text" id="regNombre" placeholder="Tu nombre"></div>

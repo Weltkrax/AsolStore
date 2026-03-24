@@ -3241,10 +3241,27 @@ button {
     .header-search {
         height: 38px;
         flex: 1;
+        min-width: 0;
+        overflow: hidden;
     }
 
     .header-search input {
         font-size: 13px;
+        min-width: 0;
+        width: 0;
+    }
+
+    .header-search input::placeholder {
+        font-size: 12px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .header-search svg {
+        width: 15px;
+        height: 15px;
+        flex-shrink: 0;
     }
 
     .header-icon-link {
