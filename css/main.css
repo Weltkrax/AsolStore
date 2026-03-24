@@ -1140,7 +1140,7 @@ button {
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 280px 280px;
+    grid-template-rows: 200px 200px;
     gap: 6px;
     border-radius: var(--r-lg);
     overflow: hidden;
@@ -3094,7 +3094,7 @@ button {
 
     .bento-grid {
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(3, 200px);
+        grid-template-rows: repeat(3, 160px);
     }
 
     .bento-box.box1 {
@@ -3176,7 +3176,7 @@ button {
 
     .bento-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(5, 180px);
+        grid-template-rows: repeat(5, 140px);
     }
 
     .bento-box.box1,
@@ -3313,8 +3313,8 @@ button {
     }
 
     .bento-grid {
-        grid-template-rows: repeat(5, 150px);
-        gap: 10px;
+        grid-template-rows: repeat(5, 120px);
+        gap: 8px;
     }
 
     .bp-label {
