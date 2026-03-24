@@ -2,7 +2,7 @@
     /* ── Configuración de redes sociales — editar aquí ── */
     window.ASOL_CONFIG = window.ASOL_CONFIG || {
         whatsapp:  'https://wa.me/51991450553',
-        instagram: 'https://instagram.com',
+        instagram: 'https://www.instagram.com/asolstore_/',
         tiktok:    'https://tiktok.com',
     };
     const { whatsapp, instagram, tiktok } = window.ASOL_CONFIG;
