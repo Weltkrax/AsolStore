@@ -484,3 +484,16 @@ img[loading="lazy"].loaded { opacity: 1; }
     .compare-slots { width: 100%; }
     .rv-grid { grid-template-columns: repeat(3, 1fr); }
 }
+
+@media (max-width: 480px) {
+    .mobile-nav { height: 58px; padding: 0 4px; }
+    .mobile-nav-btn { font-size: 10px; padding: 6px 4px; }
+    .mobile-nav-btn svg { width: 20px; height: 20px; }
+    .free-shipping-bar { font-size: 12px; padding: 8px 12px; }
+    .compare-bar { padding: 10px 12px; font-size: 13px; }
+    .compare-slot { padding: 6px 10px; font-size: 12px; }
+    .exit-popup { padding: 24px 20px; margin: 12px; }
+    .exit-popup h3 { font-size: 18px; }
+    .exit-popup-cta { padding: 12px 20px; font-size: 14px; }
+    .rv-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+}

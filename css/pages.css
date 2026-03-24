@@ -1888,6 +1888,14 @@ img {
     transform: scale(1.04);
 }
 
+/* Imagen de tarjeta de producto */
+.prod-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+}
+
 .target-card {
     display: flex;
     flex-direction: column;
@@ -2088,5 +2096,216 @@ img {
 
     .addresses-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* ================================================================
+   IPHONE 13 / MÓVIL PEQUEÑO (≤ 480px)
+================================================================ */
+@media (max-width: 480px) {
+    /* Producto */
+    .product-page {
+        padding: 12px 12px 32px;
+        gap: 16px;
+    }
+
+    .product-title {
+        font-size: 20px;
+    }
+
+    .product-price {
+        font-size: 26px;
+    }
+
+    .product-price-old {
+        font-size: 14px;
+    }
+
+    .gallery-main {
+        height: 240px;
+        font-size: 80px;
+    }
+
+    .gallery-thumbs {
+        gap: 8px;
+    }
+
+    .gallery-thumbs .gallery-thumb {
+        width: 48px;
+        height: 48px;
+        font-size: 18px;
+    }
+
+    .product-variants {
+        gap: 8px;
+    }
+
+    .product-variant-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .qty-control {
+        gap: 8px;
+    }
+
+    .qty-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+
+    .product-actions {
+        gap: 10px;
+    }
+
+    .product-actions .add-to-cart-btn,
+    .product-actions .buy-now-btn {
+        height: 44px;
+        font-size: 14px;
+    }
+
+    .product-guarantees {
+        gap: 8px;
+    }
+
+    .product-guarantee-item {
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+
+    .product-tabs-section,
+    .related-section {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .product-tab-btn {
+        font-size: 13px;
+        padding: 10px 12px;
+    }
+
+    /* Checkout */
+    .checkout-layout {
+        padding: 12px;
+    }
+
+    .checkout-form-section {
+        padding: 16px;
+    }
+
+    .checkout-title {
+        font-size: 16px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .checkout-next-btn {
+        height: 48px;
+        font-size: 15px;
+    }
+
+    .payment-method {
+        padding: 12px;
+        font-size: 13px;
+    }
+
+    /* Perfil */
+    .profile-layout {
+        padding: 12px;
+    }
+
+    .profile-sidebar {
+        padding: 16px;
+    }
+
+    .profile-avatar {
+        width: 64px;
+        height: 64px;
+        font-size: 24px;
+    }
+
+    .profile-name {
+        font-size: 18px;
+    }
+
+    .profile-panel {
+        padding: 16px;
+    }
+
+    /* Categorías */
+    .category-page {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .category-hero {
+        padding: 20px 12px;
+    }
+
+    .category-hero-title {
+        font-size: 24px;
+    }
+
+    .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .filter-bar {
+        padding: 10px 12px;
+        gap: 8px;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        scrollbar-width: none;
+    }
+
+    .filter-bar::-webkit-scrollbar { display: none; }
+
+    .filter-chip {
+        font-size: 12px;
+        padding: 6px 12px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    /* Page header */
+    .page-header-inner {
+        padding: 10px 12px;
+    }
+
+    /* Cards en grilla */
+    .target-card-img-wrap {
+        height: 140px;
+    }
+
+    .target-card-title {
+        font-size: 12px;
+    }
+
+    .target-card-price {
+        font-size: 15px;
+    }
+
+    .target-card-btn {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+
+    /* Error 404 */
+    .error-code {
+        font-size: 64px;
+    }
+
+    .error-title {
+        font-size: 18px;
     }
 }

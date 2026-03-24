@@ -62,7 +62,7 @@
     --shadow-red: 0 4px 16px rgba(255, 13, 42, 0.25);
     --ease: all 0.18s ease;
     --ease-md: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-    --header-h: 152px;
+    --header-h: 180px;
 }
 
 /* ── Reset ── */
@@ -120,10 +120,6 @@ button {
    cat    : 44px  categorías texto plano estilo dropdown-label
    Total  : ~180px
 ================================================================ */
-
-:root {
-    --header-h: 180px;
-}
 
 #mainHeader {
     position: fixed;
@@ -596,7 +592,7 @@ button {
 .side-menu {
     position: fixed;
     top: 0;
-    left: -41%;
+    left: 0;
     width: 40%;
     min-width: 300px;
     max-width: 520px;
@@ -606,12 +602,13 @@ button {
     display: flex;
     flex-direction: column;
     box-shadow: 4px 0 30px rgba(0, 0, 0, 0.3);
-    transition: left 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(-100%);
+    transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
     overflow-y: auto;
 }
 
 .side-menu.active {
-    left: 0;
+    transform: translateX(0);
 }
 
 .side-menu-header {
@@ -1429,6 +1426,7 @@ button {
     line-height: 1.35;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -1440,6 +1438,7 @@ button {
     flex: 1;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -3207,5 +3206,275 @@ button {
 
     .side-menu {
         width: 85%;
+    }
+}
+
+/* ================================================================
+   IPHONE 13 / MÓVIL PEQUEÑO (≤ 480px)
+================================================================ */
+@media (max-width: 480px) {
+    :root {
+        --header-h: 120px;
+    }
+
+    /* Header */
+    .header-top {
+        padding: 6px 16px;
+        min-height: 36px;
+    }
+
+    .header-top-socials {
+        display: none;
+    }
+
+    .header-mid {
+        height: 60px;
+        padding: 0 12px;
+        gap: 8px;
+    }
+
+    .brand-logo {
+        height: 44px;
+        width: 44px;
+    }
+
+    .header-search {
+        height: 38px;
+        flex: 1;
+    }
+
+    .header-search input {
+        font-size: 13px;
+    }
+
+    .header-icon-link {
+        padding: 6px;
+    }
+
+    .cat-bar {
+        padding: 0 12px;
+        gap: 4px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        flex-wrap: nowrap;
+    }
+
+    .cat-bar::-webkit-scrollbar { display: none; }
+
+    .cat-bar-link {
+        font-size: 13px;
+        padding: 8px 10px;
+        white-space: nowrap;
+    }
+
+    /* Hero */
+    .hero-carousel {
+        margin: 8px 12px;
+        border-radius: 14px;
+    }
+
+    .hero-slide {
+        padding: 20px 18px;
+        min-height: 180px;
+    }
+
+    .hero-tag {
+        font-size: 10px;
+        padding: 3px 8px;
+    }
+
+    .hero-title {
+        font-size: 20px;
+        line-height: 1.2;
+    }
+
+    .hero-sub {
+        font-size: 13px;
+    }
+
+    .hero-cta {
+        font-size: 13px;
+        padding: 8px 16px;
+    }
+
+    .hero-amount {
+        font-size: 28px;
+    }
+
+    .hero-desde {
+        font-size: 12px;
+    }
+
+    /* Bento grid */
+    .bento-section {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .bento-grid {
+        grid-template-rows: repeat(5, 150px);
+        gap: 10px;
+    }
+
+    .bp-label {
+        font-size: 16px;
+    }
+
+    .bp-sub {
+        font-size: 11px;
+    }
+
+    /* Section headers */
+    .section-header {
+        padding: 0 0 12px;
+    }
+
+    .section-title {
+        font-size: 20px;
+    }
+
+    /* Carruseles */
+    .carousel-section,
+    .offers-redesign {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .carousel-container {
+        overflow: hidden;
+    }
+
+    .carousel-track {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 12px;
+        padding-bottom: 4px;
+    }
+
+    .carousel-track::-webkit-scrollbar { display: none; }
+
+    .carousel-track .target-card {
+        min-width: calc(75vw);
+        max-width: calc(75vw);
+        scroll-snap-align: start;
+        flex-shrink: 0;
+    }
+
+    .carousel-btn {
+        display: none;
+    }
+
+    /* Bento images */
+    .bento-placeholder .bp-icon {
+        height: 100%;
+    }
+
+    /* Banners */
+    .banner-strip {
+        padding-left: 12px;
+        padding-right: 12px;
+        gap: 10px;
+    }
+
+    .banner-mini {
+        padding: 20px 18px;
+    }
+
+    .banner-tag {
+        font-size: 11px;
+    }
+
+    .banner-title {
+        font-size: 18px;
+    }
+
+    /* Ofertas */
+    .offers-redesign-title {
+        font-size: 20px;
+    }
+
+    .offers-redesign-timer {
+        font-size: 22px;
+    }
+
+    /* Newsletter */
+    .newsletter-section {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .newsletter-title {
+        font-size: 20px;
+    }
+
+    .newsletter-sub {
+        font-size: 13px;
+    }
+
+    .newsletter-input,
+    .newsletter-btn {
+        font-size: 14px;
+        height: 44px;
+    }
+
+    /* Footer */
+    .footer-section {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .footer-content {
+        gap: 20px;
+    }
+
+    .footer-brand p {
+        font-size: 13px;
+    }
+
+    /* Visitanos */
+    .visitanos-span {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    /* Side menu */
+    .side-menu {
+        width: 88%;
+        max-width: 300px;
+    }
+
+    /* Cart panel */
+    .cart-menu {
+        padding: 20px 16px;
+    }
+
+    .cart-menu h2 {
+        font-size: 18px;
+    }
+
+    /* WhatsApp FAB — sube por encima del mobile nav */
+    .whatsapp-fab {
+        bottom: 76px;
+        right: 16px;
+        width: 48px;
+        height: 48px;
+    }
+
+    /* Auth modal */
+    .auth-modal {
+        padding: 24px 20px;
+    }
+
+    /* Espaciado inferior para que el mobile-nav no tape contenido */
+    main, .footer-section, .newsletter-section, .visitanos-span {
+        padding-bottom: 4px;
+    }
+
+    body {
+        padding-bottom: 64px;
     }
 }
