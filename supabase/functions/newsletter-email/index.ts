@@ -111,7 +111,7 @@ Deno.serve(async (req: Request) => {
           <td style="background:#f9f9f9;padding:24px 40px;text-align:center;border-top:1px solid #eee;">
             <p style="margin:0 0 8px;font-size:12px;color:#aaa;">Síguenos en redes sociales</p>
             <a href="https://www.instagram.com/asolstore_/" style="color:#FF0D2A;font-size:12px;text-decoration:none;margin:0 8px;">Instagram</a>
-            <a href="https://tiktok.com" style="color:#FF0D2A;font-size:12px;text-decoration:none;margin:0 8px;">TikTok</a>
+            <a href="https://www.tiktok.com/@asol_store" style="color:#FF0D2A;font-size:12px;text-decoration:none;margin:0 8px;">TikTok</a>
             <a href="https://wa.me/51991450553" style="color:#FF0D2A;font-size:12px;text-decoration:none;margin:0 8px;">WhatsApp</a>
             <p style="margin:16px 0 0;font-size:11px;color:#ccc;">© 2026 AsolStore · Todos los derechos reservados<br>Sin spam. Puedes darte de baja cuando quieras.</p>
           </td>

@@ -10,7 +10,7 @@
     window.ASOL_CONFIG = window.ASOL_CONFIG || {
         whatsapp:  'https://wa.me/51991450553',
         instagram: 'https://www.instagram.com/asolstore_/',
-        tiktok:    'https://tiktok.com',
+        tiktok:    'https://www.tiktok.com/@asol_store',
     };
     // Extrae los enlaces individuales para usarlos en el HTML generado
     const { whatsapp, instagram, tiktok } = window.ASOL_CONFIG;
