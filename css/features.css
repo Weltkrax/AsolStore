@@ -4,8 +4,434 @@
 ================================================================ */
 
 /* ================================================================
+   A) HEADER SHRINK — encoge el header al hacer scroll
+================================================================ */
+
+/* ── Transiciones suaves en header-top y header-mid para el efecto shrink ── */
+.header-top {
+    transition: max-height .35s ease, opacity .3s ease, padding .35s ease;
+    max-height: 52px;
+    overflow: hidden;
+}
+
+.header-mid {
+    transition: height .35s ease;
+}
+
+/* ── header--shrunk — oculta la barra roja y reduce el mid cuando el usuario baja ── */
+#mainHeader.header--shrunk .header-top {
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#mainHeader.header--shrunk .header-mid {
+    height: 60px;
+}
+
+/* ================================================================
+   B) BACK TO TOP — botón flotante para volver al inicio
+================================================================ */
+
+/* ── #backToTop — botón circular flotante, oculto por defecto ── */
+#backToTop {
+    position: fixed;
+    bottom: 28px;
+    right: 0;
+    z-index: 901;
+    width: 56px;
+    height: 64px;
+    border-radius: 12px 0 0 12px;
+    background: var(--red);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    box-shadow: -3px 3px 16px rgba(0,0,0,0.18);
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity .3s ease, transform .3s cubic-bezier(.34,1.56,.64,1), width .22s ease;
+    pointer-events: none;
+}
+
+#backToTop::after {
+    content: 'Subir';
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    font-family: var(--font);
+    letter-spacing: .5px;
+}
+
+/* ── .visible — muestra el botón deslizando desde la derecha ── */
+#backToTop.visible {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+#backToTop:hover {
+    width: 64px;
+    box-shadow: -5px 4px 24px rgba(255,13,42,0.35);
+}
+
+/* ── En móvil sube el botón para no tapar la nav inferior ── */
+@media (max-width: 768px) {
+    #backToTop {
+        bottom: 80px;
+        right: 0;
+    }
+}
+
+/* ================================================================
+   FLY TO CART — animación de producto volando al carrito
+================================================================ */
+
+/* ── @keyframes cartShake — sacude el ícono del carrito cuando aterriza un producto ── */
+@keyframes cartShake {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    20%       { transform: rotate(-15deg) scale(1.2); }
+    40%       { transform: rotate(12deg) scale(1.15); }
+    60%       { transform: rotate(-8deg) scale(1.1); }
+    80%       { transform: rotate(5deg) scale(1.05); }
+}
+
+/* ================================================================
+   BENTO GRID REDISEÑO — imágenes a pantalla completa + texto animado
+================================================================ */
+
+/* ── Deshabilita el ::after original de main.css (era el overlay de hover) ── */
+.bento-box::after { display: none !important; }
+
+/* ── .bento-box — grid container interno que apila imagen y overlay ── */
+.bento-box {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+}
+
+/* ── .bento-img — imagen en la misma celda del grid (apilada bajo el overlay) ── */
+.bento-box .bento-img {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+    transition: transform .6s cubic-bezier(.25,.46,.45,.94);
+}
+
+.bento-box:hover .bento-img {
+    transform: scale(1.07);
+}
+
+/* ── .bento-overlay — misma celda del grid, apilada sobre la imagen ── */
+.bento-overlay {
+    grid-column: 1;
+    grid-row: 1;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px 22px;
+    gap: 6px;
+    box-sizing: border-box;
+    min-height: 0;
+}
+
+.bento-overlay--bottom {
+    background: linear-gradient(to top,
+        rgba(0,0,0,.90) 0%,
+        rgba(0,0,0,.50) 40%,
+        rgba(0,0,0,.10) 70%,
+        transparent 100%);
+}
+
+.bento-overlay--center {
+    background: linear-gradient(to top,
+        rgba(0,0,0,.85) 0%,
+        rgba(0,0,0,.40) 55%,
+        transparent 100%);
+}
+
+.bento-overlay--left {
+    justify-content: center;
+    background: linear-gradient(to right,
+        rgba(0,0,0,.90) 0%,
+        rgba(0,0,0,.55) 50%,
+        rgba(0,0,0,.05) 100%);
+    padding-left: 32px;
+}
+
+/* ── .bento-tag — pill de categoría, visible siempre ── */
+.bento-tag {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--red);
+    padding: 3px 10px;
+    border-radius: 20px;
+    /* Empieza desplazado; transición activa cuando el section es .visible */
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity .4s ease, transform .4s ease;
+}
+
+.bento-tag--white {
+    background: rgba(255,255,255,0.22);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.bento-tag--fire {
+    background: linear-gradient(90deg, #ff4500, #ff8c00);
+    font-size: 11px;
+}
+
+/* ── .bento-title — título grande y llamativo ── */
+.bento-title {
+    font-size: clamp(18px, 2.2vw, 28px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.15;
+    letter-spacing: -.3px;
+    margin: 0;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .45s ease, transform .45s ease;
+}
+
+.bento-title em {
+    font-style: normal;
+    color: #FFD700;
+}
+
+.box1 .bento-title { font-size: clamp(22px, 2.8vw, 36px); }
+.box4 .bento-title { font-size: clamp(26px, 3.2vw, 44px); line-height: 1.05; }
+
+/* ── .bento-desc — texto descriptivo secundario ── */
+.bento-desc {
+    font-size: 12px;
+    color: rgba(255,255,255,.72);
+    margin: 0;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity .4s ease, transform .4s ease;
+}
+
+/* ── Activa las transiciones de texto cuando el section entra en viewport ── */
+.bento-section.visible .bento-tag   { opacity: 1; transform: translateY(0); transition-delay: .1s; }
+.bento-section.visible .bento-title { opacity: 1; transform: translateY(0); transition-delay: .2s; }
+.bento-section.visible .bento-desc  { opacity: 1; transform: translateY(0); transition-delay: .3s; }
+
+/* ── Stagger por box para que entren en cascada ── */
+.bento-section.visible .box2 .bento-tag   { transition-delay: .2s; }
+.bento-section.visible .box2 .bento-title { transition-delay: .3s; }
+.bento-section.visible .box3 .bento-tag   { transition-delay: .3s; }
+.bento-section.visible .box3 .bento-title { transition-delay: .4s; }
+.bento-section.visible .box4 .bento-tag   { transition-delay: .15s; }
+.bento-section.visible .box4 .bento-title { transition-delay: .25s; }
+.bento-section.visible .box4 .bento-desc  { transition-delay: .35s; }
+.bento-section.visible .box5 .bento-tag   { transition-delay: .35s; }
+.bento-section.visible .box5 .bento-title { transition-delay: .45s; }
+
+/* ── .bento-cta — CTA que aparece al hacer hover ── */
+.bento-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    background: rgba(255,255,255,.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 20px;
+    padding: 6px 14px;
+    width: fit-content;
+    margin-top: 4px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .3s ease, transform .3s ease, background .2s ease, gap .2s ease;
+}
+
+.bento-box:hover .bento-cta {
+    opacity: 1;
+    transform: translateY(0);
+    background: rgba(255,255,255,.28);
+    gap: 8px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .bento-title                       { font-size: 15px; }
+    .box1 .bento-title,
+    .box4 .bento-title                 { font-size: 19px; }
+    .bento-overlay--left               { padding-left: 20px; }
+    .bento-cta                         { font-size: 11px; padding: 5px 12px; }
+}
+
+/* ================================================================
+   G) VIEWERS BADGE — "X personas están viendo esto"
+================================================================ */
+
+/* ── .viewers-badge — etiqueta compacta de urgencia social en la página de producto ── */
+.viewers-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: #e65c00;
+    font-weight: 600;
+    background: #fff5ee;
+    border: 1px solid #ffd0aa;
+    border-radius: 20px;
+    padding: 4px 10px;
+    margin-top: 6px;
+    transition: opacity .4s ease;
+}
+
+[data-theme="dark"] .viewers-badge {
+    background: #2a1a0a;
+    border-color: #6b3a10;
+    color: #ffab66;
+}
+
+/* ── .viewers-pulse — parpadeo suave al actualizar el número ── */
+.viewers-badge.viewers-pulse {
+    opacity: 0.3;
+}
+
+/* ── .cart-shake — clase temporal que dispara el shake sobre el ícono del carrito ── */
+#cart-icon.cart-shake {
+    animation: cartShake .5s cubic-bezier(.36,.07,.19,.97);
+}
+
+/* ================================================================
+   E) SKELETON LOADERS — placeholders animados durante carga
+================================================================ */
+
+/* ── Base shimmer reutilizable para todos los skeletons ── */
+.skel-img, .skel-line, .skel-btn {
+    background: linear-gradient(90deg, #e8e8e8 25%, #f5f5f5 50%, #e8e8e8 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+    border-radius: 6px;
+}
+
+/* ── .skeleton-card — tarjeta placeholder que imita la estructura de .target-card ── */
+.skeleton-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+    border-radius: 12px;
+    background: var(--bg-alt, #f9f9f9);
+    min-width: 180px;
+}
+
+.skel-img   { height: 160px; border-radius: 8px; }
+.skel-title { height: 14px; width: 80%; }
+.skel-price { height: 14px; width: 45%; }
+.skel-btn   { height: 34px; margin-top: 4px; }
+
+/* ── Modo oscuro para skeletons ── */
+[data-theme="dark"] .skel-img,
+[data-theme="dark"] .skel-line,
+[data-theme="dark"] .skel-btn {
+    background: linear-gradient(90deg, #2a2a2a 25%, #333 50%, #2a2a2a 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+}
+
+[data-theme="dark"] .skeleton-card { background: var(--dm-surface, #242424); }
+
+/* ── .is-loading — pulso sobre la galería/info de producto mientras carga Supabase ── */
+.product-gallery.is-loading,
+.product-info-panel.is-loading {
+    opacity: 0.45;
+    pointer-events: none;
+    animation: shimmer 1.6s infinite;
+    background: transparent;
+}
+
+/* ================================================================
+   D) STAGGER REVEAL — aparición escalonada de tarjetas en el grid
+================================================================ */
+
+/* ── .card-stagger — estado inicial invisible antes del reveal ── */
+.target-card.card-stagger {
+    opacity: 0;
+    transform: translateY(22px);
+    animation: cardReveal .4s ease forwards;
+}
+
+/* ── @keyframes cardReveal — fade + slide hacia arriba ── */
+@keyframes cardReveal {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================================================================
+   C) IMAGE HOVER SWAP — zoom + shine en las tarjetas de producto
+================================================================ */
+
+/* ── Overflow hidden en el wrapper para contener el zoom de la imagen ── */
+.target-card-img-wrap {
+    overflow: hidden;
+    position: relative;
+}
+
+/* ── Imagen principal: escala suave al hacer hover sobre la tarjeta ── */
+.target-card:hover .target-card-img-wrap img {
+    transform: scale(1.07);
+    transition: transform .45s cubic-bezier(.25,.46,.45,.94);
+}
+
+.target-card-img-wrap img {
+    transition: transform .45s cubic-bezier(.25,.46,.45,.94);
+}
+
+/* ── Efecto shine: destello blanco que pasa por la imagen al hacer hover ── */
+.target-card-img-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -75%;
+    width: 50%; height: 100%;
+    background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
+    transform: skewX(-20deg);
+    opacity: 0;
+    transition: none;
+    pointer-events: none;
+}
+
+.target-card:hover .target-card-img-wrap::after {
+    animation: cardShine .55s ease forwards;
+}
+
+/* ── @keyframes cardShine — destello que recorre la imagen de izquierda a derecha ── */
+@keyframes cardShine {
+    0%   { left: -75%; opacity: 1; }
+    100% { left: 125%; opacity: 1; }
+}
+
+/* ================================================================
    MODO OSCURO
 ================================================================ */
+
+/* ── Variables modo oscuro — define la paleta de colores para el tema oscuro global ── */
 :root {
     --dm-bg:       #0f0f0f;
     --dm-bg-alt:   #1a1a1a;
@@ -15,6 +441,7 @@
     --dm-muted:    #999999;
 }
 
+/* ── Tema oscuro — reasigna las variables globales de color cuando se activa el modo oscuro ── */
 [data-theme="dark"] {
     --bg:      var(--dm-bg);
     --bg-alt:  var(--dm-bg-alt);
@@ -24,22 +451,39 @@
     --muted:   var(--dm-muted);
 }
 
+/* ── Tema oscuro — adapta el fondo y color de texto del body al modo oscuro ── */
 [data-theme="dark"] body { background: var(--dm-bg); color: var(--dm-text); }
+
+/* ── Tema oscuro header y page-header — adapta la cabecera principal y las cabeceras de página al fondo oscuro ── */
 [data-theme="dark"] #mainHeader,
 [data-theme="dark"] .page-header { background: var(--dm-surface); border-color: var(--dm-border); }
+
+/* ── Tema oscuro header-mid — adapta la franja intermedia del header al modo oscuro ── */
 [data-theme="dark"] .header-mid { background: var(--dm-surface); border-color: var(--dm-border); }
+
+/* ── Tema oscuro barra de categorías — adapta el fondo y borde de la barra de categorías ── */
 [data-theme="dark"] .cat-bar { background: var(--dm-surface); border-color: var(--dm-border); }
+
+/* ── Tema oscuro links de categorías — suaviza el color de los enlaces de la barra de categorías ── */
 [data-theme="dark"] .cat-bar-link { color: #aaa; }
+
+/* ── Tema oscuro dropdown de categorías — adapta el desplegable de categorías al fondo oscuro ── */
 [data-theme="dark"] .cat-dropdown { background: var(--dm-surface); border-color: var(--dm-border); }
 [data-theme="dark"] .cat-dropdown a { color: #ccc; border-color: var(--dm-border); }
+
+/* ── Tema oscuro sección dropdown del header — adapta los desplegables del header al modo oscuro ── */
 [data-theme="dark"] .header-dropdown-section { background: var(--dm-surface); border-color: var(--dm-border); }
 [data-theme="dark"] .dropdown-label { background: var(--dm-surface); border-color: var(--dm-border); color: var(--dm-text); }
 [data-theme="dark"] .dropdown-options { background: var(--dm-surface); border-color: var(--dm-border); }
 [data-theme="dark"] .dropdown-options li { color: var(--dm-muted); border-color: var(--dm-border); }
+
+/* ── Tema oscuro tarjetas de producto — adapta el fondo, título, precio y pie de las tarjetas ── */
 [data-theme="dark"] .target-card { background: var(--dm-surface); border-color: var(--dm-border); }
 [data-theme="dark"] .target-card-title { color: var(--dm-text); }
 [data-theme="dark"] .target-card-price { color: var(--dm-text); }
 [data-theme="dark"] .target-card-footer { border-color: var(--dm-border); }
+
+/* ── Tema oscuro panel del carrito — adapta el panel lateral del carrito y todos sus elementos internos ── */
 [data-theme="dark"] .cart-menu { background: var(--dm-surface); }
 [data-theme="dark"] .cart-menu h2 { border-color: var(--dm-border); color: var(--dm-text); }
 [data-theme="dark"] .cart-menu-close { background: var(--dm-bg-alt); color: var(--dm-muted); }
@@ -47,14 +491,26 @@
 [data-theme="dark"] .cart-item-name { color: var(--dm-text); }
 [data-theme="dark"] .cart-menu-footer { background: var(--dm-bg); border-color: var(--dm-border); }
 [data-theme="dark"] #cartTotal { color: var(--dm-text); }
+
+/* ── Tema oscuro iconos del header — adapta el color de los iconos de navegación del header ── */
 [data-theme="dark"] .header-icon-link { color: var(--dm-muted); }
 [data-theme="dark"] .header-icon-link:hover { color: var(--red); }
+
+/* ── Tema oscuro barra de búsqueda — adapta el campo de búsqueda del header al fondo oscuro ── */
 [data-theme="dark"] .header-search { background: var(--dm-bg-alt); border-color: var(--dm-border); }
 [data-theme="dark"] .header-search input { color: var(--dm-text); }
+
+/* ── Tema oscuro botones del carrusel — adapta los botones de navegación del slider al modo oscuro ── */
 [data-theme="dark"] .carousel-btn { background: var(--dm-surface); border-color: var(--dm-border); color: var(--dm-text); }
+
+/* ── Tema oscuro footer — fondo casi negro para la sección de pie de página ── */
 [data-theme="dark"] .footer-section { background: #080808; }
+
+/* ── Tema oscuro "Visítanos" — adapta los elementos del bloque de dirección física al modo oscuro ── */
 [data-theme="dark"] .visitanos-span { background: var(--dm-surface); border-color: var(--dm-border); }
 [data-theme="dark"] .visitanos-link { background: var(--dm-surface); border-color: var(--dm-border); color: var(--dm-muted); }
+
+/* ── Tema oscuro modales y buscador — adapta el fondo de los modales de auth, pago y búsqueda ── */
 [data-theme="dark"] .auth-modal,
 [data-theme="dark"] .payment-modal,
 [data-theme="dark"] .search-box { background: var(--dm-surface); }
@@ -65,22 +521,34 @@
 [data-theme="dark"] .form-row input { background: var(--dm-bg-alt); border-color: var(--dm-border); color: var(--dm-text); }
 [data-theme="dark"] .auth-tab { color: var(--dm-muted); }
 [data-theme="dark"] .auth-social-btn { background: var(--dm-bg-alt); border-color: var(--dm-border); color: var(--dm-text); }
+
+/* ── Tema oscuro filtros de categoría — adapta los chips de filtro al fondo oscuro ── */
 [data-theme="dark"] .filter-chip { background: var(--dm-surface); border-color: var(--dm-border); color: var(--dm-muted); }
+
+/* ── Tema oscuro resumen del pedido en checkout — adapta el panel de resumen al modo oscuro ── */
 [data-theme="dark"] .order-summary { background: var(--dm-surface); border-color: var(--dm-border); }
 [data-theme="dark"] .summary-line { color: var(--dm-muted); }
 [data-theme="dark"] .summary-total { color: var(--dm-text); }
+
+/* ── Tema oscuro perfil de usuario — adapta el contenido y sidebar del perfil al modo oscuro ── */
 [data-theme="dark"] .profile-content,
 [data-theme="dark"] .profile-sidebar { background: var(--dm-surface); border-color: var(--dm-border); }
 [data-theme="dark"] .profile-panel-title { color: var(--dm-text); }
 [data-theme="dark"] .order-card { background: var(--dm-bg-alt); border-color: var(--dm-border); }
+
+/* ── Tema oscuro campos del checkout — adapta los inputs de envío al modo oscuro ── */
 [data-theme="dark"] .cf-field input { background: var(--dm-bg-alt); border-color: var(--dm-border); color: var(--dm-text); }
 [data-theme="dark"] .shipping-opt { border-color: var(--dm-border); }
 [data-theme="dark"] .checkout-summary-col .order-summary { background: var(--dm-surface); }
+
+/* ── Tema oscuro resultados de búsqueda — adapta el hover y etiquetas del buscador modal al modo oscuro ── */
 [data-theme="dark"] .search-result-item:hover { background: var(--dm-bg-alt); }
 [data-theme="dark"] .search-cat-tag { background: var(--dm-bg-alt); color: var(--dm-muted); }
+
+/* ── Tema oscuro banner strip — adapta la variante oscura del mini banner al modo oscuro ── */
 [data-theme="dark"] .banner-strip .banner-mini.dark { background: #111; }
 
-/* Toggle button */
+/* ── Botón toggle modo oscuro — botón circular en el header que alterna entre tema claro y oscuro ── */
 .dark-toggle {
     width: 36px; height: 36px;
     border-radius: 50%;
@@ -90,12 +558,18 @@
     cursor: pointer; transition: var(--ease); flex-shrink: 0;
     font-size: 16px;
 }
+
+/* ── Botón toggle modo oscuro (hover) — fondo rojo al pasar el cursor ── */
 .dark-toggle:hover { background: var(--red); border-color: var(--red); }
+
+/* ── Botón toggle modo oscuro (tema activo) — adapta el propio botón al fondo oscuro cuando el tema está activo ── */
 [data-theme="dark"] .dark-toggle { background: var(--dm-bg-alt); border-color: var(--dm-border); }
 
 /* ================================================================
    BARRA INFERIOR MÓVIL
 ================================================================ */
+
+/* ── Navegación móvil — barra de navegación fija en la parte inferior de la pantalla en dispositivos móviles ── */
 .mobile-nav {
     display: none;
     position: fixed; bottom: 0; left: 0; right: 0;
@@ -106,11 +580,13 @@
     box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
 }
 
+/* ── Navegación móvil interior — grid de 5 columnas iguales para los botones de la barra inferior ── */
 .mobile-nav-inner {
     display: grid; grid-template-columns: repeat(5, 1fr);
     height: 56px;
 }
 
+/* ── Navegación móvil botón — botón individual con icono y etiqueta de la barra inferior ── */
 .mobile-nav-btn {
     display: flex; flex-direction: column; align-items: center;
     justify-content: center; gap: 3px;
@@ -119,10 +595,17 @@
     transition: var(--ease); font-family: var(--font);
     padding: 0;
 }
+
+/* ── Navegación móvil botón icono — tamaño del SVG de cada botón de la barra inferior ── */
 .mobile-nav-btn svg { width: 22px; height: 22px; }
+
+/* ── Navegación móvil botón activo y hover — resalta en rojo el botón de la sección actual ── */
 .mobile-nav-btn.active, .mobile-nav-btn:hover { color: var(--red); }
 
+/* ── Navegación móvil botón carrito — contenedor relativo del botón de carrito para posicionar el badge ── */
 .mobile-nav-cart { position: relative; }
+
+/* ── Navegación móvil badge del carrito — contador numérico rojo sobre el icono de carrito en la barra inferior ── */
 .mobile-nav-badge {
     position: absolute; top: 4px; right: calc(50% - 18px);
     background: var(--red); color: #fff;
@@ -131,9 +614,11 @@
     display: none; align-items: center; justify-content: center;
 }
 
+/* ── Navegación móvil tema oscuro — adapta la barra inferior al fondo oscuro ── */
 [data-theme="dark"] .mobile-nav { background: var(--dm-surface); border-color: var(--dm-border); }
 [data-theme="dark"] .mobile-nav-btn { color: var(--dm-muted); }
 
+/* ── @media max-width: 768px — activa la barra de navegación inferior y añade espacio en el cuerpo para no tapar contenido ── */
 @media (max-width: 768px) {
     .mobile-nav { display: block; }
     body { padding-bottom: 56px; }
@@ -143,29 +628,49 @@
 /* ================================================================
    PÁGINA DE CATEGORÍA
 ================================================================ */
+
+/* ── Página de categoría — contenedor principal de la página con máximo ancho y espaciado interior ── */
 .category-page { max-width: 1400px; margin: 0 auto; padding: 24px 40px 64px; }
+
+/* ── Hero de categoría — banner superior de la página con gradiente temático por categoría, título e icono ── */
 .category-hero {
     border-radius: 14px; padding: 32px 40px;
     display: flex; align-items: center; justify-content: space-between;
     margin-bottom: 28px; position: relative; overflow: hidden;
     min-height: 140px;
 }
+
+/* ── Hero de categoría — fondos diferenciados por cada tipo de categoría ── */
 .category-hero[data-cat="gaming"]  { background: linear-gradient(135deg, #0f0f1a, #1a0a2e); }
 .category-hero[data-cat="arte"]    { background: linear-gradient(135deg, #1a0505, #2d0a0a); }
 .category-hero[data-cat="ropa"]    { background: linear-gradient(135deg, #050a1a, #0a1428); }
 .category-hero[data-cat="accesorios"] { background: linear-gradient(135deg, #0a0a0a, #1a1a1a); }
-.category-hero-text {}
+
+/* ── Hero de categoría texto — contenedor de la etiqueta, título y subtítulo del hero ── */
+.category-hero-text { display: flex; flex-direction: column; }
+
+/* ── Hero de categoría tag — etiqueta roja pequeña sobre el título de la categoría ── */
 .category-hero-tag { background: var(--red); color: #fff; font-size:10px; font-weight:700; padding:3px 10px; border-radius:4px; display:inline-block; margin-bottom:10px; letter-spacing:1px; }
+
+/* ── Hero de categoría título — nombre grande de la categoría en blanco ── */
 .category-hero-title { font-size: 28px; font-weight: 900; color: #fff; line-height: 1.2; }
+
+/* ── Hero de categoría subtítulo — descripción secundaria semi-transparente bajo el título ── */
 .category-hero-sub   { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 6px; }
+
+/* ── Hero de categoría icono — emoji decorativo grande a la derecha del hero ── */
 .category-hero-icon  { font-size: 72px; opacity: 0.8; }
 
-/* Toolbar de filtros y ordenación */
+/* ── Toolbar de categoría — barra con filtros de tipo de producto y selector de ordenación ── */
 .category-toolbar {
     display: flex; align-items: center; justify-content: space-between;
     gap: 12px; margin-bottom: 20px; flex-wrap: wrap;
 }
+
+/* ── Filtros de categoría — fila de chips de filtro para refinar los productos mostrados ── */
 .category-filters { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* ── Selector de ordenación — desplegable para ordenar productos por precio, novedad u otros criterios ── */
 .sort-select {
     padding: 7px 14px; border: 1.5px solid var(--border);
     border-radius: 8px; font-size: 13px; font-weight: 600;
@@ -173,22 +678,30 @@
     cursor: pointer; font-family: var(--font); outline: none;
     transition: var(--ease);
 }
+
+/* ── Selector de ordenación (focus) — borde rojo al tener el foco ── */
 .sort-select:focus { border-color: var(--red); }
+
+/* ── Contador de resultados — texto gris que muestra cuántos productos se están mostrando ── */
 .category-count { font-size: 13px; color: var(--muted); }
 
-/* Grid de productos en categoría */
+/* ── Grid de productos de categoría — cuadrícula adaptable de tarjetas de producto dentro de la categoría ── */
 .category-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 16px;
 }
+
+/* ── Grid de categoría tarjeta — asegura que las tarjetas no desborden el grid ── */
 .category-grid .target-card { min-width: 0; max-width: 100%; }
 
-/* Paginación */
+/* ── Paginación de categoría — controles de navegación entre páginas centrados bajo el grid ── */
 .pagination {
     display: flex; align-items: center; justify-content: center;
     gap: 6px; margin-top: 40px;
 }
+
+/* ── Botón de página — botón cuadrado de número de página con estilo neutro ── */
 .page-btn {
     width: 38px; height: 38px; border-radius: 8px;
     border: 1.5px solid var(--border); background: var(--white);
@@ -196,16 +709,25 @@
     cursor: pointer; transition: var(--ease); font-family: var(--font);
     display: flex; align-items: center; justify-content: center;
 }
+
+/* ── Botón de página (hover) — borde y texto rojos al pasar el cursor ── */
 .page-btn:hover { border-color: var(--red); color: var(--red); }
+
+/* ── Botón de página activo — página actual con fondo rojo sólido ── */
 .page-btn.active { background: var(--red); border-color: var(--red); color: #fff; }
+
+/* ── Botón de página puntos — separador sin borde ni fondo entre rangos de páginas ── */
 .page-btn.dots { border: none; background: none; cursor: default; }
 
+/* ── Tema oscuro selector de ordenación y paginación — adapta el select y botones de página al modo oscuro ── */
 [data-theme="dark"] .sort-select,
 [data-theme="dark"] .page-btn { background: var(--dm-surface); border-color: var(--dm-border); color: var(--dm-text); }
 
 /* ================================================================
    COMPARADOR DE PRODUCTOS
 ================================================================ */
+
+/* ── Barra comparador — barra fija en la parte inferior que aparece cuando el usuario selecciona productos para comparar ── */
 .compare-bar {
     position: fixed; bottom: 0; left: 0; right: 0;
     background: var(--dark); color: #fff;
@@ -215,10 +737,17 @@
     transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
     box-shadow: 0 -4px 24px rgba(0,0,0,0.3);
 }
+
+/* ── Barra comparador abierta — desliza la barra hacia arriba para mostrarla ── */
 .compare-bar.open { transform: translateY(0); }
+
+/* ── @media max-width: 768px — barra comparador en móvil: sube sobre la navegación inferior ── */
 @media (max-width:768px) { .compare-bar { bottom: 56px; } }
 
+/* ── Barra comparador slots — contenedor de los espacios donde se muestran los productos a comparar ── */
 .compare-slots { display: flex; gap: 10px; flex: 1; }
+
+/* ── Barra comparador slot — espacio individual para un producto en la barra de comparación ── */
 .compare-slot {
     display: flex; align-items: center; gap: 8px;
     background: rgba(255,255,255,0.08); border-radius: 8px;
@@ -226,10 +755,18 @@
     color: rgba(255,255,255,0.7); min-width: 140px;
     border: 1.5px solid rgba(255,255,255,0.12);
 }
+
+/* ── Barra comparador slot lleno — resalta el slot cuando tiene un producto asignado ── */
 .compare-slot.filled { color: #fff; border-color: rgba(255,13,42,0.5); }
+
+/* ── Barra comparador botón quitar — botón X para eliminar un producto del slot de comparación ── */
 .compare-slot-remove { background: none; border: none; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 16px; transition: var(--ease); margin-left:auto; }
 .compare-slot-remove:hover { color: var(--red); }
+
+/* ── Barra comparador placeholder — texto en cursiva gris cuando el slot está vacío ── */
 .compare-slot-placeholder { color: rgba(255,255,255,0.3); font-style: italic; }
+
+/* ── Barra comparador botón comparar — botón rojo que abre el modal de comparación ── */
 .compare-btn {
     padding: 10px 22px; background: var(--red); color: #fff;
     border: none; border-radius: 8px; font-size: 14px; font-weight: 700;
@@ -238,11 +775,15 @@
 }
 .compare-btn:hover { background: var(--red-dark); }
 .compare-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── Barra comparador botón limpiar — botón outline que elimina todos los productos de la comparación ── */
 .compare-clear { background: none; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.6); padding: 10px 16px; border-radius: 8px; font-size: 13px; cursor: pointer; transition: var(--ease); font-family: var(--font); }
 .compare-clear:hover { border-color: var(--red); color: var(--red); }
+
+/* ── Barra comparador contador — texto pequeño que indica cuántos productos hay en la comparación ── */
 .compare-count { font-size: 12px; color: rgba(255,255,255,0.4); white-space: nowrap; }
 
-/* Botón añadir a comparar en tarjeta */
+/* ── Botón añadir a comparar en tarjeta — botón pequeño que aparece en cada tarjeta de producto para añadirla al comparador ── */
 .compare-add-btn {
     display: flex; align-items: center; gap: 4px;
     padding: 5px 10px; border: 1px solid var(--border);
@@ -253,36 +794,51 @@
     justify-content: center;
 }
 .compare-add-btn:hover { border-color: var(--red); color: var(--red); }
+
+/* ── Botón añadir a comparar (activo) — resalta en rojo cuando el producto ya está en el comparador ── */
 .compare-add-btn.added { background: var(--red-light); border-color: var(--red); color: var(--red); }
 
-/* Modal comparador */
+/* ── Modal comparador overlay — capa oscura de fondo del modal de comparación de productos ── */
 .compare-modal-overlay {
     position: fixed; inset: 0; background: rgba(0,0,0,0.6);
     z-index: 5000; display: none; align-items: center; justify-content: center;
     backdrop-filter: blur(4px); padding: 20px;
 }
+
+/* ── Modal comparador overlay abierto — muestra el overlay del comparador ── */
 .compare-modal-overlay.open { display: flex; }
+
+/* ── Modal comparador — ventana emergente con tabla de comparación entre productos seleccionados ── */
 .compare-modal {
     background: var(--white); border-radius: 16px;
     width: 100%; max-width: 900px; max-height: 90vh;
     overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     animation: modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
 }
+
+/* ── Modal comparador cabecera — barra superior del modal con título y botón de cierre ── */
 .compare-modal-header {
     display: flex; align-items: center; justify-content: space-between;
     padding: 20px 24px 16px; border-bottom: 1px solid var(--border);
 }
 .compare-modal-header h2 { font-size: 18px; font-weight: 800; }
+
+/* ── Modal comparador tabla — tabla de atributos que muestra los productos en columnas para comparar ── */
 .compare-table { width: 100%; border-collapse: collapse; }
 .compare-table th, .compare-table td { padding: 14px 20px; border-bottom: 1px solid var(--border); font-size: 13px; text-align: left; }
 .compare-table th { background: var(--bg-alt); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); width: 140px; }
 .compare-table td:first-child { font-weight: 600; color: var(--muted); background: var(--bg-alt); }
+
+/* ── Modal comparador cabecera de producto — columna con emoji, nombre y precio de cada producto comparado ── */
 .compare-product-header { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
 .compare-product-emoji { font-size: 48px; }
 .compare-product-name { font-size: 14px; font-weight: 700; }
 .compare-product-price { font-size: 20px; font-weight: 900; color: var(--red); }
+
+/* ── Modal comparador ganador — resalta en verde el mejor valor de cada atributo comparado ── */
 .compare-winner { color: var(--green); font-weight: 700; }
 
+/* ── Modal comparador tema oscuro — adapta el modal y la tabla al modo oscuro ── */
 [data-theme="dark"] .compare-modal { background: var(--dm-surface); }
 [data-theme="dark"] .compare-modal-header { border-color: var(--dm-border); }
 [data-theme="dark"] .compare-table th { background: var(--dm-bg-alt); }
@@ -291,43 +847,64 @@
 /* ================================================================
    ZOOM EN IMAGEN DE PRODUCTO
 ================================================================ */
+
+/* ── Galería zoom — contenedor de la imagen principal del producto con efecto de zoom al pasar el cursor ── */
 .gallery-zoom-wrap {
     position: relative; overflow: hidden; cursor: zoom-in;
     border-radius: var(--r-lg);
 }
+
+/* ── Galería zoom imagen y placeholder — aplica transición de escala para el efecto de zoom ── */
 .gallery-zoom-wrap img,
 .gallery-zoom-wrap .gallery-placeholder {
     width: 100%; height: 100%; transition: transform 0.4s ease;
 }
+
+/* ── Galería zoom (hover) — amplía el placeholder de la imagen al pasar el cursor ── */
 .gallery-zoom-wrap:hover .gallery-placeholder { transform: scale(1.06); }
 
 /* ================================================================
    PROGRESS BAR ENVÍO GRATIS
 ================================================================ */
+
+/* ── Barra de envío gratis — indicador de progreso que muestra cuánto falta para conseguir el envío gratuito ── */
 .free-shipping-bar {
     background: var(--bg-alt); border-radius: 8px;
     padding: 12px 16px; margin-bottom: 14px;
     border: 1px solid var(--border);
 }
+
+/* ── Barra de envío gratis texto — mensaje informativo sobre el monto restante ── */
 .fsb-text { font-size: 13px; color: var(--text); margin-bottom: 8px; }
 .fsb-text strong { color: var(--red); }
+
+/* ── Barra de envío gratis pista — rail gris de fondo de la barra de progreso ── */
 .fsb-track {
     height: 6px; background: var(--border); border-radius: 4px; overflow: hidden;
 }
+
+/* ── Barra de envío gratis relleno — barra verde que crece conforme el carrito supera el mínimo ── */
 .fsb-fill {
     height: 100%; background: var(--green);
     border-radius: 4px; transition: width 0.4s ease;
 }
+
+/* ── Barra de envío gratis completada — mensaje verde que confirma que el envío gratis está desbloqueado ── */
 .fsb-complete { color: var(--green); font-weight: 700; }
 
+/* ── Barra de envío gratis tema oscuro — adapta el contenedor al modo oscuro ── */
 [data-theme="dark"] .free-shipping-bar { background: var(--dm-bg-alt); border-color: var(--dm-border); }
 
 /* ================================================================
    CÓDIGO DE DESCUENTO EN CHECKOUT
 ================================================================ */
+
+/* ── Cupón — fila con campo de texto y botón para ingresar y aplicar un código de descuento en el checkout ── */
 .coupon-row {
     display: flex; gap: 8px; margin-bottom: 14px;
 }
+
+/* ── Cupón input — campo de texto para escribir el código de descuento en mayúsculas ── */
 .coupon-input {
     flex: 1; padding: 10px 14px;
     border: 1.5px solid var(--border); border-radius: 8px;
@@ -335,6 +912,8 @@
     text-transform: uppercase; letter-spacing: 1px; transition: var(--ease);
 }
 .coupon-input:focus { border-color: var(--red); }
+
+/* ── Cupón botón — botón oscuro que aplica el código de descuento ingresado ── */
 .coupon-btn {
     padding: 10px 18px; background: var(--dark); color: #fff;
     border: none; border-radius: 8px; font-size: 13px; font-weight: 700;
@@ -342,17 +921,25 @@
     white-space: nowrap;
 }
 .coupon-btn:hover { background: var(--red); }
+
+/* ── Cupón mensajes de validación — texto verde de éxito o rojo de error al validar el código ── */
 .coupon-ok  { font-size: 12px; color: var(--green); font-weight: 600; margin-top: 4px; }
 .coupon-err { font-size: 12px; color: var(--red); font-weight: 600; margin-top: 4px; }
 
 /* ================================================================
    SHARE DE PRODUCTO
 ================================================================ */
+
+/* ── Compartir producto — fila de botones para compartir el producto en WhatsApp, Instagram y por enlace ── */
 .product-share {
     display: flex; align-items: center; gap: 8px;
     padding-top: 14px; border-top: 1px solid var(--border);
 }
+
+/* ── Compartir producto etiqueta — texto "Compartir:" antes de los botones de redes sociales ── */
 .product-share-label { font-size: 12px; font-weight: 600; color: var(--muted); }
+
+/* ── Compartir producto botón — botón pill neutro para cada plataforma de compartición ── */
 .share-btn {
     display: flex; align-items: center; gap: 6px;
     padding: 6px 14px; border-radius: 20px;
@@ -360,6 +947,8 @@
     color: var(--muted); background: none; cursor: pointer;
     transition: var(--ease); font-family: var(--font);
 }
+
+/* ── Compartir producto botones (hover) — colores de marca al pasar el cursor sobre cada red social ── */
 .share-btn.wa:hover  { border-color: #25D366; color: #25D366; }
 .share-btn.ig:hover  { border-color: #E1306C; color: #E1306C; }
 .share-btn.copy:hover { border-color: var(--red); color: var(--red); }
@@ -367,46 +956,85 @@
 /* ================================================================
    PRODUCTOS VISTOS RECIENTEMENTE
 ================================================================ */
+
+/* ── Sección vistos recientemente — banda de la página con un grid de miniaturas de productos visitados ── */
 .recently-viewed { max-width: 1400px; margin: 0 auto; padding: 0 40px 48px; }
+
+/* ── Título vistos recientemente — cabecera de la sección con contador en gris ── */
 .recently-viewed-title { font-size: 18px; font-weight: 800; margin-bottom: 16px; }
 .recently-viewed-title span { color: var(--muted); font-size: 14px; font-weight: 400; margin-left: 8px; }
+
+/* ── Grid vistos recientemente — cuadrícula adaptable de tarjetas pequeñas de productos visitados ── */
 .rv-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+
+/* ── Tarjeta de visto recientemente — miniatura de producto con imagen, nombre y precio ── */
 .rv-card {
     background: var(--white); border-radius: var(--r); border: 1px solid var(--border);
     overflow: hidden; cursor: pointer; transition: var(--ease);
 }
+
+/* ── Tarjeta de visto recientemente (hover) — sube y resalta con sombra y borde rojizo al pasar el cursor ── */
 .rv-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: rgba(255,13,42,0.2); }
+
+/* ── Tarjeta de visto recientemente imagen — área cuadrada con emoji o imagen del producto ── */
 .rv-img { height: 100px; display: flex; align-items: center; justify-content: center; font-size: 36px; }
+
+/* ── Tarjeta de visto recientemente nombre — nombre del producto en la tarjeta de historial ── */
 .rv-name { padding: 8px 10px; font-size: 12px; font-weight: 600; color: var(--text); }
+
+/* ── Tarjeta de visto recientemente precio — precio del producto en la tarjeta de historial ── */
 .rv-price { padding: 0 10px 10px; font-size: 13px; font-weight: 800; color: var(--text); }
 
+/* ── Tarjetas de visto recientemente tema oscuro — adapta el fondo de las tarjetas al modo oscuro ── */
 [data-theme="dark"] .rv-card { background: var(--dm-surface); border-color: var(--dm-border); }
 
 /* ================================================================
    COUNTDOWN EN PRODUCTO
 ================================================================ */
+
+/* ── Countdown de oferta — contador regresivo en la página de producto que indica cuánto tiempo queda para la oferta ── */
 .product-countdown {
     display: flex; align-items: center; gap: 10px;
     background: var(--red-light); border: 1px solid rgba(255,13,42,0.2);
     border-radius: 8px; padding: 10px 14px;
 }
+
+/* ── Countdown etiqueta — texto "Oferta por tiempo limitado" en rojo ── */
 .pcd-label { font-size: 12px; font-weight: 600; color: var(--red); }
+
+/* ── Countdown timer — fila con los bloques de horas, minutos y segundos ── */
 .pcd-timer { display: flex; gap: 6px; }
+
+/* ── Countdown bloque — columna con número y unidad de tiempo ── */
 .pcd-block { text-align: center; }
+
+/* ── Countdown número — dígito grande del contador ── */
 .pcd-num { font-size: 20px; font-weight: 900; color: var(--dark); line-height: 1; }
+
+/* ── Countdown unidad — etiqueta pequeña bajo el número indicando horas, min o seg ── */
 .pcd-unit { font-size: 9px; color: var(--muted); text-transform: uppercase; }
+
+/* ── Countdown separador — dos puntos rojos entre los bloques de tiempo ── */
 .pcd-sep { font-size: 18px; font-weight: 900; color: var(--red); align-self: flex-start; margin-top: 1px; }
+
+/* ── Aviso de stock bajo — mensaje rojo que indica que quedan pocas unidades del producto ── */
 .stock-warning { font-size: 12px; color: var(--red); font-weight: 700; }
 
 /* ================================================================
    NOTIFICACIÓN POPUP SALIDA
 ================================================================ */
+
+/* ── Popup de salida overlay — capa oscura que aparece cuando el usuario intenta salir de la página ── */
 .exit-popup-overlay {
     position: fixed; inset: 0; background: rgba(0,0,0,0.5);
     z-index: 6000; display: none; align-items: center; justify-content: center;
     backdrop-filter: blur(3px);
 }
+
+/* ── Popup de salida overlay visible — muestra el overlay cuando se activa la intención de salida ── */
 .exit-popup-overlay.show { display: flex; }
+
+/* ── Popup de salida — modal central con oferta especial para retener al usuario antes de que abandone ── */
 .exit-popup {
     background: var(--white); border-radius: 16px;
     max-width: 420px; width: 100%; padding: 32px;
@@ -414,17 +1042,32 @@
     animation: modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
     margin: 20px;
 }
+
+/* ── Popup de salida botón cerrar — botón X en la esquina para descartar el popup ── */
 .exit-popup-close { position: absolute; top: 14px; right: 14px; background: none; border: none; font-size: 22px; color: var(--muted); cursor: pointer; transition: var(--ease); }
 .exit-popup-close:hover { color: var(--red); transform: rotate(90deg); }
+
+/* ── Popup de salida badge — etiqueta pill roja que anuncia la oferta especial ── */
 .exit-popup-badge { background: var(--red); color: #fff; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; display: inline-block; margin-bottom: 14px; letter-spacing: 0.5px; }
+
+/* ── Popup de salida título — titular llamativo de la oferta de retención ── */
 .exit-popup h3 { font-size: 22px; font-weight: 900; color: var(--text); margin-bottom: 8px; line-height: 1.2; }
+
+/* ── Popup de salida descripción — texto descriptivo de la oferta ── */
 .exit-popup p  { font-size: 14px; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
+
+/* ── Popup de salida código de descuento — código con borde punteado rojo para copiar y usar ── */
 .exit-popup-code { background: var(--bg-alt); border: 2px dashed var(--red); border-radius: 8px; padding: 10px 20px; font-size: 20px; font-weight: 900; color: var(--red); letter-spacing: 4px; margin-bottom: 20px; }
+
+/* ── Popup de salida CTA — botón rojo principal que lleva al usuario de vuelta a la tienda ── */
 .exit-popup-cta { display: block; background: var(--red); color: #fff; padding: 13px 24px; border-radius: var(--r); font-size: 15px; font-weight: 700; cursor: pointer; transition: var(--ease); border: none; width: 100%; font-family: var(--font); text-decoration: none; }
 .exit-popup-cta:hover { background: var(--red-dark); color: #fff; }
+
+/* ── Popup de salida omitir — enlace discreto para cerrar el popup sin aprovechar la oferta ── */
 .exit-popup-skip { font-size: 12px; color: var(--muted); cursor: pointer; margin-top: 12px; display: block; transition: var(--ease); }
 .exit-popup-skip:hover { color: var(--text); }
 
+/* ── Popup de salida tema oscuro — adapta el popup y sus elementos al modo oscuro ── */
 [data-theme="dark"] .exit-popup { background: var(--dm-surface); }
 [data-theme="dark"] .exit-popup h3 { color: var(--dm-text); }
 [data-theme="dark"] .exit-popup-code { background: rgba(255,13,42,0.1); }
@@ -437,6 +1080,8 @@
 /* ================================================================
    WHATSAPP FLOTANTE (global)
 ================================================================ */
+
+/* ── Botón flotante de WhatsApp — botón verde circular fijo en la esquina inferior derecha para contacto directo ── */
 .whatsapp-fab {
     position: fixed; bottom: 28px; right: 28px;
     width: 56px; height: 56px; background: #25D366;
@@ -445,7 +1090,11 @@
     transition: all 0.22s ease; animation: waBounce 2.5s ease-in-out infinite;
     text-decoration: none;
 }
+
+/* ── Botón flotante de WhatsApp (hover) — escala y aumenta la sombra al pasar el cursor, detiene el rebote ── */
 .whatsapp-fab:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.6); animation: none; }
+
+/* ── Botón flotante de WhatsApp tooltip — etiqueta de texto oscura que aparece a la izquierda al hacer hover ── */
 .whatsapp-fab-label {
     position: absolute; right: 68px;
     background: var(--dark); color: #fff;
@@ -453,14 +1102,22 @@
     border-radius: 6px; white-space: nowrap; opacity: 0;
     transition: opacity 0.2s ease; pointer-events: none;
 }
+
+/* ── Botón flotante de WhatsApp tooltip flecha — triángulo decorativo que apunta al botón desde el tooltip ── */
 .whatsapp-fab-label::after { content:''; position:absolute; right:-6px; top:50%; transform:translateY(-50%); border:6px solid transparent; border-left-color:var(--dark); border-right:none; }
+
+/* ── Botón flotante de WhatsApp tooltip visible — muestra la etiqueta al hacer hover sobre el botón ── */
 .whatsapp-fab:hover .whatsapp-fab-label { opacity: 1; }
 
 /* ================================================================
    LAZY LOADING PLACEHOLDER
 ================================================================ */
+
+/* ── Imágenes con lazy loading — las imágenes empiezan invisibles y aparecen con fade al cargarse ── */
 img[loading="lazy"] { opacity: 0; transition: opacity 0.4s ease; }
 img[loading="lazy"].loaded { opacity: 1; }
+
+/* ── Placeholder de imagen — fondo con animación shimmer mientras la imagen se está cargando ── */
 .img-placeholder {
     background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
     background-size: 200% 100%;
@@ -470,6 +1127,8 @@ img[loading="lazy"].loaded { opacity: 1; }
 /* ================================================================
    RESPONSIVE FEATURES
 ================================================================ */
+
+/* ── @media max-width: 900px — responsive para tablet: reduce padding de página, hero, comparador y vistos ── */
 @media (max-width: 900px) {
     .category-page { padding-left: 20px; padding-right: 20px; }
     .category-hero { padding: 24px 20px; }
@@ -477,6 +1136,8 @@ img[loading="lazy"].loaded { opacity: 1; }
     .compare-slots { gap: 6px; }
     .recently-viewed { padding-left: 20px; padding-right: 20px; }
 }
+
+/* ── @media max-width: 600px — responsive para móvil: oculta icono del hero, ajusta grids y comparador ── */
 @media (max-width: 600px) {
     .category-hero-icon { display: none; }
     .category-grid { grid-template-columns: repeat(2, 1fr); }
@@ -485,6 +1146,7 @@ img[loading="lazy"].loaded { opacity: 1; }
     .rv-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
+/* ── @media max-width: 480px — responsive para móvil pequeño: ajustes finos de la barra inferior, envío gratis, popup y grid ── */
 @media (max-width: 480px) {
     .mobile-nav { height: 58px; padding: 0 4px; }
     .mobile-nav-btn { font-size: 10px; padding: 6px 4px; }

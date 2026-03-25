@@ -3,6 +3,7 @@
    AsolStore
 ================================================================ */
 
+/* ── Variables globales — tokens de diseño reutilizables en toda la web ── */
 :root {
     --red: #FF0D2A;
     --red-dark: #CC0020;
@@ -21,12 +22,14 @@
     --ease: all 0.18s ease;
 }
 
+/* ── Reset global — elimina márgenes/padding por defecto y aplica box-sizing ── */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* ── Body — fuente, fondo y color de texto base de todas las páginas ── */
 body {
     font-family: var(--font);
     background: var(--bg);
@@ -34,11 +37,13 @@ body {
     line-height: 1.6;
 }
 
+/* ── Enlace global — quita subrayado y hereda color del padre ── */
 a {
     text-decoration: none;
     color: inherit;
 }
 
+/* ── Botón global — quita borde/fondo por defecto y hereda fuente ── */
 button {
     border: none;
     background: none;
@@ -46,10 +51,12 @@ button {
     font-family: var(--font);
 }
 
+/* ── Lista global — quita bullets de todas las listas ── */
 ul {
     list-style: none;
 }
 
+/* ── Imagen global — evita desbordamiento y convierte en bloque ── */
 img {
     max-width: 100%;
     display: block;
@@ -58,6 +65,8 @@ img {
 /* ================================================================
    PAGE HEADER (compartido en páginas secundarias)
 ================================================================ */
+
+/* ── Page header — barra de navegación fija en la parte superior de páginas secundarias ── */
 .page-header {
     position: sticky;
     top: 0;
@@ -67,6 +76,7 @@ img {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
+/* ── Page header inner — contenedor interno centrado del header con logo y controles ── */
 .page-header-inner {
     max-width: 1400px;
     margin: 0 auto;
@@ -77,6 +87,7 @@ img {
     gap: 16px;
 }
 
+/* ── Botón volver — enlace/botón "Volver" en el header de páginas secundarias ── */
 .page-back {
     display: flex;
     align-items: center;
@@ -91,12 +102,13 @@ img {
     color: var(--red);
 }
 
+/* ── Logo del header — contenedor del logo en el header de páginas secundarias ── */
 .page-logo-link {
     display: flex;
     align-items: center;
 }
 
-/* Breadcrumb */
+/* ── Breadcrumb — ruta de navegación jerárquica debajo del header (ej: Inicio > Gaming > Producto) ── */
 .breadcrumb {
     max-width: 1400px;
     margin: 0 auto;
@@ -125,6 +137,8 @@ img {
 /* ================================================================
    PÁGINA DE PRODUCTO
 ================================================================ */
+
+/* ── Product page layout — contenedor principal de la página de producto en dos columnas ── */
 .product-page {
     max-width: 1400px;
     margin: 0 auto;
@@ -134,13 +148,14 @@ img {
     padding: 24px 40px 48px;
 }
 
-/* Galería */
+/* ── Product image gallery — galería de imágenes del producto con imagen principal y miniaturas ── */
 .product-gallery {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
+/* ── Gallery main image — área de la imagen principal grande del producto ── */
 .gallery-main {
     position: relative;
     border-radius: var(--r-lg);
@@ -149,6 +164,7 @@ img {
     background: #f0f0f0;
 }
 
+/* ── Gallery placeholder — contenedor centrado cuando no hay imagen real (usa emoji) ── */
 .gallery-placeholder {
     width: 100%;
     height: 100%;
@@ -158,10 +174,12 @@ img {
     flex-direction: column;
 }
 
+/* ── Gallery emoji — emoji decorativo grande que representa el producto en la galería ── */
 .gallery-emoji {
     font-size: 120px;
 }
 
+/* ── Product badge en galería — etiqueta de oferta/descuento superpuesta sobre la imagen principal ── */
 .product-badge-gallery {
     position: absolute;
     top: 16px;
@@ -174,11 +192,13 @@ img {
     border-radius: 4px;
 }
 
+/* ── Gallery thumbnails row — fila de miniaturas seleccionables debajo de la imagen principal ── */
 .gallery-thumbs {
     display: flex;
     gap: 10px;
 }
 
+/* ── Gallery thumbnail — miniatura individual de imagen del producto, resalta al estar activa ── */
 .gallery-thumb {
     width: 72px;
     height: 72px;
@@ -198,13 +218,14 @@ img {
     border-color: var(--red);
 }
 
-/* Info */
+/* ── Product info panel — columna derecha con toda la información del producto ── */
 .product-info-panel {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
+/* ── Product category tag — etiqueta de categoría en mayúsculas encima del título del producto ── */
 .product-category-tag {
     font-size: 11px;
     font-weight: 700;
@@ -213,6 +234,7 @@ img {
     letter-spacing: 1px;
 }
 
+/* ── Product title — nombre principal del producto en la página de detalle ── */
 .product-title {
     font-size: 26px;
     font-weight: 800;
@@ -220,22 +242,26 @@ img {
     line-height: 1.2;
 }
 
+/* ── Product rating — fila de estrellas y contador de reseñas del producto ── */
 .product-rating {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
+/* ── Stars — estrellas doradas de valoración del producto ── */
 .stars {
     color: #f59e0b;
     font-size: 16px;
 }
 
+/* ── Rating count — texto con el número de reseñas junto a las estrellas ── */
 .rating-count {
     font-size: 13px;
     color: var(--muted);
 }
 
+/* ── Product pricing block — bloque con precio actual, precio tachado y badge de descuento ── */
 .product-pricing-block {
     display: flex;
     align-items: baseline;
@@ -243,18 +269,21 @@ img {
     flex-wrap: wrap;
 }
 
+/* ── Product current price — precio actual del producto destacado en grande ── */
 .product-price-current {
     font-size: 32px;
     font-weight: 900;
     color: var(--dark);
 }
 
+/* ── Product old price — precio anterior tachado, visible cuando hay descuento ── */
 .product-price-old {
     font-size: 16px;
     color: #bbb;
     text-decoration: line-through;
 }
 
+/* ── Product discount badge — pastilla roja con el porcentaje de descuento ── */
 .product-discount-badge {
     background: var(--red-light);
     color: var(--red);
@@ -264,19 +293,21 @@ img {
     border-radius: 20px;
 }
 
+/* ── Product description — texto descriptivo del producto en tono gris ── */
 .product-description {
     font-size: 14px;
     color: var(--muted);
     line-height: 1.7;
 }
 
-/* Variantes */
+/* ── Product variants — sección de selección de variantes (talla, color, etc.) ── */
 .product-variants {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
+/* ── Variant label — etiqueta de categoría de variante (ej: "TALLA", "COLOR") ── */
 .variant-label {
     font-size: 12px;
     font-weight: 700;
@@ -285,12 +316,14 @@ img {
     letter-spacing: 0.5px;
 }
 
+/* ── Variant options — fila de botones de variante seleccionables ── */
 .variant-options {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
 }
 
+/* ── Variant button — botón individual de opción de variante del producto ── */
 .variant-btn {
     padding: 8px 16px;
     border-radius: var(--r);
@@ -308,19 +341,21 @@ img {
     box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
-/* Cantidad */
+/* ── Product quantity block — sección de control de cantidad a comprar ── */
 .product-qty-block {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
+/* ── Product quantity control — fila con botones de incrementar/decrementar cantidad ── */
 .product-qty-control {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
+/* ── Product quantity button — botón circular de + o - para ajustar la cantidad ── */
 .pqty-btn {
     width: 36px;
     height: 36px;
@@ -342,6 +377,7 @@ img {
     color: #fff;
 }
 
+/* ── Product quantity value — número de unidades seleccionadas actualmente ── */
 .pqty-val {
     font-size: 18px;
     font-weight: 800;
@@ -349,18 +385,20 @@ img {
     text-align: center;
 }
 
+/* ── Stock info — indicador de disponibilidad en verde (ej: "En stock") ── */
 .stock-info {
     font-size: 13px;
     color: var(--green);
     font-weight: 500;
 }
 
-/* Acciones */
+/* ── Product actions — fila de botones principales: "Añadir al carrito" y "Comprar ahora" ── */
 .product-actions {
     display: flex;
     gap: 12px;
 }
 
+/* ── Add to cart button — botón oscuro para añadir el producto al carrito ── */
 .btn-add-cart {
     flex: 1;
     display: flex;
@@ -383,6 +421,7 @@ img {
     transform: translateY(-1px);
 }
 
+/* ── Buy now button — botón rojo para comprar el producto directamente ── */
 .btn-buy-now {
     flex: 1;
     display: flex;
@@ -403,7 +442,7 @@ img {
     transform: translateY(-1px);
 }
 
-/* Garantías */
+/* ── Product guarantees — rejilla de iconos de garantía (envío, devolución, seguridad, etc.) ── */
 .product-guarantees {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -413,6 +452,7 @@ img {
     border-radius: var(--r);
 }
 
+/* ── Guarantee item — elemento individual de garantía con icono y texto ── */
 .guarantee-item {
     display: flex;
     align-items: center;
@@ -422,19 +462,21 @@ img {
     font-weight: 500;
 }
 
-/* Tabs */
+/* ── Product tabs section — sección inferior con pestañas (descripción, specs, reseñas) ── */
 .product-tabs-section {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 40px 40px;
 }
 
+/* ── Product tabs bar — barra de pestañas con borde inferior ── */
 .product-tabs {
     display: flex;
     border-bottom: 2px solid var(--border);
     margin-bottom: 24px;
 }
 
+/* ── Product tab button — pestaña individual (Descripción / Especificaciones / Reseñas) ── */
 .prod-tab {
     padding: 12px 24px;
     font-size: 14px;
@@ -454,6 +496,7 @@ img {
     border-bottom-color: var(--red);
 }
 
+/* ── Product tab content — panel de contenido de cada pestaña, oculto por defecto ── */
 .prod-tab-content {
     display: none;
     font-size: 14px;
@@ -465,6 +508,7 @@ img {
     display: block;
 }
 
+/* ── Product tab content list — lista con bullets dentro del contenido de pestaña ── */
 .prod-tab-content ul {
     padding-left: 20px;
     list-style: disc;
@@ -473,6 +517,7 @@ img {
     gap: 6px;
 }
 
+/* ── Specs table — tabla de especificaciones técnicas del producto ── */
 .specs-table {
     width: 100%;
     border-collapse: collapse;
@@ -493,7 +538,7 @@ img {
     width: 40%;
 }
 
-/* Reseñas */
+/* ── Reviews summary — resumen global de puntuación en la pestaña de reseñas ── */
 .reviews-summary {
     display: flex;
     flex-direction: column;
@@ -506,27 +551,32 @@ img {
     text-align: center;
 }
 
+/* ── Reviews score — puntuación numérica global grande (ej: 4.8) ── */
 .reviews-score {
     font-size: 48px;
     font-weight: 900;
     color: var(--dark);
 }
 
+/* ── Reviews stars — estrellas globales de valoración en el resumen de reseñas ── */
 .reviews-stars {
     font-size: 24px;
     color: #f59e0b;
 }
 
+/* ── Reviews count — número total de reseñas bajo las estrellas ── */
 .reviews-count {
     font-size: 13px;
     color: var(--muted);
 }
 
+/* ── Review item — reseña individual de un usuario con separador inferior ── */
 .review-item {
     padding: 16px 0;
     border-bottom: 1px solid var(--border);
 }
 
+/* ── Review header — cabecera de reseña con nombre del usuario y estrellas ── */
 .review-header {
     display: flex;
     justify-content: space-between;
@@ -537,18 +587,20 @@ img {
     font-size: 14px;
 }
 
+/* ── Review stars — estrellas de valoración de una reseña individual ── */
 .review-stars {
     color: #f59e0b;
     font-size: 13px;
 }
 
+/* ── Review text — texto del comentario de la reseña ── */
 .review-item p {
     font-size: 13px;
     color: var(--muted);
     line-height: 1.6;
 }
 
-/* Relacionados */
+/* ── Related products section — sección de productos relacionados al pie de la página de producto ── */
 .related-section {
     max-width: 1400px;
     margin: 0 auto;
@@ -558,10 +610,13 @@ img {
 /* ================================================================
    CHECKOUT
 ================================================================ */
+
+/* ── Checkout body — fondo de la página de proceso de pago ── */
 .checkout-body {
     background: var(--bg);
 }
 
+/* ── Checkout layout — rejilla principal del checkout: formulario a la izquierda, resumen a la derecha ── */
 .checkout-layout {
     max-width: 1200px;
     margin: 0 auto;
@@ -572,6 +627,7 @@ img {
     align-items: start;
 }
 
+/* ── Checkout steps — indicador de pasos del proceso de compra (Envío > Pago > Confirmación) ── */
 .checkout-steps {
     display: flex;
     align-items: center;
@@ -579,6 +635,7 @@ img {
     font-size: 13px;
 }
 
+/* ── Checkout step — paso individual del indicador de progreso del checkout ── */
 .cstep {
     color: var(--muted);
     font-weight: 500;
@@ -589,10 +646,12 @@ img {
     font-weight: 700;
 }
 
+/* ── Checkout step separator — separador visual (›) entre pasos del checkout ── */
 .cstep-sep {
     color: var(--border);
 }
 
+/* ── Checkout step panel — panel de contenido de cada paso, oculto por defecto ── */
 .checkout-step-panel {
     display: none;
 }
@@ -601,6 +660,7 @@ img {
     display: block;
 }
 
+/* ── Checkout section title — título de cada sección dentro del formulario de checkout ── */
 .checkout-section-title {
     font-size: 20px;
     font-weight: 800;
@@ -608,12 +668,14 @@ img {
     margin-bottom: 24px;
 }
 
+/* ── Checkout form — formulario de datos del checkout en columna ── */
 .checkout-form {
     display: flex;
     flex-direction: column;
     gap: 0;
 }
 
+/* ── Checkout form row — fila horizontal de campos del formulario ── */
 .cf-row {
     display: flex;
     gap: 12px;
@@ -623,6 +685,7 @@ img {
     flex: 1;
 }
 
+/* ── Checkout form field — campo individual de formulario con label e input ── */
 .cf-field {
     display: flex;
     flex-direction: column;
@@ -636,6 +699,7 @@ img {
     color: var(--muted);
 }
 
+/* ── Checkout form input / select — campos de texto y selects del formulario de checkout ── */
 .cf-field input,
 .cf-field select {
     padding: 11px 14px;
@@ -658,13 +722,14 @@ img {
     color: #bbb;
 }
 
-/* Opciones de envío */
+/* ── Shipping options — lista de opciones de envío seleccionables en el checkout ── */
 .shipping-options {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
+/* ── Shipping option — tarjeta individual de opción de envío con radio button ── */
 .shipping-opt {
     display: flex;
     align-items: center;
@@ -686,6 +751,7 @@ img {
     background: var(--red-light);
 }
 
+/* ── Shipping option inner — fila interna de la opción de envío con nombre y precio ── */
 .shipping-opt-inner {
     display: flex;
     justify-content: space-between;
@@ -694,6 +760,7 @@ img {
     font-weight: 600;
 }
 
+/* ── Shipping price — precio del método de envío seleccionado ── */
 .shipping-price {
     color: var(--dark);
 }
@@ -702,6 +769,92 @@ img {
     color: var(--green);
 }
 
+/* ── Delivery coordinado — bloque informativo de entrega coordinada por WhatsApp ── */
+.delivery-coordinated {
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    overflow: hidden;
+}
+
+.delivery-coord-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--red-light);
+    border-bottom: 1px solid var(--border);
+    color: var(--red);
+}
+
+.delivery-coord-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 2px;
+}
+
+.delivery-coord-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.delivery-coord-sub {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.delivery-coord-price {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--dark);
+    white-space: nowrap;
+}
+
+.delivery-coord-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 16px;
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0;
+    background: var(--white);
+}
+
+.delivery-coord-note svg {
+    flex-shrink: 0;
+    margin-top: 1px;
+    color: var(--red);
+}
+
+/* ── cf-field select/textarea — inputs adicionales del formulario de checkout ── */
+.cf-field select,
+.cf-field textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    font-size: 13px;
+    font-family: var(--font);
+    background: var(--white);
+    color: var(--dark);
+    transition: border-color .2s ease;
+    box-sizing: border-box;
+}
+
+.cf-field select:focus,
+.cf-field textarea:focus {
+    outline: none;
+    border-color: var(--red);
+}
+
+.cf-field textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+/* ── Checkout next button — botón de continuar al siguiente paso del checkout ── */
 .checkout-next-btn {
     width: 100%;
     padding: 14px;
@@ -722,6 +875,7 @@ img {
     transform: translateY(-1px);
 }
 
+/* ── Checkout back button — botón de volver al paso anterior del checkout ── */
 .checkout-back-btn {
     padding: 14px 24px;
     background: var(--bg-alt);
@@ -739,13 +893,14 @@ img {
     background: var(--border);
 }
 
+/* ── Checkout button row — fila que agrupa el botón de volver y el de continuar ── */
 .checkout-btn-row {
     display: flex;
     gap: 12px;
     margin-top: 8px;
 }
 
-/* Pago en checkout */
+/* ── Checkout payment form — formulario de datos de pago (tarjeta, QR, efectivo) ── */
 .checkout-payment-form {
     margin-bottom: 16px;
 }
@@ -754,15 +909,18 @@ img {
     display: none;
 }
 
+/* ── Payment methods — contenedor de la sección de métodos de pago ── */
 .payment-methods {
     padding: 0 0 16px;
 }
 
+/* ── Payment grid — rejilla de tarjetas de métodos de pago disponibles ── */
 .payment-grid {
     display: grid;
     gap: 8px;
 }
 
+/* ── Payment method card — tarjeta seleccionable de método de pago (tarjeta, QR, efectivo) ── */
 .payment-method {
     display: flex;
     flex-direction: column;
@@ -786,6 +944,7 @@ img {
     color: var(--red);
 }
 
+/* ── QR payment box — área de pago por código QR con imagen y texto de instrucciones ── */
 .qr-box {
     display: flex;
     flex-direction: column;
@@ -795,6 +954,7 @@ img {
     text-align: center;
 }
 
+/* ── QR placeholder — marco punteado donde se mostrará el código QR ── */
 .qr-placeholder {
     width: 130px;
     height: 130px;
@@ -816,6 +976,7 @@ img {
     color: var(--muted);
 }
 
+/* ── Cash payment box — área de instrucciones para pago en efectivo ── */
 .efectivo-box {
     display: flex;
     flex-direction: column;
@@ -835,7 +996,7 @@ img {
     color: var(--muted);
 }
 
-/* Éxito checkout */
+/* ── Checkout success — pantalla de confirmación de pedido completado ── */
 .checkout-success {
     display: flex;
     flex-direction: column;
@@ -845,6 +1006,7 @@ img {
     text-align: center;
 }
 
+/* ── Success circle — icono circular verde de confirmación de compra exitosa ── */
 .success-circle {
     width: 80px;
     height: 80px;
@@ -865,6 +1027,7 @@ img {
     color: var(--muted);
 }
 
+/* ── Order number — pastilla con el número de pedido tras la confirmación ── */
 .order-number {
     font-size: 13px;
     color: var(--muted);
@@ -873,12 +1036,13 @@ img {
     border-radius: 20px;
 }
 
-/* Resumen pedido */
+/* ── Checkout summary column — columna derecha pegajosa con el resumen del pedido ── */
 .checkout-summary-col {
     position: sticky;
     top: 80px;
 }
 
+/* ── Order summary card — tarjeta blanca con el resumen de artículos, envío y total ── */
 .order-summary {
     background: #fff;
     border-radius: var(--r-lg);
@@ -886,12 +1050,14 @@ img {
     padding: 24px;
 }
 
+/* ── Summary title — título "Resumen del pedido" en la columna lateral del checkout ── */
 .summary-title {
     font-size: 16px;
     font-weight: 800;
     margin-bottom: 16px;
 }
 
+/* ── Summary items list — lista de productos incluidos en el pedido ── */
 .summary-items {
     display: flex;
     flex-direction: column;
@@ -899,12 +1065,14 @@ img {
     margin-bottom: 16px;
 }
 
+/* ── Summary item — fila de producto en el resumen (imagen + nombre + precio) ── */
 .summary-item {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
+/* ── Summary item image — miniatura del producto en el resumen del pedido ── */
 .si-img {
     width: 48px;
     height: 48px;
@@ -916,6 +1084,7 @@ img {
     flex-shrink: 0;
 }
 
+/* ── Summary item info — columna con nombre y cantidad del producto en el resumen ── */
 .si-info {
     flex: 1;
     display: flex;
@@ -923,27 +1092,32 @@ img {
     gap: 2px;
 }
 
+/* ── Summary item name — nombre del producto en el resumen del pedido ── */
 .si-name {
     font-size: 13px;
     font-weight: 600;
 }
 
+/* ── Summary item quantity — cantidad de unidades del producto en el resumen ── */
 .si-qty {
     font-size: 12px;
     color: var(--muted);
 }
 
+/* ── Summary item price — precio del producto en el resumen del pedido ── */
 .si-price {
     font-size: 14px;
     font-weight: 800;
 }
 
+/* ── Summary divider — línea separadora horizontal en el resumen del pedido ── */
 .summary-divider {
     height: 1px;
     background: var(--border);
     margin: 12px 0;
 }
 
+/* ── Summary line — fila de subtotal, descuento o envío en el resumen ── */
 .summary-line {
     display: flex;
     justify-content: space-between;
@@ -956,6 +1130,7 @@ img {
     color: var(--green);
 }
 
+/* ── Summary total — fila del total final del pedido en el resumen ── */
 .summary-total {
     display: flex;
     justify-content: space-between;
@@ -964,6 +1139,7 @@ img {
     color: var(--dark);
 }
 
+/* ── Summary badge — indicador verde de seguridad/garantía al pie del resumen ── */
 .summary-badge {
     display: flex;
     align-items: center;
@@ -977,11 +1153,14 @@ img {
 /* ================================================================
    PÁGINA 404
 ================================================================ */
+
+/* ── Error body — fondo oscuro de la página de error 404 ── */
 .error-body {
     background: var(--dark);
     min-height: 100vh;
 }
 
+/* ── Error page — contenedor centrado vertical y horizontalmente de la página 404 ── */
 .error-page {
     display: flex;
     flex-direction: column;
@@ -993,10 +1172,12 @@ img {
     gap: 20px;
 }
 
+/* ── Error logo — logo animado con rebote en la página de error 404 ── */
 .error-logo {
     animation: errorBounce 2s ease-in-out infinite;
 }
 
+/* ── errorBounce keyframes — animación de rebote vertical del logo en la página 404 ── */
 @keyframes errorBounce {
 
     0%,
@@ -1009,6 +1190,7 @@ img {
     }
 }
 
+/* ── Error code — número "404" gigante en rojo en la página de error ── */
 .error-code {
     font-size: 120px;
     font-weight: 900;
@@ -1017,6 +1199,7 @@ img {
     opacity: 0.9;
 }
 
+/* ── Error title — título descriptivo del error en blanco ── */
 .error-title {
     font-size: 26px;
     font-weight: 800;
@@ -1024,6 +1207,7 @@ img {
     max-width: 400px;
 }
 
+/* ── Error description — texto de explicación del error en gris claro ── */
 .error-desc {
     font-size: 15px;
     color: rgba(255, 255, 255, 0.5);
@@ -1031,6 +1215,7 @@ img {
     line-height: 1.6;
 }
 
+/* ── Error actions — fila de botones de acción en la página 404 (volver al inicio, etc.) ── */
 .error-actions {
     display: flex;
     gap: 12px;
@@ -1038,6 +1223,7 @@ img {
     justify-content: center;
 }
 
+/* ── Error primary button — botón rojo principal de acción en la página 404 ── */
 .error-btn-primary {
     padding: 13px 28px;
     background: var(--red);
@@ -1053,6 +1239,7 @@ img {
     transform: translateY(-1px);
 }
 
+/* ── Error secondary button — botón secundario semitransparente en la página 404 ── */
 .error-btn-secondary {
     padding: 13px 28px;
     background: rgba(255, 255, 255, 0.08);
@@ -1068,6 +1255,7 @@ img {
     background: rgba(255, 255, 255, 0.14);
 }
 
+/* ── Error suggestions — sección de sugerencias de navegación en la página 404 ── */
 .error-suggestions {
     display: flex;
     flex-direction: column;
@@ -1080,6 +1268,7 @@ img {
     color: rgba(255, 255, 255, 0.4);
 }
 
+/* ── Error tags — chips de categorías sugeridas en la página 404 ── */
 .error-tags {
     display: flex;
     gap: 8px;
@@ -1104,6 +1293,8 @@ img {
 /* ================================================================
    PERFIL DE USUARIO
 ================================================================ */
+
+/* ── Profile layout — rejilla principal del perfil: sidebar izquierdo y contenido derecho ── */
 .profile-layout {
     max-width: 1200px;
     margin: 0 auto;
@@ -1114,6 +1305,7 @@ img {
     align-items: start;
 }
 
+/* ── Profile sidebar — panel lateral fijo con avatar, nombre y menú de navegación del perfil ── */
 .profile-sidebar {
     background: #fff;
     border-radius: var(--r-lg);
@@ -1123,6 +1315,7 @@ img {
     top: 80px;
 }
 
+/* ── Profile avatar block — cabecera oscura del sidebar con avatar y datos del usuario ── */
 .profile-avatar-block {
     padding: 24px;
     background: var(--dark);
@@ -1131,6 +1324,7 @@ img {
     gap: 14px;
 }
 
+/* ── Profile avatar — círculo con iniciales del usuario en el sidebar del perfil ── */
 .profile-avatar {
     width: 48px;
     height: 48px;
@@ -1145,21 +1339,25 @@ img {
     flex-shrink: 0;
 }
 
+/* ── Profile name — nombre del usuario en la cabecera del sidebar ── */
 .profile-name {
     font-size: 14px;
     font-weight: 700;
     color: #fff;
 }
 
+/* ── Profile email — correo electrónico del usuario en la cabecera del sidebar ── */
 .profile-email {
     font-size: 12px;
     color: rgba(255, 255, 255, 0.5);
 }
 
+/* ── Profile navigation — menú de navegación del sidebar del perfil ── */
 .profile-nav {
     padding: 8px 0;
 }
 
+/* ── Profile nav item — ítem individual del menú del perfil (Mis pedidos, Direcciones, etc.) ── */
 .profile-nav-item {
     display: flex;
     align-items: center;
@@ -1190,6 +1388,7 @@ img {
     font-weight: 700;
 }
 
+/* ── Logout button — botón de cerrar sesión en el sidebar, con estilo de alerta ── */
 .logout-btn {
     color: #e55 !important;
     border-top: 1px solid var(--border);
@@ -1200,6 +1399,7 @@ img {
     background: #fff0f0 !important;
 }
 
+/* ── Profile content area — área principal de contenido del perfil con los paneles ── */
 .profile-content {
     background: #fff;
     border-radius: var(--r-lg);
@@ -1208,6 +1408,7 @@ img {
     min-height: 400px;
 }
 
+/* ── Profile panel — panel de contenido de cada sección del perfil, oculto por defecto ── */
 .profile-panel {
     display: none;
 }
@@ -1216,23 +1417,26 @@ img {
     display: block;
 }
 
+/* ── Profile panel title — título de la sección activa del perfil (ej: "Mis pedidos") ── */
 .profile-panel-title {
     font-size: 20px;
     font-weight: 800;
     margin-bottom: 24px;
 }
 
+/* ── Profile form fields — campos de formulario en la sección de datos personales del perfil ── */
 .profile-form .cf-field {
     margin-bottom: 16px;
 }
 
-/* Pedidos */
+/* ── Orders list — lista de pedidos del usuario en el panel de pedidos ── */
 .orders-list {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
+/* ── Order card — tarjeta individual de pedido con estado, productos y acciones ── */
 .order-card {
     background: var(--bg-alt);
     border-radius: var(--r);
@@ -1245,6 +1449,7 @@ img {
     border-color: rgba(255, 13, 42, 0.2);
 }
 
+/* ── Order card header — cabecera de la tarjeta de pedido con ID y estado ── */
 .order-card-header {
     display: flex;
     justify-content: space-between;
@@ -1252,12 +1457,14 @@ img {
     margin-bottom: 12px;
 }
 
+/* ── Order ID — identificador único del pedido (ej: #ASL-0042) ── */
 .order-id {
     font-size: 13px;
     font-weight: 700;
     color: var(--dark);
 }
 
+/* ── Order status badge — pastilla de estado del pedido con colores por estado ── */
 .order-status {
     font-size: 11px;
     font-weight: 700;
@@ -1280,12 +1487,14 @@ img {
     color: #d97706;
 }
 
+/* ── Order items preview — fila de miniaturas de los productos del pedido ── */
 .order-items-preview {
     display: flex;
     gap: 8px;
     margin-bottom: 12px;
 }
 
+/* ── Order item preview image — miniatura individual de producto en la tarjeta de pedido ── */
 .oip {
     width: 48px;
     height: 48px;
@@ -1296,23 +1505,27 @@ img {
     font-size: 22px;
 }
 
+/* ── Order card footer — pie de la tarjeta de pedido con fecha, total y botones ── */
 .order-card-footer {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
+/* ── Order date — fecha del pedido en el pie de la tarjeta ── */
 .order-date {
     font-size: 12px;
     color: var(--muted);
     flex: 1;
 }
 
+/* ── Order total — importe total del pedido en el pie de la tarjeta ── */
 .order-total {
     font-size: 15px;
     font-weight: 800;
 }
 
+/* ── Order action buttons — botones de acción del pedido: repetir, rastrear y cancelar ── */
 .order-reorder,
 .order-track-btn,
 .order-cancel-btn {
@@ -1325,6 +1538,7 @@ img {
     text-decoration: none;
 }
 
+/* ── Order reorder button — botón rojo para volver a pedir el mismo pedido ── */
 .order-reorder {
     background: var(--red);
     color: #fff;
@@ -1334,6 +1548,7 @@ img {
     background: var(--red-dark);
 }
 
+/* ── Order track button — botón oscuro para rastrear el envío del pedido ── */
 .order-track-btn {
     background: var(--dark);
     color: #fff;
@@ -1341,6 +1556,7 @@ img {
     font-family: var(--font);
 }
 
+/* ── Order cancel button — botón gris para cancelar el pedido ── */
 .order-cancel-btn {
     background: var(--bg-alt);
     color: var(--muted);
@@ -1353,13 +1569,14 @@ img {
     border-color: #e55;
 }
 
-/* Direcciones */
+/* ── Addresses grid — rejilla de tarjetas de direcciones guardadas del usuario ── */
 .addresses-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 16px;
 }
 
+/* ── Address card — tarjeta de dirección guardada con nombre, calle y acciones ── */
 .address-card {
     background: var(--bg-alt);
     border-radius: var(--r);
@@ -1377,6 +1594,7 @@ img {
     border-color: var(--red);
 }
 
+/* ── Address badge — etiqueta "PRINCIPAL" en la dirección predeterminada ── */
 .address-badge {
     font-size: 10px;
     font-weight: 700;
@@ -1386,16 +1604,19 @@ img {
     margin-bottom: 6px;
 }
 
+/* ── Address name — nombre del destinatario en la tarjeta de dirección ── */
 .address-name {
     font-size: 14px;
     font-weight: 700;
     color: var(--dark);
 }
 
+/* ── Address actions — área de botones de acción en la tarjeta de dirección ── */
 .address-actions {
     margin-top: 10px;
 }
 
+/* ── Address edit button — botón para editar una dirección guardada ── */
 .address-edit {
     font-size: 12px;
     font-weight: 600;
@@ -1413,6 +1634,7 @@ img {
     color: #fff;
 }
 
+/* ── Address add button — tarjeta punteada para añadir una nueva dirección ── */
 .address-add-btn {
     border: 2px dashed var(--border);
     border-radius: var(--r);
@@ -1435,7 +1657,7 @@ img {
     color: var(--red);
 }
 
-/* Wishlist */
+/* ── Wishlist grid — rejilla de productos guardados en la lista de deseos del usuario ── */
 .wishlist-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -1451,7 +1673,7 @@ img {
    COMPONENTES UX GLOBALES
 ================================================================ */
 
-/* WhatsApp FAB */
+/* ── WhatsApp FAB — botón flotante de WhatsApp con animación de rebote en la esquina inferior derecha ── */
 .whatsapp-fab {
     position: fixed;
     bottom: 28px;
@@ -1475,6 +1697,7 @@ img {
     animation: none;
 }
 
+/* ── waBounce keyframes — animación de flotación vertical del botón de WhatsApp ── */
 @keyframes waBounce {
 
     0%,
@@ -1487,7 +1710,7 @@ img {
     }
 }
 
-/* Skeleton loaders */
+/* ── Skeleton loaders — placeholders animados que simulan contenido cargando ── */
 .skeleton {
     background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
     background-size: 200% 100%;
@@ -1495,6 +1718,7 @@ img {
     border-radius: var(--r);
 }
 
+/* ── shimmer keyframes — animación de barrido horizontal del efecto skeleton loader ── */
 @keyframes shimmer {
     0% {
         background-position: 200% 0
@@ -1505,11 +1729,13 @@ img {
     }
 }
 
+/* ── Skeleton card — placeholder de tarjeta de producto durante la carga ── */
 .skeleton-card {
     height: 280px;
     border-radius: var(--r-lg);
 }
 
+/* ── Skeleton text — placeholder de línea de texto durante la carga ── */
 .skeleton-text {
     height: 14px;
     margin-bottom: 8px;
@@ -1519,12 +1745,13 @@ img {
     width: 60%;
 }
 
+/* ── Skeleton image — placeholder de imagen dentro de tarjeta durante la carga ── */
 .skeleton-img {
     height: 160px;
     border-radius: var(--r) var(--r) 0 0;
 }
 
-/* Animaciones de scroll (Intersection Observer) */
+/* ── Reveal animation — efecto de aparición al hacer scroll (Intersection Observer) ── */
 .reveal {
     opacity: 0;
     transform: translateY(24px);
@@ -1536,6 +1763,7 @@ img {
     transform: translateY(0);
 }
 
+/* ── Reveal delays — retrasos escalonados para animar elementos en secuencia al revelar ── */
 .reveal-delay-1 {
     transition-delay: 0.1s;
 }
@@ -1552,7 +1780,7 @@ img {
     transition-delay: 0.4s;
 }
 
-/* Buscador con resultados */
+/* ── Search overlay — capa modal oscura con blur que aparece al activar el buscador ── */
 .search-overlay {
     position: fixed;
     inset: 0;
@@ -1569,6 +1797,7 @@ img {
     display: flex;
 }
 
+/* ── Search box — caja blanca del buscador con resultados en tiempo real ── */
 .search-box {
     background: #fff;
     border-radius: var(--r-lg);
@@ -1579,6 +1808,7 @@ img {
     animation: searchIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+/* ── searchIn keyframes — animación de entrada elástica de la caja del buscador ── */
 @keyframes searchIn {
     from {
         opacity: 0;
@@ -1591,6 +1821,7 @@ img {
     }
 }
 
+/* ── Search input row — fila superior del buscador con icono, campo de texto y botón de cerrar ── */
 .search-input-row {
     display: flex;
     align-items: center;
@@ -1617,6 +1848,7 @@ img {
     color: #bbb;
 }
 
+/* ── Search close button — botón para cerrar el modal del buscador ── */
 .search-close-btn {
     background: none;
     border: none;
@@ -1631,12 +1863,14 @@ img {
     color: var(--red);
 }
 
+/* ── Search results — lista scrollable de resultados de búsqueda de productos ── */
 .search-results {
     padding: 12px;
     max-height: 360px;
     overflow-y: auto;
 }
 
+/* ── Search result item — fila de resultado de búsqueda con imagen, nombre y precio ── */
 .search-result-item {
     display: flex;
     align-items: center;
@@ -1651,6 +1885,7 @@ img {
     background: var(--bg-alt);
 }
 
+/* ── Search result image — miniatura del producto en los resultados de búsqueda ── */
 .sr-img {
     width: 44px;
     height: 44px;
@@ -1662,27 +1897,32 @@ img {
     flex-shrink: 0;
 }
 
+/* ── Search result info — columna con nombre y categoría del producto en resultados ── */
 .sr-info {
     flex: 1;
 }
 
+/* ── Search result name — nombre del producto en el resultado de búsqueda ── */
 .sr-name {
     font-size: 14px;
     font-weight: 600;
     color: var(--text);
 }
 
+/* ── Search result category — categoría del producto en el resultado de búsqueda ── */
 .sr-cat {
     font-size: 12px;
     color: var(--muted);
 }
 
+/* ── Search result price — precio del producto en el resultado de búsqueda ── */
 .sr-price {
     font-size: 14px;
     font-weight: 800;
     color: var(--dark);
 }
 
+/* ── Search empty state — mensaje cuando no hay resultados para la búsqueda ── */
 .search-empty {
     padding: 32px;
     text-align: center;
@@ -1690,10 +1930,12 @@ img {
     font-size: 14px;
 }
 
+/* ── Search categories section — sección de accesos rápidos por categoría en el buscador ── */
 .search-categories {
     padding: 0 12px 12px;
 }
 
+/* ── Search category label — etiqueta "CATEGORÍAS" sobre los chips de acceso rápido ── */
 .search-cat-label {
     font-size: 11px;
     font-weight: 700;
@@ -1703,6 +1945,7 @@ img {
     padding: 8px 12px 6px;
 }
 
+/* ── Search category tags — fila de chips de categorías de acceso rápido en el buscador ── */
 .search-cat-tags {
     display: flex;
     flex-wrap: wrap;
@@ -1710,6 +1953,7 @@ img {
     padding: 0 12px;
 }
 
+/* ── Search category tag — chip individual de categoría en el buscador ── */
 .search-cat-tag {
     padding: 6px 14px;
     background: var(--bg-alt);
@@ -1728,7 +1972,7 @@ img {
     color: var(--red);
 }
 
-/* Filtros de categoría */
+/* ── Filter bar — barra de chips de filtro de categorías en páginas de listado ── */
 .filter-bar {
     display: flex;
     gap: 8px;
@@ -1738,6 +1982,7 @@ img {
     border-bottom: 1px solid var(--border);
 }
 
+/* ── Filter chip — chip individual de filtro de categoría/subcategoría ── */
 .filter-chip {
     padding: 7px 16px;
     border: 1.5px solid var(--border);
@@ -1762,18 +2007,20 @@ img {
     font-weight: 700;
 }
 
-/* Footer newsletter mejorado */
+/* ── Newsletter section — sección oscura de suscripción al boletín en el footer ── */
 .newsletter-section {
     background: var(--dark);
     padding: 48px 40px;
     text-align: center;
 }
 
+/* ── Newsletter inner — contenedor centrado y acotado del formulario de newsletter ── */
 .newsletter-inner {
     max-width: 520px;
     margin: 0 auto;
 }
 
+/* ── Newsletter title — título del bloque de suscripción al newsletter ── */
 .newsletter-title {
     font-size: 24px;
     font-weight: 800;
@@ -1781,17 +2028,20 @@ img {
     margin-bottom: 8px;
 }
 
+/* ── Newsletter subtitle — texto descriptivo del newsletter ── */
 .newsletter-sub {
     font-size: 14px;
     color: rgba(255, 255, 255, 0.5);
     margin-bottom: 24px;
 }
 
+/* ── Newsletter form — formulario de suscripción con input y botón en fila ── */
 .newsletter-form {
     display: flex;
     gap: 10px;
 }
 
+/* ── Newsletter input — campo de correo electrónico para suscribirse al newsletter ── */
 .newsletter-input {
     flex: 1;
     padding: 12px 16px;
@@ -1814,6 +2064,7 @@ img {
     background: rgba(255, 255, 255, 0.10);
 }
 
+/* ── Newsletter button — botón de envío de suscripción al newsletter ── */
 .newsletter-btn {
     padding: 12px 22px;
     background: var(--red);
@@ -1832,6 +2083,7 @@ img {
     background: var(--red-dark);
 }
 
+/* ── Newsletter disclaimer — texto legal pequeño bajo el formulario de newsletter ── */
 .newsletter-disclaimer {
     font-size: 11px;
     color: rgba(255, 255, 255, 0.3);
@@ -1841,6 +2093,8 @@ img {
 /* ================================================================
    BENTO & CARD PLACEHOLDERS (reutilizables en páginas secundarias)
 ================================================================ */
+
+/* ── Bento card backgrounds — fondos de gradiente oscuro por categoría para tarjetas bento ── */
 .bp-gaming-card {
     background: linear-gradient(135deg, #0f0f1a, #1a0a2e);
 }
@@ -1857,6 +2111,7 @@ img {
     background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
 }
 
+/* ── Gallery placeholder backgrounds — fondos de gradiente por categoría para imágenes placeholder ── */
 .gp-gaming {
     background: linear-gradient(135deg, #0f0f1a, #1a0a2e);
 }
@@ -1873,6 +2128,7 @@ img {
     background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
 }
 
+/* ── Target card image wrap — contenedor de imagen de tarjeta de producto con efecto zoom al hover ── */
 .target-card-img-wrap {
     width: 100%;
     height: 160px;
@@ -1888,7 +2144,7 @@ img {
     transform: scale(1.04);
 }
 
-/* Imagen de tarjeta de producto */
+/* ── Product image — imagen real de producto dentro de la tarjeta ── */
 .prod-img {
     width: 100%;
     height: 100%;
@@ -1896,6 +2152,7 @@ img {
     border-radius: inherit;
 }
 
+/* ── Target card — tarjeta de producto reutilizable con hover de elevación ── */
 .target-card {
     display: flex;
     flex-direction: column;
@@ -1914,6 +2171,7 @@ img {
     border-color: rgba(255, 13, 42, .20);
 }
 
+/* ── Target card content — área de texto de la tarjeta de producto ── */
 .target-card-content {
     padding: 14px;
     display: flex;
@@ -1922,6 +2180,7 @@ img {
     flex: 1;
 }
 
+/* ── Target card brand — marca/fabricante del producto en pequeño sobre el título ── */
 .target-card-brand {
     font-size: 11px;
     font-weight: 600;
@@ -1930,6 +2189,7 @@ img {
     letter-spacing: .5px;
 }
 
+/* ── Target card title — nombre del producto en la tarjeta ── */
 .target-card-title {
     font-size: 13px;
     font-weight: 700;
@@ -1937,6 +2197,7 @@ img {
     line-height: 1.35;
 }
 
+/* ── Target card description — descripción corta del producto en la tarjeta ── */
 .target-card-desc {
     font-size: 12px;
     color: var(--muted);
@@ -1944,6 +2205,7 @@ img {
     flex: 1;
 }
 
+/* ── Target card footer — pie de la tarjeta con precio y botón de acción ── */
 .target-card-footer {
     display: flex;
     align-items: center;
@@ -1954,12 +2216,14 @@ img {
     border-top: 1px solid var(--border);
 }
 
+/* ── Target card price — precio del producto en el pie de la tarjeta ── */
 .target-card-price {
     font-size: 18px;
     font-weight: 800;
     color: var(--text);
 }
 
+/* ── Target card button — botón rojo de acción rápida en el pie de la tarjeta ── */
 .target-card-btn {
     display: inline-flex;
     align-items: center;
@@ -1979,6 +2243,7 @@ img {
     background: var(--red-dark);
 }
 
+/* ── Badge oferta — etiqueta roja "OFERTA" superpuesta en la esquina de la tarjeta ── */
 .badge-oferta {
     position: absolute;
     top: 10px;
@@ -1992,6 +2257,7 @@ img {
     z-index: 2;
 }
 
+/* ── Badge nuevo — etiqueta oscura "NUEVO" superpuesta en la esquina de la tarjeta ── */
 .badge-nuevo {
     position: absolute;
     top: 10px;
@@ -2008,6 +2274,8 @@ img {
 /* ================================================================
    RESPONSIVE GLOBAL
 ================================================================ */
+
+/* ── Media query ≤900px — adaptación de layouts de dos columnas a una sola columna en tablets ── */
 @media (max-width:900px) {
     .product-page {
         grid-template-columns: 1fr;
@@ -2063,6 +2331,7 @@ img {
     }
 }
 
+/* ── Media query ≤600px — ajustes de componentes específicos en móviles pequeños ── */
 @media (max-width:600px) {
     .product-actions {
         flex-direction: column;
@@ -2102,6 +2371,8 @@ img {
 /* ================================================================
    IPHONE 13 / MÓVIL PEQUEÑO (≤ 480px)
 ================================================================ */
+
+/* ── Media query ≤480px — ajustes finos para iPhone 13 y móviles muy pequeños ── */
 @media (max-width: 480px) {
     /* Producto */
     .product-page {

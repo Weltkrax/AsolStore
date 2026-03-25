@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+    <!-- ══ HEAD — metadatos, OG tags y hojas de estilo ══ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="AsolStore — Gaming, Arte, Ropa y Accesorios con garantía oficial.">
@@ -19,52 +20,17 @@
 </head>
 
 <body>
+    <!-- ══ NOSCRIPT — aviso cuando JS está desactivado ══ -->
     <noscript><div style="position:fixed;top:0;left:0;right:0;background:#FF0D2A;color:#fff;text-align:center;padding:12px;font-family:sans-serif;font-size:14px;z-index:9999;">AsolStore requiere JavaScript para funcionar correctamente. Por favor, actívalo en tu navegador.</div></noscript>
 
-    <!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-       HEADER
-  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+    <!-- ══ HEADER — barra de navegación principal inyectada por header.js ══ -->
         <header id="mainHeader"></header>
     <script src="js/header.js"></script>
 
-    <!-- Dropdown header -->
-    <section class="header-dropdown-section">
-        <div class="header-dropdown-left">
-            <div class="custom-dropdown">
-                <span class="dropdown-label"><svg class="dropdown-logo" viewBox="0 0 680 680" xmlns="http://www.w3.org/2000/svg"><rect width="680" height="680" fill="#fff" rx="80"/><rect x="140" y="140" width="400" height="400" rx="32" fill="#FF0D2A"/><text x="340" y="375" text-anchor="middle" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="74" fill="#fff" letter-spacing="3">ASOL</text><text x="340" y="468" text-anchor="middle" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="48" fill="#fff" letter-spacing="12">STORE</text></svg> AsolStore</span>
-                <ul class="dropdown-options">
-                    <li><a href="pages/asolstore.html">Mi tienda</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="header-dropdown-right">
-            <div class="custom-dropdown"><span class="dropdown-label">Arte</span>
-                <ul class="dropdown-options">
-                    <li><a href="pages/arte.html">Ver Arte</a></li>
-                    <li><a href="pages/categoria.html?cat=arte">Posters</a></li>
-                    <li><a href="pages/categoria.html?cat=arte">Figuras</a></li>
-                </ul>
-            </div>
-            <div class="custom-dropdown"><span class="dropdown-label">Ropa</span>
-                <ul class="dropdown-options">
-                    <li><a href="pages/ropa.html">Ver Ropa</a></li>
-                    <li><a href="pages/categoria.html?cat=ropa">Hoodies</a></li>
-                    <li><a href="pages/categoria.html?cat=ropa">Gorros</a></li>
-                </ul>
-            </div>
-            <div class="custom-dropdown"><span class="dropdown-label">Accesorios</span>
-                <ul class="dropdown-options">
-                    <li><a href="pages/accesorios.html">Ver Accesorios</a></li>
-                    <li><a href="pages/categoria.html?cat=accesorios">Tecnología</a></li>
-                    <li><a href="pages/categoria.html?cat=accesorios">Instrumentos</a></li>
-                </ul>
-            </div>
-        </div>
-    </section>
 
     <main>
 
-        <!-- â•â• HERO â•â• -->
+        <!-- ══ HERO — carrusel principal con 4 slides de categorías y ofertas ══ -->
         <div class="hero-carousel" id="heroCarousel">
             <div class="hero-slides">
                 <div class="hero-slide active" data-bg="gaming">
@@ -142,57 +108,69 @@
             </div>
         </div>
 
-        <!-- â•â• BENTO GRID — simétrico 3+2 â•â• -->
+        <!-- ══ BENTO GRID — grid simétrico 3+2 con acceso rápido a categorías ══ -->
         <section class="bento-section">
             <div class="section-header">
                 <div class="section-title">Lo más <span>destacado</span></div>
             </div>
             <div class="bento-grid">
+
+                <!-- Box 1 — Gaming (2 filas) -->
                 <a href="pages/categoria.html?cat=gaming" class="bento-box box1">
-                    <div class="bento-placeholder bp-gaming">
-                        <div class="bp-icon"><img src="assets/images/productos/gaming-nintendo-switch.jpg" alt="Gaming"
-                                style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></div>
-                        <div class="bp-label">Gaming</div>
-                        <div class="bp-sub">Consolas & accesorios</div>
+                    <img class="bento-img" src="assets/images/productos/gaming-nintendo-switch.jpg" alt="Gaming">
+                    <div class="bento-overlay bento-overlay--bottom">
+                        <span class="bento-tag">Gaming</span>
+                        <h3 class="bento-title">Lleva tu juego al<br>siguiente nivel</h3>
+                        <p class="bento-desc">Consolas, mandos y accesorios</p>
+                        <span class="bento-cta">Explorar colección <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
                     </div>
                 </a>
+
+                <!-- Box 2 — Arte -->
                 <a href="pages/categoria.html?cat=arte" class="bento-box box2">
-                    <div class="bento-placeholder bp-arte">
-                        <div class="bp-icon"><img src="assets/images/productos/arte-cuadro-astronauta.jpg" alt="Arte"
-                                style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></div>
-                        <div class="bp-label">Arte</div>
-                        <div class="bp-sub">Posters únicos</div>
+                    <img class="bento-img" src="assets/images/productos/arte-cuadro-astronauta.jpg" alt="Arte">
+                    <div class="bento-overlay bento-overlay--center">
+                        <span class="bento-tag">Arte</span>
+                        <h3 class="bento-title">Decora<br>tu mundo</h3>
+                        <span class="bento-cta">Ver posters <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
                     </div>
                 </a>
+
+                <!-- Box 3 — Ropa -->
                 <a href="pages/categoria.html?cat=ropa" class="bento-box box3">
-                    <div class="bento-placeholder bp-ropa">
-                        <div class="bp-icon"><img src="assets/images/productos/ropa-hoodie-gurunvani.jpg" alt="Ropa"
-                                style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></div>
-                        <div class="bp-label">Ropa</div>
-                        <div class="bp-sub">Edición limitada</div>
+                    <img class="bento-img" src="assets/images/productos/ropa-hoodie-gurunvani.jpg" alt="Ropa">
+                    <div class="bento-overlay bento-overlay--center">
+                        <span class="bento-tag bento-tag--white">Edición Limitada</span>
+                        <h3 class="bento-title">Streetwear<br>exclusivo</h3>
+                        <span class="bento-cta">Ver lookbook <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
                     </div>
                 </a>
+
+                <!-- Box 4 — Ofertas (2 columnas) -->
                 <a href="#ofertas" class="bento-box box4">
-                    <div class="bento-placeholder bp-oferta">
-                        <div class="bp-icon"><img src="assets/images/productos/gaming-gatillos-belug.jpg" alt="Ofertas"
-                                style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></div>
-                        <div class="bp-label">Ofertas del día</div>
-                        <div class="bp-sub">Hasta 40% OFF</div>
+                    <img class="bento-img" src="assets/images/productos/gaming-gatillos-belug.jpg" alt="Ofertas">
+                    <div class="bento-overlay bento-overlay--left">
+                        <span class="bento-tag bento-tag--fire">🔥 Oferta del día</span>
+                        <h3 class="bento-title">Hasta<br><em>40% OFF</em></h3>
+                        <p class="bento-desc">Solo por tiempo limitado · No te lo pierdas</p>
+                        <span class="bento-cta">Ver todas las ofertas <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
                     </div>
                 </a>
+
+                <!-- Box 5 — Accesorios -->
                 <a href="pages/categoria.html?cat=accesorios" class="bento-box box5">
-                    <div class="bento-placeholder bp-acc">
-                        <div class="bp-icon"><img src="assets/images/productos/acc-iphone13-midnight.jpg"
-                                alt="Accesorios" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
-                        </div>
-                        <div class="bp-label">Accesorios</div>
-                        <div class="bp-sub">Tecnología & más</div>
+                    <img class="bento-img" src="assets/images/productos/acc-iphone13-midnight.jpg" alt="Accesorios">
+                    <div class="bento-overlay bento-overlay--center">
+                        <span class="bento-tag">Tech</span>
+                        <h3 class="bento-title">Accesorios<br>premium</h3>
+                        <span class="bento-cta">Descubrir <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
                     </div>
                 </a>
+
             </div>
         </section>
 
-        <!-- â•â• CARRUSEL PRINCIPAL â•â• -->
+        <!-- ══ CARRUSEL PRINCIPAL — slider de 8 productos destacados ══ -->
         <section class="carousel-section">
             <div class="section-header">
                 <div class="section-title">Productos <span>destacados</span></div>
@@ -325,7 +303,7 @@
             </div>
         </section>
 
-        <!-- â•â• BANNERS â•â• -->
+        <!-- ══ BANNERS — mini banners informativos de envío rápido y garantía ══ -->
         <div class="banner-strip">
             <div class="banner-mini dark">
                 <div class="banner-tag">ENVÍO RÁPIDO</div>
@@ -339,7 +317,7 @@
             </div>
         </div>
 
-        <!-- â•â• OFERTAS â•â• -->
+        <!-- ══ OFERTAS — sección de ofertas semanales con timer y slider ══ -->
         <section class="offers-redesign" id="ofertas">
             <div class="offers-redesign-frame">
                 <div class="offers-redesign-left">
@@ -472,6 +450,7 @@
 
     </main>
 
+    <!-- ══ VISITANOS — barra con enlaces a redes sociales ══ -->
     <!-- Visítanos -->
     <span class="visitanos-span">
         <span class="typewriter">Visítanos en</span>
@@ -494,7 +473,7 @@
             </svg></a>
     </span>
 
-    <!-- Newsletter -->
+    <!-- ══ NEWSLETTER — formulario de suscripción por correo ══ -->
     <section class="newsletter-section">
         <div class="newsletter-inner">
             <div class="newsletter-title">No te pierdas nada 🔥</div>
@@ -508,7 +487,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ══ FOOTER — información de marca, enlaces y redes sociales ══ -->
     <footer class="footer-section">
         <div class="footer-content">
             <div class="footer-brand">
@@ -537,7 +516,7 @@
         </div>
     </footer>
 
-    <!-- Carrito panel lateral -->
+    <!-- ══ CARRITO — panel lateral del carrito de compras ══ -->
     <div class="cart-menu-overlay" id="cartMenuOverlay">
         <aside class="cart-menu" id="cartMenu">
             <button class="cart-menu-close" id="closeCartMenu">&times;</button>
@@ -552,7 +531,7 @@
         </aside>
     </div>
 
-    <!-- Scripts — orden importante -->
+    <!-- ══ SCRIPTS — carga de módulos JS en el orden correcto ══ -->
     <script src="js/car-buy.js"></script>
     <script src="js/app.js" defer></script>
     <script src="js/features.js" defer></script>

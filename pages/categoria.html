@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+    <!-- ══ HEAD — metadatos, OG tags y hojas de estilo ══ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categoría | AsolStore</title>
@@ -18,13 +19,14 @@
 </head>
 
 <body>
+    <!-- ══ NOSCRIPT — aviso cuando JS está desactivado ══ -->
     <noscript><div style="position:fixed;top:0;left:0;right:0;background:#FF0D2A;color:#fff;text-align:center;padding:12px;font-family:sans-serif;font-size:14px;z-index:9999;">AsolStore requiere JavaScript para funcionar correctamente. Por favor, actívalo en tu navegador.</div></noscript>
 
-    <!-- ══ HEADER ══ -->
+    <!-- ══ HEADER — barra de navegación principal inyectada por header.js ══ -->
         <header id="mainHeader"></header>
     <script src="../js/header.js"></script>
 
-    <!-- Breadcrumb -->
+    <!-- ══ BREADCRUMB — ruta de navegación: Inicio › Categoría ══ -->
     <div class="breadcrumb">
         <a href="../index.html">Inicio</a>
         <span>›</span>
@@ -33,7 +35,7 @@
 
     <div class="category-page">
 
-        <!-- ══ HERO con auto-scroll 4s ══ -->
+        <!-- ══ HERO — carrusel con auto-scroll de 4s para las 3 categorías principales ══ -->
         <div class="hero-carousel" id="heroCarousel" style="margin-bottom:0;">
             <div class="hero-slides">
                 <div class="hero-slide active" data-bg="gaming">
@@ -94,7 +96,7 @@
             </div>
         </div>
 
-        <!-- Toolbar — solo 3 filtros + count + sort -->
+        <!-- ══ TOOLBAR — filtros de categoría, contador y selector de orden ══ -->
         <div class="category-toolbar">
             <div class="category-filters">
                 <button class="filter-chip active" data-filter="all">Todos</button>
@@ -113,7 +115,7 @@
             </div>
         </div>
 
-        <!-- Grid 3 columnas — 12 tarjetas -->
+        <!-- ══ GRID PRODUCTOS — grid de 3 columnas con 12 tarjetas de productos ══ -->
         <div class="category-grid" id="categoryGrid">
 
             <div class="target-card" data-slug="switch-joycon-neon" data-stock="true" style="cursor:pointer;">
@@ -281,7 +283,7 @@
 
         </div>
 
-        <!-- Paginación -->
+        <!-- ══ PAGINACIÓN — controles de paginación del listado ══ -->
         <div class="pagination">
             <button class="page-btn active">1</button>
             <button class="page-btn">2</button>
@@ -291,7 +293,7 @@
 
     </div>
 
-    <!-- Newsletter -->
+    <!-- ══ NEWSLETTER — formulario de suscripción por correo ══ -->
     <section class="newsletter-section">
         <div class="newsletter-inner">
             <div class="newsletter-title">No te pierdas nada 🔥</div>
@@ -303,7 +305,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ══ FOOTER — información de marca, enlaces y redes sociales ══ -->
     <footer class="footer-section">
         <div class="footer-content">
             <div class="footer-brand">
@@ -331,6 +333,7 @@
         </div>
     </footer>
 
+    <!-- ══ CARRITO / AUTH — panel lateral de autenticación (registro) ══ -->
     <!-- Carrito -->
             <div class="auth-form" id="tab-register">
                 <div class="auth-logo"><img src="../assets/logo.svg" alt="AsolStore"
@@ -347,6 +350,8 @@
             </div>
         </div>
     </div>
+
+    <!-- ══ SCRIPTS — carga de módulos JS en el orden correcto ══ -->
     <script src="../js/car-buy.js"></script>
     <script src="../js/app.js" defer></script>
     <script src="../js/features.js" defer></script>

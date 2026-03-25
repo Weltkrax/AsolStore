@@ -1,7 +1,8 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
+    <!-- ══ HEAD — metadatos y hojas de estilo ══ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gaming | AsolStore</title>
@@ -14,14 +15,17 @@
 </head>
 
 <body>
+    <!-- ══ NOSCRIPT — aviso cuando JS está desactivado ══ -->
     <noscript><div style="position:fixed;top:0;left:0;right:0;background:#FF0D2A;color:#fff;text-align:center;padding:12px;font-family:sans-serif;font-size:14px;z-index:9999;">AsolStore requiere JavaScript para funcionar correctamente. Por favor, actívalo en tu navegador.</div></noscript>
 
+    <!-- ══ HEADER — barra de navegación principal inyectada por header.js ══ -->
     <header id="mainHeader"></header>
     <script src="../js/header.js"></script>
 
+    <!-- ══ BREADCRUMB — ruta de navegación: Inicio › Arte ══ -->
     <div class="breadcrumb"><a href="../index.html">Inicio</a><span>›</span><span>Arte</span></div>
 
-    <!-- Hero gaming -->
+    <!-- ══ HERO — carrusel de 2 slides para la sección de arte ══ -->
     <div class="hero-carousel" id="heroCarousel" style="margin-bottom:0;">
         <div class="hero-slides">
             <div class="hero-slide active" data-bg="arte">
@@ -60,7 +64,10 @@
         <div class="hero-dots"><span class="hero-dot active"></span><span class="hero-dot"></span></div>
     </div>
 
+    <!-- ══ CATEGORY PAGE — contenedor principal con toolbar y grid de productos ══ -->
     <div class="category-page">
+
+        <!-- ══ TOOLBAR — filtros y selector de orden ══ -->
         <div class="category-toolbar">
             <div class="category-filters">
                 <button class="filter-chip active" data-filter="all">Todos</button>
@@ -79,6 +86,7 @@
             </div>
         </div>
 
+        <!-- ══ GRID PRODUCTOS — listado de productos de arte ══ -->
         <div class="category-grid" id="categoryGrid">
             <div class="target-card" data-slug="poster-el-viajero" data-stock="true" style="cursor:pointer;"><span
                     class="badge-oferta">-20%</span>
@@ -157,10 +165,13 @@
                 </div>
             </div>
         </div>
+
+        <!-- ══ PAGINACIÓN — controles de paginación del listado ══ -->
         <div class="pagination"><button class="page-btn active">1</button><button class="page-btn">2</button><button
                 class="page-btn">›</button></div>
     </div>
 
+    <!-- ══ NEWSLETTER — formulario de suscripción por correo ══ -->
     <section class="newsletter-section">
         <div class="newsletter-inner">
             <div class="newsletter-title">No te pierdas nada 🔥</div>
@@ -170,6 +181,7 @@
         </div>
     </section>
 
+    <!-- ══ FOOTER — información de marca, enlaces y redes sociales ══ -->
     <footer class="footer-section">
         <div class="footer-content">
             <div class="footer-brand"><a href="../index.html"><img src="../assets/logo.svg" alt="AsolStore"
@@ -191,6 +203,8 @@
             <p>&copy; 2026 AsolStore — Todos los derechos reservados</p>
         </div>
     </footer>
+
+    <!-- ══ SCRIPTS — carga de módulos JS en el orden correcto ══ -->
     </div>
     <script src="../js/car-buy.js"></script>
     <script src="../js/app.js" defer></script>

@@ -1,19 +1,36 @@
+/**
+ * IIFE principal del header — construye e inyecta dinámicamente todos los
+ * elementos comunes de la cabecera (header, menú lateral, panel carrito,
+ * modal de autenticación y botón flotante de WhatsApp) en cada página de la web.
+ * Se ejecuta de forma inmediata al cargarse el script.
+ */
 (function () {
     /* ── Configuración de redes sociales — editar aquí ── */
+    // Objeto global que almacena los enlaces a redes sociales del negocio
     window.ASOL_CONFIG = window.ASOL_CONFIG || {
         whatsapp:  'https://wa.me/51991450553',
         instagram: 'https://www.instagram.com/asolstore_/',
         tiktok:    'https://tiktok.com',
     };
+    // Extrae los enlaces individuales para usarlos en el HTML generado
     const { whatsapp, instagram, tiktok } = window.ASOL_CONFIG;
 
+    // Detecta si la página actual está dentro de la carpeta /pages/
+    // para calcular rutas relativas correctas a assets y enlaces
     const p       = window.location.pathname.replace(/\\/g, '/');
     const inPg    = p.includes('/pages/');
+    // Prefijo de ruta: desde /pages/ hay que subir un nivel (..), desde raíz no
     const r       = inPg ? '../' : '';
+    // Ruta base para los enlaces de categoría según ubicación de la página
     const cat     = inPg ? 'categoria.html?cat=' : 'pages/categoria.html?cat=';
+    // Prefijo para páginas internas cuando se está en la raíz
     const pagesDir = inPg ? '' : 'pages/';
 
     /* ── 1. HEADER ── */
+    // Rellena el contenedor #mainHeader con todo el HTML del encabezado principal.
+    // Contiene: logo SVG superior, marquesina animada con frases, iconos de redes
+    // sociales, logo de marca central, barra de búsqueda, botones de usuario/carrito
+    // y barra de navegación por categorías.
     const header = document.getElementById('mainHeader');
     if (header) {
         header.innerHTML = `
@@ -33,6 +50,20 @@
             <div class="header-top-marquee">
                 <span id="typewriterPhrase"></span>
                 <span class="typewriter-cursor">|</span>
+            </div>
+            <div class="header-car-track" aria-hidden="true">
+                <svg class="header-car" viewBox="0 0 64 32" width="48" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="4" y="14" width="56" height="12" rx="4" fill="#fff" fill-opacity="0.9"/>
+                    <path d="M10 14 L18 6 Q20 4 23 4 H41 Q44 4 46 6 L54 14Z" fill="#fff" fill-opacity="0.9"/>
+                    <circle cx="16" cy="26" r="5" fill="#FF0D2A" stroke="#fff" stroke-width="1.5"/>
+                    <circle cx="16" cy="26" r="2" fill="#fff"/>
+                    <circle cx="48" cy="26" r="5" fill="#FF0D2A" stroke="#fff" stroke-width="1.5"/>
+                    <circle cx="48" cy="26" r="2" fill="#fff"/>
+                    <rect x="22" y="7" width="8" height="6" rx="1" fill="#FF0D2A" fill-opacity="0.6"/>
+                    <rect x="32" y="7" width="9" height="6" rx="1" fill="#FF0D2A" fill-opacity="0.6"/>
+                    <rect x="5" y="17" width="4" height="3" rx="1" fill="#FFD700" fill-opacity="0.9"/>
+                    <rect x="55" y="17" width="4" height="3" rx="1" fill="#FF4444" fill-opacity="0.8"/>
+                </svg>
             </div>
             <div class="header-top-socials">
                 <a href="${instagram}" target="_blank" class="social-link" title="Instagram">
@@ -85,11 +116,46 @@
                     <a href="${cat}${slug}">${name}</a>
                 </div>
             </div>`).join('')}
-            <a href="${pagesDir}asolstore.html" class="cat-bar-link cat-bar-direct">AsolStore</a>
-        </nav>`;
+        </nav>
+        <div class="header-dropdown-section">
+            <div class="header-dropdown-left">
+                <div class="custom-dropdown">
+                    <span class="dropdown-label"><svg class="dropdown-logo" viewBox="0 0 680 680" xmlns="http://www.w3.org/2000/svg"><rect width="680" height="680" fill="#fff" rx="80"/><rect x="140" y="140" width="400" height="400" rx="32" fill="#FF0D2A"/><text x="340" y="375" text-anchor="middle" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="74" fill="#fff" letter-spacing="3">ASOL</text><text x="340" y="468" text-anchor="middle" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="48" fill="#fff" letter-spacing="12">STORE</text></svg> AsolStore</span>
+                    <ul class="dropdown-options">
+                        <li><a href="${pagesDir}asolstore.html">Mi tienda</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="header-dropdown-right">
+                <div class="custom-dropdown"><span class="dropdown-label">Arte</span>
+                    <ul class="dropdown-options">
+                        <li><a href="${pagesDir}arte.html">Ver Arte</a></li>
+                        <li><a href="${cat}arte">Posters</a></li>
+                        <li><a href="${cat}arte">Figuras</a></li>
+                    </ul>
+                </div>
+                <div class="custom-dropdown"><span class="dropdown-label">Ropa</span>
+                    <ul class="dropdown-options">
+                        <li><a href="${pagesDir}ropa.html">Ver Ropa</a></li>
+                        <li><a href="${cat}ropa">Hoodies</a></li>
+                        <li><a href="${cat}ropa">Gorros</a></li>
+                    </ul>
+                </div>
+                <div class="custom-dropdown"><span class="dropdown-label">Accesorios</span>
+                    <ul class="dropdown-options">
+                        <li><a href="${pagesDir}accesorios.html">Ver Accesorios</a></li>
+                        <li><a href="${cat}accesorios">Tecnología</a></li>
+                        <li><a href="${cat}accesorios">Instrumentos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>`;
     }
 
     /* ── 2. MENÚ LATERAL ── */
+    // Inserta al final del body el overlay oscuro y el panel de navegación lateral
+    // que se despliega al pulsar el botón hamburguesa. Contiene navegación,
+    // estadísticas de la tienda, banner de oferta y enlaces a redes sociales.
     document.body.insertAdjacentHTML('beforeend', `
     <div class="side-overlay" id="sideOverlay"></div>
     <nav class="side-menu" id="side-menu">
@@ -137,6 +203,9 @@
     </nav>`);
 
     /* ── 3. PANEL CARRITO ── */
+    // Inserta el panel lateral del carrito de compras (overlay + aside).
+    // Muestra los productos añadidos, el total y el botón para ir al checkout.
+    // Se comprueba antes que no exista ya en el DOM para evitar duplicados.
     if (!document.getElementById('cartMenuOverlay')) {
         document.body.insertAdjacentHTML('beforeend', `
         <div class="cart-menu-overlay" id="cartMenuOverlay">
@@ -153,6 +222,9 @@
     }
 
     /* ── 4. MODAL DE AUTENTICACIÓN ── */
+    // Inserta el modal de login/registro con dos pestañas: "Ingresar" y "Crear cuenta".
+    // Es invisible por defecto (display:none) y se activa al pulsar el botón de usuario.
+    // Se comprueba antes que no exista ya en el DOM para evitar duplicados.
     if (!document.getElementById('authModal')) {
         document.body.insertAdjacentHTML('beforeend', `
         <div id="authModal" class="auth-modal-overlay" style="display:none;">
@@ -210,10 +282,17 @@
     }
 
     /* ── 5. WHATSAPP FAB ── */
+    // Inserta el botón flotante de WhatsApp (Fixed Action Button) en la esquina
+    // inferior derecha, visible en todas las páginas para contacto directo.
+    // Se comprueba antes que no exista ya en el DOM para evitar duplicados.
     if (!document.querySelector('.whatsapp-fab')) {
         document.body.insertAdjacentHTML('beforeend', `
         <a href="${whatsapp}" target="_blank" class="whatsapp-fab" title="WhatsApp">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                <line x1="9" y1="10" x2="15" y2="10"/>
+                <line x1="9" y1="14" x2="13" y2="14"/>
+            </svg>
         </a>`);
     }
 })();

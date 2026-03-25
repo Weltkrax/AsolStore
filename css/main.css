@@ -1,6 +1,6 @@
-/* Flechas laterales para el slider de productos relacionados */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
-/* Flechas del slider de productos relacionados */
+/* ── Slider de productos relacionados — contenedor centrado de las flechas laterales ── */
 .carousel-arrow-container {
     display: flex;
     align-items: center;
@@ -8,6 +8,7 @@
     height: 100%;
 }
 
+/* ── Flechas del slider de productos relacionados — botón circular con ícono de navegación ── */
 .carousel-arrow {
     background: #fff;
     border: 1.5px solid var(--border);
@@ -39,7 +40,7 @@
    Consolida: variables, reset, header, componentes, carrito, modal
 ================================================================ */
 
-/* ── Variables ── */
+/* ── Variables CSS — define colores, tipografía, radios, sombras y alturas globales del sitio ── */
 :root {
     --red: #FF0D2A;
     --red-dark: #CC0020;
@@ -62,10 +63,11 @@
     --shadow-red: 0 4px 16px rgba(255, 13, 42, 0.25);
     --ease: all 0.18s ease;
     --ease-md: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-    --header-h: 180px;
+    --header-h: 236px;
+    --content-max: 1400px;
 }
 
-/* ── Reset ── */
+/* ── Reset global — elimina márgenes, paddings y normaliza box-sizing en todos los elementos ── */
 *,
 *::before,
 *::after {
@@ -74,12 +76,14 @@
     box-sizing: border-box;
 }
 
+/* ── HTML base — activa scroll suave y evita desbordamiento horizontal ── */
 html {
     scroll-behavior: smooth;
     font-size: 16px;
     overflow-x: hidden;
 }
 
+/* ── Body — aplica tipografía, fondo gris claro y reserva espacio para el header fijo ── */
 body {
     font-family: var(--font);
     background: var(--bg);
@@ -90,22 +94,33 @@ body {
     overflow-x: hidden;
 }
 
+/* ── Enlaces — quita subrayado y hereda color, con transición suave ── */
 a {
     text-decoration: none;
     color: inherit;
     transition: var(--ease);
 }
 
+/* ── Listas — elimina viñetas y numeración en ul y ol ── */
 ul,
 ol {
     list-style: none;
 }
 
+/* ── Imágenes — limita al ancho del contenedor y fuerza comportamiento de bloque ── */
 img {
     max-width: 100%;
     display: block;
 }
 
+/* ── Main — centra y limita el ancho del contenido principal ── */
+main {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ── Botones — resetea borde, fondo y hereda tipografía del sitio ── */
 button {
     border: none;
     background: none;
@@ -121,6 +136,7 @@ button {
    Total  : ~180px
 ================================================================ */
 
+/* ── Main header — contenedor fijo en la parte superior con sombra, encima de todo el contenido ── */
 #mainHeader {
     position: fixed;
     top: 0;
@@ -128,25 +144,27 @@ button {
     right: 0;
     z-index: 1000;
     background: var(--white);
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.09);
 }
 
-/* ── Barra superior roja ── */
+/* ── Header top bar — barra roja superior con redes sociales y texto animado ── */
 .header-top {
     background: var(--red);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 48px;
-    height: 40px;
+    padding: 0 max(48px, calc((100% - var(--content-max)) / 2));
+    height: 52px;
     gap: 16px;
     overflow: hidden;
+    position: relative;
 }
 
+/* ── Header top logo link — logo en barra superior, oculto por defecto en desktop ── */
 .header-top-logo-link {
     display: none;
 }
 
+/* ── Header top marquee — área central de la barra roja que contiene el texto animado ── */
 .header-top-marquee {
     flex: 1;
     display: flex;
@@ -155,20 +173,29 @@ button {
     gap: 2px;
 }
 
-.typewriter-phrase {
-    font-size: 12px;
-    font-weight: 600;
+/* ── Typewriter text — texto animado que cambia frases en la barra roja superior ── */
+.typewriter-phrase,
+#typewriterPhrase {
+    font-size: 26px;
+    font-weight: 400;
     color: #fff;
-    letter-spacing: 0.3px;
+    letter-spacing: 3px;
     white-space: nowrap;
+    text-transform: uppercase;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5), 0 0 24px rgba(255,255,255,0.2);
+    font-family: 'Bebas Neue', 'Arial Black', Impact, sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
+/* ── Cursor del typewriter — barra parpadeante al final del texto animado ── */
 .typewriter-cursor {
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.85);
+    font-size: 28px;
+    font-family: 'Bebas Neue', 'Arial Black', Impact, sans-serif;
+    color: rgba(255, 255, 255, 0.9);
     animation: cursorBlink 0.75s step-end infinite;
 }
 
+/* ── @keyframes cursorBlink — parpadeo del cursor del efecto typewriter ── */
 @keyframes cursorBlink {
 
     0%,
@@ -181,6 +208,32 @@ button {
     }
 }
 
+/* ── Header car track — pista invisible donde se desliza el coche animado en la barra roja ── */
+.header-car-track {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 28px;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+/* ── Header car — coche animado que atraviesa la barra roja de izquierda a derecha ── */
+.header-car {
+    position: absolute;
+    bottom: 2px;
+    animation: carDrive 10s linear infinite;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+/* ── @keyframes carDrive — animación del coche que cruza de lado a lado la barra superior ── */
+@keyframes carDrive {
+    0%   { left: -60px; }
+    100% { left: calc(100% + 60px); }
+}
+
+/* ── @keyframes logoPulse — efecto de brillo pulsante sobre el logo ── */
 @keyframes logoPulse {
 
     0%,
@@ -193,12 +246,14 @@ button {
     }
 }
 
+/* ── Header top socials — grupo de íconos de redes sociales en la esquina derecha de la barra roja ── */
 .header-top-socials {
     display: flex;
     align-items: center;
     gap: 16px;
 }
 
+/* ── Social link — ícono individual de red social en la barra superior, con efecto hover ── */
 .social-link {
     position: relative;
     display: flex;
@@ -214,6 +269,7 @@ button {
     transform: translateY(-2px);
 }
 
+/* ── Social tooltip — etiqueta emergente que aparece debajo del ícono social al hacer hover ── */
 .social-tooltip {
     position: absolute;
     bottom: -28px;
@@ -234,21 +290,21 @@ button {
     opacity: 1;
 }
 
-/* ── Navbar — CENTRADO, elementos grandes ── */
+/* ── Header mid — franja central del header con logo, buscador e íconos de acción ── */
 .header-mid {
     background: var(--white);
     display: flex;
     align-items: center;
     justify-content: center;
     /* centra todo el contenido */
-    padding: 0 48px;
+    padding: 0 max(48px, calc((100% - var(--content-max)) / 2));
     height: 96px;
     gap: 20px;
     border-bottom: 1px solid var(--border);
     max-width: 100%;
 }
 
-/* Hamburguesa — más grande */
+/* ── Hamburger button — botón de tres líneas que abre el menú lateral en móvil y desktop ── */
 .hamburger-btn {
     display: flex;
     flex-direction: column;
@@ -266,6 +322,7 @@ button {
     background: rgba(0, 0, 0, 0.06);
 }
 
+/* ── Hamburger button lines — las tres barras del botón hamburguesa y su animación a X al abrirse ── */
 .hamburger-btn span {
     display: block;
     width: 28px;
@@ -289,7 +346,7 @@ button {
     transform: translateY(-10px) rotate(-45deg);
 }
 
-/* Logo — grande y con texto AsolStore */
+/* ── Brand logo link — enlace del logo principal que lleva al inicio, con imagen y texto ── */
 .brand-logo-link {
     display: flex;
     align-items: center;
@@ -303,6 +360,7 @@ button {
     opacity: 0.85;
 }
 
+/* ── Brand logo — imagen cuadrada del logotipo de AsolStore en el header ── */
 .brand-logo {
     height: 80px;
     width: 80px;
@@ -310,6 +368,7 @@ button {
     border-radius: 14px;
 }
 
+/* ── Brand logo text — texto con nombre y slogan junto al logo en el header ── */
 .brand-logo-text {
     display: flex;
     flex-direction: column;
@@ -331,7 +390,7 @@ button {
     text-transform: uppercase;
 }
 
-/* Búsqueda — ocupa todo el espacio disponible */
+/* ── Header search — caja de búsqueda central que ocupa todo el espacio disponible en el header ── */
 .header-search {
     flex: 1;
     min-width: 0;
@@ -352,6 +411,7 @@ button {
     box-shadow: 0 0 0 3px rgba(255, 13, 42, 0.10);
 }
 
+/* ── Search icon — ícono de lupa dentro de la caja de búsqueda ── */
 .header-search svg {
     color: #bbb;
     flex-shrink: 0;
@@ -359,6 +419,7 @@ button {
     height: 20px;
 }
 
+/* ── Search input — campo de texto donde el usuario escribe su búsqueda ── */
 .header-search input {
     flex: 1;
     border: none;
@@ -374,6 +435,7 @@ button {
     font-size: 16px;
 }
 
+/* ── Search button — botón rojo "Buscar" dentro de la barra de búsqueda del header ── */
 .header-search-btn {
     background: var(--red);
     color: #fff;
@@ -394,7 +456,7 @@ button {
     background: var(--red-dark);
 }
 
-/* Íconos — grandes con etiqueta */
+/* ── Header icons group — grupo de íconos de acción (cuenta, favoritos, carrito) en el header ── */
 .header-icons-group {
     display: flex;
     align-items: center;
@@ -402,6 +464,7 @@ button {
     flex-shrink: 0;
 }
 
+/* ── Header icon link — botón de ícono individual con etiqueta de texto debajo ── */
 .header-icon-link {
     display: flex;
     flex-direction: column;
@@ -435,10 +498,12 @@ button {
     white-space: nowrap;
 }
 
+/* ── Cart icon wrap — envoltorio del ícono del carrito que permite posicionar el badge encima ── */
 .cart-icon-wrap {
     position: relative;
 }
 
+/* ── Cart badge — contador rojo con número de productos en el carrito, sobre el ícono ── */
 #cart-badge {
     position: absolute;
     top: 4px;
@@ -457,13 +522,13 @@ button {
     padding: 0 3px;
 }
 
-/* ── Cat-bar — estilo texto plano como dropdown-label ── */
+/* ── Cat bar — barra de navegación de categorías debajo del header con scroll horizontal ── */
 .cat-bar {
     background: var(--white);
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
-    padding: 0 48px;
+    padding: 0 max(48px, calc((100% - var(--content-max)) / 2));
     height: 44px;
     gap: 4px;
     overflow-x: auto;
@@ -476,11 +541,12 @@ button {
     display: none;
 }
 
+/* ── Cat accordion — contenedor de cada categoría con su dropdown asociado ── */
 .cat-accordion {
     position: relative;
 }
 
-/* Estilo igual que .dropdown-label */
+/* ── Cat bar link — botón de categoría en la barra, estilo pill con flecha desplegable ── */
 .cat-bar-link {
     display: inline-flex;
     align-items: center;
@@ -499,6 +565,7 @@ button {
     font-family: var(--font);
 }
 
+/* ── Cat bar link arrow — flecha ▾ generada por CSS que indica el dropdown de categoría ── */
 .cat-bar-link::after {
     content: '▾';
     font-size: 10px;
@@ -518,12 +585,14 @@ button {
     opacity: 1;
 }
 
+/* ── Cat arrow — flecha SVG del acordeón de categorías, oculta (se usa ::after en su lugar) ── */
 .cat-arrow {
     display: none;
 }
 
 /* ocultar SVG arrow, usamos ::after */
 
+/* ── Cat dropdown — panel desplegable con subcategorías al hacer clic en una categoría ── */
 .cat-dropdown {
     position: fixed;
     top: calc(var(--header-h) + 12px);
@@ -548,6 +617,7 @@ button {
     opacity: 1;
 }
 
+/* ── Cat dropdown links — ítems individuales dentro del panel de subcategorías ── */
 .cat-dropdown a {
     display: flex;
     align-items: center;
@@ -574,6 +644,8 @@ button {
 /* ================================================================
    MENÚ LATERAL 40%
 ================================================================ */
+
+/* ── Side overlay — fondo semitransparente con blur que aparece al abrir el menú lateral ── */
 .side-overlay {
     position: fixed;
     inset: 0;
@@ -589,6 +661,7 @@ button {
     backdrop-filter: blur(3px);
 }
 
+/* ── Side menu — panel deslizable desde la izquierda con navegación y contenido adicional ── */
 .side-menu {
     position: fixed;
     top: 0;
@@ -611,6 +684,7 @@ button {
     transform: translateX(0);
 }
 
+/* ── Side menu header — cabecera del menú lateral con logo y botón de cierre ── */
 .side-menu-header {
     display: flex;
     align-items: center;
@@ -620,6 +694,7 @@ button {
     flex-shrink: 0;
 }
 
+/* ── Side logo — logo pequeño de AsolStore dentro del menú lateral ── */
 .side-logo {
     width: 44px;
     height: 44px;
@@ -627,6 +702,7 @@ button {
     object-fit: contain;
 }
 
+/* ── Side close button — botón circular X para cerrar el menú lateral ── */
 .side-close {
     width: 32px;
     height: 32px;
@@ -647,11 +723,13 @@ button {
     transform: rotate(90deg);
 }
 
+/* ── Side menu body — área de contenido scrollable del menú lateral ── */
 .side-menu-body {
     padding: 20px 24px;
     flex: 1;
 }
 
+/* ── Side section label — etiqueta de sección en mayúsculas dentro del menú lateral ── */
 .side-section-label {
     font-size: 10px;
     font-weight: 700;
@@ -665,6 +743,7 @@ button {
     margin-top: 0;
 }
 
+/* ── Side nav — lista de enlaces de navegación dentro del menú lateral oscuro ── */
 .side-nav {
     display: flex;
     flex-direction: column;
@@ -690,12 +769,14 @@ button {
     padding-left: 20px;
 }
 
+/* ── Side stats — cuadrícula de 3 estadísticas de la tienda en el menú lateral ── */
 .side-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
 }
 
+/* ── Side stat item — tarjeta individual con número y etiqueta de estadística ── */
 .side-stat {
     background: rgba(255, 255, 255, 0.06);
     border-radius: 8px;
@@ -719,6 +800,7 @@ button {
     letter-spacing: 0.5px;
 }
 
+/* ── Side banner — bloque promocional rojo dentro del menú lateral ── */
 .side-banner {
     background: var(--red);
     border-radius: 10px;
@@ -741,6 +823,7 @@ button {
     line-height: 1.3;
 }
 
+/* ── Side socials — enlaces de redes sociales en forma de píldoras dentro del menú lateral ── */
 .side-socials {
     display: flex;
     gap: 8px;
@@ -765,17 +848,20 @@ button {
 /* ================================================================
    DROPDOWN HEADER
 ================================================================ */
+
+/* ── Header dropdown section — barra secundaria bajo el header con dropdowns de idioma/moneda ── */
 .header-dropdown-section {
     background: var(--white);
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 6px 40px;
+    padding: 6px max(40px, calc((100% - var(--content-max)) / 2));
     flex-wrap: wrap;
     gap: 8px;
 }
 
+/* ── Header dropdown left/right — lados izquierdo y derecho de la barra de dropdowns del header ── */
 .header-dropdown-left,
 .header-dropdown-right {
     display: flex;
@@ -783,11 +869,13 @@ button {
     gap: 8px;
 }
 
+/* ── Custom dropdown — componente selector personalizado (idioma, moneda, etc.) ── */
 .custom-dropdown {
     position: relative;
     display: inline-block;
 }
 
+/* ── Dropdown label — botón visual del selector con flecha indicadora ── */
 .dropdown-label {
     display: inline-flex;
     align-items: center;
@@ -804,6 +892,7 @@ button {
     white-space: nowrap;
 }
 
+/* ── Dropdown logo — imagen de bandera o logo dentro del selector personalizado ── */
 .dropdown-logo {
     width: 20px;
     height: 20px;
@@ -812,6 +901,7 @@ button {
     flex-shrink: 0;
 }
 
+/* ── Dropdown label arrow — flecha ▾ generada por CSS en el selector personalizado ── */
 .dropdown-label::after {
     content: '▾';
     font-size: 10px;
@@ -828,6 +918,7 @@ button {
     transform: rotate(180deg);
 }
 
+/* ── Dropdown options — lista de opciones desplegables del selector personalizado ── */
 .dropdown-options {
     position: absolute;
     top: calc(100% + 6px);
@@ -851,6 +942,7 @@ button {
     transform: translateY(0);
 }
 
+/* ── Dropdown option items — ítems individuales dentro del panel de opciones ── */
 .dropdown-options li {
     padding: 8px 14px;
     font-size: 13px;
@@ -873,7 +965,8 @@ button {
 /* ================================================================
    HERO CARRUSEL
 ================================================================ */
-/* Imagen de fondo agregada al hero automático */
+
+/* ── Hero carousel — carrusel principal de banners promocionales en la página de inicio ── */
 .hero-carousel {
     position: relative;
     margin: 16px 40px;
@@ -886,12 +979,14 @@ button {
     background-repeat: no-repeat;
 }
 
+/* ── Hero slides wrapper — contenedor flex que agrupa todas las diapositivas del hero ── */
 .hero-slides {
     display: flex;
     width: 100%;
     height: 100%;
 }
 
+/* ── Hero slide — diapositiva individual del carrusel hero, visible solo cuando está activa ── */
 .hero-slide {
     position: absolute;
     inset: 0;
@@ -909,6 +1004,7 @@ button {
     z-index: 2;
 }
 
+/* ── Hero slide backgrounds — gradientes oscuros específicos por categoría de diapositiva ── */
 .hero-slide[data-bg="gaming"] {
     background: linear-gradient(135deg, #0f0f1a 0%, #1a0a2e 50%, #0d1b2a 100%);
 }
@@ -925,6 +1021,7 @@ button {
     background: linear-gradient(135deg, #1a0505 0%, #2a0808 50%, #1a0a00 100%);
 }
 
+/* ── Hero slide shapes — contenedor de figuras decorativas flotantes en el fondo del hero ── */
 .hero-slide-shapes {
     position: absolute;
     inset: 0;
@@ -932,6 +1029,7 @@ button {
     pointer-events: none;
 }
 
+/* ── Hero circles — círculos decorativos animados en el fondo del banner hero ── */
 .hs-circle {
     position: absolute;
     border-radius: 50%;
@@ -955,6 +1053,7 @@ button {
     animation: floatCircle 8s ease-in-out infinite reverse;
 }
 
+/* ── @keyframes floatCircle — flotación vertical suave de los círculos decorativos del hero ── */
 @keyframes floatCircle {
 
     0%,
@@ -967,6 +1066,7 @@ button {
     }
 }
 
+/* ── Hero prev/next buttons — flechas de navegación izquierda y derecha del carrusel hero ── */
 .hero-prev,
 .hero-next {
     position: absolute;
@@ -1002,6 +1102,7 @@ button {
     border-color: var(--red);
 }
 
+/* ── Hero dots — indicadores de posición del carrusel en la parte inferior del hero ── */
 .hero-dots {
     position: absolute;
     bottom: 14px;
@@ -1012,6 +1113,7 @@ button {
     z-index: 10;
 }
 
+/* ── Hero dot — punto individual del indicador de diapositiva activa del hero ── */
 .hero-dot {
     width: 8px;
     height: 8px;
@@ -1027,17 +1129,20 @@ button {
     border-radius: 4px;
 }
 
+/* ── Hero text — bloque de texto izquierdo del slide con título, subtítulo y CTA ── */
 .hero-text {
     position: relative;
     z-index: 5;
 }
 
+/* ── Hero price — bloque de precio a la derecha del slide hero ── */
 .hero-price {
     position: relative;
     z-index: 5;
     text-align: right;
 }
 
+/* ── Hero tag — etiqueta de categoría/oferta pequeña sobre el título del hero ── */
 .hero-tag {
     background: var(--red);
     color: #fff;
@@ -1050,6 +1155,7 @@ button {
     letter-spacing: 1px;
 }
 
+/* ── Hero title — título principal grande del banner hero ── */
 .hero-title {
     font-size: 28px;
     font-weight: 800;
@@ -1058,12 +1164,14 @@ button {
     margin-bottom: 8px;
 }
 
+/* ── Hero subtitle — descripción secundaria debajo del título en el banner hero ── */
 .hero-sub {
     font-size: 14px;
     color: rgba(255, 255, 255, 0.55);
     margin-bottom: 20px;
 }
 
+/* ── Hero CTA button — botón de llamada a la acción en el banner hero ── */
 .hero-cta {
     display: inline-block;
     background: var(--red);
@@ -1080,6 +1188,7 @@ button {
     color: #fff;
 }
 
+/* ── Hero price labels — texto "Desde" y monto grande en el bloque de precio del hero ── */
 .hero-desde {
     font-size: 13px;
     color: rgba(255, 255, 255, 0.45);
@@ -1101,6 +1210,8 @@ button {
 /* ================================================================
    SECCIONES
 ================================================================ */
+
+/* ── Section header — fila superior de cada sección con título y enlace "Ver todo" ── */
 .section-header {
     display: flex;
     align-items: center;
@@ -1108,6 +1219,7 @@ button {
     margin-bottom: 16px;
 }
 
+/* ── Section title — título destacado de cada sección de productos ── */
 .section-title {
     font-size: 18px;
     font-weight: 800;
@@ -1118,6 +1230,7 @@ button {
     color: var(--red);
 }
 
+/* ── Ver todo link — enlace "Ver todo" al lado derecho del título de sección ── */
 .ver-todo {
     font-size: 13px;
     color: var(--red);
@@ -1131,21 +1244,25 @@ button {
 /* ================================================================
    BENTO GRID
 ================================================================ */
+
+/* ── Bento section — sección contenedora del bento grid de categorías ── */
 .bento-section {
     padding: 16px 40px;
     max-width: 1400px;
     margin: 0 auto;
 }
 
+/* ── Bento grid — cuadrícula asimétrica de 3 columnas que muestra las categorías de la tienda ── */
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 200px 200px;
+    grid-template-rows: 160px 160px;
     gap: 6px;
     border-radius: var(--r-lg);
     overflow: hidden;
 }
 
+/* ── Bento box — celda individual de la cuadrícula bento con imagen o placeholder de categoría ── */
 .bento-box {
     overflow: hidden;
     position: relative;
@@ -1164,6 +1281,7 @@ button {
     transform: scale(1.05);
 }
 
+/* ── Bento box overlay — capa de gradiente oscuro que aparece al hacer hover sobre la celda ── */
 .bento-box::after {
     content: '';
     position: absolute;
@@ -1177,6 +1295,7 @@ button {
     opacity: 1;
 }
 
+/* ── Bento box layout variants — celdas especiales que ocupan más espacio en la cuadrícula ── */
 .bento-box.box1 {
     grid-row: span 2;
 }
@@ -1185,6 +1304,7 @@ button {
     grid-column: span 2;
 }
 
+/* ── Bento placeholder — contenido alternativo cuando no hay imagen, con ícono y texto ── */
 .bento-placeholder {
     width: 100%;
     height: 100%;
@@ -1196,6 +1316,7 @@ button {
     transition: all 0.3s ease;
 }
 
+/* ── Bento placeholder backgrounds — fondos de gradiente oscuro por categoría en el bento ── */
 .bp-gaming {
     background: linear-gradient(135deg, #0f0f1a, #1a0a2e);
 }
@@ -1216,12 +1337,14 @@ button {
     background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
 }
 
+/* ── Bento placeholder icon — emoji/ícono grande en el centro de cada celda bento ── */
 .bp-icon {
     font-size: 40px;
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
     transition: transform 0.3s ease;
 }
 
+/* ── Bento placeholder label — nombre de la categoría en la celda bento ── */
 .bp-label {
     font-size: 16px;
     font-weight: 800;
@@ -1229,6 +1352,7 @@ button {
     transition: var(--ease);
 }
 
+/* ── Bento placeholder sub — texto secundario con descripción breve de la categoría ── */
 .bp-sub {
     font-size: 12px;
     color: rgba(255, 255, 255, 0.5);
@@ -1245,6 +1369,8 @@ button {
 /* ================================================================
    SLIDER / CAROUSEL
 ================================================================ */
+
+/* ── Carousel section — sección contenedora del carrusel de productos ── */
 .carousel-section {
     padding: 16px 40px;
     max-width: 1400px;
@@ -1252,6 +1378,7 @@ button {
     overflow-x: hidden;
 }
 
+/* ── Slider wrapper — fila que contiene los botones y el carrusel de tarjetas ── */
 .slider-wrapper {
     display: flex;
     align-items: center;
@@ -1260,12 +1387,14 @@ button {
     max-width: 100%;
 }
 
+/* ── Carousel container — ventana con overflow hidden que recorta las tarjetas fuera de vista ── */
 .carousel-container {
     overflow: hidden;
     flex: 1;
     max-width: 100%;
 }
 
+/* ── Carousel track — pista de tarjetas que se desplaza horizontalmente con transición suave ── */
 .carousel-track {
     display: flex;
     gap: 14px;
@@ -1276,6 +1405,8 @@ button {
     min-width: 0;
 }
 
+
+/* ── Carousel button — botón circular de navegación anterior/siguiente del carrusel ── */
 .carousel-btn {
     display: flex;
     align-items: center;
@@ -1303,6 +1434,8 @@ button {
 /* ================================================================
    TARJETA DE PRODUCTO
 ================================================================ */
+
+/* ── Product card (target-card) — tarjeta de producto con imagen, info y botón de compra ── */
 .target-card {
     display: flex;
     flex-direction: column;
@@ -1325,6 +1458,7 @@ button {
     border-color: rgba(255, 13, 42, 0.20);
 }
 
+/* ── Badge oferta — etiqueta roja "OFERTA" superpuesta sobre la imagen del producto ── */
 .badge-oferta {
     position: absolute;
     top: 10px;
@@ -1338,6 +1472,7 @@ button {
     z-index: 2;
 }
 
+/* ── Badge nuevo — etiqueta oscura "NUEVO" superpuesta sobre la imagen del producto ── */
 .badge-nuevo {
     position: absolute;
     top: 10px;
@@ -1351,6 +1486,7 @@ button {
     z-index: 2;
 }
 
+/* ── Product card image — imagen del producto con efecto zoom suave al hacer hover ── */
 .target-card-img {
     width: 100%;
     height: 180px;
@@ -1364,6 +1500,7 @@ button {
     transform: scale(1.04);
 }
 
+/* ── Product card image wrap — contenedor de la imagen del producto con fondo gris ── */
 .target-card-img-wrap {
     width: 100%;
     height: 160px;
@@ -1383,6 +1520,7 @@ button {
     display: block;
 }
 
+/* ── Product card image wrap backgrounds — fondos de gradiente por categoría en la imagen ── */
 .bp-gaming-card {
     background: linear-gradient(135deg, #0f0f1a, #1a0a2e);
 }
@@ -1403,6 +1541,7 @@ button {
     transform: scale(1.04);
 }
 
+/* ── Product card content — área de texto con marca, título, descripción y precio ── */
 .target-card-content {
     padding: 14px;
     display: flex;
@@ -1411,6 +1550,7 @@ button {
     flex: 1;
 }
 
+/* ── Product card brand — nombre de la marca en pequeño sobre el título del producto ── */
 .target-card-brand {
     font-size: 11px;
     font-weight: 600;
@@ -1419,6 +1559,7 @@ button {
     letter-spacing: 0.5px;
 }
 
+/* ── Product card title — nombre del producto truncado a 2 líneas ── */
 .target-card-title {
     font-size: 13px;
     font-weight: 700;
@@ -1431,6 +1572,7 @@ button {
     overflow: hidden;
 }
 
+/* ── Product card description — descripción corta del producto truncada a 2 líneas ── */
 .target-card-desc {
     font-size: 12px;
     color: var(--muted);
@@ -1443,6 +1585,7 @@ button {
     overflow: hidden;
 }
 
+/* ── Product card footer — fila inferior de la tarjeta con precio y botón de añadir ── */
 .target-card-footer {
     display: flex;
     align-items: center;
@@ -1453,12 +1596,14 @@ button {
     border-top: 1px solid var(--border);
 }
 
+/* ── Product card price — precio principal del producto en la tarjeta ── */
 .target-card-price {
     font-size: 18px;
     font-weight: 800;
     color: var(--text);
 }
 
+/* ── Product card button — botón rojo de añadir al carrito en la tarjeta de producto ── */
 .target-card-btn {
     display: inline-flex;
     align-items: center;
@@ -1483,6 +1628,8 @@ button {
 /* ================================================================
    BANNERS
 ================================================================ */
+
+/* ── Banner strip — franja de dos banners promocionales en cuadrícula de 2 columnas ── */
 .banner-strip {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1490,6 +1637,7 @@ button {
     margin: 4px 40px 20px;
 }
 
+/* ── Banner mini — bloque promocional individual oscuro o rojo con título y descripción ── */
 .banner-mini {
     border-radius: 10px;
     padding: 22px 28px;
@@ -1506,6 +1654,7 @@ button {
     background: var(--red);
 }
 
+/* ── Banner tag — etiqueta pequeña de categoría en la parte superior del banner ── */
 .banner-tag {
     font-size: 11px;
     font-weight: 700;
@@ -1520,6 +1669,7 @@ button {
     color: rgba(255, 255, 255, 0.75);
 }
 
+/* ── Banner title — título grande principal del banner promocional ── */
 .banner-title {
     font-size: 17px;
     font-weight: 800;
@@ -1527,6 +1677,7 @@ button {
     line-height: 1.3;
 }
 
+/* ── Banner sub — texto secundario descriptivo del banner promocional ── */
 .banner-sub {
     font-size: 12px;
     margin-top: 2px;
@@ -1543,12 +1694,15 @@ button {
 /* ================================================================
    OFERTAS
 ================================================================ */
+
+/* ── Offers section — sección de fondo oscuro con carrusel de productos en oferta y contador ── */
 .offers-redesign {
     background: var(--dark);
     padding: 40px;
     margin: 0 0 8px;
 }
 
+/* ── Offers frame — cuadrícula de 2 columnas: info/timer a la izquierda, carrusel a la derecha ── */
 .offers-redesign-frame {
     max-width: 1400px;
     margin: 0 auto;
@@ -1558,12 +1712,14 @@ button {
     align-items: center;
 }
 
+/* ── Offers left column — columna izquierda con título y temporizador de ofertas ── */
 .offers-redesign-left {
     display: flex;
     flex-direction: column;
     gap: 24px;
 }
 
+/* ── Offers title — título de la sección de ofertas con borde rojo a la izquierda ── */
 .offers-redesign-title {
     font-size: 1.7rem;
     font-weight: 800;
@@ -1573,12 +1729,14 @@ button {
     padding-left: 14px;
 }
 
+/* ── Offers timer block — bloque que contiene la etiqueta y el contador regresivo ── */
 .offers-redesign-timer-block {
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
 
+/* ── Offers timer label — texto "TERMINA EN" sobre el contador de oferta ── */
 .offers-redesign-timer-label {
     font-size: 11px;
     color: rgba(255, 255, 255, 0.45);
@@ -1587,6 +1745,7 @@ button {
     letter-spacing: 1px;
 }
 
+/* ── Offers timer — contador regresivo animado en rojo para las ofertas ── */
 .offers-redesign-timer {
     font-size: 2rem;
     font-weight: 800;
@@ -1595,10 +1754,12 @@ button {
     animation: pulsarTimer 1s ease-in-out infinite;
 }
 
+/* ── Offers right column — columna derecha con el carrusel de productos en oferta ── */
 .offers-redesign-right {
     overflow: hidden;
 }
 
+/* ── Offers carousel section — fila con botones de navegación y el track del carrusel de ofertas ── */
 .offers-carousel-section {
     display: flex;
     align-items: center;
@@ -1609,6 +1770,7 @@ button {
     flex-shrink: 0;
 }
 
+/* ── Offers product cards — tarjetas de producto adaptadas para el fondo oscuro de ofertas ── */
 .offers-redesign .target-card {
     background: rgba(255, 255, 255, 0.06);
     border-color: rgba(255, 255, 255, 0.08);
@@ -1640,6 +1802,7 @@ button {
     border-color: rgba(255, 255, 255, 0.08);
 }
 
+/* ── Offers carousel buttons — botones de navegación adaptados al fondo oscuro de ofertas ── */
 .offers-redesign .carousel-btn {
     background: rgba(255, 255, 255, 0.08);
     border-color: rgba(255, 255, 255, 0.12);
@@ -1654,6 +1817,8 @@ button {
 /* ================================================================
    VISITANOS / FOOTER
 ================================================================ */
+
+/* ── Visitanos span — franja blanca con texto animado y botones de redes sociales ── */
 .visitanos-span {
     display: flex;
     align-items: center;
@@ -1665,6 +1830,7 @@ button {
     border-bottom: 1px solid var(--border);
 }
 
+/* ── Typewriter visitanos — texto con cursor parpadeante en la sección de visítanos ── */
 .typewriter {
     font-size: 15px;
     font-weight: 600;
@@ -1674,6 +1840,7 @@ button {
     animation: blink 0.8s step-end infinite;
 }
 
+/* ── Visitanos link — botón circular para cada red social en la sección de visítanos ── */
 .visitanos-link {
     display: flex;
     align-items: center;
@@ -1694,11 +1861,13 @@ button {
     transform: translateY(-2px);
 }
 
+/* ── Footer section — pie de página oscuro con logo, links y redes sociales ── */
 .footer-section {
     background: var(--dark);
     padding: 48px 40px 0;
 }
 
+/* ── Footer content — cuadrícula de 3 columnas del contenido principal del footer ── */
 .footer-content {
     max-width: 1400px;
     margin: 0 auto;
@@ -1709,6 +1878,7 @@ button {
     padding-bottom: 40px;
 }
 
+/* ── Footer brand — columna del footer con logo, nombre y descripción de la tienda ── */
 .footer-brand h3 {
     font-size: 1.4rem;
     font-weight: 800;
@@ -1731,6 +1901,7 @@ button {
     margin-bottom: 4px;
 }
 
+/* ── Footer links — columna del footer con navegación interna de la tienda ── */
 .footer-links h4,
 .footer-social h4 {
     font-size: 12px;
@@ -1758,6 +1929,7 @@ button {
     padding-left: 5px;
 }
 
+/* ── Footer social — columna del footer con enlaces a redes sociales de la tienda ── */
 .footer-social {
     display: flex;
     flex-direction: column;
@@ -1774,6 +1946,7 @@ button {
     color: var(--red);
 }
 
+/* ── Footer bottom — barra inferior del footer con copyright y logo en texto ── */
 .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     padding: 18px 0;
@@ -1798,6 +1971,8 @@ button {
 /* ================================================================
    CARRITO LATERAL
 ================================================================ */
+
+/* ── Cart menu overlay — fondo semitransparente con blur al abrir el panel del carrito ── */
 .cart-menu-overlay {
     position: fixed;
     inset: 0;
@@ -1813,6 +1988,7 @@ button {
     backdrop-filter: blur(3px);
 }
 
+/* ── Cart menu — panel lateral deslizable desde la derecha con los productos del carrito ── */
 .cart-menu {
     position: fixed;
     top: 0;
@@ -1834,6 +2010,7 @@ button {
     transform: translateX(0);
 }
 
+/* ── Cart menu title — encabezado del panel del carrito con ícono de carrito ── */
 .cart-menu h2 {
     font-size: 1.1rem;
     font-weight: 700;
@@ -1850,6 +2027,7 @@ button {
     font-size: 1rem;
 }
 
+/* ── Cart menu close button — botón X para cerrar el panel lateral del carrito ── */
 .cart-menu-close {
     position: absolute;
     top: 14px;
@@ -1874,6 +2052,7 @@ button {
     transform: rotate(90deg);
 }
 
+/* ── Cart menu content — área scrollable que lista los productos añadidos al carrito ── */
 #cartMenuContent {
     flex: 1;
     overflow-y: auto;
@@ -1890,6 +2069,7 @@ button {
     padding: 48px 0;
 }
 
+/* ── Cart empty state — mensaje y ícono mostrados cuando el carrito está vacío ── */
 .cart-empty {
     display: flex;
     flex-direction: column;
@@ -1913,6 +2093,7 @@ button {
     color: #aaa;
 }
 
+/* ── Cart item — fila individual de producto en el panel del carrito con imagen e info ── */
 .cart-item {
     display: grid;
     grid-template-columns: 64px 1fr auto;
@@ -1930,6 +2111,7 @@ button {
     background: var(--red-light);
 }
 
+/* ── Cart item image — miniatura del producto en el panel lateral del carrito ── */
 .cart-item-img {
     width: 64px;
     height: 64px;
@@ -1938,6 +2120,7 @@ button {
     background: var(--bg-alt);
 }
 
+/* ── Cart item emoji — emoji alternativo cuando no hay imagen del producto ── */
 .cart-item-emoji {
     display: flex;
     align-items: center;
@@ -1948,6 +2131,7 @@ button {
     flex-shrink: 0;
 }
 
+/* ── Cart item info — bloque con nombre y precio unitario del producto en el carrito ── */
 .cart-item-info {
     display: flex;
     flex-direction: column;
@@ -1966,6 +2150,7 @@ button {
     color: #888;
 }
 
+/* ── Cart item quantity — controles de cantidad con botones + y - para cada ítem del carrito ── */
 .cart-item-qty {
     display: flex;
     align-items: center;
@@ -1973,6 +2158,7 @@ button {
     margin-top: 6px;
 }
 
+/* ── Qty buttons — botones circulares de aumentar/disminuir cantidad en el carrito ── */
 .qty-btn {
     width: 26px;
     height: 26px;
@@ -1994,6 +2180,7 @@ button {
     color: #fff;
 }
 
+/* ── Qty value — número de unidades del producto entre los botones de cantidad ── */
 .qty-value {
     font-size: 14px;
     font-weight: 700;
@@ -2001,6 +2188,7 @@ button {
     text-align: center;
 }
 
+/* ── Cart item right — columna derecha del ítem del carrito con subtotal y botón eliminar ── */
 .cart-item-right {
     display: flex;
     flex-direction: column;
@@ -2008,12 +2196,14 @@ button {
     gap: 8px;
 }
 
+/* ── Cart item subtotal — precio total del ítem (precio x cantidad) en el carrito ── */
 .cart-item-subtotal {
     font-size: 15px;
     font-weight: 800;
     color: var(--text);
 }
 
+/* ── Cart item remove button — botón de eliminar producto del carrito ── */
 .cart-item-remove {
     background: none;
     border: none;
@@ -2031,6 +2221,7 @@ button {
     background: #fee2e2;
 }
 
+/* ── Cart menu footer — pie del panel del carrito con total y botón de comprar ── */
 .cart-menu-footer {
     padding: 16px 20px;
     border-top: 1px solid var(--border);
@@ -2040,6 +2231,7 @@ button {
     background: var(--bg);
 }
 
+/* ── Cart total — fila con el total del carrito en el footer del panel lateral ── */
 #cartTotal {
     font-size: 1.1rem;
     font-weight: 800;
@@ -2049,6 +2241,7 @@ button {
     align-items: center;
 }
 
+/* ── Buy button — botón principal rojo de finalizar compra en el carrito lateral ── */
 #buyButton {
     width: 100%;
     padding: 14px;
@@ -2072,6 +2265,8 @@ button {
 /* ================================================================
    MODAL PAGO
 ================================================================ */
+
+/* ── Payment overlay — fondo con blur que aparece al abrir el modal de pago ── */
 .payment-overlay {
     position: fixed;
     inset: 0;
@@ -2084,6 +2279,7 @@ button {
     padding: 20px;
 }
 
+/* ── Payment modal — ventana modal de pago con animación de entrada ── */
 .payment-modal {
     background: #fff;
     border-radius: 16px;
@@ -2095,6 +2291,7 @@ button {
     animation: modalIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+/* ── @keyframes modalIn — animación de aparición del modal (escala + desplazamiento suave) ── */
 @keyframes modalIn {
     from {
         opacity: 0;
@@ -2107,6 +2304,7 @@ button {
     }
 }
 
+/* ── Payment modal header — cabecera del modal de pago con título y botón de cierre ── */
 .payment-header {
     display: flex;
     align-items: center;
@@ -2121,6 +2319,7 @@ button {
     color: var(--text);
 }
 
+/* ── Payment modal close button — botón X para cerrar el modal de pago ── */
 .payment-close {
     width: 32px;
     height: 32px;
@@ -2142,6 +2341,7 @@ button {
     transform: rotate(90deg);
 }
 
+/* ── Payment total bar — barra gris con el total a pagar en el modal de pago ── */
 .payment-total-bar {
     display: flex;
     justify-content: space-between;
@@ -2158,10 +2358,12 @@ button {
     color: var(--text);
 }
 
+/* ── Payment methods section — sección de selección de método de pago en el modal ── */
 .payment-methods {
     padding: 20px 24px 0;
 }
 
+/* ── Payment label — etiqueta "MÉTODO DE PAGO" sobre la cuadrícula de opciones ── */
 .payment-label {
     font-size: 12px;
     font-weight: 600;
@@ -2171,12 +2373,14 @@ button {
     margin-bottom: 12px;
 }
 
+/* ── Payment grid — cuadrícula de 4 métodos de pago disponibles ── */
 .payment-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 8px;
 }
 
+/* ── Payment method card — opción individual de método de pago seleccionable ── */
 .payment-method {
     display: flex;
     flex-direction: column;
@@ -2204,6 +2408,7 @@ button {
     color: var(--red);
 }
 
+/* ── Payment form — formulario de datos del método de pago seleccionado ── */
 .payment-form {
     padding: 20px 24px;
 }
@@ -2212,6 +2417,7 @@ button {
     display: none;
 }
 
+/* ── Form row — fila de campo de formulario con label e input ── */
 .form-row {
     display: flex;
     flex-direction: column;
@@ -2237,6 +2443,7 @@ button {
     color: #555;
 }
 
+/* ── Form inputs — campos de texto del formulario de pago con estilo focus rojo ── */
 .form-row input {
     padding: 10px 14px;
     border: 1.5px solid var(--border);
@@ -2258,6 +2465,7 @@ button {
     color: #bbb;
 }
 
+/* ── Yape QR section — sección con código QR para pago por Yape ── */
 .yape-qr {
     display: flex;
     flex-direction: column;
@@ -2267,6 +2475,7 @@ button {
     text-align: center;
 }
 
+/* ── QR placeholder — cuadro con borde punteado donde irá el código QR de Yape ── */
 .qr-placeholder {
     width: 130px;
     height: 130px;
@@ -2290,6 +2499,7 @@ button {
     color: #888;
 }
 
+/* ── Efectivo info — instrucciones para pago en efectivo al recoger el pedido ── */
 .efectivo-info {
     display: flex;
     flex-direction: column;
@@ -2312,6 +2522,7 @@ button {
     line-height: 1.5;
 }
 
+/* ── Payment confirm button — botón principal rojo de confirmar pedido en el modal de pago ── */
 .payment-confirm {
     display: block;
     width: calc(100% - 48px);
@@ -2334,11 +2545,13 @@ button {
     transform: translateY(-1px);
 }
 
+/* ── Success modal — pantalla de confirmación de pedido exitoso dentro del modal ── */
 .success-modal {
     text-align: center;
     padding-bottom: 8px;
 }
 
+/* ── Success icon — ícono grande de confirmación en la pantalla de éxito del pedido ── */
 .success-icon {
     padding: 32px 24px 16px;
     display: flex;
@@ -2360,6 +2573,7 @@ button {
     margin-bottom: 6px;
 }
 
+/* ── Success sub — texto secundario de confirmación con menor énfasis ── */
 .success-sub {
     font-size: 13px !important;
     color: #888 !important;
@@ -2369,6 +2583,8 @@ button {
 /* ================================================================
    AUTH MODAL
 ================================================================ */
+
+/* ── Auth modal overlay — fondo semitransparente con blur del modal de login/registro ── */
 .auth-modal-overlay {
     position: fixed;
     inset: 0;
@@ -2381,6 +2597,7 @@ button {
     padding: 20px;
 }
 
+/* ── Auth modal — ventana de login y registro con animación de entrada ── */
 .auth-modal {
     background: #fff;
     border-radius: 16px;
@@ -2393,6 +2610,7 @@ button {
     position: relative;
 }
 
+/* ── Auth modal close button — botón X para cerrar el modal de login/registro ── */
 .auth-close {
     position: absolute;
     top: 14px;
@@ -2418,11 +2636,13 @@ button {
     transform: rotate(90deg);
 }
 
+/* ── Auth tabs — pestañas de alternancia entre Iniciar Sesión y Registrarse ── */
 .auth-tabs {
     display: flex;
     border-bottom: 1px solid var(--border);
 }
 
+/* ── Auth tab — pestaña individual del modal de autenticación ── */
 .auth-tab {
     flex: 1;
     padding: 16px;
@@ -2442,6 +2662,7 @@ button {
     border-bottom-color: var(--red);
 }
 
+/* ── Auth form — formulario de login o registro dentro del modal de autenticación ── */
 .auth-form {
     display: none;
     padding: 24px;
@@ -2451,6 +2672,7 @@ button {
     display: block;
 }
 
+/* ── Auth logo — logo de AsolStore y subtítulo en la parte superior del formulario de auth ── */
 .auth-logo {
     display: flex;
     flex-direction: column;
@@ -2466,6 +2688,7 @@ button {
     color: var(--text);
 }
 
+/* ── Auth field — campo individual del formulario de autenticación con label e input ── */
 .auth-field {
     display: flex;
     flex-direction: column;
@@ -2479,6 +2702,7 @@ button {
     color: #555;
 }
 
+/* ── Auth field input — campo de texto para email/contraseña en el modal de auth ── */
 .auth-field input {
     padding: 11px 14px;
     border: 1.5px solid var(--border);
@@ -2499,6 +2723,7 @@ button {
     color: #bbb;
 }
 
+/* ── Auth forgot link — enlace "¿Olvidaste tu contraseña?" en el formulario de login ── */
 .auth-forgot {
     display: block;
     font-size: 12px;
@@ -2507,6 +2732,7 @@ button {
     margin-bottom: 16px;
 }
 
+/* ── Auth submit button — botón rojo principal de enviar en el modal de autenticación ── */
 .auth-submit {
     width: 100%;
     padding: 13px;
@@ -2527,6 +2753,7 @@ button {
     box-shadow: var(--shadow-red);
 }
 
+/* ── Auth divider — separador "O" entre el formulario y los botones de login social ── */
 .auth-divider {
     text-align: center;
     position: relative;
@@ -2551,6 +2778,7 @@ button {
     color: #999;
 }
 
+/* ── Auth social buttons — botones de login con Google y Facebook en el modal de auth ── */
 .auth-social-btns {
     display: flex;
     gap: 8px;
@@ -2582,6 +2810,8 @@ button {
 /* ================================================================
    TOAST
 ================================================================ */
+
+/* ── Toast notification — mensaje flotante en la parte inferior que confirma acciones ── */
 .toast-notification {
     position: fixed;
     bottom: 32px;
@@ -2606,31 +2836,30 @@ button {
     opacity: 1;
 }
 
-/* WhatsApp FAB */
+/* ── WhatsApp FAB — botón flotante verde de WhatsApp en la esquina inferior derecha ── */
 .whatsapp-fab {
     position: fixed;
     bottom: 28px;
-    right: 28px;
+    left: 0;
     width: 56px;
-    height: 56px;
+    height: 64px;
     background: #25D366;
-    border-radius: 50%;
+    border-radius: 0 12px 12px 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45);
+    box-shadow: 3px 3px 16px rgba(37, 211, 102, 0.40);
     z-index: 999;
-    transition: all 0.22s ease;
-    animation: waBounce 2.5s ease-in-out infinite;
+    transition: width 0.22s ease, box-shadow 0.22s ease;
 }
+
 
 .whatsapp-fab:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 28px rgba(37, 211, 102, 0.6);
-    animation: none;
+    width: 64px;
+    box-shadow: 5px 4px 24px rgba(37, 211, 102, 0.55);
 }
 
-/* Reveal / Skeleton */
+/* ── Reveal animation — efecto de aparición con fade + desplazamiento para secciones al hacer scroll ── */
 .reveal {
     opacity: 0;
     transform: translateY(24px);
@@ -2642,6 +2871,7 @@ button {
     transform: translateY(0);
 }
 
+/* ── Reveal delays — retardos escalonados para animar elementos en secuencia ── */
 .reveal-delay-1 {
     transition-delay: 0.1s;
 }
@@ -2658,6 +2888,7 @@ button {
     transition-delay: 0.4s;
 }
 
+/* ── Skeleton loading — efecto de brillo animado para placeholder mientras cargan los productos ── */
 .skeleton {
     background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
     background-size: 200% 100%;
@@ -2665,6 +2896,7 @@ button {
     border-radius: var(--r);
 }
 
+/* ── Skeleton variants — versiones de imagen y texto del skeleton loader ── */
 .skeleton-img {
     height: 160px;
     border-radius: var(--r) var(--r) 0 0;
@@ -2679,7 +2911,7 @@ button {
     width: 60%;
 }
 
-/* Filter chips & newsletter */
+/* ── Filter bar — barra de chips para filtrar productos por categoría ── */
 .filter-bar {
     display: flex;
     gap: 8px;
@@ -2689,6 +2921,7 @@ button {
     border-bottom: 1px solid var(--border);
 }
 
+/* ── Filter chip — etiqueta/píldora de filtro seleccionable por categoría de producto ── */
 .filter-chip {
     padding: 7px 16px;
     border: 1.5px solid var(--border);
@@ -2709,17 +2942,20 @@ button {
     background: var(--red-light);
 }
 
+/* ── Newsletter section — sección oscura de suscripción al boletín de la tienda ── */
 .newsletter-section {
     background: var(--dark);
     padding: 48px 40px;
     text-align: center;
 }
 
+/* ── Newsletter inner — contenedor centrado con ancho máximo del formulario de newsletter ── */
 .newsletter-inner {
     max-width: 520px;
     margin: 0 auto;
 }
 
+/* ── Newsletter title — título principal de la sección de newsletter ── */
 .newsletter-title {
     font-size: 24px;
     font-weight: 800;
@@ -2727,17 +2963,20 @@ button {
     margin-bottom: 8px;
 }
 
+/* ── Newsletter subtitle — descripción secundaria bajo el título del newsletter ── */
 .newsletter-sub {
     font-size: 14px;
     color: rgba(255, 255, 255, 0.5);
     margin-bottom: 24px;
 }
 
+/* ── Newsletter form — fila con input de email y botón de suscribirse ── */
 .newsletter-form {
     display: flex;
     gap: 10px;
 }
 
+/* ── Newsletter input — campo de email en la sección de newsletter ── */
 .newsletter-input {
     flex: 1;
     padding: 12px 16px;
@@ -2759,6 +2998,7 @@ button {
     border-color: var(--red);
 }
 
+/* ── Newsletter button — botón rojo de suscribirse al boletín ── */
 .newsletter-btn {
     padding: 12px 22px;
     background: var(--red);
@@ -2777,13 +3017,14 @@ button {
     background: var(--red-dark);
 }
 
+/* ── Newsletter disclaimer — texto legal pequeño bajo el formulario de newsletter ── */
 .newsletter-disclaimer {
     font-size: 11px;
     color: rgba(255, 255, 255, 0.3);
     margin-top: 10px;
 }
 
-/* Search overlay */
+/* ── Search overlay — panel de búsqueda a pantalla completa con blur de fondo ── */
 .search-overlay {
     position: fixed;
     inset: 0;
@@ -2800,6 +3041,7 @@ button {
     display: flex;
 }
 
+/* ── Search box — caja de búsqueda expandida con resultados en tiempo real ── */
 .search-box {
     background: #fff;
     border-radius: var(--r-lg);
@@ -2810,6 +3052,7 @@ button {
     animation: searchIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+/* ── @keyframes searchIn — animación de aparición del panel de búsqueda expandido ── */
 @keyframes searchIn {
     from {
         opacity: 0;
@@ -2822,6 +3065,7 @@ button {
     }
 }
 
+/* ── Search input row — fila superior del panel de búsqueda con ícono, campo y botón cerrar ── */
 .search-input-row {
     display: flex;
     align-items: center;
@@ -2848,6 +3092,7 @@ button {
     color: #bbb;
 }
 
+/* ── Search close button — botón X para cerrar el panel de búsqueda expandido ── */
 .search-close-btn {
     background: none;
     border: none;
@@ -2861,12 +3106,14 @@ button {
     color: var(--red);
 }
 
+/* ── Search results — lista de resultados de búsqueda con scroll vertical ── */
 .search-results {
     padding: 12px;
     max-height: 360px;
     overflow-y: auto;
 }
 
+/* ── Search result item — fila individual de resultado con imagen, nombre y precio ── */
 .search-result-item {
     display: flex;
     align-items: center;
@@ -2881,6 +3128,7 @@ button {
     background: var(--bg-alt);
 }
 
+/* ── Search result image — miniatura del producto en los resultados de búsqueda ── */
 .sr-img {
     width: 44px;
     height: 44px;
@@ -2892,6 +3140,7 @@ button {
     flex-shrink: 0;
 }
 
+/* ── Search result info — bloque con nombre y categoría del producto en resultados ── */
 .sr-info {
     flex: 1;
 }
@@ -2907,12 +3156,14 @@ button {
     color: var(--muted);
 }
 
+/* ── Search result price — precio del producto en los resultados de búsqueda ── */
 .sr-price {
     font-size: 14px;
     font-weight: 800;
     color: var(--dark);
 }
 
+/* ── Search empty state — mensaje cuando no hay resultados para la búsqueda ── */
 .search-empty {
     padding: 32px;
     text-align: center;
@@ -2920,10 +3171,12 @@ button {
     font-size: 14px;
 }
 
+/* ── Search categories — sección de categorías sugeridas en el panel de búsqueda ── */
 .search-categories {
     padding: 0 12px 12px;
 }
 
+/* ── Search category label — etiqueta "CATEGORÍAS" sobre los chips de categoría ── */
 .search-cat-label {
     font-size: 11px;
     font-weight: 700;
@@ -2934,6 +3187,7 @@ button {
     display: block;
 }
 
+/* ── Search category tags container — grupo de chips de categorías en la búsqueda ── */
 .search-cat-tags {
     display: flex;
     flex-wrap: wrap;
@@ -2941,6 +3195,7 @@ button {
     padding: 0 12px;
 }
 
+/* ── Search category tag — chip de categoría rápida dentro del panel de búsqueda ── */
 .search-cat-tag {
     padding: 6px 14px;
     background: var(--bg-alt);
@@ -2962,6 +3217,8 @@ button {
 /* ================================================================
    ANIMACIONES
 ================================================================ */
+
+/* ── @keyframes badgePop — efecto de pop elástico al actualizar el badge del carrito ── */
 @keyframes badgePop {
     0% {
         transform: scale(0)
@@ -2976,6 +3233,7 @@ button {
     }
 }
 
+/* ── @keyframes fadeSlideUp — aparición con fade y desplazamiento hacia arriba de las tarjetas ── */
 @keyframes fadeSlideUp {
     from {
         opacity: 0;
@@ -2988,12 +3246,14 @@ button {
     }
 }
 
+/* ── @keyframes blink — parpadeo del cursor del efecto typewriter en la sección visitanos ── */
 @keyframes blink {
     50% {
         border-color: transparent
     }
 }
 
+/* ── @keyframes pulsarTimer — pulsación suave del texto del contador regresivo de ofertas ── */
 @keyframes pulsarTimer {
 
     0%,
@@ -3006,6 +3266,7 @@ button {
     }
 }
 
+/* ── @keyframes shimmer — barrido de brillo del efecto skeleton loader de productos ── */
 @keyframes shimmer {
     0% {
         background-position: 200% 0
@@ -3016,6 +3277,7 @@ button {
     }
 }
 
+/* ── @keyframes waBounce — rebote vertical suave del botón flotante de WhatsApp ── */
 @keyframes waBounce {
 
     0%,
@@ -3031,6 +3293,8 @@ button {
 /* ================================================================
    RESPONSIVE
 ================================================================ */
+
+/* ── @media max-width: 900px — ajustes para tablets: padding reducido, header más compacto, bento de 2 col ── */
 @media (max-width:900px) {
     :root {
         --header-h: 158px;
@@ -3094,7 +3358,7 @@ button {
 
     .bento-grid {
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(3, 160px);
+        grid-template-rows: repeat(3, 130px);
     }
 
     .bento-box.box1 {
@@ -3125,6 +3389,7 @@ button {
     }
 }
 
+/* ── @media max-width: 600px — ajustes para móviles: logo sin texto, hero vertical, bento de 1 col ── */
 @media (max-width:600px) {
     :root {
         --header-h: 142px;
@@ -3176,7 +3441,7 @@ button {
 
     .bento-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(5, 140px);
+        grid-template-rows: repeat(5, 120px);
     }
 
     .bento-box.box1,
@@ -3212,6 +3477,8 @@ button {
 /* ================================================================
    IPHONE 13 / MÓVIL PEQUEÑO (≤ 480px)
 ================================================================ */
+
+/* ── @media max-width: 480px — ajustes para iPhone 13 y móviles pequeños: header mínimo, tarjetas a 72vw ── */
 @media (max-width: 480px) {
     :root {
         --header-h: 120px;
@@ -3330,7 +3597,7 @@ button {
     }
 
     .bento-grid {
-        grid-template-rows: repeat(5, 120px);
+        grid-template-rows: repeat(5, 100px);
         gap: 8px;
     }
 
@@ -3458,10 +3725,10 @@ button {
 
     /* WhatsApp FAB — sube por encima del mobile nav */
     .whatsapp-fab {
-        bottom: 76px;
-        right: 16px;
+        bottom: 80px;
+        left: 0;
         width: 48px;
-        height: 48px;
+        height: 56px;
     }
 
     /* Auth modal */

@@ -3,7 +3,7 @@
    Importar después de main.css, pages.css, features.css
 ================================================================ */
 
-/* ── Cat-bar enlace directo (sin dropdown) ── */
+/* ── Cat-bar enlace directo — botón de la barra de categorías que actúa como enlace directo sin desplegar dropdown ── */
 .cat-bar-direct {
     background: none;
     border: none;
@@ -19,12 +19,13 @@
     align-items: center;
 }
 
+/* ── Cat-bar enlace directo (hover) — resalta en rojo al pasar el cursor ── */
 .cat-bar-direct:hover {
     color: var(--red, #FF0D2A);
     background: rgba(255, 13, 42, 0.06);
 }
 
-/* ── Bento grid — 3+2 simétrico ── */
+/* ── Bento grid — contenedor principal del grid tipo bento con 3 columnas y 2 filas ── */
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -33,22 +34,24 @@
     padding: 0 24px;
 }
 
-/* Fila 1: 3 boxes iguales */
+/* ── Bento grid fila 1 — los tres primeros boxes ocupan una columna cada uno ── */
 .bento-box.box1,
 .bento-box.box2,
 .bento-box.box3 {
     grid-column: span 1;
 }
 
-/* Fila 2: 2 boxes más anchos centrados */
+/* ── Bento grid fila 2, box4 — cuarto bloque ocupa la primera columna ── */
 .bento-box.box4 {
     grid-column: 1 / 2;
 }
 
+/* ── Bento grid fila 2, box5 — quinto bloque ocupa las dos últimas columnas, más ancho ── */
 .bento-box.box5 {
     grid-column: 2 / 4;
 }
 
+/* ── @media max-width: 768px — Bento grid responsive: reorganiza a 2 columnas en tablet ── */
 @media (max-width: 768px) {
     .bento-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -67,6 +70,7 @@
     }
 }
 
+/* ── @media max-width: 480px — Bento grid en móvil pequeño: mantiene 2 columnas iguales ── */
 @media (max-width: 480px) {
     .bento-grid {
         grid-template-columns: 1fr 1fr;
@@ -76,17 +80,20 @@
 /* ════════════════════════════════════════════════════════════
    SECCIÓN VISTOS RECIENTEMENTE — paleta rojo/blanco
 ════════════════════════════════════════════════════════════ */
+
+/* ── Sección historial — franja de la página que muestra los productos vistos recientemente ── */
 .historial-section {
     padding: 40px 0 32px;
     background: linear-gradient(180deg, #fff 0%, #fff0f2 100%);
     border-top: 2px solid rgba(255, 13, 42, 0.08);
 }
 
+/* ── Sección historial oculta — clase que se aplica para esconder la sección completa ── */
 .historial-section.hidden {
     display: none;
 }
 
-/* Header de la sección */
+/* ── Sección historial — cabecera con título y botones de acción alineados horizontalmente ── */
 .historial-section .section-header {
     display: flex;
     align-items: center;
@@ -95,22 +102,24 @@
     margin-bottom: 20px;
 }
 
+/* ── Sección historial — tamaño del título de la sección ── */
 .historial-section .section-title {
     font-size: 22px;
 }
 
+/* ── Sección historial — acento rojo en la palabra destacada del título ── */
 .historial-section .section-title span {
     color: #FF0D2A;
 }
 
-/* Grupo de botones */
+/* ── Historial acciones — contenedor de los botones Ver lista y Limpiar ── */
 .historial-actions {
     display: flex;
     gap: 10px;
     align-items: center;
 }
 
-/* Botón Ver lista — rojo sólido */
+/* ── Botón Ver lista — abre el panel lateral de historial, fondo rojo sólido ── */
 .historial-btn-open {
     display: flex;
     align-items: center;
@@ -127,12 +136,13 @@
     font-family: inherit;
 }
 
+/* ── Botón Ver lista (hover) — oscurece el fondo al pasar el cursor ── */
 .historial-btn-open:hover {
     background: #CC0020;
     border-color: #CC0020;
 }
 
-/* Botón Limpiar — borde rojo, texto rojo, hover rojo sólido */
+/* ── Botón Limpiar historial — borra el historial, estilo outline rojo sobre fondo transparente ── */
 .historial-btn-clear {
     display: flex;
     align-items: center;
@@ -149,97 +159,493 @@
     font-family: inherit;
 }
 
+/* ── Botón Limpiar historial (hover) — rellena de rojo al pasar el cursor ── */
 .historial-btn-clear:hover {
     background: #FF0D2A;
     color: #fff;
 }
 
-/* ── AsolStore hero ── */
-.asolstore-hero {
-    background: linear-gradient(135deg, var(--navy, #0f172a) 0%, #1a1f3a 50%, #1e1025 100%);
-    padding: 64px 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+/* ================================================================
+   HERO ASOLSTORE DINÁMICO — ciudad animada + moto de delivery
+================================================================ */
+
+/* ── Contenedor principal ── */
+.as-hero {
     position: relative;
+    background: linear-gradient(160deg, #08101e 0%, #0d1530 45%, #130a22 100%);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
-.asolstore-hero::before {
-    content: '';
+/* ── Fondo decorativo ── */
+.as-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+
+.as-bg-glow {
     position: absolute;
-    top: -60px;
-    right: -60px;
-    width: 300px;
-    height: 300px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 13, 42, 0.10) 0%, transparent 70%);
+    filter: blur(80px);
+    animation: asGlowPulse 6s ease-in-out infinite;
+}
+.as-g1 {
+    width: 500px; height: 500px;
+    top: -120px; right: -80px;
+    background: radial-gradient(circle, rgba(255,13,42,0.14) 0%, transparent 70%);
+}
+.as-g2 {
+    width: 400px; height: 400px;
+    bottom: 60px; left: -60px;
+    background: radial-gradient(circle, rgba(60,80,220,0.10) 0%, transparent 70%);
+    animation-delay: -3s;
+}
+.as-bg-grid {
+    position: absolute; inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 48px 48px;
+}
+
+/* ── Zona texto + deco ── */
+.as-hero-body {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 28px max(40px, calc((100% - var(--content-max, 1400px)) / 2)) 12px;
+}
+
+/* ── Columna texto ── */
+.as-hero-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 600px;
+}
+
+/* Badge pill */
+.as-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,13,42,0.1);
+    border: 1px solid rgba(255,13,42,0.28);
+    color: #FF0D2A;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    padding: 5px 14px;
+    border-radius: 20px;
+    width: fit-content;
+    animation: asTextIn 0.5s ease both;
+}
+.as-badge-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #FF0D2A;
+    animation: asBadgeDot 1.6s ease-in-out infinite;
+}
+
+/* Logo */
+.as-logo-wrap {
+    position: relative;
+    width: 80px; height: 80px;
+    animation: asLogoIn 0.7s cubic-bezier(.34,1.56,.64,1) 0.15s both;
+}
+.as-logo-img {
+    width: 80px; height: 80px;
+    object-fit: contain;
+    border-radius: 18px;
+    position: relative; z-index: 1;
+    filter: drop-shadow(0 0 16px rgba(255,13,42,0.35));
+}
+.as-logo-ring {
+    position: absolute;
+    inset: -8px;
+    border-radius: 26px;
+    border: 1.5px solid rgba(255,13,42,0.3);
+    animation: asRingExpand 2.4s ease-in-out infinite;
+}
+.as-logo-ring-2 {
+    inset: -16px;
+    border-radius: 32px;
+    border-color: rgba(255,13,42,0.15);
+    animation-delay: -1.2s;
+}
+
+/* Headline */
+.as-headline {
+    font-size: clamp(30px, 4.5vw, 54px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.08;
+    margin: 0;
+    animation: asTextIn 0.6s ease 0.25s both;
+}
+.as-headline em {
+    font-style: normal;
+    background: linear-gradient(90deg, #FF0D2A, #ff6b35);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Sub */
+.as-subline {
+    color: #8898b8;
+    font-size: 15px;
+    line-height: 1.65;
+    margin: 0;
+    animation: asTextIn 0.6s ease 0.35s both;
+}
+
+/* CTA */
+.as-hero-ctas { animation: asTextIn 0.6s ease 0.45s both; }
+.as-cta-main {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #FF0D2A;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 13px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 24px rgba(255,13,42,0.35);
+}
+.as-cta-main:hover {
+    background: #CC0020;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(255,13,42,0.45);
+}
+
+/* Stats */
+.as-stats {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    animation: asTextIn 0.6s ease 0.55s both;
+}
+.as-stat-item {
+    display: flex; flex-direction: column; gap: 1px;
+}
+.as-stat-item strong {
+    font-size: 20px; font-weight: 800; color: #fff;
+}
+.as-stat-item span {
+    font-size: 11px; color: #5a6a88;
+}
+.as-stat-sep {
+    width: 1px; height: 32px;
+    background: rgba(255,255,255,0.1);
+}
+
+/* ── Columna decorativa ── */
+.as-hero-deco {
+    flex: 0 0 300px;
+    position: relative;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    animation: asTextIn 0.7s ease 0.3s both;
+}
+
+.as-deco-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(255,13,42,0.12);
+    pointer-events: none;
+}
+.as-dr1 { width: 220px; height: 220px; top: 50%; left: 50%; transform: translate(-50%,-50%); animation: asDecoSpin 18s linear infinite; }
+.as-dr2 { width: 310px; height: 310px; top: 50%; left: 50%; transform: translate(-50%,-50%); animation: asDecoSpin 28s linear infinite reverse; border-style: dashed; border-color: rgba(60,80,220,0.1); }
+
+.as-deco-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 260px;
+    position: relative;
+    z-index: 1;
+    animation: asDecoFloat 4s ease-in-out infinite;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+.as-deco-card-icon {
+    width: 42px; height: 42px;
+    background: rgba(255,13,42,0.1);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+}
+.as-deco-card-text { display: flex; flex-direction: column; gap: 2px; }
+.as-deco-card-text strong { font-size: 13px; font-weight: 700; color: #fff; }
+.as-deco-card-text span  { font-size: 11px; color: #6a7a98; }
+.as-deco-card-dot {
+    position: absolute;
+    top: 12px; right: 14px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 8px #22c55e;
+    animation: asBadgeDot 2s ease-in-out infinite;
+}
+
+.as-deco-pill {
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #8898b8;
+    width: fit-content;
+    position: relative; z-index: 1;
+    animation: asDecoFloat 4s ease-in-out infinite;
+    animation-delay: 0.8s;
+}
+.as-dp2 { animation-delay: 1.4s; }
+
+/* ── Escena ciudad ── */
+.as-city {
+    position: relative;
+    z-index: 1;
+    height: 120px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.as-skyline {
+    position: absolute;
+    bottom: 28px;
+    left: 0;
+    width: 100%;
+    height: auto;
+}
+
+/* Carretera */
+.as-road {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 28px;
+    background: #0a0e1a;
+    border-top: 2px solid #1a2448;
+    overflow: hidden;
+}
+.as-road-dashes {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 0;
+    animation: asRoadMove 1.2s linear infinite;
+    width: 200%;
+}
+.as-road-dashes span {
+    flex: 0 0 60px;
+    height: 3px;
+    background: #ffd700;
+    opacity: 0.45;
+    margin-right: 48px;
+    border-radius: 2px;
+}
+
+/* Moto */
+.as-moto-track {
+    position: absolute;
+    bottom: 28px;
+    left: 0; right: 0;
+    height: 90px;
+    overflow: hidden;
+    pointer-events: none;
+}
+.as-moto {
+    position: absolute;
+    bottom: 4px;
+    display: flex;
+    align-items: flex-end;
+    animation: asMotoRide 9s linear infinite;
+}
+.as-moto-svg {
+    width: 120px;
+    height: auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* Ruedas girando */
+.as-wheel {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: asWheelSpin 0.45s linear infinite;
+}
+
+/* Líneas de velocidad */
+.as-speed-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-right: 6px;
+    margin-bottom: 16px;
+    align-self: center;
+}
+.sl {
+    display: block;
+    height: 2px;
+    border-radius: 2px;
+    background: rgba(255,13,42,0.6);
+    transform-origin: right center;
+    animation: asSpeedLine 0.5s ease-in-out infinite;
+}
+.sl1 { width: 32px; animation-delay: 0s; }
+.sl2 { width: 22px; animation-delay: 0.1s; background: rgba(255,150,50,0.5); }
+.sl3 { width: 28px; animation-delay: 0.05s; }
+.sl4 { width: 18px; animation-delay: 0.15s; background: rgba(255,150,50,0.4); }
+
+/* Humo escape */
+.as-smoke {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: asSmoke 1.2s ease-out infinite;
+}
+.as-sm1 { animation-delay: 0s; }
+.as-sm2 { animation-delay: 0.4s; }
+
+/* Resplandor bajo moto */
+.as-road-glow {
+    position: absolute;
+    bottom: 24px;
+    left: 0;
+    width: 180px;
+    height: 12px;
+    background: radial-gradient(ellipse, rgba(255,13,42,0.25) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: asMotoRide 9s linear infinite;
     pointer-events: none;
 }
 
-.asolstore-hero-inner {
-    max-width: 700px;
+/* ================================================================
+   KEYFRAMES HERO ASOLSTORE
+================================================================ */
+@keyframes asGlowPulse {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50%       { opacity: 1;   transform: scale(1.08); }
+}
+@keyframes asLogoIn {
+    from { opacity: 0; transform: translateY(16px) scale(0.85); }
+    to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+@keyframes asTextIn {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes asRingExpand {
+    0%   { opacity: 0.7; transform: scale(1); }
+    50%  { opacity: 0.3; transform: scale(1.12); }
+    100% { opacity: 0.7; transform: scale(1); }
+}
+@keyframes asBadgeDot {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.25; }
+}
+@keyframes asDecoFloat {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-7px); }
+}
+@keyframes asDecoSpin {
+    from { transform: translate(-50%,-50%) rotate(0deg); }
+    to   { transform: translate(-50%,-50%) rotate(360deg); }
+}
+@keyframes asMotoRide {
+    0%   { transform: translateX(-180px); }
+    100% { transform: translateX(calc(100vw + 180px)); }
+}
+@keyframes asWheelSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(-360deg); }
+}
+@keyframes asSpeedLine {
+    0%   { transform: scaleX(0.2); opacity: 0.8; }
+    50%  { transform: scaleX(1);   opacity: 0.6; }
+    100% { transform: scaleX(0.2); opacity: 0.8; }
+}
+@keyframes asSmoke {
+    0%   { transform: scale(1)   translateX(0);    opacity: 0.25; }
+    100% { transform: scale(2.5) translateX(-14px); opacity: 0; }
+}
+@keyframes asRoadMove {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
 }
 
-.asolstore-hero-badge {
-    display: inline-block;
-    background: rgba(255, 13, 42, 0.12);
-    color: var(--red, #FF0D2A);
-    border: 1px solid rgba(255, 13, 42, 0.25);
-    border-radius: 20px;
-    padding: 4px 14px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    margin-bottom: 16px;
+/* ── Responsive tablet ── */
+@media (max-width: 900px) {
+    .as-hero-deco { display: none; }
+    .as-hero-body { padding: 24px 24px 10px; }
+    .as-city      { height: 100px; }
 }
 
-.asolstore-hero-title {
-    font-size: clamp(32px, 5vw, 52px);
-    font-weight: 900;
-    color: #fff;
-    line-height: 1.1;
-    margin: 0 0 16px;
+/* ── Responsive mobile (iPhone 13 ≤ 430px) ── */
+@media (max-width: 600px) {
+    .as-hero-body {
+        padding: 20px 18px 8px;
+        gap: 10px;
+    }
+    .as-hero-text { gap: 10px; }
+
+    .as-badge {
+        font-size: 10px;
+        padding: 4px 10px;
+    }
+    .as-logo-wrap  { width: 56px; height: 56px; }
+    .as-logo-img   { width: 56px; height: 56px; border-radius: 12px; }
+    .as-logo-ring  { inset: -6px; border-radius: 18px; }
+    .as-logo-ring-2 { inset: -12px; border-radius: 22px; }
+
+    .as-headline {
+        font-size: clamp(22px, 7.5vw, 32px);
+        line-height: 1.1;
+    }
+    .as-subline  {
+        font-size: 12px;
+        line-height: 1.55;
+    }
+    .as-cta-main {
+        font-size: 13px;
+        padding: 10px 20px;
+    }
+    .as-stats { gap: 14px; }
+    .as-stat-item strong { font-size: 17px; }
+    .as-stat-item span   { font-size: 10px; }
+    .as-stat-sep         { height: 24px; }
+
+    .as-city      { height: 88px; }
+    .as-moto-svg  { width: 80px; }
+    .sl1 { width: 22px; }
+    .sl2 { width: 15px; }
+    .sl3 { width: 18px; }
+    .sl4 { width: 12px; }
 }
 
-.asolstore-hero-title span {
-    color: var(--red, #FF0D2A);
-}
-
-.asolstore-hero-sub {
-    color: #94a3b8;
-    font-size: 16px;
-    margin-bottom: 32px;
-    line-height: 1.6;
-}
-
-.asolstore-hero-stats {
-    display: flex;
-    gap: 32px;
-    flex-wrap: wrap;
-}
-
-.ah-stat {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.ah-stat strong {
-    font-size: 22px;
-    font-weight: 800;
-    color: #fff;
-}
-
-.ah-stat span {
-    font-size: 12px;
-    color: #64748b;
-}
-
-/* ── AsolStore section ── */
+/* ── AsolStore sección — contenedor con espaciado de la sección de productos de la tienda ── */
 .asolstore-section {
     padding: 40px 0;
 }
 
-/* ── Category grid — 3 columnas fijas ── */
+/* ── Category grid — cuadrícula de 3 columnas fijas para mostrar tarjetas de productos por categoría ── */
 .category-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -247,36 +653,41 @@
     padding: 0 24px;
 }
 
+/* ── @media max-width: 900px — Category grid responsive: pasa a 2 columnas en tablet ── */
 @media (max-width: 900px) {
     .category-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
+/* ── @media max-width: 560px — Category grid responsive: pasa a 1 columna en móvil ── */
 @media (max-width: 560px) {
     .category-grid {
         grid-template-columns: 1fr;
     }
 }
 
-/* ── Target card — cursor pointer + hover ── */
+/* ── Target card con slug — tarjeta de producto clicable que dirige a su página de detalle ── */
 .target-card[data-slug] {
     cursor: pointer;
 }
 
+/* ── Target card con slug (hover) — sube ligeramente la tarjeta al pasar el cursor ── */
 .target-card[data-slug]:hover {
     transform: translateY(-3px);
 }
 
-/* ── Panel historial lateral (usa estilos de cart-menu) ── */
+/* ── Overlay del panel historial — capa oscura de fondo que aparece al abrir el panel lateral de historial ── */
 #historialOverlay {
     z-index: 1100;
 }
 
+/* ── Panel historial lateral — panel deslizante que muestra los productos vistos recientemente ── */
 #historialPanel {
     z-index: 1101;
 }
 
+/* ── Sección relacionados — contenedor de la sección "productos relacionados" usando slider en lugar de grid ── */
 /* ── FIX: related-section con slider en lugar de grid ──
    pages.css define .related-grid como display:grid de 4 columnas.
    Como el HTML ya no usa .related-grid sino un slider con
@@ -289,20 +700,24 @@
     overflow: hidden;
 }
 
+/* ── Sección relacionados — wrapper del slider con padding lateral ── */
 .related-section .slider-wrapper {
     padding: 0 40px;
 }
 
+/* ── Sección relacionados — contenedor del carrusel que oculta el desbordamiento horizontal ── */
 .related-section .carousel-container {
     overflow: hidden;
 }
 
+/* ── Sección relacionados — pista del carrusel que se desplaza horizontalmente con animación suave ── */
 .related-section .carousel-track {
     display: flex;
     gap: 14px;
     transition: transform 0.35s ease;
 }
 
+/* ── Sección relacionados — tarjeta individual del slider con ancho mínimo fijo ── */
 .related-section .target-card {
     min-width: 220px;
     flex-shrink: 0;
@@ -311,6 +726,8 @@
 /* ════════════════════════════════════════════════════════════
    BUSCADOR EN TIEMPO REAL
 ════════════════════════════════════════════════════════════ */
+
+/* ── Buscador overlay — panel desplegable con resultados de búsqueda en tiempo real bajo la barra de búsqueda ── */
 .search-results-overlay {
     position: absolute;
     top: 100%;
@@ -326,14 +743,17 @@
     border-top: none;
 }
 
+/* ── Buscador overlay abierto — muestra el panel de resultados cuando hay texto en el campo ── */
 .search-results-overlay.open {
     display: block;
 }
 
+/* ── Buscador overlay inner — espaciado interno del contenedor de resultados ── */
 .sro-inner {
     padding: 8px;
 }
 
+/* ── Buscador overlay item — fila de resultado individual con imagen, nombre, precio y categoría ── */
 .sro-item {
     display: flex;
     align-items: center;
@@ -344,10 +764,12 @@
     transition: background 0.15s;
 }
 
+/* ── Buscador overlay item (hover) — resalta el resultado al pasar el cursor ── */
 .sro-item:hover {
     background: #f8fafc;
 }
 
+/* ── Buscador overlay imagen — miniatura cuadrada del producto en el resultado de búsqueda ── */
 .sro-img {
     width: 44px;
     height: 44px;
@@ -356,11 +778,13 @@
     flex-shrink: 0;
 }
 
+/* ── Buscador overlay info — columna que agrupa nombre y categoría del producto en el resultado ── */
 .sro-info {
     flex: 1;
     min-width: 0;
 }
 
+/* ── Buscador overlay nombre — nombre del producto en el resultado, truncado si es largo ── */
 .sro-nombre {
     font-size: 13px;
     font-weight: 600;
@@ -370,12 +794,14 @@
     text-overflow: ellipsis;
 }
 
+/* ── Buscador overlay categoría — etiqueta de categoría en gris bajo el nombre del producto ── */
 .sro-cat {
     font-size: 11px;
     color: #94a3b8;
     margin-top: 2px;
 }
 
+/* ── Buscador overlay precio — precio del producto alineado a la derecha del resultado ── */
 .sro-precio {
     font-size: 14px;
     font-weight: 800;
@@ -383,6 +809,7 @@
     white-space: nowrap;
 }
 
+/* ── Buscador overlay vacío — mensaje centrado que aparece cuando no hay resultados ── */
 .sro-empty {
     padding: 20px;
     text-align: center;
@@ -390,7 +817,7 @@
     color: #94a3b8;
 }
 
-/* El header-search necesita position relative para el overlay */
+/* ── Header search — barra de búsqueda del header con position relative para anclar el overlay ── */
 .header-search {
     position: relative;
 }
@@ -400,6 +827,8 @@
    Son distintas a las del slider: layout en fila con imagen
    a la izquierda, info a la derecha, y borde rojo en hover.
 ════════════════════════════════════════════════════════════ */
+
+/* ── @keyframes fadeInCard — animación de entrada que hace aparecer cada tarjeta desde abajo con fade ── */
 @keyframes fadeInCard {
     from {
         opacity: 0;
@@ -412,7 +841,7 @@
     }
 }
 
-/* Sobreescribir el layout de las tarjetas SOLO dentro del grid de categoría */
+/* ── Category grid tarjeta — tarjeta de producto en layout horizontal: imagen a la izquierda, info a la derecha ── */
 .category-grid .target-card {
     flex-direction: row;
     /* horizontal en lugar de vertical */
@@ -427,13 +856,14 @@
     position: relative;
 }
 
+/* ── Category grid tarjeta (hover) — borde rojo y sombra suave al pasar el cursor ── */
 .category-grid .target-card:hover {
     border-color: #FF0D2A;
     box-shadow: 0 6px 24px rgba(255, 13, 42, 0.10);
     transform: translateY(-2px);
 }
 
-/* Imagen — columna izquierda fija de 120px */
+/* ── Category grid tarjeta — columna de imagen fija de 120px a la izquierda de la tarjeta ── */
 .category-grid .target-card .target-card-img-wrap {
     width: 120px;
     min-width: 120px;
@@ -443,7 +873,7 @@
     font-size: 36px;
 }
 
-/* Contenido — ocupa el resto del ancho */
+/* ── Category grid tarjeta — columna de contenido que ocupa el resto del ancho disponible ── */
 .category-grid .target-card .target-card-content {
     flex: 1;
     padding: 14px 16px;
@@ -454,6 +884,7 @@
     min-width: 0;
 }
 
+/* ── Category grid tarjeta — marca del producto en gris pequeño con letras mayúsculas ── */
 .category-grid .target-card .target-card-brand {
     font-size: 10px;
     font-weight: 700;
@@ -462,6 +893,7 @@
     letter-spacing: 0.5px;
 }
 
+/* ── Category grid tarjeta — nombre del producto en negrita oscura ── */
 .category-grid .target-card .target-card-title {
     font-size: 14px;
     font-weight: 800;
@@ -470,6 +902,7 @@
     margin: 2px 0;
 }
 
+/* ── Category grid tarjeta — descripción corta del producto en gris ── */
 .category-grid .target-card .target-card-desc {
     font-size: 12px;
     color: #666;
@@ -477,6 +910,7 @@
     flex: 1;
 }
 
+/* ── Category grid tarjeta — pie de tarjeta con precio y botón de compra separados por línea ── */
 .category-grid .target-card .target-card-footer {
     display: flex;
     align-items: center;
@@ -487,12 +921,14 @@
     border-top: 1px solid #f0f0f0;
 }
 
+/* ── Category grid tarjeta — precio del producto en grande y negrita ── */
 .category-grid .target-card .target-card-price {
     font-size: 20px;
     font-weight: 900;
     color: #1a1a1a;
 }
 
+/* ── Category grid tarjeta — botón rojo de añadir al carrito ── */
 .category-grid .target-card .target-card-btn {
     padding: 8px 18px;
     font-size: 12px;
@@ -506,11 +942,12 @@
     white-space: nowrap;
 }
 
+/* ── Category grid tarjeta botón (hover) — oscurece el botón de compra al pasar el cursor ── */
 .category-grid .target-card .target-card-btn:hover {
     background: #CC0020;
 }
 
-/* Badges posicionados sobre la imagen */
+/* ── Category grid tarjeta badges — posiciona las etiquetas "Oferta" y "Nuevo" sobre la imagen ── */
 .category-grid .target-card .badge-oferta,
 .category-grid .target-card .badge-nuevo {
     top: 8px;
@@ -519,7 +956,7 @@
     padding: 2px 7px;
 }
 
-/* Delays de animación */
+/* ── Category grid tarjeta — delays escalonados de animación para cada tarjeta del grid ── */
 .category-grid .target-card:nth-child(2) {
     animation-delay: 0.04s;
 }
@@ -548,7 +985,7 @@
     animation-delay: 0.28s;
 }
 
-/* En mobile vuelven a ser verticales */
+/* ── @media max-width: 560px — Category grid tarjeta mobile: vuelve a layout vertical con imagen arriba ── */
 @media (max-width: 560px) {
     .category-grid .target-card {
         flex-direction: column;
@@ -564,6 +1001,8 @@
 /* ════════════════════════════════════════════════════════════
    CHECKOUT — indicadores de paso mejorados
 ════════════════════════════════════════════════════════════ */
+
+/* ── Checkout steps — barra de pasos del proceso de pago que indica en qué etapa se encuentra el usuario ── */
 .checkout-steps {
     display: flex;
     align-items: center;
@@ -571,6 +1010,7 @@
     margin-bottom: 28px;
 }
 
+/* ── Checkout step — elemento individual de paso con número y etiqueta de texto ── */
 .cstep {
     display: flex;
     align-items: center;
@@ -583,11 +1023,13 @@
     transition: all 0.2s;
 }
 
+/* ── Checkout step activo — resalta el paso actual en rojo para orientar al usuario ── */
 .cstep.active {
     color: #FF0D2A;
     background: rgba(255, 13, 42, 0.06);
 }
 
+/* ── Checkout step número — círculo con el número de paso en gris cuando está inactivo ── */
 .cstep-num {
     width: 24px;
     height: 24px;
@@ -602,11 +1044,13 @@
     flex-shrink: 0;
 }
 
+/* ── Checkout step número activo — círculo rojo con número blanco en el paso actual ── */
 .cstep.active .cstep-num {
     background: #FF0D2A;
     color: #fff;
 }
 
+/* ── Checkout step separador — flecha o guión entre pasos del proceso de pago ── */
 .cstep-sep {
     color: #e2e8f0;
     font-size: 18px;
@@ -615,6 +1059,8 @@
 /* ════════════════════════════════════════════════════════════
    MOBILE — mejoras responsive
 ════════════════════════════════════════════════════════════ */
+
+/* ── @media max-width: 768px — ajustes globales responsive para tablet y móvil ── */
 @media (max-width: 768px) {
 
     /* Bento 2 columnas simétrico en mobile */
@@ -648,15 +1094,6 @@
         gap: 12px;
     }
 
-    /* AsolStore hero mobile */
-    .asolstore-hero {
-        padding: 36px 20px;
-    }
-
-    .asolstore-hero-stats {
-        gap: 20px;
-    }
-
     /* Historial botones en columna */
     .historial-section .section-header {
         flex-direction: column;
@@ -686,6 +1123,7 @@
     }
 }
 
+/* ── @media max-width: 480px — ajustes para móviles pequeños: grids de 1 columna, bento apilado, checkout compacto ── */
 @media (max-width: 480px) {
 
     /* Grid 1 col en móvil pequeño */
@@ -744,7 +1182,7 @@
    Rediseño completo con paleta rojo/blanco
 ════════════════════════════════════════════════════════════ */
 
-/* Header del panel */
+/* ── Panel historial cabecera — barra superior del panel lateral con título, icono y botón de cierre ── */
 .hist-panel-header {
     display: flex;
     align-items: center;
@@ -755,12 +1193,14 @@
     flex-shrink: 0;
 }
 
+/* ── Panel historial cabecera izquierda — agrupa el icono y los textos de título y subtítulo ── */
 .hist-panel-header-left {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
+/* ── Panel historial icono — cuadrado redondeado con fondo rojo tenue que contiene el icono del panel ── */
 .hist-panel-icon {
     width: 38px;
     height: 38px;
@@ -772,6 +1212,7 @@
     flex-shrink: 0;
 }
 
+/* ── Panel historial título — nombre del panel en negrita oscura ── */
 .hist-panel-title {
     font-size: 15px;
     font-weight: 800;
@@ -779,12 +1220,14 @@
     line-height: 1.2;
 }
 
+/* ── Panel historial subtítulo — texto secundario en gris bajo el título del panel ── */
 .hist-panel-sub {
     font-size: 11px;
     color: #999;
     margin-top: 1px;
 }
 
+/* ── Panel historial botón cerrar — botón X que cierra el panel lateral de historial ── */
 .hist-panel-close {
     width: 34px;
     height: 34px;
@@ -800,13 +1243,14 @@
     flex-shrink: 0;
 }
 
+/* ── Panel historial botón cerrar (hover) — fondo rosado y giro de 90° al pasar el cursor ── */
 .hist-panel-close:hover {
     background: #fee2e2;
     color: #FF0D2A;
     transform: rotate(90deg);
 }
 
-/* Área scrolleable */
+/* ── Panel historial contenido — área central scrolleable que lista los productos del historial ── */
 .hist-panel-content {
     flex: 1;
     overflow-y: auto;
@@ -817,6 +1261,7 @@
     background: #fafafa;
 }
 
+/* ── Panel historial contenido scrollbar — scrollbar delgado y discreto en el área de la lista ── */
 .hist-panel-content::-webkit-scrollbar {
     width: 4px;
 }
@@ -830,7 +1275,7 @@
     border-radius: 4px;
 }
 
-/* Estado vacío */
+/* ── Panel historial vacío — mensaje centrado con icono cuando no hay productos en el historial ── */
 .hist-panel-empty {
     display: flex;
     flex-direction: column;
@@ -841,6 +1286,7 @@
     text-align: center;
 }
 
+/* ── Panel historial vacío — título del estado vacío ── */
 .hist-panel-empty p {
     font-size: 15px;
     font-weight: 700;
@@ -848,13 +1294,14 @@
     margin: 0;
 }
 
+/* ── Panel historial vacío — descripción secundaria del estado vacío ── */
 .hist-panel-empty span {
     font-size: 13px;
     color: #aaa;
     line-height: 1.5;
 }
 
-/* Item del historial */
+/* ── Panel historial item — tarjeta horizontal de producto visto recientemente con imagen, info y flecha ── */
 .hist-panel-item {
     display: flex;
     align-items: center;
@@ -867,13 +1314,14 @@
     transition: all 0.18s;
 }
 
+/* ── Panel historial item (hover) — borde rojo, fondo rosado y desplazamiento lateral al pasar el cursor ── */
 .hist-panel-item:hover {
     border-color: #FF0D2A;
     background: #fff0f2;
     transform: translateX(3px);
 }
 
-/* Imagen del item */
+/* ── Panel historial item imagen — miniatura cuadrada del producto en el panel de historial ── */
 .hist-item-img {
     width: 70px;
     height: 70px;
@@ -883,7 +1331,7 @@
     position: relative;
 }
 
-/* Badge sobre la imagen */
+/* ── Panel historial item badge — etiqueta pequeña sobre la imagen que indica si el producto está en oferta ── */
 .hist-item-badge {
     position: absolute;
     top: 4px;
@@ -898,7 +1346,7 @@
     letter-spacing: 0.3px;
 }
 
-/* Info del item */
+/* ── Panel historial item info — columna con categoría, nombre y precios del producto visto ── */
 .hist-item-info {
     flex: 1;
     min-width: 0;
@@ -907,6 +1355,7 @@
     gap: 3px;
 }
 
+/* ── Panel historial item categoría — etiqueta de categoría en rojo y mayúsculas sobre el nombre ── */
 .hist-item-cat {
     font-size: 10px;
     font-weight: 700;
@@ -915,6 +1364,7 @@
     letter-spacing: 0.5px;
 }
 
+/* ── Panel historial item nombre — nombre del producto truncado con puntos suspensivos si es largo ── */
 .hist-item-nombre {
     font-size: 13px;
     font-weight: 700;
@@ -925,6 +1375,7 @@
     text-overflow: ellipsis;
 }
 
+/* ── Panel historial item precios — fila con precio actual y precio anterior tachado ── */
 .hist-item-precios {
     display: flex;
     align-items: baseline;
@@ -932,19 +1383,21 @@
     margin-top: 2px;
 }
 
+/* ── Panel historial item precio actual — precio actual del producto en grande y negrita ── */
 .hist-item-precio {
     font-size: 15px;
     font-weight: 900;
     color: #1a1a1a;
 }
 
+/* ── Panel historial item precio anterior — precio original tachado en gris para mostrar el descuento ── */
 .hist-item-old {
     font-size: 11px;
     color: #bbb;
     text-decoration: line-through;
 }
 
-/* Flecha de acción */
+/* ── Panel historial item flecha — icono de acción en rojo tenue que invita a ver el producto ── */
 .hist-item-action {
     width: 28px;
     height: 28px;
@@ -958,12 +1411,13 @@
     transition: all 0.18s;
 }
 
+/* ── Panel historial item flecha (hover) — rellena la flecha de rojo sólido al pasar el cursor sobre el item ── */
 .hist-panel-item:hover .hist-item-action {
     background: #FF0D2A;
     color: #fff;
 }
 
-/* Footer del panel */
+/* ── Panel historial pie — barra inferior fija con botones de limpiar historial y explorar tienda ── */
 .hist-panel-footer {
     padding: 16px 20px;
     border-top: 1px solid #e8e8e8;
@@ -973,6 +1427,7 @@
     flex-shrink: 0;
 }
 
+/* ── Panel historial botón limpiar — botón outline rojo que elimina todo el historial de vistos ── */
 .hist-panel-clear-btn {
     flex: 1;
     display: flex;
@@ -991,11 +1446,13 @@
     transition: all 0.18s;
 }
 
+/* ── Panel historial botón limpiar (hover) — rellena de rojo al pasar el cursor ── */
 .hist-panel-clear-btn:hover {
     background: #FF0D2A;
     color: #fff;
 }
 
+/* ── Panel historial botón explorar — botón rojo sólido que lleva al usuario a seguir navegando la tienda ── */
 .hist-panel-explore-btn {
     flex: 1;
     display: flex;
@@ -1011,11 +1468,12 @@
     transition: background 0.18s;
 }
 
+/* ── Panel historial botón explorar (hover) — oscurece el botón al pasar el cursor ── */
 .hist-panel-explore-btn:hover {
     background: #CC0020;
 }
 
-/* Override — panel del historial no usa h2::before del carrito */
+/* ── Panel historial — override que elimina el pseudo-elemento ::before del h2 heredado del carrito ── */
 #historialPanel h2::before {
     content: '';
 }
@@ -1023,6 +1481,8 @@
 /* ════════════════════════════════════════════════════════════
    BADGE BOUNCE — animación al añadir al carrito
 ════════════════════════════════════════════════════════════ */
+
+/* ── @keyframes badgeBounce — animación de rebote en el badge del carrito al añadir un producto ── */
 @keyframes badgeBounce {
     0% {
         transform: scale(1);
@@ -1042,6 +1502,7 @@
     }
 }
 
+/* ── Badge carrito bounce — aplica la animación de rebote al badge numérico del icono de carrito ── */
 #cart-badge.badge-bounce {
     animation: badgeBounce 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97);
 }
@@ -1049,6 +1510,8 @@
 /* ════════════════════════════════════════════════════════════
    MODAL AUTH — optimizado para mobile
 ════════════════════════════════════════════════════════════ */
+
+/* ── @media max-width: 600px — Modal de autenticación en móvil: se presenta como sheet desde la parte inferior ── */
 @media (max-width: 600px) {
     .auth-modal-overlay {
         align-items: flex-end !important;
@@ -1067,6 +1530,8 @@
 /* ════════════════════════════════════════════════════════════
    PANEL HISTORIAL — mobile full width
 ════════════════════════════════════════════════════════════ */
+
+/* ── @media max-width: 600px — Panel historial en móvil: ocupa todo el ancho de la pantalla ── */
 @media (max-width: 600px) {
     #historialPanel {
         width: 100% !important;
@@ -1084,6 +1549,8 @@
 /* ════════════════════════════════════════════════════════════
    PAGINACIÓN — botones funcionales con estilo
 ════════════════════════════════════════════════════════════ */
+
+/* ── Paginación — barra de navegación entre páginas de resultados centrada bajo el grid de productos ── */
 .pagination {
     display: flex;
     justify-content: center;
@@ -1091,6 +1558,7 @@
     padding: 32px 24px;
 }
 
+/* ── Paginación botón — botón de número de página con borde gris y fondo blanco ── */
 .page-btn {
     width: 38px;
     height: 38px;
@@ -1105,17 +1573,20 @@
     font-family: inherit;
 }
 
+/* ── Paginación botón (hover) — borde y texto rojos al pasar el cursor ── */
 .page-btn:hover {
     border-color: #FF0D2A;
     color: #FF0D2A;
 }
 
+/* ── Paginación botón activo — página actual resaltada con fondo rojo sólido y texto blanco ── */
 .page-btn.active {
     background: #FF0D2A;
     border-color: #FF0D2A;
     color: #fff;
 }
 
+/* ── Paginación botón puntos — separador decorativo sin interacción entre grupos de páginas ── */
 .page-btn.dots {
     cursor: default;
     border-color: transparent;

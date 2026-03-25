@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+    <!-- ══ HEAD — metadatos, OG tags y hojas de estilo ══ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Completa tu compra en AsolStore de forma rápida y segura.">
@@ -20,16 +21,17 @@
 
 <body class="checkout-body">
 
-
+    <!-- ══ HEADER — barra de navegación principal inyectada por header.js ══ -->
         <header id="mainHeader"></header>
     <script src="../js/header.js"></script>
 
+    <!-- ══ CHECKOUT LAYOUT — contenedor de dos columnas: formulario y resumen ══ -->
     <div class="checkout-layout">
 
-        <!-- Formulario izquierdo -->
+        <!-- ══ FORMULARIO — columna izquierda con pasos del proceso de compra ══ -->
         <div class="checkout-form-col">
 
-            <!-- Paso 1: Datos personales -->
+            <!-- ══ PASO 1 — datos de entrega: nombre, dirección y tipo de envío ══ -->
             <div class="checkout-step-panel active" id="panel1">
                 <h2 class="checkout-section-title">Datos de entrega</h2>
                 <div class="checkout-form">
@@ -52,36 +54,47 @@
                         </div>
                     </div>
                     <div class="cf-field">
-                        <label>Tipo de envío</label>
-                        <div class="shipping-options">
-                            <label class="shipping-opt active">
-                                <input type="radio" name="shipping" value="24h" checked>
-                                <div class="shipping-opt-inner">
-                                    <span class="shipping-name">Express 24h</span>
-                                    <span class="shipping-price">S/ 12.00</span>
+                        <label>Método de entrega</label>
+                        <div class="delivery-coordinated">
+                            <div class="delivery-coord-header">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                                <div class="delivery-coord-info">
+                                    <span class="delivery-coord-name">Delivery coordinado</span>
+                                    <span class="delivery-coord-sub">Acordamos fecha y hora por WhatsApp</span>
                                 </div>
-                            </label>
-                            <label class="shipping-opt">
-                                <input type="radio" name="shipping" value="48h">
-                                <div class="shipping-opt-inner">
-                                    <span class="shipping-name">Estándar 48h</span>
-                                    <span class="shipping-price">S/ 7.00</span>
-                                </div>
-                            </label>
-                            <label class="shipping-opt">
-                                <input type="radio" name="shipping" value="free">
-                                <div class="shipping-opt-inner">
-                                    <span class="shipping-name">Gratis +S/99</span>
-                                    <span class="shipping-price free">Gratis</span>
-                                </div>
-                            </label>
+                                <span class="delivery-coord-price">S/ 10.00</span>
+                            </div>
+                            <p class="delivery-coord-note">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                Recibirás un mensaje de WhatsApp para confirmar los detalles de tu entrega. El costo puede variar según tu distrito.
+                            </p>
                         </div>
+                    </div>
+                    <div class="cf-row two">
+                        <div class="cf-field">
+                            <label>Fecha preferida</label>
+                            <input type="date" id="cfFecha">
+                        </div>
+                        <div class="cf-field">
+                            <label>Franja horaria</label>
+                            <select id="cfHorario">
+                                <option value="">Selecciona una franja</option>
+                                <option value="mañana">Mañana (8am – 12pm)</option>
+                                <option value="tarde">Tarde (12pm – 6pm)</option>
+                                <option value="noche">Noche (6pm – 10pm)</option>
+                                <option value="cualquiera">Cualquier hora</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="cf-field">
+                        <label>Referencias / instrucciones</label>
+                        <textarea id="cfReferencias" rows="2" placeholder="Casa de rejas azules, timbre 2B, llamar antes de llegar..."></textarea>
                     </div>
                     <button class="checkout-next-btn" id="goStep2">Continuar al pago →</button>
                 </div>
             </div>
 
-            <!-- Paso 2: Pago -->
+            <!-- ══ PASO 2 — método de pago: tarjeta, Yape, Plin o efectivo ══ -->
             <div class="checkout-step-panel" id="panel2">
                 <h2 class="checkout-section-title">Método de pago</h2>
                 <div class="payment-methods" style="padding:0 0 16px;">
@@ -172,7 +185,7 @@
                 </div>
             </div>
 
-            <!-- Paso 3: Confirmación -->
+            <!-- ══ PASO 3 — confirmación del pedido con número de orden ══ -->
             <div class="checkout-step-panel" id="panel3">
                 <div class="checkout-success">
                     <div class="success-circle">
@@ -190,7 +203,7 @@
             </div>
         </div>
 
-        <!-- Resumen del pedido -->
+        <!-- ══ RESUMEN PEDIDO — columna derecha con items, subtotal y total ══ -->
         <div class="checkout-summary-col">
             <div class="order-summary">
                 <h3 class="summary-title">Resumen del pedido</h3>
@@ -210,7 +223,7 @@
                 </div>
                 <div class="summary-divider"></div>
                 <div class="summary-line"><span>Subtotal</span><span>S/ 159.00</span></div>
-                <div class="summary-line"><span>Envío</span><span id="summaryShipping">S/ 12.00</span></div>
+                <div class="summary-line"><span>Envío</span><span id="summaryShipping">S/ 10.00</span></div>
                 <div class="summary-line discount"><span>Descuento</span><span>− S/ 0.00</span></div>
                 <div class="summary-divider"></div>
                 <div class="summary-total"><span>Total</span><span id="summaryTotal">S/ 171.00</span></div>
@@ -224,6 +237,7 @@
         </div>
     </div>
 
+    <!-- ══ SCRIPTS — carga de módulos JS en el orden correcto ══ -->
     <!-- WhatsApp flotante -->
     <!-- car-buy.js SIN defer para exponer window.addToCart/renderCart de inmediato -->
     <script src="../js/car-buy.js"></script>

@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+    <!-- ══ HEAD — metadatos, OG tags y hojas de estilo ══ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AsolStore | Mi Tienda</title>
@@ -18,41 +19,315 @@
 </head>
 
 <body>
+    <!-- ══ NOSCRIPT — aviso cuando JS está desactivado ══ -->
     <noscript><div style="position:fixed;top:0;left:0;right:0;background:#FF0D2A;color:#fff;text-align:center;padding:12px;font-family:sans-serif;font-size:14px;z-index:9999;">AsolStore requiere JavaScript para funcionar correctamente. Por favor, actívalo en tu navegador.</div></noscript>
 
-    <!-- ══ HEADER ══ -->
+    <!-- ══ HEADER — barra de navegación principal inyectada por header.js ══ -->
         <header id="mainHeader"></header>
     <script src="../js/header.js"></script>
 
-    <!-- Breadcrumb -->
+    <!-- ══ BREADCRUMB — ruta de navegación: Inicio › AsolStore ══ -->
     <div class="breadcrumb">
         <a href="../index.html">Inicio</a>
         <span>›</span>
         <span>AsolStore</span>
     </div>
 
-    <!-- ══ HERO DE ASOLSTORE ══ -->
-    <div class="asolstore-hero">
-        <div class="asolstore-hero-inner">
-            <div class="asolstore-hero-badge">MARCA PROPIA</div>
-            <h1 class="asolstore-hero-title">Productos<br><span>AsolStore</span></h1>
-            <p class="asolstore-hero-sub">Diseñados y seleccionados por nosotros. Calidad garantizada, precio justo.</p>
-            <div class="asolstore-hero-stats">
-                <div class="ah-stat"><strong>+50</strong><span>Productos exclusivos</span></div>
-                <div class="ah-stat"><strong>4.9★</strong><span>Valoración promedio</span></div>
-                <div class="ah-stat"><strong>24h</strong><span>Envío express</span></div>
+    <!-- ══ HERO ASOLSTORE — hero dinámico con ciudad animada y moto de delivery ══ -->
+    <div class="as-hero">
+
+        <!-- Fondo decorativo con glows -->
+        <div class="as-bg">
+            <div class="as-bg-glow as-g1"></div>
+            <div class="as-bg-glow as-g2"></div>
+            <div class="as-bg-grid"></div>
+        </div>
+
+        <!-- Zona superior: texto + deco -->
+        <div class="as-hero-body">
+
+            <!-- Columna texto -->
+            <div class="as-hero-text">
+                <div class="as-badge">
+                    <span class="as-badge-dot"></span>
+                    MARCA PROPIA · PERÚ
+                </div>
+                <div class="as-logo-wrap">
+                    <img src="../assets/logo.svg" alt="AsolStore" class="as-logo-img">
+                    <div class="as-logo-ring"></div>
+                    <div class="as-logo-ring as-logo-ring-2"></div>
+                </div>
+                <h1 class="as-headline">
+                    Llevamos lo mejor<br>
+                    <em>hasta tu puerta.</em>
+                </h1>
+                <p class="as-subline">
+                    Productos exclusivos, precios justos y entrega coordinada.<br>
+                    Tu satisfacción es nuestra misión.
+                </p>
+                <div class="as-hero-ctas">
+                    <a href="#productos" class="as-cta-main">
+                        Explorar colección
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
+                <div class="as-stats">
+                    <div class="as-stat-item">
+                        <strong>+50</strong>
+                        <span>Productos exclusivos</span>
+                    </div>
+                    <div class="as-stat-sep"></div>
+                    <div class="as-stat-item">
+                        <strong>4.9★</strong>
+                        <span>Valoración promedio</span>
+                    </div>
+                    <div class="as-stat-sep"></div>
+                    <div class="as-stat-item">
+                        <strong>100%</strong>
+                        <span>Calidad garantizada</span>
+                    </div>
+                </div>
             </div>
+
+            <!-- Columna decorativa -->
+            <div class="as-hero-deco">
+                <div class="as-deco-ring as-dr1"></div>
+                <div class="as-deco-ring as-dr2"></div>
+                <div class="as-deco-card">
+                    <div class="as-deco-card-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF0D2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="1" y="3" width="15" height="13" rx="1"/>
+                            <path d="M16 8h4l3 5v3h-7V8z"/>
+                            <circle cx="5.5" cy="18.5" r="2.5"/>
+                            <circle cx="18.5" cy="18.5" r="2.5"/>
+                        </svg>
+                    </div>
+                    <div class="as-deco-card-text">
+                        <strong>Pedido en camino</strong>
+                        <span>Delivery coordinado por WhatsApp</span>
+                    </div>
+                    <div class="as-deco-card-dot"></div>
+                </div>
+                <div class="as-deco-pill">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="#22c55e"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                    Calidad AsolStore verificada
+                </div>
+                <div class="as-deco-pill as-dp2">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="#FF0D2A"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+                    Productos seleccionados
+                </div>
+            </div>
+        </div>
+
+        <!-- Escena ciudad + moto -->
+        <div class="as-city">
+
+            <!-- Skyline SVG -->
+            <svg class="as-skyline" viewBox="0 0 1400 220" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <!-- Edificios fondo -->
+                <rect x="0"    y="130" width="55"  height="90"  fill="#0d1428"/>
+                <rect x="60"   y="90"  width="75"  height="130" fill="#0c1326"/>
+                <rect x="75"   y="75"  width="45"  height="15"  fill="#0c1326"/>
+                <rect x="145"  y="110" width="50"  height="110" fill="#0e1530"/>
+                <rect x="205"  y="60"  width="85"  height="160" fill="#0b1224"/>
+                <rect x="240"  y="44"  width="14"  height="16"  fill="#0b1224"/>
+                <circle cx="247" cy="40" r="4.5" fill="#FF0D2A" opacity="0.75"/>
+                <rect x="300"  y="100" width="48"  height="120" fill="#0d1530"/>
+                <rect x="358"  y="78"  width="68"  height="142" fill="#0a1020"/>
+                <rect x="390"  y="60"  width="14"  height="18"  fill="#0a1020"/>
+                <circle cx="397" cy="56" r="4" fill="#FF0D2A" opacity="0.6"/>
+                <rect x="436"  y="120" width="42"  height="100" fill="#0e1632"/>
+                <rect x="488"  y="50"  width="92"  height="170" fill="#091120"/>
+                <rect x="530"  y="32"  width="18"  height="18"  fill="#091120"/>
+                <circle cx="539" cy="28" r="5" fill="#FF0D2A" opacity="0.85"/>
+                <rect x="590"  y="95"  width="58"  height="125" fill="#0c1428"/>
+                <rect x="658"  y="70"  width="80"  height="150" fill="#0b1326"/>
+                <rect x="690"  y="52"  width="20"  height="18"  fill="#0b1326"/>
+                <circle cx="700" cy="48" r="5" fill="#FF0D2A" opacity="0.7"/>
+                <rect x="748"  y="115" width="44"  height="105" fill="#0d1428"/>
+                <rect x="802"  y="55"  width="90"  height="165" fill="#091020"/>
+                <rect x="840"  y="38"  width="16"  height="17"  fill="#091020"/>
+                <circle cx="848" cy="34" r="5" fill="#FF0D2A" opacity="0.8"/>
+                <rect x="902"  y="100" width="52"  height="120" fill="#0c1326"/>
+                <rect x="964"  y="80"  width="72"  height="140" fill="#0a1020"/>
+                <rect x="1046" y="58"  width="88"  height="162" fill="#091120"/>
+                <rect x="1082" y="40"  width="16"  height="18"  fill="#091120"/>
+                <circle cx="1090" cy="36" r="5" fill="#FF0D2A" opacity="0.7"/>
+                <rect x="1144" y="110" width="48"  height="110" fill="#0d1530"/>
+                <rect x="1202" y="72"  width="76"  height="148" fill="#0b1224"/>
+                <rect x="1238" y="54"  width="18"  height="18"  fill="#0b1224"/>
+                <circle cx="1247" cy="50" r="5" fill="#FF0D2A" opacity="0.65"/>
+                <rect x="1288" y="90"  width="60"  height="130" fill="#0c1428"/>
+                <rect x="1358" y="130" width="42"  height="90"  fill="#0e1632"/>
+
+                <!-- Ventanas (luz amarilla/azul) distribuidas -->
+                <rect x="68"  y="100" width="7" height="6" fill="#ffd700" opacity="0.55"/>
+                <rect x="80"  y="100" width="7" height="6" fill="#a0c4ff" opacity="0.4"/>
+                <rect x="93"  y="100" width="7" height="6" fill="#ffd700" opacity="0.7"/>
+                <rect x="68"  y="113" width="7" height="6" fill="#a0c4ff" opacity="0.5"/>
+                <rect x="93"  y="113" width="7" height="6" fill="#ffd700" opacity="0.4"/>
+                <rect x="68"  y="126" width="7" height="6" fill="#ffd700" opacity="0.6"/>
+                <rect x="80"  y="126" width="7" height="6" fill="#a0c4ff" opacity="0.35"/>
+                <rect x="213" y="72"  width="9" height="8" fill="#a0c4ff" opacity="0.5"/>
+                <rect x="227" y="72"  width="9" height="8" fill="#a0c4ff" opacity="0.7"/>
+                <rect x="241" y="72"  width="9" height="8" fill="#ffd700" opacity="0.4"/>
+                <rect x="255" y="72"  width="9" height="8" fill="#a0c4ff" opacity="0.6"/>
+                <rect x="269" y="72"  width="9" height="8" fill="#a0c4ff" opacity="0.3"/>
+                <rect x="213" y="87"  width="9" height="8" fill="#ffd700" opacity="0.5"/>
+                <rect x="241" y="87"  width="9" height="8" fill="#a0c4ff" opacity="0.7"/>
+                <rect x="269" y="87"  width="9" height="8" fill="#ffd700" opacity="0.4"/>
+                <rect x="227" y="102" width="9" height="8" fill="#a0c4ff" opacity="0.6"/>
+                <rect x="255" y="102" width="9" height="8" fill="#a0c4ff" opacity="0.3"/>
+                <rect x="213" y="117" width="9" height="8" fill="#ffd700" opacity="0.5"/>
+                <rect x="241" y="117" width="9" height="8" fill="#ffd700" opacity="0.6"/>
+                <rect x="496" y="62"  width="10" height="9" fill="#a0c4ff" opacity="0.5"/>
+                <rect x="511" y="62"  width="10" height="9" fill="#a0c4ff" opacity="0.7"/>
+                <rect x="526" y="62"  width="10" height="9" fill="#ffd700" opacity="0.4"/>
+                <rect x="541" y="62"  width="10" height="9" fill="#a0c4ff" opacity="0.6"/>
+                <rect x="556" y="62"  width="10" height="9" fill="#a0c4ff" opacity="0.3"/>
+                <rect x="570" y="62"  width="10" height="9" fill="#ffd700" opacity="0.7"/>
+                <rect x="496" y="78"  width="10" height="9" fill="#ffd700" opacity="0.4"/>
+                <rect x="526" y="78"  width="10" height="9" fill="#a0c4ff" opacity="0.6"/>
+                <rect x="556" y="78"  width="10" height="9" fill="#ffd700" opacity="0.5"/>
+                <rect x="511" y="94"  width="10" height="9" fill="#a0c4ff" opacity="0.7"/>
+                <rect x="541" y="94"  width="10" height="9" fill="#a0c4ff" opacity="0.3"/>
+                <rect x="570" y="94"  width="10" height="9" fill="#ffd700" opacity="0.5"/>
+                <rect x="496" y="110" width="10" height="9" fill="#a0c4ff" opacity="0.4"/>
+                <rect x="526" y="110" width="10" height="9" fill="#ffd700" opacity="0.6"/>
+                <rect x="556" y="110" width="10" height="9" fill="#a0c4ff" opacity="0.5"/>
+                <rect x="666" y="82"  width="9" height="8" fill="#a0c4ff" opacity="0.5"/>
+                <rect x="680" y="82"  width="9" height="8" fill="#ffd700" opacity="0.7"/>
+                <rect x="694" y="82"  width="9" height="8" fill="#a0c4ff" opacity="0.3"/>
+                <rect x="708" y="82"  width="9" height="8" fill="#a0c4ff" opacity="0.6"/>
+                <rect x="722" y="82"  width="9" height="8" fill="#ffd700" opacity="0.4"/>
+                <rect x="666" y="97"  width="9" height="8" fill="#ffd700" opacity="0.5"/>
+                <rect x="694" y="97"  width="9" height="8" fill="#a0c4ff" opacity="0.7"/>
+                <rect x="722" y="97"  width="9" height="8" fill="#ffd700" opacity="0.4"/>
+                <rect x="680" y="112" width="9" height="8" fill="#a0c4ff" opacity="0.6"/>
+                <rect x="708" y="112" width="9" height="8" fill="#a0c4ff" opacity="0.3"/>
+                <rect x="808" y="67"  width="10" height="9" fill="#a0c4ff" opacity="0.5"/>
+                <rect x="823" y="67"  width="10" height="9" fill="#ffd700" opacity="0.7"/>
+                <rect x="838" y="67"  width="10" height="9" fill="#a0c4ff" opacity="0.4"/>
+                <rect x="853" y="67"  width="10" height="9" fill="#a0c4ff" opacity="0.6"/>
+                <rect x="868" y="67"  width="10" height="9" fill="#ffd700" opacity="0.3"/>
+                <rect x="808" y="83"  width="10" height="9" fill="#ffd700" opacity="0.5"/>
+                <rect x="838" y="83"  width="10" height="9" fill="#a0c4ff" opacity="0.7"/>
+                <rect x="868" y="83"  width="10" height="9" fill="#ffd700" opacity="0.4"/>
+                <rect x="823" y="99"  width="10" height="9" fill="#a0c4ff" opacity="0.5"/>
+                <rect x="853" y="99"  width="10" height="9" fill="#a0c4ff" opacity="0.3"/>
+                <rect x="808" y="115" width="10" height="9" fill="#ffd700" opacity="0.6"/>
+                <rect x="838" y="115" width="10" height="9" fill="#a0c4ff" opacity="0.4"/>
+                <rect x="868" y="115" width="10" height="9" fill="#ffd700" opacity="0.5"/>
+                <rect x="1054" y="70" width="10" height="9" fill="#a0c4ff" opacity="0.5"/>
+                <rect x="1069" y="70" width="10" height="9" fill="#ffd700" opacity="0.7"/>
+                <rect x="1084" y="70" width="10" height="9" fill="#a0c4ff" opacity="0.3"/>
+                <rect x="1099" y="70" width="10" height="9" fill="#a0c4ff" opacity="0.6"/>
+                <rect x="1114" y="70" width="10" height="9" fill="#ffd700" opacity="0.4"/>
+                <rect x="1054" y="86" width="10" height="9" fill="#ffd700" opacity="0.5"/>
+                <rect x="1084" y="86" width="10" height="9" fill="#a0c4ff" opacity="0.6"/>
+                <rect x="1114" y="86" width="10" height="9" fill="#ffd700" opacity="0.4"/>
+                <rect x="1069" y="102" width="10" height="9" fill="#a0c4ff" opacity="0.7"/>
+                <rect x="1099" y="102" width="10" height="9" fill="#a0c4ff" opacity="0.3"/>
+                <rect x="1054" y="118" width="10" height="9" fill="#ffd700" opacity="0.5"/>
+                <rect x="1084" y="118" width="10" height="9" fill="#ffd700" opacity="0.6"/>
+                <rect x="1209" y="84" width="9" height="8" fill="#a0c4ff" opacity="0.5"/>
+                <rect x="1223" y="84" width="9" height="8" fill="#ffd700" opacity="0.7"/>
+                <rect x="1237" y="84" width="9" height="8" fill="#a0c4ff" opacity="0.3"/>
+                <rect x="1251" y="84" width="9" height="8" fill="#a0c4ff" opacity="0.6"/>
+                <rect x="1265" y="84" width="9" height="8" fill="#ffd700" opacity="0.4"/>
+                <rect x="1209" y="99" width="9" height="8" fill="#ffd700" opacity="0.5"/>
+                <rect x="1237" y="99" width="9" height="8" fill="#a0c4ff" opacity="0.6"/>
+                <rect x="1265" y="99" width="9" height="8" fill="#ffd700" opacity="0.4"/>
+
+                <!-- Línea de suelo -->
+                <rect x="0" y="218" width="1400" height="3" fill="#1a2448" opacity="0.8"/>
+            </svg>
+
+            <!-- Carretera -->
+            <div class="as-road">
+                <div class="as-road-dashes">
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+
+            <!-- Moto de delivery animada -->
+            <div class="as-moto-track">
+                <div class="as-moto">
+                    <!-- Líneas de velocidad -->
+                    <div class="as-speed-lines">
+                        <span class="sl sl1"></span>
+                        <span class="sl sl2"></span>
+                        <span class="sl sl3"></span>
+                        <span class="sl sl4"></span>
+                    </div>
+                    <!-- SVG moto -->
+                    <svg viewBox="0 0 155 82" class="as-moto-svg" xmlns="http://www.w3.org/2000/svg" fill="none">
+                        <!-- Rueda trasera -->
+                        <g class="as-wheel as-wheel-r">
+                            <circle cx="28" cy="60" r="17" stroke="#CC0020" stroke-width="4"/>
+                            <circle cx="28" cy="60" r="7"  fill="#FF0D2A" opacity="0.55"/>
+                            <line x1="28" y1="43" x2="28" y2="77" stroke="#FF0D2A" stroke-width="2" opacity="0.45"/>
+                            <line x1="11" y1="60" x2="45" y2="60" stroke="#FF0D2A" stroke-width="2" opacity="0.45"/>
+                            <line x1="16" y1="49" x2="40" y2="71" stroke="#FF0D2A" stroke-width="2" opacity="0.45"/>
+                            <line x1="40" y1="49" x2="16" y2="71" stroke="#FF0D2A" stroke-width="2" opacity="0.45"/>
+                        </g>
+                        <!-- Rueda delantera -->
+                        <g class="as-wheel as-wheel-f">
+                            <circle cx="122" cy="60" r="17" stroke="#CC0020" stroke-width="4"/>
+                            <circle cx="122" cy="60" r="7"  fill="#FF0D2A" opacity="0.55"/>
+                            <line x1="122" y1="43" x2="122" y2="77" stroke="#FF0D2A" stroke-width="2" opacity="0.45"/>
+                            <line x1="105" y1="60" x2="139" y2="60" stroke="#FF0D2A" stroke-width="2" opacity="0.45"/>
+                            <line x1="110" y1="49" x2="134" y2="71" stroke="#FF0D2A" stroke-width="2" opacity="0.45"/>
+                            <line x1="134" y1="49" x2="110" y2="71" stroke="#FF0D2A" stroke-width="2" opacity="0.45"/>
+                        </g>
+                        <!-- Chasis -->
+                        <path d="M34 58 L44 30 L82 22 L114 32 L122 58" stroke="#d0d8f0" stroke-width="3" stroke-linejoin="round"/>
+                        <path d="M44 30 L33 45" stroke="#d0d8f0" stroke-width="2.2" stroke-linecap="round"/>
+                        <!-- Manillar -->
+                        <path d="M114 32 L130 27 L133 35" stroke="#d0d8f0" stroke-width="2.2" stroke-linecap="round"/>
+                        <!-- Cuerpo moto -->
+                        <path d="M48 54 L55 28 L85 20 L112 32 L116 54 Z" fill="#131d3b" stroke="#1e2e58" stroke-width="1.2"/>
+                        <!-- Caja de delivery -->
+                        <rect x="70" y="5" width="36" height="24" rx="3.5" fill="#FF0D2A"/>
+                        <rect x="70" y="5" width="36" height="24" rx="3.5" stroke="#AA0018" stroke-width="1.5"/>
+                        <line x1="70" y1="17" x2="106" y2="17" stroke="rgba(255,255,255,0.3)" stroke-width="1.3"/>
+                        <line x1="88" y1="5"  x2="88"  y2="29" stroke="rgba(255,255,255,0.3)" stroke-width="1.3"/>
+                        <text x="74" y="14" font-size="5.5" fill="white" opacity="0.75" font-family="Arial" font-weight="bold">ASOL</text>
+                        <text x="72" y="26" font-size="4.5" fill="white" opacity="0.55" font-family="Arial">STORE</text>
+                        <!-- Rider cuerpo -->
+                        <ellipse cx="64" cy="36" rx="9" ry="12" fill="#0c1226"/>
+                        <path d="M56 40 L46 30 L38 34" stroke="#0c1226" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                        <!-- Casco -->
+                        <circle cx="64" cy="23" r="12" fill="#FF0D2A"/>
+                        <path d="M53 26 Q64 20 75 26" fill="rgba(0,0,0,0.22)"/>
+                        <!-- Visera -->
+                        <rect x="56" y="27" width="16" height="8" rx="4" fill="#05080f" opacity="0.88"/>
+                        <!-- Faro delantero -->
+                        <ellipse cx="138" cy="48" rx="6"  ry="5"  fill="#fffce0" opacity="0.95"/>
+                        <ellipse cx="141" cy="48" rx="9"  ry="3.5" fill="rgba(255,250,180,0.2)"/>
+                        <!-- Escape -->
+                        <path d="M40 60 L20 62 Q11 63 7 60" stroke="#445" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+                        <!-- Humo -->
+                        <circle cx="4"  cy="58" r="3.5" fill="rgba(180,180,200,0.18)" class="as-smoke as-sm1"/>
+                        <circle cx="-2" cy="55" r="5"   fill="rgba(180,180,200,0.1)"  class="as-smoke as-sm2"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Resplandor bajo la moto -->
+            <div class="as-road-glow"></div>
         </div>
     </div>
 
     <main>
 
-        <!-- ══ SECCIÓN: PRODUCTOS PROPIOS ASOLSTORE ══ -->
+        <!-- ══ PRODUCTOS PROPIOS — grid de 6 productos de marca propia AsolStore ══ -->
         <section class="asolstore-section">
             <div class="section-header">
                 <div class="section-title">Nuestra <span>colección exclusiva</span></div>
-                <p style="color:var(--text-muted,#94a3b8);font-size:14px;margin:0;">Diseñados y curados por AsolStore
-                </p>
+
             </div>
 
             <!-- Filtros de la sección -->
@@ -63,7 +338,6 @@
                     <button class="filter-chip" data-filter="nuevo">Nuevos</button>
                     <button class="filter-chip" data-filter="stock">En stock</button>
                 </div>
-                <span class="category-count" id="catCount">6 productos</span>
             </div>
 
             <!-- Grid 3 columnas — productos propios AsolStore -->
@@ -155,7 +429,7 @@
             </div>
         </section>
 
-        <!-- ══ SECCIÓN: SOCIOS / OTRAS MARCAS ══ -->
+        <!-- ══ MARCAS ASOCIADAS — carrusel de productos de marcas socias ══ -->
         <section class="carousel-section" style="margin-top:48px;">
             <div class="section-header">
                 <div class="section-title">Marcas <span>asociadas</span></div>
@@ -247,7 +521,7 @@
 
     </main>
 
-    <!-- Newsletter -->
+    <!-- ══ NEWSLETTER — formulario de suscripción por correo ══ -->
     <section class="newsletter-section">
         <div class="newsletter-inner">
             <div class="newsletter-title">No te pierdas nada 🔥</div>
@@ -259,7 +533,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ══ FOOTER — información de marca, enlaces y redes sociales ══ -->
     <footer class="footer-section">
         <div class="footer-content">
             <div class="footer-brand">
@@ -287,6 +561,7 @@
         </div>
     </footer>
 
+    <!-- ══ CARRITO / AUTH — panel lateral de autenticación (registro) ══ -->
     <!-- Carrito -->
             <div class="auth-form" id="tab-register">
                 <div class="auth-logo"><img src="../assets/logo.svg" alt="AsolStore"
@@ -303,6 +578,8 @@
             </div>
         </div>
     </div>
+
+    <!-- ══ SCRIPTS — carga de módulos JS en el orden correcto ══ -->
     <script src="../js/car-buy.js"></script>
     <script src="../js/app.js" defer></script>
     <script src="../js/features.js" defer></script>

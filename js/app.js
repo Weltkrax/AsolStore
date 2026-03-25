@@ -1,5 +1,11 @@
 /* app.js - AsolStore v2 */
 
+/**
+ * PRODUCTOS_DB — Base de datos local de todos los productos de la tienda.
+ * Se usa en toda la web: búsqueda en tiempo real, páginas de producto,
+ * categoría, historial y carrito.
+ * Cada clave es el slug único del producto.
+ */
 window.PRODUCTOS_DB = {
     "switch-joycon-neon": {
         categoria: "Gaming", categoriaSlug: "gaming", slug: "switch-joycon-neon",
@@ -157,76 +163,152 @@ window.PRODUCTOS_DB = {
 };
 
 /* ── Helpers ── */
+
+/**
+ * getSlugFromURL — Lee el parámetro "slug" de la URL actual.
+ * Se usa en la página de producto para saber qué producto mostrar.
+ * @returns {string|null} El slug del producto o null si no existe
+ */
 function getSlugFromURL() { return new URLSearchParams(window.location.search).get('slug'); }
+
+/**
+ * getCatFromURL — Lee el parámetro "cat" de la URL actual.
+ * Se usa en la página de categoría para filtrar los productos por categoría.
+ * @returns {string} La categoría activa o cadena vacía si no hay ninguna
+ */
 function getCatFromURL()  { return new URLSearchParams(window.location.search).get('cat') || ''; }
+
+/**
+ * inPages — Detecta si la página actual está dentro de la carpeta /pages/.
+ * Se usa para construir rutas relativas correctas (con o sin prefijo "../").
+ * @returns {boolean} true si la URL contiene "/pages/"
+ */
 function inPages()        { return window.location.pathname.includes('/pages/'); }
+
+/**
+ * productoURL — Construye la URL relativa hacia la página de un producto.
+ * Ajusta el prefijo de ruta según si estamos en /pages/ o en la raíz.
+ * @param {string} slug — Slug único del producto
+ * @returns {string} Ruta relativa a producto.html con el slug como parámetro
+ */
 function productoURL(slug){ return (inPages() ? '' : 'pages/') + 'producto.html?slug=' + slug; }
 
 /* ── Toast ── */
+
+/**
+ * showToast — Muestra un mensaje emergente (toast) en la parte inferior de la pantalla.
+ * Se usa en toda la web para avisos rápidos como "Añadido al carrito" o validaciones.
+ * Delega en showToastGlobal si está disponible (definido en features.js).
+ * @param {string} msg — Texto a mostrar en el toast
+ */
 function showToast(msg) {
+    // Si features.js ya definió showToastGlobal, lo usamos directamente
     if (typeof window.showToastGlobal === 'function') { window.showToastGlobal(msg); return; }
+    // Si no existe el elemento toast, se crea y se añade al body
     let t = document.getElementById('appToast');
     if (!t) { t = document.createElement('div'); t.id = 'appToast'; t.className = 'toast-notification'; document.body.appendChild(t); }
+    // Muestra el mensaje y lo oculta automáticamente tras 2,8 segundos
     t.textContent = msg; t.classList.add('show'); clearTimeout(t._tid);
     t._tid = setTimeout(() => t.classList.remove('show'), 2800);
 }
 window.showToast = showToast;
 
 /* ── Header ── */
+
+/**
+ * initHeader — Inicializa todos los comportamientos del encabezado de la web.
+ * Controla: menú lateral (hamburguesa), acordeones de categorías, dropdowns
+ * personalizados y la sombra dinámica del header al hacer scroll.
+ * Opera en el header visible en todas las páginas de la tienda.
+ */
 function initHeader() {
+    // Referencias a los elementos del menú lateral
     const toggle = document.getElementById('menu-toggle');
     const menu   = document.getElementById('side-menu');
     const ov     = document.getElementById('sideOverlay');
     const cl     = document.getElementById('sideClose');
+
+    // Función para abrir el menú lateral: activa clases y bloquea el scroll del body
     const open   = () => { menu?.classList.add('active'); ov?.classList.add('open'); toggle?.classList.add('open'); document.body.style.overflow = 'hidden'; };
+
+    // Función para cerrar el menú lateral: revierte las clases y restaura el scroll
     const close  = () => { menu?.classList.remove('active'); ov?.classList.remove('open'); toggle?.classList.remove('open'); document.body.style.overflow = ''; };
+
+    // Asigna eventos de apertura/cierre a los botones correspondientes
     toggle?.addEventListener('click', open);
     cl?.addEventListener('click', close);
     ov?.addEventListener('click', close);
 
+    // Acordeones de categorías en el menú lateral: solo uno abierto a la vez
     document.querySelectorAll('.cat-accordion').forEach(acc => {
         acc.querySelector('.cat-bar-link')?.addEventListener('click', () => {
             const isOpen = acc.classList.contains('open');
+            // Cierra todos los acordeones antes de abrir el pulsado
             document.querySelectorAll('.cat-accordion').forEach(a => a.classList.remove('open'));
             if (!isOpen) acc.classList.add('open');
         });
     });
+    // Cierra todos los acordeones al hacer clic fuera de ellos
     document.addEventListener('click', e => {
         if (!e.target.closest('.cat-accordion')) document.querySelectorAll('.cat-accordion').forEach(a => a.classList.remove('open'));
     });
 
+    // Dropdowns personalizados del header: solo uno abierto a la vez
     document.querySelectorAll('.custom-dropdown').forEach(dd => {
         dd.querySelector('.dropdown-label')?.addEventListener('click', e => {
             e.stopPropagation();
             const isOpen = dd.classList.contains('open');
+            // Cierra todos los dropdowns antes de abrir el pulsado
             document.querySelectorAll('.custom-dropdown').forEach(d => d.classList.remove('open'));
             if (!isOpen) dd.classList.add('open');
         });
     });
+    // Cierra todos los dropdowns al hacer clic en cualquier parte del documento
     document.addEventListener('click', () => document.querySelectorAll('.custom-dropdown').forEach(d => d.classList.remove('open')));
 
+    // Encoge el header al hacer scroll: oculta la barra roja superior y reduce el mid
     const hdr = document.getElementById('mainHeader');
     window.addEventListener('scroll', () => {
-        if (hdr) hdr.style.boxShadow = window.scrollY > 10 ? '0 4px 20px rgba(0,0,0,0.12)' : '0 2px 8px rgba(0,0,0,0.08)';
+        const y = window.scrollY;
+        if (hdr) {
+            hdr.style.boxShadow = y > 10 ? '0 4px 20px rgba(0,0,0,0.12)' : '0 2px 8px rgba(0,0,0,0.08)';
+            // Añade/quita la clase según si el usuario ha bajado más de 80px
+            hdr.classList.toggle('header--shrunk', y > 80);
+        }
     }, { passive: true });
 }
 
 /* ── Auth modal ── */
+
+/**
+ * initAuth — Inicializa el modal de autenticación (login / registro).
+ * Controla la apertura, cierre y cambio de pestañas (login / registro).
+ * El modal se activa al pulsar el botón de usuario en el header.
+ */
 function initAuth() {
     const modal  = document.getElementById('authModal');
     const cl     = document.getElementById('authClose');
     const btn    = document.getElementById('loginBtn');
+
+    // Función para mostrar el modal y bloquear el scroll del body
     const openA  = () => { if (modal) { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; } };
+
+    // Función para ocultar el modal y restaurar el scroll
     const closeA = () => { if (modal) { modal.style.display = 'none'; document.body.style.overflow = ''; } };
+
+    // Asigna eventos de apertura/cierre
     btn?.addEventListener('click', openA);
     cl?.addEventListener('click', closeA);
     modal?.addEventListener('click', e => { if (e.target === modal) closeA(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeA(); });
 
+    // Gestión de pestañas dentro del modal: "Iniciar sesión" / "Registrarse"
     document.querySelectorAll('.auth-tab').forEach(tab => {
         tab.addEventListener('click', () => {
+            // Desactiva todas las pestañas y formularios
             document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            // Activa la pestaña pulsada y su formulario correspondiente
             tab.classList.add('active');
             document.getElementById('tab-' + tab.dataset.tab)?.classList.add('active');
         });
@@ -234,11 +316,19 @@ function initAuth() {
 }
 
 /* ── Buscador en tiempo real ── */
+
+/**
+ * initBuscador — Inicializa el buscador de productos en el header.
+ * Muestra resultados en tiempo real mientras el usuario escribe,
+ * filtrando por título, marca o categoría. Visible en todas las páginas.
+ * Usa debounce de 250ms para evitar búsquedas excesivas.
+ */
 function initBuscador() {
     const input = document.querySelector('.header-search input');
     const form  = document.querySelector('.header-search');
     if (!input) return;
 
+    // Crea el contenedor flotante de resultados si no existe aún
     let box = document.getElementById('searchResultsOverlay');
     if (!box) {
         box = document.createElement('div');
@@ -250,15 +340,22 @@ function initBuscador() {
 
     let debounce;
     input.addEventListener('input', () => {
+        // Retrasa la búsqueda 250ms para no disparar en cada tecla
         clearTimeout(debounce);
         debounce = setTimeout(() => {
             const q     = input.value.trim().toLowerCase();
             const inner = document.getElementById('sroInner');
             if (!inner) return;
+
+            // Si el campo está vacío, oculta el panel de resultados
             if (!q) { box.classList.remove('open'); return; }
+
+            // Filtra productos por título, marca o categoría (máximo 6 resultados)
             const matches = Object.values(window.PRODUCTOS_DB || {}).filter(p =>
                 p.titulo.toLowerCase().includes(q) || p.marca.toLowerCase().includes(q) || p.categoria.toLowerCase().includes(q)
             ).slice(0, 6);
+
+            // Renderiza los resultados o un mensaje de "sin resultados"
             inner.innerHTML = matches.length
                 ? matches.map(p => `<div class="sro-item" onclick="location.href='${productoURL(p.slug)}'"><div class="sro-img bp-${p.categoriaSlug}-card"><img src="${p.imagen}" alt="${p.titulo}" style="width:100%;height:100%;object-fit:cover;border-radius:6px;"></div><div class="sro-info"><div class="sro-nombre">${p.titulo}</div><div class="sro-cat">${p.categoria} · ${p.marca}</div></div><div class="sro-precio">S/ ${p.precio}</div></div>`).join('')
                 : `<div class="sro-empty">Sin resultados para "<strong>${q}</strong>"</div>`;
@@ -266,52 +363,123 @@ function initBuscador() {
         }, 250);
     });
 
+    // Cierra el panel de resultados al hacer clic fuera del buscador
     document.addEventListener('click', e => {
         if (!e.target.closest('.header-search') && !e.target.closest('#searchResultsOverlay'))
             box.classList.remove('open');
     });
+
+    // Al enviar el formulario, dispara el evento de búsqueda sin recargar la página
     form?.addEventListener('submit', e => { e.preventDefault(); input.dispatchEvent(new Event('input')); });
+
+    // Cierra los resultados al pulsar Escape
     document.addEventListener('keydown', e => { if (e.key === 'Escape') box.classList.remove('open'); });
 }
 
 /* ── Hero ── */
+
+/**
+ * initHero — Inicializa el carrusel de diapositivas del hero (banner principal).
+ * Controla la navegación manual (flechas y puntos) y el avance automático
+ * cada 4 segundos. Visible en index.html y en páginas de categoría.
+ */
 function initHero() {
     const slides = document.querySelectorAll('.hero-slide');
     const dots   = document.querySelectorAll('.hero-dot');
     if (!slides.length) return;
     let cur = 0, timer;
+
+    // Navega a la diapositiva indicada actualizando clases activas
     const goTo = i => {
         slides[cur]?.classList.remove('active'); dots[cur]?.classList.remove('active');
         cur = (i + slides.length) % slides.length;
         slides[cur]?.classList.add('active'); dots[cur]?.classList.add('active');
     };
+
+    // Inicia el avance automático cada 4 segundos
     const startAuto = () => { timer = setInterval(() => goTo(cur + 1), 4000); };
+
+    // Reinicia el temporizador automático (se llama tras navegación manual)
     const resetAuto = () => { clearInterval(timer); startAuto(); };
     startAuto();
+
+    // Botones de navegación manual: anterior y siguiente
     document.getElementById('heroPrev')?.addEventListener('click', () => { goTo(cur - 1); resetAuto(); });
     document.getElementById('heroNext')?.addEventListener('click', () => { goTo(cur + 1); resetAuto(); });
+
+    // Puntos de navegación: cada uno salta directamente a su diapositiva
     dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); resetAuto(); }));
 }
 
 /* ── Slider genérico ── */
+
+/**
+ * initSlider — Inicializa un carrusel horizontal de tarjetas de producto.
+ * Soporta navegación por botones y gestos táctiles (swipe).
+ * Se reutiliza para el carrusel principal, el de ofertas, relacionados e historial.
+ * @param {string} trackId   — ID del elemento contenedor de las tarjetas
+ * @param {string} leftCls   — Clase CSS del botón para desplazarse a la izquierda
+ * @param {string} rightCls  — Clase CSS del botón para desplazarse a la derecha
+ */
 function initSlider(trackId, leftCls, rightCls) {
     const track = document.getElementById(trackId);
     if (!track) return;
     let pos = 0;
-    const cardW  = () => { const c = track.querySelector('.target-card'); return c ? c.offsetWidth + (parseFloat(window.getComputedStyle(track).gap) || 14) : 240; };
-    const maxPos = () => Math.max(0, track.querySelectorAll('.target-card').length - Math.floor(track.parentElement.offsetWidth / cardW()));
-    const slideTo = n => { pos = Math.max(0, Math.min(n, maxPos())); track.style.transform = `translateX(-${pos * cardW()}px)`; };
+
+    // Fuerza ancho fijo en las tarjetas para que siempre haya desbordamiento (N visibles)
+    const GAP = 14;
+    const VISIBLE = window.innerWidth < 768 ? 1 : window.innerWidth < 1100 ? 2 : 3;
+    const containerW = track.parentElement.offsetWidth;
+    const forcedW = Math.floor((containerW - GAP * (VISIBLE - 1)) / VISIBLE);
+    track.querySelectorAll('.target-card').forEach(c => {
+        c.style.minWidth = forcedW + 'px';
+        c.style.width    = forcedW + 'px';
+        c.style.flexShrink = '0';
+    });
+
+    // Calcula el ancho de una tarjeta más el gap entre tarjetas
+    const cardW  = () => { const c = track.querySelector('.target-card'); return c ? c.offsetWidth + (parseFloat(window.getComputedStyle(track).gap) || GAP) : forcedW + GAP; };
+
+    // Calcula el desplazamiento máximo real basado en el scrollWidth del track
+    // (evita sobrepasar el contenido y dejar espacio en blanco al final)
+    const maxTranslate = () => Math.max(0, track.scrollWidth - track.parentElement.offsetWidth);
+    const maxPos = () => Math.max(0, Math.ceil(maxTranslate() / cardW()));
+
+    // Mueve el track capeando el translateX al máximo real de contenido
+    const slideTo = n => {
+        pos = Math.max(0, Math.min(n, maxPos()));
+        track.style.transform = `translateX(-${Math.min(pos * cardW(), maxTranslate())}px)`;
+    };
+
+    // Asigna los botones de navegación izquierda/derecha
     document.querySelectorAll('.' + leftCls).forEach(b => b.addEventListener('click', () => slideTo(pos - 1)));
     document.querySelectorAll('.' + rightCls).forEach(b => b.addEventListener('click', () => slideTo(pos + 1)));
+
+    // Soporte para swipe táctil: registra posición inicial y calcula dirección al soltar
     let tx = 0;
     track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
     track.addEventListener('touchend', e => { const d = tx - e.changedTouches[0].clientX; if (Math.abs(d) > 50) slideTo(d > 0 ? pos + 1 : pos - 1); });
-    window.addEventListener('resize', () => slideTo(Math.min(pos, maxPos())), { passive: true });
+
+    // Recalcula anchos y posición al redimensionar la ventana
+    window.addEventListener('resize', () => {
+        const newVisible = window.innerWidth < 768 ? 1 : window.innerWidth < 1100 ? 2 : 3;
+        const newW = Math.floor((track.parentElement.offsetWidth - GAP * (newVisible - 1)) / newVisible);
+        track.querySelectorAll('.target-card').forEach(c => { c.style.minWidth = newW + 'px'; c.style.width = newW + 'px'; });
+        slideTo(Math.min(pos, maxPos()));
+    }, { passive: true });
 }
 
 /* ── Navegación tarjeta → producto ── */
+
+/**
+ * initCardNavigation — Permite navegar a la página de producto al hacer clic
+ * en cualquier parte de una tarjeta (.target-card) que tenga atributo data-slug.
+ * Excluye los clics sobre el botón de añadir al carrito para no interferir.
+ * Opera en todas las páginas que muestran tarjetas de producto.
+ */
 function initCardNavigation() {
     document.addEventListener('click', e => {
+        // Si el clic fue sobre el botón "Añadir", no navegamos
         if (e.target.closest('.target-card-btn')) return;
         const card = e.target.closest('.target-card[data-slug]');
         if (card) window.location.href = productoURL(card.dataset.slug);
@@ -319,25 +487,88 @@ function initCardNavigation() {
 }
 
 /* ── Timer de ofertas ── */
+
+/**
+ * initTimer — Inicializa el contador regresivo de la sección de ofertas.
+ * Empieza en 15 horas y cuenta hacia atrás segundo a segundo.
+ * Visible en la sección "Ofertas del día" del inicio (index.html).
+ */
 function initTimer() {
     const el = document.getElementById('offers-timer');
     if (!el) return;
     let t = 15 * 3600;
     setInterval(() => {
         if (t <= 0) return; t--;
+        // Formatea el tiempo como HH:MM:SS y lo muestra en el elemento
         el.textContent = [Math.floor(t / 3600), Math.floor((t % 3600) / 60), t % 60].map(n => String(n).padStart(2, '0')).join(':');
     }, 1000);
 }
 
+/* ── E) Skeleton loaders ── */
+
+/**
+ * showGridSkeleton — Inserta `n` tarjetas skeleton en el grid indicado.
+ * Las tarjetas reales se ocultan temporalmente para dejar espacio a los placeholders.
+ * @param {HTMLElement} grid — contenedor del grid de productos
+ * @param {number} n — número de tarjetas skeleton a mostrar
+ */
+function showGridSkeleton(grid, n) {
+    // Oculta temporalmente las tarjetas reales
+    grid.querySelectorAll('.target-card').forEach(c => c.style.visibility = 'hidden');
+    // Genera e inserta los placeholders skeleton
+    const skels = Array.from({ length: n }, () => {
+        const s = document.createElement('div');
+        s.className = 'skeleton-card';
+        s.innerHTML = '<div class="skel-img"></div><div class="skel-line skel-title"></div><div class="skel-line skel-price"></div><div class="skel-btn"></div>';
+        return s;
+    });
+    grid.append(...skels);
+}
+
+/**
+ * removeGridSkeleton — Elimina los skeleton cards del grid y vuelve a mostrar
+ * las tarjetas reales con una animación de fade-in.
+ * @param {HTMLElement} grid — contenedor del grid de productos
+ */
+function removeGridSkeleton(grid) {
+    grid.querySelectorAll('.skeleton-card').forEach(s => s.remove());
+    grid.querySelectorAll('.target-card').forEach(c => {
+        c.style.visibility = '';
+        c.style.animation = 'cardReveal .35s ease both';
+    });
+}
+
 /* ── Reveal al scroll ── */
+
+/**
+ * initReveal — Añade animaciones de entrada a secciones cuando entran en pantalla.
+ * Usa IntersectionObserver para detectar la visibilidad y aplicar la clase "visible".
+ * Opera en todas las secciones principales de index.html y páginas interiores.
+ */
 function initReveal() {
     const ro = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+        entries.forEach(e => {
+            if (!e.isIntersecting) return;
+            e.target.classList.add('visible');
+            // D) Stagger: aplica delay escalonado a las tarjetas hijas al revelar la sección
+            e.target.querySelectorAll('.target-card').forEach((card, i) => {
+                card.style.animationDelay = `${i * 70}ms`;
+                card.classList.add('card-stagger');
+            });
+            ro.unobserve(e.target);
+        });
     }, { threshold: 0.08 });
+    // Observa todas las secciones susceptibles de animarse al hacer scroll
     document.querySelectorAll('.bento-section,.carousel-section,.banner-strip,.offers-redesign,.visitanos-span,.newsletter-section,.related-section,.asolstore-section,.category-grid,.cat-page-section').forEach(el => { el.classList.add('reveal'); ro.observe(el); });
 }
 
 /* ── Typewriter ── */
+
+/**
+ * initTypewriter — Anima el efecto de escritura/borrado de texto en el hero.
+ * Muestra secuencialmente varias frases escribiéndolas y borrándolas letra a letra.
+ * Visible en el subtítulo del banner principal de index.html.
+ */
 function initTypewriter() {
     const el = document.getElementById('typewriterPhrase');
     if (!el) return;
@@ -345,36 +576,73 @@ function initTypewriter() {
     let pi = 0, ci = 0, del = false;
     const tick = () => {
         const cur = phrases[pi];
-        if (!del) { el.textContent = cur.slice(0, ++ci); if (ci === cur.length) { del = true; setTimeout(tick, 2200); return; } }
-        else      { el.textContent = cur.slice(0, --ci); if (ci === 0) { del = false; pi = (pi + 1) % phrases.length; setTimeout(tick, 400); return; } }
+        if (!del) {
+            // Modo escritura: añade un carácter y pausa al completar la frase
+            el.textContent = cur.slice(0, ++ci);
+            if (ci === cur.length) { del = true; setTimeout(tick, 2200); return; }
+        } else {
+            // Modo borrado: quita un carácter y avanza a la siguiente frase al terminar
+            el.textContent = cur.slice(0, --ci);
+            if (ci === 0) { del = false; pi = (pi + 1) % phrases.length; setTimeout(tick, 400); return; }
+        }
+        // Velocidad de borrado (22ms) y escritura (45ms) para efecto natural
         setTimeout(tick, del ? 22 : 45);
     };
     setTimeout(tick, 600);
 }
 
 /* ── Historial ── */
+
+/**
+ * registrarVisita — Guarda el slug de un producto visitado en el historial local.
+ * Mantiene un máximo de 8 entradas, eliminando duplicados y colocando
+ * el más reciente al principio. Se usa en la página de producto al cargarla.
+ * @param {string} slug — Slug del producto visitado
+ */
 window.registrarVisita = slug => { let h = JSON.parse(localStorage.getItem('as_historial') || '[]'); h = [slug, ...h.filter(s => s !== slug)].slice(0, 8); localStorage.setItem('as_historial', JSON.stringify(h)); };
+
+/**
+ * getHistorial — Recupera el array de slugs del historial guardado en localStorage.
+ * Se usa para renderizar el carrusel "Vistos recientemente" en la página de producto.
+ * @returns {string[]} Array de slugs de productos visitados
+ */
 window.getHistorial    = ()   => JSON.parse(localStorage.getItem('as_historial') || '[]');
+
+/**
+ * limpiarHistorial — Elimina todo el historial de productos vistos del almacenamiento local.
+ * @returns {void}
+ */
 window.limpiarHistorial = ()  => localStorage.removeItem('as_historial');
 
 /* ── Página de Producto ── */
+
+/**
+ * initProductoPage — Inicializa la página de detalle de producto (producto.html).
+ * Carga los datos del producto desde PRODUCTOS_DB según el slug de la URL,
+ * y rellena dinámicamente: título, precio, galería, variantes, specs, reseñas y tabs.
+ * También gestiona la cantidad, el botón "Añadir al carrito" y el slider de relacionados.
+ */
 function initProductoPage() {
     if (!document.querySelector('.product-page')) return;
     const slug = getSlugFromURL();
     const p    = window.PRODUCTOS_DB[slug];
 
     if (p) {
+        // Registra la visita en el historial local
         window.registrarVisita(slug);
         document.title = p.titulo + ' | AsolStore';
 
+        // Atajo para rellenar elementos por ID con texto
         const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
         set('productCategory', p.categoria); set('productTitle', p.titulo);
         set('productPrice', 'S/ ' + p.precio.toFixed(2)); set('productDesc', p.descripcion);
         set('productBadge', p.badge || ''); set('bc-product', p.titulo);
 
+        // Carga la imagen principal de la galería
         const gImg = document.getElementById('galleryEmoji');
         if (gImg?.tagName === 'IMG') { gImg.src = p.imagen; gImg.alt = p.titulo; }
 
+        // Rellena precio anterior, badge de ahorro, categoría y rating
         const oldEl = document.querySelector('.product-price-old');         if (oldEl) oldEl.textContent = 'S/ ' + p.precioOld.toFixed(2);
         const discEl = document.querySelector('.product-discount-badge');   if (discEl) discEl.textContent = 'Ahorras S/ ' + p.ahorras;
         const catTag = document.querySelector('.product-category-tag');     if (catTag) catTag.textContent = p.categoria;
@@ -382,15 +650,19 @@ function initProductoPage() {
         const ratingEl = document.querySelector('.product-rating .rating-count'); if (ratingEl) ratingEl.textContent = `${p.rating} (${p.ratingCount} reseñas)`;
         const stockEl = document.querySelector('.stock-info');              if (stockEl) stockEl.textContent = `✓ En stock (${p.stock} unidades)`;
 
+        // Genera los botones de variantes (tallas, colores, capacidades, etc.)
         const varDiv = document.querySelector('.variant-options');
         if (varDiv) varDiv.innerHTML = p.variantes.map((v, i) => `<button class="variant-btn${i === 0 ? ' active' : ''}">${v}</button>`).join('');
 
+        // Genera los thumbnails de la galería de imágenes
         const thumbsEl = document.getElementById('galleryThumbs');
         if (thumbsEl && p.galeria?.length) thumbsEl.innerHTML = p.galeria.map((src, i) => `<div class="gallery-thumb ${i === 0 ? 'active' : ''} gp-${p.categoriaSlug}"><img src="${src}" alt="${p.titulo}" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"></div>`).join('');
 
+        // Rellena la tabla de especificaciones técnicas
         const specsTable = document.querySelector('#tab-specs table.specs-table');
         if (specsTable && p.specs?.length) specsTable.innerHTML = p.specs.map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('');
 
+        // Renderiza las reseñas de usuarios con estrellas
         const rl = document.querySelector('.review-list');
         if (rl && p.resenas?.length) {
             rl.innerHTML = p.resenas.map(r => `<div class="review-item"><div class="review-header"><strong>${r.nombre}</strong><span class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</span></div><p>${r.texto}</p></div>`).join('');
@@ -398,13 +670,14 @@ function initProductoPage() {
             if (tabR) tabR.textContent = `Reseñas (${p.resenas.length})`;
         }
 
+        // Botón "Añadir al carrito": añade tantas unidades como indique el selector de cantidad
         document.getElementById('btnAddCart')?.addEventListener('click', () => {
             const qty = parseInt(document.getElementById('pqtyVal')?.textContent || '1');
             for (let i = 0; i < qty; i++) window.addToCart(p.titulo, p.precio, p.imagen, '📦');
         });
     }
 
-    /* Galería thumbnails */
+    // Galería thumbnails: al hacer clic en un thumb, actualiza la imagen principal con transición
     document.addEventListener('click', e => {
         const thumb = e.target.closest('.gallery-thumb'); if (!thumb) return;
         document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
@@ -412,26 +685,28 @@ function initProductoPage() {
         const img = thumb.querySelector('img');
         const main = document.getElementById('galleryEmoji');
         if (img && main?.tagName === 'IMG') {
+            // Aplica efecto fade-out, cambia src y hace fade-in
             main.style.opacity = '0'; main.style.transform = 'scale(0.93)';
             setTimeout(() => { main.src = img.src; main.style.opacity = '1'; main.style.transform = 'scale(1)'; }, 160);
         }
     });
 
+    // Prepara la imagen principal para transiciones suaves
     const gE = document.getElementById('galleryEmoji');
     if (gE) gE.style.transition = 'opacity 0.16s ease, transform 0.16s ease';
 
-    /* Variantes */
+    // Variantes: solo una puede estar activa a la vez
     document.querySelectorAll('.variant-btn').forEach(btn => {
         btn.addEventListener('click', () => { btn.closest('.variant-options')?.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); });
     });
 
-    /* Cantidad */
+    // Selector de cantidad: incrementa o decrementa entre 1 y 99
     let qty = 1;
     const pqtyVal = document.getElementById('pqtyVal');
     document.getElementById('pqtyPlus')?.addEventListener('click',  () => { qty = Math.min(qty + 1, 99); if (pqtyVal) pqtyVal.textContent = qty; });
     document.getElementById('pqtyMinus')?.addEventListener('click', () => { qty = Math.max(qty - 1, 1);  if (pqtyVal) pqtyVal.textContent = qty; });
 
-    /* Tabs */
+    // Tabs de producto (Descripción / Specs / Reseñas): muestra el panel correspondiente
     document.querySelectorAll('.prod-tab').forEach(tab => {
         tab.addEventListener('click', () => {
             document.querySelectorAll('.prod-tab').forEach(t => t.classList.remove('active'));
@@ -441,64 +716,100 @@ function initProductoPage() {
         });
     });
 
+    // Inicializa el slider de productos relacionados y el carrusel del historial
     initSlider('relatedTrack', 'carouselLeftRelated', 'carouselRightRelated');
     renderHistorial();
 }
 
+/**
+ * renderHistorial — Renderiza el carrusel "Vistos recientemente" en la página de producto.
+ * Lee el historial del localStorage y genera tarjetas de producto para cada slug válido.
+ * Oculta la sección si no hay historial disponible.
+ */
 function renderHistorial() {
     const container = document.getElementById('historialTrack'); if (!container) return;
+
+    // Filtra slugs que existan en la base de datos
     const hist = window.getHistorial().filter(s => window.PRODUCTOS_DB[s]);
     if (!hist.length) { document.querySelector('.historial-section')?.classList.add('hidden'); return; }
     document.querySelector('.historial-section')?.classList.remove('hidden');
+
+    // Genera el HTML de cada tarjeta del historial
     container.innerHTML = hist.map(slug => {
         const p = window.PRODUCTOS_DB[slug];
         return `<div class="target-card" data-slug="${p.slug}" style="cursor:pointer;min-width:200px;flex-shrink:0;"><div class="target-card-img-wrap bp-${p.categoriaSlug}-card"><img src="${p.imagen}" alt="${p.titulo}" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"></div><div class="target-card-content"><div class="target-card-brand">${p.marca}</div><h3 class="target-card-title">${p.titulo}</h3><div class="target-card-footer"><span class="target-card-price">S/ ${p.precio}</span><button class="target-card-btn">Añadir</button></div></div></div>`;
     }).join('');
+
+    // Inicializa el slider horizontal del historial
     initSlider('historialTrack', 'histLeftBtn', 'histRightBtn');
 }
 
 /* ── Categoría ── */
+
+/**
+ * initCategoriaPage — Inicializa la página de listado de categoría (categoria.html).
+ * Lee la categoría activa de la URL, actualiza los textos de cabecera,
+ * y configura los filtros de chips y el selector de ordenación.
+ */
 function initCategoriaPage() {
     const grid = document.getElementById('categoryGrid'); if (!grid) return;
     const cat   = getCatFromURL();
+
+    // Mapas de etiquetas y títulos descriptivos por categoría
     const labels = { gaming: 'Gaming', arte: 'Arte', ropa: 'Ropa', accesorios: 'Accesorios' };
     const titles = { gaming: 'Consolas & Accesorios', arte: 'Posters & Figuras', ropa: 'Hoodies & Ropa', accesorios: 'Tecnología & Más' };
     const label  = labels[cat] || 'Categoría';
     const el = id => document.getElementById(id);
+
+    // Actualiza los elementos de texto de la cabecera de la página
     if (el('catName'))  el('catName').textContent  = label;
     if (el('catTitle')) el('catTitle').textContent = titles[cat] || 'Todos los productos';
     if (el('catTag'))   el('catTag').textContent   = label.toUpperCase();
     document.title = label + ' | AsolStore';
 
+    // Marca todas las tarjetas como visibles inicialmente
     const cards   = Array.from(grid.querySelectorAll('.target-card'));
     cards.forEach(card => { card.dataset.filteredOut = 'false'; });
     const countEl = el('catCount');
     if (countEl) countEl.textContent = cards.length + ' productos';
 
+    // Filtros de chips (Todos / Ofertas / Nuevo / En stock)
     document.querySelectorAll('.filter-chip').forEach(chip => {
         chip.addEventListener('click', () => {
+            // Desactiva todos los chips y activa el pulsado
             document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
             chip.classList.add('active');
             const filter = chip.dataset.filter;
             let visible = 0;
-            cards.forEach(card => {
-                let show = true;
-                if (filter === 'oferta') show = !!card.querySelector('.badge-oferta');
-                if (filter === 'nuevo')  show = !!card.querySelector('.badge-nuevo');
-                if (filter === 'stock')  show = card.dataset.stock !== 'false';
-                card.dataset.filteredOut = show ? 'false' : 'true';
-                card.style.display = show ? '' : 'none';
-                if (show) visible++;
-            });
-            if (countEl) countEl.textContent = visible + ' producto' + (visible !== 1 ? 's' : '');
-            window._renderPage?.(1);
+
+            // E) Skeleton: muestra placeholders mientras se aplica el filtro
+            showGridSkeleton(grid, 6);
+            setTimeout(() => {
+                // Aplica el filtro seleccionado a cada tarjeta
+                cards.forEach(card => {
+                    let show = true;
+                    if (filter === 'oferta') show = !!card.querySelector('.badge-oferta');
+                    if (filter === 'nuevo')  show = !!card.querySelector('.badge-nuevo');
+                    if (filter === 'stock')  show = card.dataset.stock !== 'false';
+                    card.dataset.filteredOut = show ? 'false' : 'true';
+                    card.style.display = show ? '' : 'none';
+                    if (show) visible++;
+                });
+                removeGridSkeleton(grid);
+                // Actualiza el contador de productos visibles
+                if (countEl) countEl.textContent = visible + ' producto' + (visible !== 1 ? 's' : '');
+                // Vuelve a la primera página de paginación tras filtrar
+                window._renderPage?.(1);
+            }, 280);
         });
     });
 
+    // Selector de ordenación: por precio ascendente, descendente o nombre
     document.getElementById('sortSelect')?.addEventListener('change', function () {
         const val    = this.value;
         const sorted = [...cards].filter(c => c.style.display !== 'none');
         sorted.sort((a, b) => {
+            // Extrae precios y nombres de las tarjetas para compararlos
             const pa = parseFloat(a.querySelector('.target-card-price')?.textContent?.replace(/[^0-9.]/g, '') || 0);
             const pb = parseFloat(b.querySelector('.target-card-price')?.textContent?.replace(/[^0-9.]/g, '') || 0);
             const na = a.querySelector('.target-card-title')?.textContent || '';
@@ -508,6 +819,7 @@ function initCategoriaPage() {
             if (val === 'name')       return na.localeCompare(nb);
             return 0;
         });
+        // Reordena los nodos del DOM según el criterio seleccionado
         sorted.forEach(card => grid.appendChild(card));
     });
 
@@ -515,6 +827,12 @@ function initCategoriaPage() {
 }
 
 /* ── Checkout ── */
+
+/**
+ * syncResumen — Sincroniza el resumen lateral del carrito en la página de checkout.
+ * Actualiza la lista de ítems, subtotal y total (sumando el coste de envío).
+ * Se llama al cargar el checkout y cada vez que cambia el envío seleccionado.
+ */
 function syncResumen() {
     const items   = window.cartItems || [];
     const summary = document.getElementById('summaryItems');
@@ -522,12 +840,14 @@ function syncResumen() {
     const shipEl  = document.getElementById('summaryShipping');
     if (!summary) return;
 
+    // Si el carrito está vacío, muestra un mensaje con enlace a la tienda
     if (!items.length) {
         summary.innerHTML = '<div style="color:#999;font-size:13px;padding:16px 0;text-align:center;">El carrito está vacío.<br><a href="../index.html" style="color:#FF0D2A;font-weight:700;">← Ver productos</a></div>';
         if (totalEl) totalEl.textContent = 'S/ 0.00';
         return;
     }
 
+    // Renderiza cada ítem del carrito con imagen, nombre, cantidad y precio
     summary.innerHTML = items.map(item => {
         const imgHTML = item.img
             ? `<img src="${item.img}" alt="${item.title}" style="width:100%;height:100%;object-fit:cover;">`
@@ -535,88 +855,133 @@ function syncResumen() {
         return `<div class="summary-item"><div class="si-img" style="overflow:hidden;border-radius:8px;">${imgHTML}</div><div class="si-info"><span class="si-name">${item.title}</span><span class="si-qty">×${item.qty}</span></div><span class="si-price">S/ ${(item.price * item.qty).toFixed(2)}</span></div>`;
     }).join('');
 
+    // Calcula el subtotal y suma el coste de envío para obtener el total
     const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
-    const shipText = shipEl?.textContent || 'S/ 12.00';
-    const shipCost = shipText === 'Gratis' ? 0 : parseFloat(shipText.replace(/[^0-9.]/g, '') || 12);
+    const shipText = shipEl?.textContent || 'S/ 10.00';
+    const shipCost = parseFloat(shipText.replace(/[^0-9.]/g, '') || 10);
     if (totalEl) totalEl.textContent = 'S/ ' + (subtotal + shipCost).toFixed(2);
 
+    // Actualiza el subtotal mostrado en las líneas del resumen
     const subLines = document.querySelectorAll('.summary-line');
     if (subLines[0]) { const sp = subLines[0].querySelectorAll('span'); if (sp[1]) sp[1].textContent = 'S/ ' + subtotal.toFixed(2); }
 }
 
+/**
+ * initCheckout — Inicializa toda la lógica del flujo de checkout (checkout.html).
+ * Gestiona: opciones de envío, validación de formulario en paso 1,
+ * confirmación del pedido en paso 2, selección de método de pago
+ * y formato automático de número de tarjeta y fecha de expiración.
+ */
 function initCheckout() {
     if (!document.querySelector('.checkout-layout')) return;
     syncResumen();
 
-    document.querySelectorAll('.shipping-opt input').forEach(radio => {
-        radio.addEventListener('change', () => {
-            document.querySelectorAll('.shipping-opt').forEach(o => o.classList.remove('active'));
-            radio.closest('.shipping-opt').classList.add('active');
-            const shipEl = document.getElementById('summaryShipping');
-            const prices = { '24h': 'S/ 12.00', '48h': 'S/ 7.00', 'free': 'Gratis' };
-            if (shipEl) shipEl.textContent = prices[radio.value] || 'S/ 12.00';
-            syncResumen();
-        });
-    });
+    // Delivery coordinado — fecha mínima: mañana
+    const fechaInput = document.getElementById('cfFecha');
+    if (fechaInput) {
+        const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
+        fechaInput.min = tomorrow.toISOString().split('T')[0];
+    }
 
+    // Botón "Continuar al pago": valida los campos del paso 1 antes de avanzar
     document.getElementById('goStep2')?.addEventListener('click', e => {
         e.preventDefault();
         const campos = ['cfNombre','cfApellido','cfEmail','cfTel','cfDir','cfDistrito'];
         let ok = true;
+
+        // Marca en rojo los campos vacíos y los limpia al corregirlos
         campos.forEach(id => {
             const el = document.getElementById(id);
             if (!el?.value.trim()) { ok = false; el.style.borderColor = '#FF0D2A'; el.style.boxShadow = '0 0 0 3px rgba(255,13,42,0.12)'; el.addEventListener('input', () => { el.style.borderColor = ''; el.style.boxShadow = ''; }, { once: true }); }
         });
+
+        // Valida el formato del email antes de avanzar
         const email = document.getElementById('cfEmail')?.value;
         if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast('Ingresa un email válido'); return; }
         if (!ok) { showToast('Completa todos los campos obligatorios'); return; }
         cambiarPaso(1);
     });
 
+    // Botón "Volver" en el paso 2: regresa al paso 1 (datos personales)
     document.getElementById('backStep1')?.addEventListener('click', () => cambiarPaso(0));
 
+    // Botón "Confirmar pedido": genera un número de pedido aleatorio y vacía el carrito
     document.getElementById('goStep3')?.addEventListener('click', () => {
         if (!(window.cartItems || []).length) { showToast('Tu carrito está vacío'); return; }
+        // Genera un número de pedido único en formato AS-2026-XXXX
         const num   = 'AS-2026-' + String(Math.floor(Math.random() * 9000) + 1000);
         const numEl = document.getElementById('orderNum');
         if (numEl) numEl.textContent = num;
+        // Vacía el carrito y actualiza el renderizado
         window.cartItems = [];
         window.renderCart?.();
         cambiarPaso(2);
+        // F) Confetti al llegar al paso de confirmación
+        launchConfetti();
     });
 
+    /**
+     * cambiarPaso — Muestra el panel del paso indicado y oculta los demás.
+     * También actualiza los indicadores de progreso del stepper visual.
+     * @param {number} idx — Índice del paso (0=Datos, 1=Pago, 2=Confirmación)
+     */
     function cambiarPaso(idx) {
+        // Activa solo el panel correspondiente al paso indicado
         ['panel1','panel2','panel3'].forEach((id, i) => document.getElementById(id)?.classList.toggle('active', i === idx));
+        // Marca como activos todos los pasos hasta el actual en el stepper
         ['cstep1','cstep2','cstep3'].forEach((id, i) => document.getElementById(id)?.classList.toggle('active', i <= idx));
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // Métodos de pago: muestra el formulario del método seleccionado
     document.querySelectorAll('.payment-method').forEach(btn => {
         btn.addEventListener('click', () => {
+            // Desactiva todos los métodos y oculta todos los formularios
             document.querySelectorAll('.payment-method').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.checkout-payment-form').forEach(f => f.classList.add('hidden'));
+            // Activa el método pulsado y muestra su formulario
             btn.classList.add('active');
             document.getElementById('cpf-' + btn.dataset.method)?.classList.remove('hidden');
         });
     });
 
+    // Formato automático del número de tarjeta: grupos de 4 dígitos separados por espacios
     document.getElementById('coCardNum')?.addEventListener('input', function () { this.value = this.value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim().slice(0, 19); });
+
+    // Formato automático de la fecha de expiración: MM/AA
     document.getElementById('coCardExp')?.addEventListener('input', function () { let v = this.value.replace(/\D/g, ''); if (v.length >= 2) v = v.slice(0, 2) + '/' + v.slice(2, 4); this.value = v; });
 }
 
 /* ── Persistencia del carrito ── */
+
+// Clave utilizada para almacenar el carrito en localStorage
 const CART_KEY = 'as_cart';
 
+/**
+ * saveCart — Guarda el estado actual del carrito en localStorage.
+ * Se llama automáticamente cada vez que se añade un producto al carrito.
+ */
 window.saveCart = () => { try { localStorage.setItem(CART_KEY, JSON.stringify(window.cartItems || [])); } catch (_) {} };
 
+/**
+ * initCartPersistence — Envuelve la función addToCart para añadir
+ * guardado automático y animación del badge del carrito.
+ * Restaura el carrito guardado desde localStorage al iniciar la página.
+ */
 function initCartPersistence() {
+    // Guarda referencia a la función original de añadir al carrito
     const _origAdd = window.addToCart;
+
+    // Sobreescribe addToCart para guardar en localStorage y animar el badge tras cada adición
     window.addToCart = (title, price, img, emoji) => {
         _origAdd?.(title, price, img, emoji);
         window.saveCart();
+        // Dispara la animación de rebote en el badge del carrito
         const badge = document.getElementById('cart-badge');
         if (badge) { badge.classList.remove('badge-bounce'); void badge.offsetWidth; badge.classList.add('badge-bounce'); setTimeout(() => badge.classList.remove('badge-bounce'), 500); }
     };
+
+    // Restaura el carrito desde localStorage si había ítems guardados de sesiones anteriores
     try {
         const saved = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
         if (saved.length) { window.cartItems = saved; setTimeout(() => window.renderCart?.(), 150); }
@@ -624,51 +989,162 @@ function initCartPersistence() {
 }
 
 /* ── Paginación ── */
+
+/**
+ * initPaginacion — Inicializa la paginación del grid de productos en la página de categoría.
+ * Muestra 9 productos por página y genera botones de navegación dinámicamente.
+ * Respeta los filtros activos: solo pagina los productos visibles.
+ */
 function initPaginacion() {
     const grid       = document.getElementById('categoryGrid');
     const pagination = document.querySelector('.pagination');
     if (!grid || !pagination) return;
 
+    // Número de productos que se muestran por página
     const ITEMS_PER_PAGE = 9;
 
+    // Devuelve solo las tarjetas que no han sido ocultadas por los filtros
     const getVisibleCards = () => Array.from(grid.querySelectorAll('.target-card')).filter(c => c.dataset.filteredOut !== 'true');
 
+    /**
+     * renderPage — Muestra los productos correspondientes a la página indicada
+     * y actualiza los botones de paginación.
+     * @param {number} page — Número de página a mostrar (empieza en 1)
+     */
     function renderPage(page) {
         const visible    = getVisibleCards();
         const totalPages = Math.max(1, Math.ceil(visible.length / ITEMS_PER_PAGE));
+
+        // Corrige la página si supera el total disponible
         page = Math.min(page, totalPages);
         const start = (page - 1) * ITEMS_PER_PAGE;
         const end   = start + ITEMS_PER_PAGE;
 
+        // Muestra u oculta cada tarjeta según el rango de la página actual
         Array.from(grid.querySelectorAll('.target-card')).forEach(card => {
             const idx = visible.indexOf(card);
             card.style.display = card.dataset.filteredOut === 'true' ? 'none' : (idx >= start && idx < end ? '' : 'none');
         });
 
         updatePaginationBtns(page, totalPages);
+        // Hace scroll suave hasta el inicio del grid al cambiar de página
         window.scrollTo({ top: grid.offsetTop - 120, behavior: 'smooth' });
     }
 
+    /**
+     * updatePaginationBtns — Genera y actualiza los botones del paginador.
+     * Oculta el paginador si solo hay una página.
+     * @param {number} current — Página actualmente mostrada
+     * @param {number} total   — Total de páginas disponibles
+     */
     function updatePaginationBtns(current, total) {
         if (total <= 1) { pagination.style.display = 'none'; return; }
         pagination.style.display = 'flex';
+
+        // Genera un botón por cada página más el botón "siguiente"
         let btns = '';
         for (let i = 1; i <= total; i++) btns += `<button class="page-btn${i === current ? ' active' : ''}" data-page="${i}">${i}</button>`;
         btns += `<button class="page-btn" data-page="${Math.min(current + 1, total)}">›</button>`;
         pagination.innerHTML = btns;
+
+        // Asigna el evento de clic a cada botón de página
         pagination.querySelectorAll('.page-btn[data-page]').forEach(btn => {
             btn.addEventListener('click', () => renderPage(parseInt(btn.dataset.page)));
         });
     }
 
+    // Expone renderPage globalmente para que los filtros puedan volver a la página 1
     window._renderPage = renderPage;
     renderPage(1);
 }
 
+/* ── F) Confetti ── */
+
+/**
+ * launchConfetti — Lanza una lluvia de confetti sobre la pantalla usando un <canvas>
+ * temporal. Se autodestruye al terminar la animación (~3.5 segundos).
+ * Opera en: checkout.html al llegar al paso de confirmación (paso 3).
+ */
+function launchConfetti() {
+    const canvas = document.createElement('canvas');
+    canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;pointer-events:none;';
+    document.body.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const COLORS = ['#FF0D2A','#FFD700','#00C9A7','#4F8EF7','#FF6B6B','#A78BFA'];
+    const pieces = Array.from({ length: 120 }, () => ({
+        x:     Math.random() * canvas.width,
+        y:     Math.random() * -canvas.height,
+        w:     6 + Math.random() * 8,
+        h:     10 + Math.random() * 6,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        rot:   Math.random() * Math.PI * 2,
+        vx:    (Math.random() - 0.5) * 3,
+        vy:    2.5 + Math.random() * 3.5,
+        vr:    (Math.random() - 0.5) * 0.18,
+    }));
+
+    let start = null;
+    const DURATION = 3500;
+
+    function frame(ts) {
+        if (!start) start = ts;
+        const elapsed = ts - start;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        pieces.forEach(p => {
+            p.x  += p.vx;
+            p.y  += p.vy;
+            p.rot += p.vr;
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rot);
+            ctx.globalAlpha = Math.max(0, 1 - elapsed / DURATION);
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+            ctx.restore();
+            // Reinicia la partícula al salir por abajo
+            if (p.y > canvas.height + 20) { p.y = -20; p.x = Math.random() * canvas.width; }
+        });
+
+        if (elapsed < DURATION) requestAnimationFrame(frame);
+        else canvas.remove();
+    }
+    requestAnimationFrame(frame);
+}
+
+/* ── B) Back to top ── */
+
+/**
+ * initBackToTop — Crea e inyecta el botón "volver arriba" en el DOM.
+ * Aparece con animación cuando el usuario baja más de 400px y al hacer
+ * clic hace scroll suave hasta el inicio de la página.
+ * Opera en todas las páginas de la tienda.
+ */
+function initBackToTop() {
+    const btn = document.createElement('button');
+    btn.id = 'backToTop';
+    btn.setAttribute('aria-label', 'Volver arriba');
+    btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>';
+    document.body.appendChild(btn);
+
+    // Muestra u oculta el botón según la posición del scroll
+    window.addEventListener('scroll', () => {
+        btn.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+
+    // Scroll suave al inicio al hacer clic
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+
 /* ════════════════════════════════════════════════════════════════
-   INIT
+   INIT — Punto de entrada principal: ejecuta todas las funciones
+   de inicialización al estar el DOM completamente cargado.
 ════════════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
+    // Inicialización de componentes globales presentes en todas las páginas
     initHeader();
     initAuth();
     initHero();
@@ -678,20 +1154,24 @@ document.addEventListener('DOMContentLoaded', () => {
     initBuscador();
     initCardNavigation();
     initCartPersistence();
+    initBackToTop();
 
+    // Inicializa los dos sliders de carruseles del inicio
     initSlider('mainTrack',   'carouselLeft',       'carouselRight');
     initSlider('offersTrack', 'offersCarouselLeft',  'offersCarouselRight');
 
+    // Inicialización condicional según la página activa
     initProductoPage();
     initCategoriaPage();
     initCheckout();
 
+    // En checkout, sincroniza el resumen con un pequeño retraso para asegurar que el carrito esté cargado
     if (document.querySelector('.checkout-layout')) {
         setTimeout(syncResumen, 150);
     }
 
     if (document.querySelector('.category-page')) {
-        /* Hero dinámico según categoría URL */
+        // Activa el slide del hero que corresponde a la categoría mostrada en la URL
         const cat    = getCatFromURL();
         const bgMap  = { gaming: 'gaming', arte: 'arte', ropa: 'ropa', accesorios: 'ofertas' };
         const target = bgMap[cat];
@@ -700,6 +1180,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const dots   = document.querySelectorAll('.hero-dot');
             slides.forEach(s => s.classList.remove('active'));
             dots.forEach(d => d.classList.remove('active'));
+            // Encuentra y activa el slide cuyo data-bg coincide con la categoría
             slides.forEach((s, i) => { if (s.dataset.bg === target) { s.classList.add('active'); dots[i]?.classList.add('active'); } });
         }
         initPaginacion();
