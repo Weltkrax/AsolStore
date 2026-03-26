@@ -591,11 +591,12 @@
     to   { transform: translateX(-50%); }
 }
 
-/* ── Responsive tablet ── */
+/* ── Responsive tablet (900px) ── */
 @media (max-width: 900px) {
     .as-hero-deco { display: none; }
     .as-hero-body { padding: 24px 24px 10px; }
     .as-city      { height: 100px; }
+    .category-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ── Responsive mobile (iPhone 13 ≤ 430px) ── */
@@ -653,23 +654,22 @@
     padding: 0 24px;
 }
 
-/* ── @media max-width: 900px — Category grid responsive: pasa a 2 columnas en tablet ── */
-@media (max-width: 900px) {
-    .category-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
 
-/* ── @media max-width: 560px — Category grid responsive: pasa a 1 columna en móvil ── */
+/* ── @media max-width: 560px — Category grid: 1 columna + tarjetas verticales en móvil ── */
 @media (max-width: 560px) {
     .category-grid {
         grid-template-columns: 1fr;
     }
-}
 
-/* ── Target card con slug — tarjeta de producto clicable que dirige a su página de detalle ── */
-.target-card[data-slug] {
-    cursor: pointer;
+    .category-grid .target-card {
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    .category-grid .target-card .target-card-img-wrap {
+        width: 100%;
+        height: 140px;
+    }
 }
 
 /* ── Target card con slug (hover) — sube ligeramente la tarjeta al pasar el cursor ── */
@@ -985,18 +985,6 @@
     animation-delay: 0.28s;
 }
 
-/* ── @media max-width: 560px — Category grid tarjeta mobile: vuelve a layout vertical con imagen arriba ── */
-@media (max-width: 560px) {
-    .category-grid .target-card {
-        flex-direction: column;
-        min-height: auto;
-    }
-
-    .category-grid .target-card .target-card-img-wrap {
-        width: 100%;
-        height: 140px;
-    }
-}
 
 /* ════════════════════════════════════════════════════════════
    CHECKOUT — indicadores de paso mejorados
@@ -1511,7 +1499,7 @@
    MODAL AUTH — optimizado para mobile
 ════════════════════════════════════════════════════════════ */
 
-/* ── @media max-width: 600px — Modal de autenticación en móvil: se presenta como sheet desde la parte inferior ── */
+/* ── @media max-width: 600px — Modal auth como sheet inferior + panel historial full width ── */
 @media (max-width: 600px) {
     .auth-modal-overlay {
         align-items: flex-end !important;
@@ -1525,14 +1513,7 @@
         max-height: 92vh;
         overflow-y: auto;
     }
-}
 
-/* ════════════════════════════════════════════════════════════
-   PANEL HISTORIAL — mobile full width
-════════════════════════════════════════════════════════════ */
-
-/* ── @media max-width: 600px — Panel historial en móvil: ocupa todo el ancho de la pantalla ── */
-@media (max-width: 600px) {
     #historialPanel {
         width: 100% !important;
         min-width: unset !important;

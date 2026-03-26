@@ -240,31 +240,29 @@ function initHeader() {
     ov?.addEventListener('click', close);
 
     // Acordeones de categorías en el menú lateral: solo uno abierto a la vez
-    document.querySelectorAll('.cat-accordion').forEach(acc => {
+    const catAccordions = document.querySelectorAll('.cat-accordion');
+    catAccordions.forEach(acc => {
         acc.querySelector('.cat-bar-link')?.addEventListener('click', () => {
             const isOpen = acc.classList.contains('open');
-            // Cierra todos los acordeones antes de abrir el pulsado
-            document.querySelectorAll('.cat-accordion').forEach(a => a.classList.remove('open'));
+            catAccordions.forEach(a => a.classList.remove('open'));
             if (!isOpen) acc.classList.add('open');
         });
     });
-    // Cierra todos los acordeones al hacer clic fuera de ellos
     document.addEventListener('click', e => {
-        if (!e.target.closest('.cat-accordion')) document.querySelectorAll('.cat-accordion').forEach(a => a.classList.remove('open'));
+        if (!e.target.closest('.cat-accordion')) catAccordions.forEach(a => a.classList.remove('open'));
     });
 
     // Dropdowns personalizados del header: solo uno abierto a la vez
-    document.querySelectorAll('.custom-dropdown').forEach(dd => {
+    const customDropdowns = document.querySelectorAll('.custom-dropdown');
+    customDropdowns.forEach(dd => {
         dd.querySelector('.dropdown-label')?.addEventListener('click', e => {
             e.stopPropagation();
             const isOpen = dd.classList.contains('open');
-            // Cierra todos los dropdowns antes de abrir el pulsado
-            document.querySelectorAll('.custom-dropdown').forEach(d => d.classList.remove('open'));
+            customDropdowns.forEach(d => d.classList.remove('open'));
             if (!isOpen) dd.classList.add('open');
         });
     });
-    // Cierra todos los dropdowns al hacer clic en cualquier parte del documento
-    document.addEventListener('click', () => document.querySelectorAll('.custom-dropdown').forEach(d => d.classList.remove('open')));
+    document.addEventListener('click', () => customDropdowns.forEach(d => d.classList.remove('open')));
 
     // Encoge el header al hacer scroll: oculta la barra roja superior y reduce el mid
     const hdr = document.getElementById('mainHeader');
@@ -303,12 +301,12 @@ function initAuth() {
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeA(); });
 
     // Gestión de pestañas dentro del modal: "Iniciar sesión" / "Registrarse"
-    document.querySelectorAll('.auth-tab').forEach(tab => {
+    const authTabs  = document.querySelectorAll('.auth-tab');
+    const authForms = document.querySelectorAll('.auth-form');
+    authTabs.forEach(tab => {
         tab.addEventListener('click', () => {
-            // Desactiva todas las pestañas y formularios
-            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
-            // Activa la pestaña pulsada y su formulario correspondiente
+            authTabs.forEach(t => t.classList.remove('active'));
+            authForms.forEach(f => f.classList.remove('active'));
             tab.classList.add('active');
             document.getElementById('tab-' + tab.dataset.tab)?.classList.add('active');
         });

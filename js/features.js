@@ -103,21 +103,22 @@
     }
 
     /**
-     * syncMobileNavBadge — Sincroniza el badge de cantidad del carrito
-     * en la barra de navegación móvil con el badge del header principal.
-     * Se ejecuta cada 500ms mediante setInterval para mantenerse actualizado.
-     * Opera sobre el badge visible en el botón "Carrito" de la nav móvil.
+     * syncMobileNavBadge — Sincroniza el badge del carrito en la nav móvil
+     * usando MutationObserver en lugar de setInterval para evitar memory leaks.
      */
     function syncMobileNavBadge() {
         const mobile = document.getElementById('mobileNavBadge');
         if (!mobile) return;
-        // Lee la cantidad del badge del header y la replica en la nav móvil
         const count = parseInt(document.getElementById('cart-badge')?.textContent || '0');
         mobile.textContent = count > 0 ? count : '';
         mobile.style.display = count > 0 ? 'flex' : 'none';
     }
-    // Comprueba el badge cada medio segundo para mantenerlo sincronizado
-    setInterval(syncMobileNavBadge, 500);
+    // Observa cambios en cart-badge para sincronizar sin setInterval
+    const cartBadgeEl = document.getElementById('cart-badge');
+    if (cartBadgeEl) {
+        new MutationObserver(syncMobileNavBadge).observe(cartBadgeEl, { childList: true, characterData: true, subtree: true });
+    }
+    syncMobileNavBadge();
 
     /* ── Comparador de productos ── */
 

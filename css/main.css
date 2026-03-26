@@ -1445,6 +1445,7 @@ button {
     overflow: hidden;
     box-shadow: var(--shadow-sm);
     transition: var(--ease-md);
+    cursor: pointer;
     min-width: 220px;
     max-width: 240px;
     flex-shrink: 0;

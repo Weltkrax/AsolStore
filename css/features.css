@@ -986,6 +986,11 @@
 /* ── Tarjeta de visto recientemente precio — precio del producto en la tarjeta de historial ── */
 .rv-price { padding: 0 10px 10px; font-size: 13px; font-weight: 800; color: var(--text); }
 
+/* ── Historial panel items ── */
+.historial-item { cursor: pointer; }
+.historial-item-img { background: var(--bg-alt); border-radius: 8px; overflow: hidden; }
+.historial-empty { padding: 20px; color: var(--muted); }
+
 /* ── Tarjetas de visto recientemente tema oscuro — adapta el fondo de las tarjetas al modo oscuro ── */
 [data-theme="dark"] .rv-card { background: var(--dm-surface); border-color: var(--dm-border); }
 
