@@ -239,13 +239,23 @@ function initHeader() {
     cl?.addEventListener('click', close);
     ov?.addEventListener('click', close);
 
-    // Acordeones de categorías en el menú lateral: solo uno abierto a la vez
+    // Acordeones de categorías — usa getBoundingClientRect para posicionar
+    // el dropdown en fixed, evitando que overflow-x del cat-bar lo recorte
     const catAccordions = document.querySelectorAll('.cat-accordion');
     catAccordions.forEach(acc => {
-        acc.querySelector('.cat-bar-link')?.addEventListener('click', () => {
+        const btn      = acc.querySelector('.cat-bar-link');
+        const dropdown = acc.querySelector('.cat-dropdown');
+        btn?.addEventListener('click', () => {
             const isOpen = acc.classList.contains('open');
             catAccordions.forEach(a => a.classList.remove('open'));
-            if (!isOpen) acc.classList.add('open');
+            if (!isOpen) {
+                const rect = btn.getBoundingClientRect();
+                if (dropdown) {
+                    dropdown.style.top  = rect.bottom + 4 + 'px';
+                    dropdown.style.left = rect.left + 'px';
+                }
+                acc.classList.add('open');
+            }
         });
     });
     document.addEventListener('click', e => {
