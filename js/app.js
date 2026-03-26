@@ -369,8 +369,13 @@ function initBuscador() {
             box.classList.remove('open');
     });
 
-    // Al enviar el formulario, dispara el evento de búsqueda sin recargar la página
-    form?.addEventListener('submit', e => { e.preventDefault(); input.dispatchEvent(new Event('input')); });
+    // Al enviar el formulario (Enter): navega al primer resultado si existe
+    form?.addEventListener('submit', e => {
+        e.preventDefault();
+        const first = document.querySelector('#sroInner .sro-item');
+        if (first) first.click();
+        else input.dispatchEvent(new Event('input'));
+    });
 
     // Cierra los resultados al pulsar Escape
     document.addEventListener('keydown', e => { if (e.key === 'Escape') box.classList.remove('open'); });
@@ -767,6 +772,10 @@ function initCategoriaPage() {
     if (el('catTag'))   el('catTag').textContent   = label.toUpperCase();
     document.title = label + ' | AsolStore';
 
+    // Skeleton inicial mientras la página termina de renderizar
+    showGridSkeleton(grid, 6);
+    setTimeout(() => removeGridSkeleton(grid), 400);
+
     // Marca todas las tarjetas como visibles inicialmente
     const cards   = Array.from(grid.querySelectorAll('.target-card'));
     cards.forEach(card => { card.dataset.filteredOut = 'false'; });
@@ -798,6 +807,19 @@ function initCategoriaPage() {
                 removeGridSkeleton(grid);
                 // Actualiza el contador de productos visibles
                 if (countEl) countEl.textContent = visible + ' producto' + (visible !== 1 ? 's' : '');
+                // Estado vacío cuando ningún producto coincide con el filtro
+                let emptyEl = grid.querySelector('.grid-empty-state');
+                if (visible === 0) {
+                    if (!emptyEl) {
+                        emptyEl = document.createElement('div');
+                        emptyEl.className = 'grid-empty-state';
+                        emptyEl.innerHTML = '<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><p>No hay productos con este filtro</p><span>Prueba con otra categoría</span>';
+                        grid.appendChild(emptyEl);
+                    }
+                    emptyEl.style.display = 'flex';
+                } else if (emptyEl) {
+                    emptyEl.style.display = 'none';
+                }
                 // Vuelve a la primera página de paginación tras filtrar
                 window._renderPage?.(1);
             }, 280);
@@ -908,16 +930,24 @@ function initCheckout() {
     // Botón "Confirmar pedido": genera un número de pedido aleatorio y vacía el carrito
     document.getElementById('goStep3')?.addEventListener('click', () => {
         if (!(window.cartItems || []).length) { showToast('Tu carrito está vacío'); return; }
-        // Genera un número de pedido único en formato AS-2026-XXXX
-        const num   = 'AS-2026-' + String(Math.floor(Math.random() * 9000) + 1000);
-        const numEl = document.getElementById('orderNum');
-        if (numEl) numEl.textContent = num;
-        // Vacía el carrito y actualiza el renderizado
-        window.cartItems = [];
-        window.renderCart?.();
-        cambiarPaso(2);
-        // F) Confetti al llegar al paso de confirmación
-        launchConfetti();
+        const btn = document.getElementById('goStep3');
+        // Estado de carga: deshabilita el botón y muestra spinner
+        btn.disabled = true;
+        btn.innerHTML = '<span class="btn-spinner"></span> Procesando...';
+        setTimeout(() => {
+            // Genera un número de pedido único en formato AS-2026-XXXX
+            const num   = 'AS-2026-' + String(Math.floor(Math.random() * 9000) + 1000);
+            const numEl = document.getElementById('orderNum');
+            if (numEl) numEl.textContent = num;
+            // Vacía el carrito y actualiza el renderizado
+            window.cartItems = [];
+            window.renderCart?.();
+            cambiarPaso(2);
+            launchConfetti();
+            // Restaura el botón por si el usuario regresa
+            btn.disabled = false;
+            btn.innerHTML = 'Confirmar pedido →';
+        }, 1200);
     });
 
     /**
