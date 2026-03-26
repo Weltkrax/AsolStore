@@ -594,12 +594,9 @@ button {
 
 /* ── Cat dropdown — panel desplegable con subcategorías al hacer clic en una categoría ── */
 .cat-dropdown {
-    position: fixed;
-    top: calc(var(--header-h) + 12px);
-    left: auto;
-    min-width: 200px;
-    margin-left: 0;
-    right: auto;
+    position: absolute;
+    top: 100%;
+    left: 0;
     min-width: 200px;
     background: var(--white);
     border: 1px solid var(--border);
