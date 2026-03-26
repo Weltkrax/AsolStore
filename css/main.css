@@ -2475,17 +2475,6 @@ button {
     text-align: center;
 }
 
-/* ── QR placeholder — cuadro con borde punteado donde irá el código QR de Yape ── */
-.qr-placeholder {
-    width: 130px;
-    height: 130px;
-    border: 2px dashed #e0e0e0;
-    border-radius: var(--r);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fafafa;
-}
 
 .yape-qr p {
     font-size: 14px;

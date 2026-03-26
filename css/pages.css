@@ -1729,11 +1729,6 @@ img {
     }
 }
 
-/* ── Skeleton card — placeholder de tarjeta de producto durante la carga ── */
-.skeleton-card {
-    height: 280px;
-    border-radius: var(--r-lg);
-}
 
 /* ── Skeleton text — placeholder de línea de texto durante la carga ── */
 .skeleton-text {
