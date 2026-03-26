@@ -218,6 +218,10 @@ function initNewsletterSupabase() {
         if (!email) { window.showToast('Ingresa tu email'); return; }
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { window.showToast('Ingresa un email válido'); return; }
 
+        // Estado de carga
+        nuevoBtn.disabled = true;
+        nuevoBtn.innerHTML = '<span class="btn-spinner"></span> Suscribiendo...';
+
         try {
             // Intenta insertar el email en la tabla newsletter de Supabase
             const { error } = await supabase.from('newsletter').insert({ email });
@@ -244,10 +248,13 @@ function initNewsletterSupabase() {
             // Confirma la suscripción y limpia el campo de email
             window.showToast('¡Suscrito! Revisa tu correo, tienes un 20% OFF 🎁');
             if (input) input.value = '';
+            nuevoBtn.disabled = false;
+            nuevoBtn.textContent = '¡Suscrito! ✓';
         } catch (_) {
-            // En caso de error inesperado, muestra un mensaje genérico y limpia el campo
             window.showToast('¡Listo! Te tendremos en cuenta');
             if (input) input.value = '';
+            nuevoBtn.disabled = false;
+            nuevoBtn.textContent = 'Suscribirme';
         }
     });
 }

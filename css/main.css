@@ -1559,6 +1559,26 @@ button {
     letter-spacing: 0.5px;
 }
 
+/* ── Card rating — estrellas y valor numérico en tarjetas de producto ── */
+.card-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 3px;
+}
+
+.card-stars {
+    font-size: 11px;
+    color: #f59e0b;
+    letter-spacing: 1px;
+}
+
+.card-rating-val {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
 /* ── Product card title — nombre del producto truncado a 2 líneas ── */
 .target-card-title {
     font-size: 13px;

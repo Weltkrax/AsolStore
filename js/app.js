@@ -700,6 +700,15 @@ function initProductoPage() {
     const gE = document.getElementById('galleryEmoji');
     if (gE) gE.style.transition = 'opacity 0.16s ease, transform 0.16s ease';
 
+    // Botón compartir por WhatsApp
+    document.getElementById('btnShareWa')?.addEventListener('click', () => {
+        const title = document.getElementById('productTitle')?.textContent || 'Producto';
+        const price = document.getElementById('productPrice')?.textContent || '';
+        const url   = window.location.href;
+        const msg   = `¡Mira este producto en AsolStore! 🛍️\n*${title}* — ${price}\n${url}`;
+        window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+    });
+
     // Variantes: solo una puede estar activa a la vez
     document.querySelectorAll('.variant-btn').forEach(btn => {
         btn.addEventListener('click', () => { btn.closest('.variant-options')?.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); });
@@ -939,6 +948,18 @@ function initCheckout() {
             const num   = 'AS-2026-' + String(Math.floor(Math.random() * 9000) + 1000);
             const numEl = document.getElementById('orderNum');
             if (numEl) numEl.textContent = num;
+
+            // Construye mensaje de WhatsApp con detalles del pedido
+            const nombre  = document.getElementById('cfNombre')?.value || '';
+            const items   = (window.cartItems || []).map(i => `  • ${i.title} ×${i.qty} — S/ ${(i.price * i.qty).toFixed(2)}`).join('\n');
+            const total   = document.getElementById('summaryTotal')?.textContent || '';
+            const fecha   = document.getElementById('cfFecha')?.value || '';
+            const hora    = document.getElementById('cfHorario')?.value || '';
+            const dir     = document.getElementById('cfDir')?.value || '';
+            const msg = `Hola AsolStore! 👋 Quiero confirmar mi pedido:\n\n*Pedido #${num}*\n${items}\n\n*Total:* ${total}\n*Nombre:* ${nombre}\n*Dirección:* ${dir}\n*Fecha:* ${fecha} ${hora}`.trim();
+            const waBtn = document.getElementById('btnWaOrder');
+            if (waBtn) waBtn.href = `https://wa.me/51991450553?text=${encodeURIComponent(msg)}`;
+
             // Vacía el carrito y actualiza el renderizado
             window.cartItems = [];
             window.renderCart?.();
@@ -1174,6 +1195,20 @@ function initBackToTop() {
    de inicialización al estar el DOM completamente cargado.
 ════════════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
+    // Inyecta rating en todas las tarjetas de producto del DOM
+    document.querySelectorAll('.target-card').forEach(card => {
+        const slug = card.dataset.slug;
+        const p    = window.PRODUCTOS_DB?.[slug];
+        if (!p?.rating) return;
+        const title = card.querySelector('.target-card-title');
+        if (!title || card.querySelector('.card-rating')) return;
+        const stars = Math.round(p.rating);
+        const el = document.createElement('div');
+        el.className = 'card-rating';
+        el.innerHTML = `<span class="card-stars">${'★'.repeat(stars)}${'☆'.repeat(5 - stars)}</span><span class="card-rating-val">${p.rating}</span>`;
+        title.insertAdjacentElement('afterend', el);
+    });
+
     // Inicialización de componentes globales presentes en todas las páginas
     initHeader();
     initAuth();

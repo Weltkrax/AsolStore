@@ -443,6 +443,27 @@ img {
     transform: translateY(-1px);
 }
 
+/* ── Share WhatsApp button — botón cuadrado para compartir el producto por WhatsApp ── */
+.btn-share-wa {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #25D366;
+    color: #fff;
+    border: none;
+    border-radius: var(--r);
+    cursor: pointer;
+    transition: var(--ease);
+}
+
+.btn-share-wa:hover {
+    background: #1ebe5d;
+    transform: translateY(-1px);
+}
+
 /* ── Product guarantees — rejilla de iconos de garantía (envío, devolución, seguridad, etc.) ── */
 .product-guarantees {
     display: grid;
