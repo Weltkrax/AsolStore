@@ -35,22 +35,6 @@
     if (header) {
         header.innerHTML = `
         <div class="header-top">
-            <a href="${r}index.html" class="header-top-logo-link">
-                <svg class="header-top-logo-svg" viewBox="0 0 680 680" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="680" height="680" fill="transparent"/>
-                    <rect x="140" y="140" width="400" height="400" rx="32" fill="#fff" fill-opacity="0.15"/>
-                    <path d="M290 140 Q290 118 305 118 L375 118 Q390 118 390 140" fill="none" stroke="#fff" stroke-width="20" stroke-linecap="round"/>
-                    <rect x="155" y="285" width="370" height="230" rx="16" fill="#fff" fill-opacity="0.10"/>
-                    <rect x="155" y="277" width="370" height="14" rx="4" fill="rgba(255,255,255,0.25)"/>
-                    <text x="340" y="375" text-anchor="middle" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="74" fill="#fff" letter-spacing="3">ASOL</text>
-                    <rect x="175" y="392" width="330" height="2" rx="1" fill="rgba(255,255,255,0.5)"/>
-                    <text x="340" y="468" text-anchor="middle" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="48" fill="#fff" letter-spacing="12">STORE</text>
-                </svg>
-            </a>
-            <div class="header-top-marquee">
-                <span id="typewriterPhrase"></span>
-                <span class="typewriter-cursor">|</span>
-            </div>
             <div class="header-car-track" aria-hidden="true">
                 <svg class="header-car" viewBox="0 0 64 32" width="48" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="4" y="14" width="56" height="12" rx="4" fill="#fff" fill-opacity="0.9"/>
@@ -108,23 +92,17 @@
                 </button>
             </div>
         </div>
-        <nav class="cat-bar">
-            ${[['Gaming','gaming'],['Arte','arte'],['Ropa','ropa'],['Accesorios','accesorios']].map(([name, slug]) => `
-            <div class="cat-accordion">
-                <button class="cat-bar-link">${name} <svg class="cat-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
-                <div class="cat-dropdown">
-                    <a href="${cat}${slug}">${name}</a>
-                </div>
-            </div>`).join('')}
-        </nav>
         <div class="header-dropdown-section">
             <div class="header-dropdown-left">
                 <div class="custom-dropdown">
-                    <span class="dropdown-label"><svg class="dropdown-logo" viewBox="0 0 680 680" xmlns="http://www.w3.org/2000/svg"><rect width="680" height="680" fill="#fff" rx="80"/><rect x="140" y="140" width="400" height="400" rx="32" fill="#FF0D2A"/><text x="340" y="375" text-anchor="middle" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="74" fill="#fff" letter-spacing="3">ASOL</text><text x="340" y="468" text-anchor="middle" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="48" fill="#fff" letter-spacing="12">STORE</text></svg> AsolStore</span>
+                    <span class="dropdown-label">AsolStore</span>
                     <ul class="dropdown-options">
                         <li><a href="${pagesDir}asolstore.html">Mi tienda</a></li>
                     </ul>
                 </div>
+            </div>
+            <div class="dropdown-tagline">
+                <span id="typewriterPhrase"></span><span class="typewriter-cursor">|</span>
             </div>
             <div class="header-dropdown-right">
                 <div class="custom-dropdown"><span class="dropdown-label">Arte</span>
@@ -141,11 +119,12 @@
                         <li><a href="${cat}ropa">Gorros</a></li>
                     </ul>
                 </div>
-                <div class="custom-dropdown"><span class="dropdown-label">Accesorios</span>
+                <div class="custom-dropdown"><span class="dropdown-label">Wabis</span>
                     <ul class="dropdown-options">
-                        <li><a href="${pagesDir}accesorios.html">Ver Accesorios</a></li>
-                        <li><a href="${cat}accesorios">Tecnología</a></li>
-                        <li><a href="${cat}accesorios">Instrumentos</a></li>
+                        <li><a href="${pagesDir}wabis.html">Ver Wabis</a></li>
+                        <li><a href="${cat}wabis">Punch Needle</a></li>
+                        <li><a href="${cat}wabis">Needle Felting</a></li>
+                        <li><a href="${cat}wabis">Retratos de mascota</a></li>
                     </ul>
                 </div>
             </div>
@@ -179,7 +158,7 @@
                 <li><a href="${cat}gaming">Gaming</a></li>
                 <li><a href="${cat}arte">Arte</a></li>
                 <li><a href="${cat}ropa">Ropa</a></li>
-                <li><a href="${cat}accesorios">Accesorios</a></li>
+                <li><a href="${cat}wabis">Wabis</a></li>
                 <li><a href="${inPg ? '../index.html#ofertas' : '#ofertas'}">Ofertas</a></li>
                 <li><a href="${pagesDir}asolstore.html">AsolStore</a></li>
             </ul>

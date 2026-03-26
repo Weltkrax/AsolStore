@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@800;900&display=swap');
 
 /* ── Slider de productos relacionados — contenedor centrado de las flechas laterales ── */
 .carousel-arrow-container {
@@ -63,7 +63,7 @@
     --shadow-red: 0 4px 16px rgba(255, 13, 42, 0.25);
     --ease: all 0.18s ease;
     --ease-md: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-    --header-h: 236px;
+    --header-h: 200px;
     --content-max: 1400px;
 }
 
@@ -178,11 +178,11 @@ button {
 #typewriterPhrase {
     font-size: 26px;
     font-weight: 400;
-    color: #fff;
+    color: var(--dark);
     letter-spacing: 3px;
     white-space: nowrap;
     text-transform: uppercase;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.5), 0 0 24px rgba(255,255,255,0.2);
+    text-shadow: none;
     font-family: 'Bebas Neue', 'Arial Black', Impact, sans-serif;
     -webkit-font-smoothing: antialiased;
 }
@@ -191,7 +191,7 @@ button {
 .typewriter-cursor {
     font-size: 28px;
     font-family: 'Bebas Neue', 'Arial Black', Impact, sans-serif;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--dark);
     animation: cursorBlink 0.75s step-end infinite;
 }
 
@@ -224,13 +224,18 @@ button {
     position: absolute;
     bottom: 2px;
     animation: carDrive 10s linear infinite;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 /* ── @keyframes carDrive — animación del coche que cruza de lado a lado la barra superior ── */
 @keyframes carDrive {
-    0%   { left: -60px; }
-    100% { left: calc(100% + 60px); }
+    0% {
+        left: -60px;
+    }
+
+    100% {
+        left: calc(100% + 60px);
+    }
 }
 
 /* ── @keyframes logoPulse — efecto de brillo pulsante sobre el logo ── */
@@ -529,13 +534,13 @@ button {
     display: flex;
     align-items: center;
     padding: 0 max(48px, calc((100% - var(--content-max)) / 2));
-    height: 44px;
     gap: 4px;
     overflow-x: auto;
     scrollbar-width: none;
     position: relative;
     z-index: 100;
 }
+
 
 .cat-bar::-webkit-scrollbar {
     display: none;
@@ -551,9 +556,8 @@ button {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 5px 14px;
-    height: 32px;
-    font-size: 13px;
+    padding: 6px 16px;
+    font-size: 12px;
     font-weight: 600;
     color: var(--text);
     background: var(--white);
@@ -856,8 +860,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 6px max(40px, calc((100% - var(--content-max)) / 2));
-    flex-wrap: wrap;
+    padding: 0 max(48px, calc((100% - var(--content-max)) / 2)) 0 0;
     gap: 8px;
 }
 
@@ -867,6 +870,42 @@ button {
     display: flex;
     align-items: center;
     gap: 8px;
+    margin-right: 120px;
+}
+
+/* ── Dropdown tagline — frase animada centrada en la barra del dropdown ── */
+.dropdown-tagline {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Raleway', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* ── Header dropdown left — fondo rojo extendido hasta el borde izquierdo ── */
+.header-dropdown-left {
+    align-self: stretch;
+    background: var(--red);
+    width: 23%;
+    justify-content: flex-end;
+    padding-right: 20px;
+}
+
+.header-dropdown-left .dropdown-label {
+    color: #fff;
+    font-size: 14px;
+    gap: 8px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 /* ── Custom dropdown — componente selector personalizado (idioma, moneda, etc.) ── */
@@ -879,24 +918,36 @@ button {
 .dropdown-label {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 5px 14px;
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 600;
+    gap: 8px;
+    padding: 4px 18px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: 'Raleway', sans-serif;
     color: var(--text);
     cursor: pointer;
     transition: var(--ease);
     white-space: nowrap;
+    letter-spacing: 0.3px;
+}
+
+.header-dropdown-right .dropdown-label:hover {
+    color: var(--red);
+    border-bottom-color: var(--red);
+}
+
+.header-dropdown-right .custom-dropdown + .custom-dropdown {
+    border-left: 1px solid var(--border);
 }
 
 /* ── Dropdown logo — imagen de bandera o logo dentro del selector personalizado ── */
 .dropdown-logo {
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
     object-fit: contain;
     flex-shrink: 0;
 }
@@ -909,9 +960,13 @@ button {
     transition: transform 0.2s;
 }
 
-.custom-dropdown:hover .dropdown-label {
+.header-dropdown-right .custom-dropdown:hover .dropdown-label {
     border-color: var(--red);
     color: var(--red);
+}
+
+.header-dropdown-left .custom-dropdown:hover .dropdown-label {
+    color: #fff;
 }
 
 .custom-dropdown.open .dropdown-label::after {
@@ -1588,20 +1643,26 @@ button {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.92);
+    background: rgba(255, 255, 255, 0.92);
     border: none;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #ccc;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12);
     transition: color .2s, transform .2s;
     z-index: 2;
 }
 
-.card-wish-btn:hover { transform: scale(1.15); color: var(--red); }
-.card-wish-btn.active { color: var(--red); }
+.card-wish-btn:hover {
+    transform: scale(1.15);
+    color: var(--red);
+}
+
+.card-wish-btn.active {
+    color: var(--red);
+}
 
 /* ── Product card title — nombre del producto truncado a 2 líneas ── */
 .target-card-title {
@@ -3330,7 +3391,7 @@ button {
 /* ── @media max-width: 900px — ajustes para tablets: padding reducido, header más compacto, bento de 2 col ── */
 @media (max-width:900px) {
     :root {
-        --header-h: 158px;
+        --header-h: 122px;
     }
 
     .header-top,
@@ -3425,7 +3486,7 @@ button {
 /* ── @media max-width: 600px — ajustes para móviles: logo sin texto, hero vertical, bento de 1 col ── */
 @media (max-width:600px) {
     :root {
-        --header-h: 142px;
+        --header-h: 106px;
     }
 
     .header-mid {
@@ -3514,7 +3575,7 @@ button {
 /* ── @media max-width: 480px — ajustes para iPhone 13 y móviles pequeños: header mínimo, tarjetas a 72vw ── */
 @media (max-width: 480px) {
     :root {
-        --header-h: 120px;
+        --header-h: 84px;
     }
 
     /* Header */
@@ -3577,7 +3638,9 @@ button {
         flex-wrap: nowrap;
     }
 
-    .cat-bar::-webkit-scrollbar { display: none; }
+    .cat-bar::-webkit-scrollbar {
+        display: none;
+    }
 
     .cat-bar-link {
         font-size: 13px;
@@ -3770,7 +3833,10 @@ button {
     }
 
     /* Espaciado inferior para que el mobile-nav no tape contenido */
-    main, .footer-section, .newsletter-section, .visitanos-span {
+    main,
+    .footer-section,
+    .newsletter-section,
+    .visitanos-span {
         padding-bottom: 4px;
     }
 

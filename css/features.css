@@ -475,6 +475,8 @@
 /* ── Tema oscuro sección dropdown del header — adapta los desplegables del header al modo oscuro ── */
 [data-theme="dark"] .header-dropdown-section { background: var(--dm-surface); border-color: var(--dm-border); }
 [data-theme="dark"] .dropdown-label { background: var(--dm-surface); border-color: var(--dm-border); color: var(--dm-text); }
+[data-theme="dark"] .header-dropdown-left { background: var(--red) !important; }
+[data-theme="dark"] .header-dropdown-left .dropdown-label { background: transparent !important; border-color: transparent !important; color: #fff !important; }
 [data-theme="dark"] .dropdown-options { background: var(--dm-surface); border-color: var(--dm-border); }
 [data-theme="dark"] .dropdown-options li { color: var(--dm-muted); border-color: var(--dm-border); }
 
@@ -645,7 +647,7 @@
 .category-hero[data-cat="gaming"]  { background: linear-gradient(135deg, #0f0f1a, #1a0a2e); }
 .category-hero[data-cat="arte"]    { background: linear-gradient(135deg, #1a0505, #2d0a0a); }
 .category-hero[data-cat="ropa"]    { background: linear-gradient(135deg, #050a1a, #0a1428); }
-.category-hero[data-cat="accesorios"] { background: linear-gradient(135deg, #0a0a0a, #1a1a1a); }
+.category-hero[data-cat="wabis"] { background: linear-gradient(135deg, #0a0a0a, #1a1a1a); }
 
 /* ── Hero de categoría texto — contenedor de la etiqueta, título y subtítulo del hero ── */
 .category-hero-text { display: flex; flex-direction: column; }

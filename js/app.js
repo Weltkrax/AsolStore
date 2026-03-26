@@ -44,7 +44,7 @@ window.PRODUCTOS_DB = {
         resenas: [{nombre:"Rodrigo C.",stars:5,texto:"Mejoré mucho en PUBG Mobile."},{nombre:"Sofía R.",stars:4,texto:"Buena calidad, fácil de instalar."}]
     },
     "iphone-13-128gb": {
-        categoria: "Accesorios", categoriaSlug: "accesorios", slug: "iphone-13-128gb",
+        categoria: "Wabis", categoriaSlug: "wabis", slug: "iphone-13-128gb",
         titulo: "iPhone 13 128GB", precio: 1899, precioOld: 2099, descuento: "-10%", ahorras: 200, badge: "-10%", esNuevo: false, enStock: true,
         descripcion: "Midnight — SIM libre. Garantía oficial Apple. Chip A15 Bionic, cámara dual 12MP, pantalla Super Retina XDR 6.1\".",
         imagen: "../assets/images/productos/acc-iphone13-midnight.jpg", galeria: ["../assets/images/productos/acc-iphone13-midnight.jpg"],
@@ -71,7 +71,7 @@ window.PRODUCTOS_DB = {
         resenas: [{nombre:"Kevin A.",stars:5,texto:"Calidad excelente, el bordado es nítido."}]
     },
     "samsung-s22-ultra": {
-        categoria: "Accesorios", categoriaSlug: "accesorios", slug: "samsung-s22-ultra",
+        categoria: "Wabis", categoriaSlug: "wabis", slug: "samsung-s22-ultra",
         titulo: "Samsung Galaxy S22 Ultra", precio: 2499, precioOld: 2799, descuento: "-11%", ahorras: 300, badge: "-11%", esNuevo: true, enStock: true,
         descripcion: "Pantalla Dynamic AMOLED 6.8\", S Pen integrado, batería 5000mAh, cámara 108MP. Color Phantom Black.",
         imagen: "../assets/images/productos/acc-samsung-s22-ultra.jpg", galeria: ["../assets/images/productos/acc-samsung-s22-ultra.jpg"],
@@ -116,7 +116,7 @@ window.PRODUCTOS_DB = {
         resenas: [{nombre:"Isabella R.",stars:5,texto:"Increíble calidad. El marco flotante le da un toque premium."}]
     },
     "ipad-pro": {
-        categoria: "Accesorios", categoriaSlug: "accesorios", slug: "ipad-pro",
+        categoria: "Wabis", categoriaSlug: "wabis", slug: "ipad-pro",
         titulo: "iPad Pro 11 M2", precio: 3299, precioOld: 3799, descuento: "-13%", ahorras: 500, badge: "-13%", esNuevo: true, enStock: true,
         descripcion: "Chip M2, pantalla Liquid Retina 11 pulgadas, compatible con Apple Pencil 2. Color Space Gray.",
         imagen: "../assets/images/productos/acc-ipad-pro.jpg", galeria: ["../assets/images/productos/acc-ipad-pro.jpg"],
@@ -125,7 +125,7 @@ window.PRODUCTOS_DB = {
         resenas: [{nombre:"Gabriela N.",stars:5,texto:"La pantalla es espectacular. Rápidísimo para trabajo creativo."}]
     },
     "sony-walkman": {
-        categoria: "Accesorios", categoriaSlug: "accesorios", slug: "sony-walkman",
+        categoria: "Wabis", categoriaSlug: "wabis", slug: "sony-walkman",
         titulo: "Sony Walkman NW-E394", precio: 189, precioOld: 229, descuento: "-17%", ahorras: 40, badge: "-17%", esNuevo: false, enStock: true,
         descripcion: "Reproductor MP3 con 8GB de almacenamiento, auriculares incluidos. Batería hasta 35 horas.",
         imagen: "../assets/images/productos/acc-sony-walkman.jpg", galeria: ["../assets/images/productos/acc-sony-walkman.jpg"],
@@ -134,7 +134,7 @@ window.PRODUCTOS_DB = {
         resenas: [{nombre:"Felipe O.",stars:4,texto:"Sonido limpio, batería dura mucho. Ideal para el gym."}]
     },
     "bateria-pdp": {
-        categoria: "Accesorios", categoriaSlug: "accesorios", slug: "bateria-pdp",
+        categoria: "Wabis", categoriaSlug: "wabis", slug: "bateria-pdp",
         titulo: "Batería PDP Afro Negro", precio: 1299, precioOld: 1599, descuento: "-19%", ahorras: 300, badge: "-19%", esNuevo: true, enStock: true,
         descripcion: "Kit de batería acústica profesional 5 piezas. Color negro mate. Incluye platillos y hardware completo.",
         imagen: "../assets/images/productos/acc-bateria-pdp-negro.jpg", galeria: ["../assets/images/productos/acc-bateria-pdp-negro.jpg"],
@@ -143,7 +143,7 @@ window.PRODUCTOS_DB = {
         resenas: [{nombre:"Omar S.",stars:5,texto:"Excelente calidad para el precio. Sonido profesional."}]
     },
     "guitarra-bajo": {
-        categoria: "Accesorios", categoriaSlug: "accesorios", slug: "guitarra-bajo",
+        categoria: "Wabis", categoriaSlug: "wabis", slug: "guitarra-bajo",
         titulo: "Guitarra Bajo Eléctrico Auburn", precio: 899, precioOld: 1099, descuento: "-18%", ahorras: 200, badge: "-18%", esNuevo: false, enStock: true,
         descripcion: "Bajo eléctrico Auburn Jazz Bass 4 cuerdas. Color negro con pickguard blanco. Incluye cable y correa.",
         imagen: "../assets/images/productos/acc-guitarra-bajo.jpg", galeria: ["../assets/images/productos/acc-guitarra-bajo.jpg"],
@@ -152,7 +152,7 @@ window.PRODUCTOS_DB = {
         resenas: [{nombre:"Sebastián M.",stars:5,texto:"Acción baja, fácil de tocar. Excelente para principiantes."}]
     },
     "yamaha-rydeen": {
-        categoria: "Accesorios", categoriaSlug: "accesorios", slug: "yamaha-rydeen",
+        categoria: "Wabis", categoriaSlug: "wabis", slug: "yamaha-rydeen",
         titulo: "Yamaha Rydeen Drum Kit", precio: 2199, precioOld: 2699, descuento: "-19%", ahorras: 500, badge: "-19%", esNuevo: false, enStock: true,
         descripcion: "Batería acústica Yamaha Rydeen 5 piezas. Color Surf Green. Incluye platillos Zildjian y hardware.",
         imagen: "../assets/images/productos/acc-yamaha-rydeen.jpg", galeria: ["../assets/images/productos/acc-yamaha-rydeen.jpg"],
@@ -161,6 +161,14 @@ window.PRODUCTOS_DB = {
         resenas: [{nombre:"Laura B.",stars:5,texto:"La calidad Yamaha se nota desde el primer golpe."}]
     }
 };
+
+/* Corrige rutas de imágenes cuando la página está en la raíz (no en /pages/) */
+if (!window.location.pathname.replace(/\\/g, '/').includes('/pages/')) {
+    Object.values(window.PRODUCTOS_DB).forEach(p => {
+        p.imagen  = p.imagen.replace('../', '');
+        p.galeria = p.galeria.map(g => g.replace('../', ''));
+    });
+}
 
 /* ── Helpers ── */
 
@@ -585,7 +593,7 @@ function initReveal() {
 function initTypewriter() {
     const el = document.getElementById('typewriterPhrase');
     if (!el) return;
-    const phrases = ['Gaming','Arte','Ropa','Accesorios','Envíos a todo el Perú','Garantía oficial','Novedades cada semana'];
+    const phrases = ['Gaming','Arte','Ropa','Wabis','Envíos a todo el Perú','Garantía oficial','Novedades cada semana'];
     let pi = 0, ci = 0, del = false;
     const tick = () => {
         const cur = phrases[pi];
@@ -778,8 +786,8 @@ function initCategoriaPage() {
     const cat   = getCatFromURL();
 
     // Mapas de etiquetas y títulos descriptivos por categoría
-    const labels = { gaming: 'Gaming', arte: 'Arte', ropa: 'Ropa', accesorios: 'Accesorios' };
-    const titles = { gaming: 'Consolas & Accesorios', arte: 'Posters & Figuras', ropa: 'Hoodies & Ropa', accesorios: 'Tecnología & Más' };
+    const labels = { gaming: 'Gaming', arte: 'Arte', ropa: 'Ropa', wabis: 'Wabis' };
+    const titles = { gaming: 'Consolas & Wabis', arte: 'Posters & Figuras', ropa: 'Hoodies & Ropa', wabis: 'Tecnología & Más' };
     const label  = labels[cat] || 'Categoría';
     const el = id => document.getElementById(id);
 
@@ -1272,7 +1280,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('.category-page')) {
         // Activa el slide del hero que corresponde a la categoría mostrada en la URL
         const cat    = getCatFromURL();
-        const bgMap  = { gaming: 'gaming', arte: 'arte', ropa: 'ropa', accesorios: 'ofertas' };
+        const bgMap  = { gaming: 'gaming', arte: 'arte', ropa: 'ropa', wabis: 'ofertas' };
         const target = bgMap[cat];
         if (target) {
             const slides = document.querySelectorAll('.hero-slide');
