@@ -19,19 +19,139 @@ document.addEventListener('DOMContentLoaded', () => {
     // de la navegación se activa el panel correspondiente y se desactivan los demás.
     // Opera en: página de perfil (/pages/perfil.html).
     if (document.querySelector('.profile-layout')) {
-        document.querySelectorAll('.profile-nav-item').forEach(btn => {
-            // Excluye el botón de logout y evita registrar el listener más de una vez
+        const profileNavBtns   = document.querySelectorAll('.profile-nav-item');
+        const profilePanels    = document.querySelectorAll('.profile-panel');
+
+        profileNavBtns.forEach(btn => {
             if (btn.id === 'logoutBtn' || btn.dataset.listenerAdded) return;
             btn.dataset.listenerAdded = 'true';
             btn.addEventListener('click', () => {
-                // Desactiva todos los ítems del menú y todos los paneles de contenido
-                document.querySelectorAll('.profile-nav-item').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.profile-panel').forEach(p => p.classList.remove('active'));
-                // Activa el ítem clicado y el panel cuyo ID coincide con data-panel
+                profileNavBtns.forEach(b => b.classList.remove('active'));
+                profilePanels.forEach(p => p.classList.remove('active'));
                 btn.classList.add('active');
-                document.getElementById(`panel-${btn.dataset.panel}`)?.classList.add('active');
+                const panel = document.getElementById(`panel-${btn.dataset.panel}`);
+                if (panel) panel.classList.add('active');
+                if (btn.dataset.panel === 'wishlist') renderWishlist();
             });
         });
+
+        // ── Wishlist — carga productos guardados desde localStorage ──
+        function renderWishlist() {
+            const container = document.getElementById('wishlistContent');
+            if (!container) return;
+            const list = JSON.parse(localStorage.getItem('asol_wishlist') || '[]');
+            const db   = window.PRODUCTOS_DB || {};
+            const valid = list.filter(s => db[s]);
+
+            if (!valid.length) {
+                container.innerHTML = `<div class="wishlist-empty">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    <p>Tu lista de deseos está vacía</p>
+                    <span>Guarda productos que te interesen para comprarlos después</span>
+                    <a href="../index.html" class="wish-explore-btn">Explorar productos →</a>
+                </div>`;
+                return;
+            }
+
+            container.innerHTML = `<div class="wishlist-grid">${valid.map(slug => {
+                const p = db[slug];
+                return `<div class="wish-card" data-slug="${slug}">
+                    <button class="wish-remove" data-slug="${slug}" title="Eliminar">✕</button>
+                    <div class="wish-img bp-${p.categoriaSlug}-card">
+                        <img src="${p.imagen}" alt="${p.titulo}" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
+                    </div>
+                    <div class="wish-info">
+                        <div class="wish-brand">${p.marca}</div>
+                        <div class="wish-title">${p.titulo}</div>
+                        <div class="wish-price">S/ ${p.precio.toFixed(2)}</div>
+                        <a href="producto.html?slug=${slug}" class="wish-buy-btn">Ver producto →</a>
+                    </div>
+                </div>`;
+            }).join('')}</div>`;
+
+            // Eliminar de wishlist
+            container.querySelectorAll('.wish-remove').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const s = btn.dataset.slug;
+                    const updated = JSON.parse(localStorage.getItem('asol_wishlist') || '[]').filter(x => x !== s);
+                    localStorage.setItem('asol_wishlist', JSON.stringify(updated));
+                    renderWishlist();
+                });
+            });
+        }
+
+        // ── Direcciones — formulario para añadir nueva dirección ──
+        document.querySelector('.address-add-btn')?.addEventListener('click', () => {
+            if (document.getElementById('addressFormInline')) return;
+            const grid = document.querySelector('.addresses-grid');
+            const form = document.createElement('div');
+            form.id = 'addressFormInline';
+            form.className = 'address-form-inline';
+            form.innerHTML = `
+                <h4>Nueva dirección</h4>
+                <div class="cf-row two">
+                    <div class="cf-field"><label>Nombre completo</label><input type="text" id="adNombre" placeholder="Tu nombre"></div>
+                    <div class="cf-field"><label>Teléfono</label><input type="tel" id="adTel" placeholder="+51 999 999 999"></div>
+                </div>
+                <div class="cf-field"><label>Dirección</label><input type="text" id="adDir" placeholder="Av. Lima 123, Dpto 4B"></div>
+                <div class="cf-row two">
+                    <div class="cf-field"><label>Distrito</label><input type="text" id="adDistrito" placeholder="Miraflores"></div>
+                    <div class="cf-field"><label>Ciudad</label><input type="text" id="adCiudad" placeholder="Lima"></div>
+                </div>
+                <div class="address-form-actions">
+                    <button class="address-save-btn">Guardar dirección</button>
+                    <button class="address-cancel-btn">Cancelar</button>
+                </div>`;
+            grid.insertBefore(form, grid.querySelector('.address-add-btn'));
+
+            form.querySelector('.address-cancel-btn').addEventListener('click', () => form.remove());
+            form.querySelector('.address-save-btn').addEventListener('click', () => {
+                const nombre   = document.getElementById('adNombre')?.value.trim();
+                const tel      = document.getElementById('adTel')?.value.trim();
+                const dir      = document.getElementById('adDir')?.value.trim();
+                const distrito = document.getElementById('adDistrito')?.value.trim();
+                const ciudad   = document.getElementById('adCiudad')?.value.trim();
+                if (!nombre || !dir || !distrito) { window.showToast('Completa los campos obligatorios'); return; }
+
+                // Guarda en localStorage
+                const addresses = JSON.parse(localStorage.getItem('asol_addresses') || '[]');
+                addresses.push({ nombre, tel, dir, distrito, ciudad, id: Date.now() });
+                localStorage.setItem('asol_addresses', JSON.stringify(addresses));
+
+                form.remove();
+                window.showToast('Dirección guardada ✓');
+                renderAddresses();
+            });
+        });
+
+        function renderAddresses() {
+            const grid      = document.querySelector('.addresses-grid');
+            const addBtn    = grid?.querySelector('.address-add-btn');
+            if (!grid || !addBtn) return;
+            // Elimina tarjetas dinámicas anteriores
+            grid.querySelectorAll('.address-card.dynamic').forEach(c => c.remove());
+            const addresses = JSON.parse(localStorage.getItem('asol_addresses') || '[]');
+            addresses.forEach(addr => {
+                const card = document.createElement('div');
+                card.className = 'address-card dynamic';
+                card.innerHTML = `<p class="address-name">${addr.nombre}</p>
+                    <p>${addr.dir}</p>
+                    <p>${addr.distrito}, ${addr.ciudad}</p>
+                    <p>${addr.tel || ''}</p>
+                    <div class="address-actions">
+                        <button class="address-edit" data-id="${addr.id}">Editar</button>
+                        <button class="address-delete" data-id="${addr.id}">Eliminar</button>
+                    </div>`;
+                card.querySelector('.address-delete').addEventListener('click', () => {
+                    const updated = JSON.parse(localStorage.getItem('asol_addresses') || '[]').filter(a => a.id !== addr.id);
+                    localStorage.setItem('asol_addresses', JSON.stringify(updated));
+                    renderAddresses();
+                });
+                grid.insertBefore(card, addBtn);
+            });
+        }
+
+        renderAddresses();
     }
 
     /* ── Buscador overlay — abrir/cerrar ── */

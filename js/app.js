@@ -1193,18 +1193,44 @@ function initBackToTop() {
    de inicialización al estar el DOM completamente cargado.
 ════════════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
-    // Inyecta rating en todas las tarjetas de producto del DOM
+    // Inyecta rating y botón de wishlist en todas las tarjetas de producto del DOM
+    const wishlist = JSON.parse(localStorage.getItem('asol_wishlist') || '[]');
+
     document.querySelectorAll('.target-card').forEach(card => {
         const slug = card.dataset.slug;
         const p    = window.PRODUCTOS_DB?.[slug];
-        if (!p?.rating) return;
-        const title = card.querySelector('.target-card-title');
-        if (!title || card.querySelector('.card-rating')) return;
-        const stars = Math.round(p.rating);
-        const el = document.createElement('div');
-        el.className = 'card-rating';
-        el.innerHTML = `<span class="card-stars">${'★'.repeat(stars)}${'☆'.repeat(5 - stars)}</span><span class="card-rating-val">${p.rating}</span>`;
-        title.insertAdjacentElement('afterend', el);
+        if (!slug) return;
+
+        // Rating
+        if (p?.rating) {
+            const title = card.querySelector('.target-card-title');
+            if (title && !card.querySelector('.card-rating')) {
+                const stars = Math.round(p.rating);
+                const el = document.createElement('div');
+                el.className = 'card-rating';
+                el.innerHTML = `<span class="card-stars">${'★'.repeat(stars)}${'☆'.repeat(5 - stars)}</span><span class="card-rating-val">${p.rating}</span>`;
+                title.insertAdjacentElement('afterend', el);
+            }
+        }
+
+        // Botón wishlist
+        if (!card.querySelector('.card-wish-btn')) {
+            const inWish = wishlist.includes(slug);
+            const btn = document.createElement('button');
+            btn.className = 'card-wish-btn' + (inWish ? ' active' : '');
+            btn.title = inWish ? 'Quitar de favoritos' : 'Agregar a favoritos';
+            btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="${inWish ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
+            btn.addEventListener('click', e => {
+                e.stopPropagation();
+                const list = JSON.parse(localStorage.getItem('asol_wishlist') || '[]');
+                const idx  = list.indexOf(slug);
+                if (idx === -1) { list.push(slug); btn.classList.add('active'); btn.querySelector('svg').setAttribute('fill', 'currentColor'); showToast('Agregado a favoritos ♥'); }
+                else            { list.splice(idx, 1); btn.classList.remove('active'); btn.querySelector('svg').setAttribute('fill', 'none'); showToast('Eliminado de favoritos'); }
+                localStorage.setItem('asol_wishlist', JSON.stringify(list));
+            });
+            const imgWrap = card.querySelector('.target-card-img-wrap');
+            if (imgWrap) { imgWrap.style.position = 'relative'; imgWrap.appendChild(btn); }
+        }
     });
 
     // Inicialización de componentes globales presentes en todas las páginas

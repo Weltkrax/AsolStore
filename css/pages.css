@@ -1699,17 +1699,167 @@ img {
     color: var(--red);
 }
 
+/* ── Wishlist empty state ── */
+.wishlist-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 56px 24px;
+    text-align: center;
+    color: var(--muted);
+}
+
+.wishlist-empty p { font-weight: 700; color: var(--dark); font-size: 15px; margin: 0; }
+.wishlist-empty span { font-size: 13px; }
+
+.wish-explore-btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 10px 24px;
+    background: var(--red);
+    color: #fff;
+    border-radius: var(--r);
+    font-weight: 700;
+    font-size: 13px;
+    text-decoration: none;
+}
+
 /* ── Wishlist grid — rejilla de productos guardados en la lista de deseos del usuario ── */
 .wishlist-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 14px;
 }
 
-.wishlist-grid .target-card {
-    min-width: 0;
-    max-width: 100%;
+/* ── Wish card — tarjeta de producto en la lista de deseos ── */
+.wish-card {
+    background: var(--bg-alt);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    position: relative;
+    transition: var(--ease);
 }
+
+.wish-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+
+.wish-remove {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    border: none;
+    font-size: 11px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: background .2s;
+}
+
+.wish-remove:hover { background: var(--red); }
+
+.wish-img {
+    width: 100%;
+    height: 130px;
+    overflow: hidden;
+}
+
+.wish-info {
+    padding: 10px 12px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.wish-brand { font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; }
+.wish-title { font-size: 13px; font-weight: 700; color: var(--dark); line-clamp: 2; }
+.wish-price { font-size: 14px; font-weight: 800; color: var(--red); }
+
+.wish-buy-btn {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--red);
+    text-decoration: none;
+}
+
+.wish-buy-btn:hover { text-decoration: underline; }
+
+/* ── Address delete button ── */
+.address-delete {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 5px 12px;
+    cursor: pointer;
+    margin-left: 6px;
+    transition: var(--ease);
+}
+
+.address-delete:hover { border-color: var(--red); color: var(--red); }
+
+/* ── Address form inline ── */
+.address-form-inline {
+    background: var(--bg-alt);
+    border: 1.5px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 20px;
+    grid-column: 1 / -1;
+}
+
+.address-form-inline h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: var(--dark);
+}
+
+.address-form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.address-save-btn {
+    padding: 10px 24px;
+    background: var(--red);
+    color: #fff;
+    border: none;
+    border-radius: var(--r);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: var(--font);
+    transition: background .2s;
+}
+
+.address-save-btn:hover { background: var(--red-dark); }
+
+.address-cancel-btn {
+    padding: 10px 20px;
+    background: none;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--font);
+    transition: var(--ease);
+}
+
+.address-cancel-btn:hover { border-color: var(--dark); color: var(--dark); }
 
 /* ================================================================
    COMPONENTES UX GLOBALES

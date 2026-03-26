@@ -1580,6 +1580,29 @@ button {
     color: var(--muted);
 }
 
+/* ── Wishlist heart button — botón de favorito sobre la imagen de la tarjeta ── */
+.card-wish-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ccc;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+    transition: color .2s, transform .2s;
+    z-index: 2;
+}
+
+.card-wish-btn:hover { transform: scale(1.15); color: var(--red); }
+.card-wish-btn.active { color: var(--red); }
+
 /* ── Product card title — nombre del producto truncado a 2 líneas ── */
 .target-card-title {
     font-size: 13px;
