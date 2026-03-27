@@ -2791,4 +2791,21 @@ img {
     .error-title {
         font-size: 18px;
     }
+
+    /* Specs table scroll en móvil */
+    .specs-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .specs-table td:first-child {
+        width: auto;
+        min-width: 100px;
+    }
+
+    .specs-table td {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
 }
