@@ -105,28 +105,9 @@
                 <span id="typewriterPhrase"></span><span class="typewriter-cursor">|</span>
             </div>
             <div class="header-dropdown-right">
-                <div class="custom-dropdown"><span class="dropdown-label">Arte</span>
-                    <ul class="dropdown-options">
-                        <li><a href="${pagesDir}arte.html">Ver Arte</a></li>
-                        <li><a href="${cat}arte">Posters</a></li>
-                        <li><a href="${cat}arte">Figuras</a></li>
-                    </ul>
-                </div>
-                <div class="custom-dropdown"><span class="dropdown-label">Ropa</span>
-                    <ul class="dropdown-options">
-                        <li><a href="${pagesDir}ropa.html">Ver Ropa</a></li>
-                        <li><a href="${cat}ropa">Hoodies</a></li>
-                        <li><a href="${cat}ropa">Gorros</a></li>
-                    </ul>
-                </div>
-                <div class="custom-dropdown"><span class="dropdown-label">Wabis</span>
-                    <ul class="dropdown-options">
-                        <li><a href="${pagesDir}wabis.html">Ver Wabis</a></li>
-                        <li><a href="${cat}wabis">Punch Needle</a></li>
-                        <li><a href="${cat}wabis">Needle Felting</a></li>
-                        <li><a href="${cat}wabis">Retratos de mascota</a></li>
-                    </ul>
-                </div>
+                <a href="${pagesDir}arte.html" class="nav-link">Arte</a>
+                <a href="${pagesDir}ropa.html" class="nav-link">Ropa</a>
+                <a href="${pagesDir}wabis.html" class="nav-link">Wabis</a>
             </div>
         </div>`;
     }

@@ -144,6 +144,18 @@ button {
     right: 0;
     z-index: 1000;
     background: var(--white);
+    transition: box-shadow 0.2s;
+}
+
+/* ── Header shrunk — estado compacto al hacer scroll ── */
+
+/* header-top colapsa; header-mid y header-dropdown suben a su lugar */
+#mainHeader.header--shrunk .header-top {
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    pointer-events: none;
 }
 
 /* ── Header top bar — barra roja superior con redes sociales y texto animado ── */
@@ -154,9 +166,11 @@ button {
     justify-content: space-between;
     padding: 0 max(48px, calc((100% - var(--content-max)) / 2));
     height: 52px;
+    max-height: 80px;
     gap: 16px;
     overflow: hidden;
     position: relative;
+    transition: max-height 0.35s ease, opacity 0.3s ease, padding 0.3s ease;
 }
 
 /* ── Header top logo link — logo en barra superior, oculto por defecto en desktop ── */
@@ -307,6 +321,7 @@ button {
     gap: 20px;
     border-bottom: 1px solid var(--border);
     max-width: 100%;
+    transition: height 0.35s ease, padding 0.35s ease;
 }
 
 /* ── Hamburger button — botón de tres líneas que abre el menú lateral en móvil y desktop ── */
@@ -860,8 +875,10 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
     padding: 0 max(48px, calc((100% - var(--content-max)) / 2)) 0 0;
-    gap: 8px;
+    max-height: 80px;
+    transition: max-height 0.3s ease, opacity 0.25s ease;
 }
 
 /* ── Header dropdown left/right — lados izquierdo y derecho de la barra de dropdowns del header ── */
@@ -870,15 +887,15 @@ button {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-right: 120px;
 }
 
 /* ── Dropdown tagline — frase animada centrada en la barra del dropdown ── */
 .dropdown-tagline {
-    flex: 1;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
-    justify-content: center;
     font-family: 'Raleway', sans-serif;
     font-size: 12px;
     font-weight: 800;
@@ -887,6 +904,7 @@ button {
     text-transform: uppercase;
     opacity: 0.6;
     pointer-events: none;
+    white-space: nowrap;
 }
 
 /* ── Header dropdown left — fondo rojo extendido hasta el borde izquierdo ── */
@@ -934,9 +952,28 @@ button {
     letter-spacing: 0.3px;
 }
 
-.header-dropdown-right .dropdown-label:hover {
+.header-dropdown-right .nav-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 18px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+    transition: var(--ease);
+}
+
+.header-dropdown-right .nav-link:hover {
     color: var(--red);
     border-bottom-color: var(--red);
+}
+
+.header-dropdown-right .nav-link + .nav-link {
+    border-left: 1px solid var(--border);
 }
 
 .header-dropdown-right .custom-dropdown + .custom-dropdown {
@@ -1072,8 +1109,8 @@ button {
     background: linear-gradient(135deg, #050a1a 0%, #0a1428 50%, #0a0514 100%);
 }
 
-.hero-slide[data-bg="ofertas"] {
-    background: linear-gradient(135deg, #1a0505 0%, #2a0808 50%, #1a0a00 100%);
+.hero-slide[data-bg="wabis"] {
+    background: linear-gradient(135deg, #1a1208 0%, #2d1f0a 50%, #1a160a 100%);
 }
 
 /* ── Hero slide shapes — contenedor de figuras decorativas flotantes en el fondo del hero ── */
@@ -1751,9 +1788,6 @@ button {
     gap: 4px;
 }
 
-.banner-mini.dark {
-    background: var(--dark);
-}
 
 .banner-mini.red {
     background: var(--red);
@@ -1766,9 +1800,6 @@ button {
     letter-spacing: 1px;
 }
 
-.banner-mini.dark .banner-tag {
-    color: var(--red);
-}
 
 .banner-mini.red .banner-tag {
     color: rgba(255, 255, 255, 0.75);
@@ -1788,9 +1819,6 @@ button {
     margin-top: 2px;
 }
 
-.banner-mini.dark .banner-sub {
-    color: rgba(255, 255, 255, 0.45);
-}
 
 .banner-mini.red .banner-sub {
     color: rgba(255, 255, 255, 0.70);
@@ -3397,7 +3425,6 @@ button {
     .header-top,
     .header-mid,
     .cat-bar,
-    .header-dropdown-section,
     .bento-section,
     .carousel-section,
     .banner-strip,
@@ -3408,6 +3435,16 @@ button {
     .newsletter-section {
         padding-left: 20px;
         padding-right: 20px;
+    }
+
+    .header-dropdown-section {
+        padding-left: 0;
+        padding-right: 20px;
+    }
+
+    .header-dropdown-left {
+        min-width: 130px;
+        padding-left: 20px;
     }
 
     .header-mid {
@@ -3487,10 +3524,6 @@ button {
 @media (max-width:600px) {
     :root {
         --header-h: 106px;
-    }
-
-    .header-dropdown-right {
-        margin-right: 0;
     }
 
     .dropdown-tagline {
@@ -3583,7 +3616,7 @@ button {
 /* ── @media max-width: 480px — ajustes para iPhone 13 y móviles pequeños: header mínimo, tarjetas a 72vw ── */
 @media (max-width: 480px) {
     :root {
-        --header-h: 84px;
+        --header-h: 128px;
     }
 
     /* Header */
@@ -3597,44 +3630,58 @@ button {
     }
 
     .header-mid {
-        height: 60px;
-        padding: 0 12px;
-        gap: 8px;
+        height: 58px;
+        padding: 0 10px;
+        gap: 6px;
     }
 
     .brand-logo {
-        height: 44px;
-        width: 44px;
+        height: 36px;
+        width: 36px;
+    }
+
+    .hamburger-btn {
+        padding: 6px;
+        gap: 5px;
+    }
+
+    .hamburger-btn span {
+        width: 22px;
+        height: 2px;
     }
 
     .header-search {
-        height: 38px;
         flex: 1;
         min-width: 0;
-        overflow: hidden;
+        align-self: stretch;
+        margin: 8px 0;
+        height: auto;
+        padding: 0 6px 0 10px;
+        border-radius: 8px;
     }
 
     .header-search input {
         font-size: 13px;
         min-width: 0;
-        width: 0;
     }
 
     .header-search input::placeholder {
         font-size: 12px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
     }
 
     .header-search svg {
-        width: 15px;
-        height: 15px;
+        width: 14px;
+        height: 14px;
         flex-shrink: 0;
     }
 
     .header-icon-link {
-        padding: 6px;
+        padding: 4px 5px;
+    }
+
+    .header-icon-link svg {
+        width: 18px;
+        height: 18px;
     }
 
     .cat-bar {
@@ -3659,25 +3706,24 @@ button {
     /* Header dropdown section */
     .header-dropdown-section {
         padding: 0;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        scrollbar-width: none;
-        gap: 0;
-        justify-content: flex-start;
+        display: flex;
+        justify-content: space-between;
+        overflow: visible;
     }
-
-    .header-dropdown-section::-webkit-scrollbar { display: none; }
 
     .header-dropdown-left {
         width: auto;
-        min-width: 90px;
         flex-shrink: 0;
         padding-right: 12px;
+        padding-left: 12px;
+        justify-content: center;
+        margin-right: 0;
     }
 
     .header-dropdown-left .dropdown-label {
         font-size: 11px;
         letter-spacing: 0.5px;
+        padding: 4px 6px;
     }
 
     .dropdown-tagline {
@@ -3686,18 +3732,14 @@ button {
 
     .header-dropdown-right {
         display: flex;
-        flex-shrink: 0;
         margin-right: 0;
         gap: 0;
     }
 
-    .header-dropdown-right .dropdown-label {
-        font-size: 12px;
-        padding: 0 10px;
-    }
-
-    .header-dropdown-right .custom-dropdown + .custom-dropdown {
-        border-left: 1px solid var(--border);
+    .header-dropdown-right .nav-link {
+        font-size: 11px;
+        padding: 4px 8px;
+        letter-spacing: 0.3px;
     }
 
     /* Hero */

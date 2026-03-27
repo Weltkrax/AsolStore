@@ -273,11 +273,21 @@ function initHeader() {
     // Dropdowns personalizados del header: solo uno abierto a la vez
     const customDropdowns = document.querySelectorAll('.custom-dropdown');
     customDropdowns.forEach(dd => {
-        dd.querySelector('.dropdown-label')?.addEventListener('click', e => {
+        const label   = dd.querySelector('.dropdown-label');
+        const options = dd.querySelector('.dropdown-options');
+        label?.addEventListener('click', e => {
             e.stopPropagation();
             const isOpen = dd.classList.contains('open');
             customDropdowns.forEach(d => d.classList.remove('open'));
-            if (!isOpen) dd.classList.add('open');
+            if (!isOpen) {
+                if (options) {
+                    const rect = label.getBoundingClientRect();
+                    options.style.position = 'fixed';
+                    options.style.top  = rect.bottom + 4 + 'px';
+                    options.style.left = rect.left + 'px';
+                }
+                dd.classList.add('open');
+            }
         });
     });
     document.addEventListener('click', () => customDropdowns.forEach(d => d.classList.remove('open')));

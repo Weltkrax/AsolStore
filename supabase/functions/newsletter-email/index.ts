@@ -43,7 +43,7 @@ Deno.serve(async (req: Request) => {
               <span style="font-family:Impact,Arial Black,sans-serif;font-size:22px;color:#FF0D2A;letter-spacing:2px;">ASOL</span>
               <span style="font-family:Impact,Arial Black,sans-serif;font-size:14px;color:#FF0D2A;letter-spacing:6px;display:block;margin-top:-4px;">STORE</span>
             </div>
-            <p style="color:#fff;margin:12px 0 0;font-size:13px;letter-spacing:1px;text-transform:uppercase;opacity:0.85;">Gaming · Arte · Ropa · Accesorios</p>
+            <p style="color:#fff;margin:12px 0 0;font-size:13px;letter-spacing:1px;text-transform:uppercase;opacity:0.85;">Gaming · Arte · Ropa · Wabis</p>
           </td>
         </tr>
 

@@ -1,53 +1,6 @@
 (function () {
     'use strict';
 
-    /* ── Modo oscuro ── */
-
-    // Clave usada para guardar la preferencia de tema en localStorage
-    const THEME_KEY = 'asol_theme';
-
-    /**
-     * applyTheme — Aplica un tema visual (claro u oscuro) a toda la página.
-     * Actualiza el atributo data-theme del elemento <html>, cambia el icono
-     * del botón de alternancia y guarda la preferencia en localStorage.
-     * El botón aparece en el header en todas las páginas de la tienda.
-     * @param {string} t — Tema a aplicar: 'dark' o 'light'
-     */
-    function applyTheme(t) {
-        // Aplica el tema al elemento raíz para que las variables CSS de tema surtan efecto
-        document.documentElement.setAttribute('data-theme', t);
-        const btn = document.getElementById('darkToggle');
-        // Cambia el icono del botón según el tema: sol para modo oscuro, luna para claro
-        if (btn) btn.textContent = t === 'dark' ? '☀️' : '🌙';
-        // Persiste la preferencia del usuario en localStorage
-        localStorage.setItem(THEME_KEY, t);
-    }
-
-    /**
-     * initDarkMode — Inicializa el sistema de modo oscuro/claro.
-     * Lee la preferencia guardada (o la del sistema operativo) y la aplica.
-     * Si el botón de alternancia no existe aún en el DOM, lo crea e inserta
-     * en el grupo de iconos del header.
-     * Visible en el header de todas las páginas de la tienda.
-     */
-    function initDarkMode() {
-        const saved = localStorage.getItem(THEME_KEY);
-        // Si no hay preferencia guardada, usa la preferencia del sistema operativo
-        const sys   = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        applyTheme(saved || sys);
-
-        // Crea el botón de alternancia si no existe todavía en el header
-        const group = document.querySelector('.header-icons-group');
-        if (group && !document.getElementById('darkToggle')) {
-            const btn = document.createElement('button');
-            btn.id = 'darkToggle'; btn.className = 'dark-toggle'; btn.title = 'Cambiar tema';
-            btn.textContent = localStorage.getItem(THEME_KEY) === 'dark' ? '☀️' : '🌙';
-            // Al hacer clic, alterna entre 'dark' y 'light'
-            btn.addEventListener('click', () => applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
-            group.prepend(btn);
-        }
-    }
-
     /* ── Barra de navegación móvil ── */
 
     /**
@@ -586,7 +539,6 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         // Módulos activos en todas las páginas
-        initDarkMode();
         initMobileNav();
         initFreeShippingBar();
         initLazyLoading();
