@@ -1065,10 +1065,7 @@ button {
     border-radius: 14px;
     overflow: hidden;
     min-height: 220px;
-    background-image: url('../assets/images/productos/gaming-nintendo-switch.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: linear-gradient(135deg, #0f0f1a 0%, #1a0505 50%, #0d0d0d 100%);
 }
 
 /* ── Hero slides wrapper — contenedor flex que agrupa todas las diapositivas del hero ── */
@@ -1087,13 +1084,44 @@ button {
     justify-content: space-between;
     padding: 40px 48px;
     opacity: 0;
-    transition: opacity 0.6s ease;
+    transition: opacity 0.55s ease;
     z-index: 1;
 }
 
 .hero-slide.active {
     opacity: 1;
     z-index: 2;
+}
+
+/* Texto del slide: oculto por defecto, entra desde abajo al activarse */
+.hero-slide .hero-tag,
+.hero-slide .hero-title,
+.hero-slide .hero-sub,
+.hero-slide .hero-cta,
+.hero-slide .hero-price {
+    opacity: 0;
+    transform: translateY(16px);
+}
+
+.hero-slide.active .hero-tag {
+    opacity: 1; transform: translateY(0);
+    transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
+}
+.hero-slide.active .hero-title {
+    opacity: 1; transform: translateY(0);
+    transition: opacity 0.4s ease 0.25s, transform 0.4s ease 0.25s;
+}
+.hero-slide.active .hero-sub {
+    opacity: 1; transform: translateY(0);
+    transition: opacity 0.4s ease 0.35s, transform 0.4s ease 0.35s;
+}
+.hero-slide.active .hero-cta {
+    opacity: 1; transform: translateY(0);
+    transition: opacity 0.4s ease 0.45s, transform 0.4s ease 0.45s;
+}
+.hero-slide.active .hero-price {
+    opacity: 1; transform: translateY(0);
+    transition: opacity 0.4s ease 0.3s, transform 0.4s ease 0.3s;
 }
 
 /* ── Hero slide backgrounds — gradientes oscuros específicos por categoría de diapositiva ── */
@@ -1360,7 +1388,14 @@ button {
     position: relative;
     border-radius: var(--r);
     background: var(--bg-alt);
+    animation: bentoIn 0.55s cubic-bezier(0.4, 0, 0.2, 1) both;
 }
+
+.bento-box:nth-child(1) { animation-delay: 0.05s; }
+.bento-box:nth-child(2) { animation-delay: 0.15s; }
+.bento-box:nth-child(3) { animation-delay: 0.22s; }
+.bento-box:nth-child(4) { animation-delay: 0.30s; }
+.bento-box:nth-child(5) { animation-delay: 0.38s; }
 
 .bento-box img {
     width: 100%;
@@ -1585,12 +1620,13 @@ button {
     height: 180px;
     object-fit: cover;
     object-position: center;
-    transition: transform 0.35s ease;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), filter 0.5s ease;
     background: var(--bg-alt);
 }
 
 .target-card:hover .target-card-img {
-    transform: scale(1.04);
+    transform: scale(1.12);
+    filter: brightness(1.1) contrast(1.04);
 }
 
 /* ── Product card image wrap — contenedor de la imagen del producto con fondo gris ── */
@@ -1602,8 +1638,34 @@ button {
     justify-content: center;
     font-size: 48px;
     flex-shrink: 0;
-    transition: transform 0.3s ease;
     overflow: hidden;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.55s ease;
+    will-change: transform;
+}
+
+.target-card:hover .target-card-img-wrap {
+    box-shadow: 0 12px 32px rgba(0,0,0,0.22);
+}
+
+/* destello de luz que barre la imagen al hacer hover */
+.target-card-img-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 55%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+    transform: skewX(-15deg);
+    transition: left 0.6s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.target-card:hover .target-card-img-wrap::after {
+    left: 160%;
 }
 
 .target-card-img-wrap img {
@@ -1611,6 +1673,13 @@ button {
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1), filter 0.55s ease;
+    will-change: transform;
+}
+
+.target-card:hover .target-card-img-wrap img {
+    transform: scale(1.08);
+    filter: brightness(1.08) contrast(1.03);
 }
 
 /* ── Product card image wrap backgrounds — fondos de gradiente por categoría en la imagen ── */
@@ -1631,7 +1700,7 @@ button {
 }
 
 .target-card:hover .target-card-img-wrap {
-    transform: scale(1.04);
+    transform: none;
 }
 
 /* ── Product card content — área de texto con marca, título, descripción y precio ── */
@@ -3353,6 +3422,12 @@ button {
     100% {
         transform: scale(1)
     }
+}
+
+/* ── @keyframes bentoIn — entrada escalonada de las celdas del bento grid ── */
+@keyframes bentoIn {
+    from { opacity: 0; transform: translateY(28px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0)    scale(1); }
 }
 
 /* ── @keyframes fadeSlideUp — aparición con fade y desplazamiento hacia arriba de las tarjetas ── */

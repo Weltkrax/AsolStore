@@ -1216,6 +1216,40 @@ function initBackToTop() {
     btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
+/* ── Card tilt 3D ── */
+
+/**
+ * initCardTilt — Aplica efecto de inclinación 3D a la imagen de cada tarjeta
+ * de producto. La imagen se inclina siguiendo la posición del cursor dentro
+ * de la tarjeta, creando sensación de profundidad. Al salir, vuelve al centro.
+ */
+function initCardTilt() {
+    document.querySelectorAll('.target-card').forEach(card => {
+        const wrap = card.querySelector('.target-card-img-wrap');
+        if (!wrap) return;
+
+        card.addEventListener('mouseenter', () => {
+            wrap.style.transition = 'transform 0.12s ease, box-shadow 0.55s ease';
+        });
+
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            // Posición del cursor relativa al centro de la tarjeta (-1 a 1)
+            const x = (e.clientX - rect.left - rect.width  / 2) / (rect.width  / 2);
+            const y = (e.clientY - rect.top  - rect.height / 2) / (rect.height / 2);
+            // Inclinación máxima de 14 grados
+            const rotY =  x * 14;
+            const rotX = -y * 10;
+            wrap.style.transform = `perspective(500px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.04)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            wrap.style.transition = 'transform 0.55s cubic-bezier(0.4,0,0.2,1), box-shadow 0.55s ease';
+            wrap.style.transform  = 'perspective(500px) rotateX(0deg) rotateY(0deg) scale(1)';
+        });
+    });
+}
+
 /* ════════════════════════════════════════════════════════════════
    INIT — Punto de entrada principal: ejecuta todas las funciones
    de inicialización al estar el DOM completamente cargado.
@@ -1262,6 +1296,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Inicialización de componentes globales presentes en todas las páginas
+    initCardTilt();
     initHeader();
     initAuth();
     initHero();
