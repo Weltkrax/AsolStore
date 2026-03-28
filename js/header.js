@@ -106,7 +106,7 @@
             </div>
             <div class="header-dropdown-right">
                 <a href="${pagesDir}arte.html" class="nav-link">Arte</a>
-                <a href="${pagesDir}ropa.html" class="nav-link">Ropa</a>
+                <a href="${pagesDir}juve.html" class="nav-link">Juve</a>
                 <a href="${pagesDir}wabis.html" class="nav-link">Wabis</a>
             </div>
         </div>`;
@@ -138,7 +138,7 @@
                 <li><a href="${r}index.html">Inicio</a></li>
                 <li><a href="${cat}gaming">Gaming</a></li>
                 <li><a href="${cat}arte">Arte</a></li>
-                <li><a href="${cat}ropa">Ropa</a></li>
+                <li><a href="${cat}juve">Juve</a></li>
                 <li><a href="${cat}wabis">Wabis</a></li>
                 <li><a href="${inPg ? '../index.html#ofertas' : '#ofertas'}">Ofertas</a></li>
                 <li><a href="${pagesDir}asolstore.html">AsolStore</a></li>

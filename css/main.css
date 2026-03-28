@@ -1133,8 +1133,8 @@ button {
     background: linear-gradient(135deg, #1a0505 0%, #2d0a0a 50%, #1a1005 100%);
 }
 
-.hero-slide[data-bg="ropa"] {
-    background: linear-gradient(135deg, #050a1a 0%, #0a1428 50%, #0a0514 100%);
+.hero-slide[data-bg="juve"] {
+    background: linear-gradient(135deg, #1a0000 0%, #2d0505 50%, #1a0a00 100%);
 }
 
 .hero-slide[data-bg="wabis"] {
@@ -1452,7 +1452,7 @@ button {
     background: linear-gradient(135deg, #1a0505, #2d0a0a);
 }
 
-.bp-ropa {
+.bp-juve {
     background: linear-gradient(135deg, #050a1a, #0a1428);
 }
 
@@ -1691,8 +1691,8 @@ button {
     background: linear-gradient(135deg, #1a0505, #2d0a0a);
 }
 
-.bp-ropa-card {
-    background: linear-gradient(135deg, #050a1a, #0a1428);
+.bp-juve-card {
+    background: linear-gradient(135deg, #1a0000, #2d0505);
 }
 
 .bp-acc-card {

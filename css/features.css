@@ -488,7 +488,7 @@
 /* ── Hero de categoría — fondos diferenciados por cada tipo de categoría ── */
 .category-hero[data-cat="gaming"]  { background: linear-gradient(135deg, #0f0f1a, #1a0a2e); }
 .category-hero[data-cat="arte"]    { background: linear-gradient(135deg, #1a0505, #2d0a0a); }
-.category-hero[data-cat="ropa"]    { background: linear-gradient(135deg, #050a1a, #0a1428); }
+.category-hero[data-cat="juve"]    { background: linear-gradient(135deg, #050a1a, #0a1428); }
 .category-hero[data-cat="wabis"] { background: linear-gradient(135deg, #0a0a0a, #1a1a1a); }
 
 /* ── Hero de categoría texto — contenedor de la etiqueta, título y subtítulo del hero ── */

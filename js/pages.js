@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="filter-chip active" data-filter="all">Todos</button>
             <button class="filter-chip" data-filter="gaming">🎮 Gaming</button>
             <button class="filter-chip" data-filter="arte">🎨 Arte</button>
-            <button class="filter-chip" data-filter="ropa">👕 Ropa</button>
+            <button class="filter-chip" data-filter="juve">👕 Juve</button>
             <button class="filter-chip" data-filter="wabis">⭐ Wabis</button>
             <button class="filter-chip" data-filter="oferta">🔥 Ofertas</button>`;
         carouselSection.insertAdjacentElement('beforebegin', filterBar);

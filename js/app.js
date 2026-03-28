@@ -26,10 +26,10 @@ window.PRODUCTOS_DB = {
         resenas: [{nombre:"Ana G.",stars:5,texto:"Calidad de impresión increíble."},{nombre:"Marco P.",stars:4,texto:"Llegó bien embalado, sin daños."}]
     },
     "hoodie-contrast-color": {
-        categoria: "Ropa", categoriaSlug: "ropa", slug: "hoodie-contrast-color",
+        categoria: "Juve", categoriaSlug: "juve", slug: "hoodie-contrast-color",
         titulo: "Hoodie Contrast Color", precio: 120, precioOld: 140, descuento: "-15%", ahorras: 20, badge: "-15%", esNuevo: false, enStock: true,
         descripcion: "Patchwork premium diseño Guruvani. Material suave y resistente. Disponible en tallas S a XL.",
-        imagen: "../assets/images/productos/ropa-hoodie-gurunvani.jpg", galeria: ["../assets/images/productos/ropa-hoodie-gurunvani.jpg"],
+        imagen: "../assets/images/productos/juve-hoodie-gurunvani.jpg", galeria: ["../assets/images/productos/juve-hoodie-gurunvani.jpg"],
         rating: 4.9, ratingCount: 31, variantes: ["S","M","L","XL"], stock: 7, marca: "Gurunvani",
         specs: [["Material","80% algodón, 20% poliéster"],["Tallas","S, M, L, XL"],["Color","Gris / Negro contrast"],["Lavado","A máquina 30°C"]],
         resenas: [{nombre:"Luis F.",stars:5,texto:"Calidad premium, se nota en el tacto."},{nombre:"Valeria T.",stars:5,texto:"Diseño único, muchos me preguntaron dónde lo conseguí."}]
@@ -62,7 +62,7 @@ window.PRODUCTOS_DB = {
         resenas: [{nombre:"Jorge M.",stars:5,texto:"Regalo perfecto para fan de LOTR."},{nombre:"Carmen V.",stars:4,texto:"Bonita réplica, el grabado es claro."}]
     },
     "gorra-snapback": {
-        categoria: "Ropa", categoriaSlug: "ropa", slug: "gorra-snapback",
+        categoria: "Juve", categoriaSlug: "juve", slug: "gorra-snapback",
         titulo: "Gorra Snapback Logo", precio: 39, precioOld: 49, descuento: "-20%", ahorras: 10, badge: "-20%", esNuevo: false, enStock: true,
         descripcion: "Edición exclusiva AsolStore. Ajustable, material premium 100% algodón. Logo bordado frontal.",
         imagen: "../assets/images/productos/acc-ipad-pro.jpg", galeria: ["../assets/images/productos/acc-ipad-pro.jpg"],
@@ -603,7 +603,7 @@ function initReveal() {
 function initTypewriter() {
     const el = document.getElementById('typewriterPhrase');
     if (!el) return;
-    const phrases = ['Gaming','Arte','Ropa','Wabis','Envíos a todo el Perú','Garantía oficial','Novedades cada semana'];
+    const phrases = ['Gaming','Arte','Juve','Wabis','Envíos a todo el Perú','Garantía oficial','Novedades cada semana'];
     let pi = 0, ci = 0, del = false;
     const tick = () => {
         const cur = phrases[pi];
@@ -796,8 +796,8 @@ function initCategoriaPage() {
     const cat   = getCatFromURL();
 
     // Mapas de etiquetas y títulos descriptivos por categoría
-    const labels = { gaming: 'Gaming', arte: 'Arte', ropa: 'Ropa', wabis: 'Wabis' };
-    const titles = { gaming: 'Consolas & Wabis', arte: 'Posters & Figuras', ropa: 'Hoodies & Ropa', wabis: 'Tecnología & Más' };
+    const labels = { gaming: 'Gaming', arte: 'Arte', juve: 'Juve', wabis: 'Wabis' };
+    const titles = { gaming: 'Consolas & Wabis', arte: 'Posters & Figuras', juve: 'Hoodies & Juve', wabis: 'Tecnología & Más' };
     const label  = labels[cat] || 'Categoría';
     const el = id => document.getElementById(id);
 
@@ -1325,7 +1325,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('.category-page')) {
         // Activa el slide del hero que corresponde a la categoría mostrada en la URL
         const cat    = getCatFromURL();
-        const bgMap  = { gaming: 'gaming', arte: 'arte', ropa: 'ropa', wabis: 'ofertas' };
+        const bgMap  = { gaming: 'gaming', arte: 'arte', juve: 'juve', wabis: 'ofertas' };
         const target = bgMap[cat];
         if (target) {
             const slides = document.querySelectorAll('.hero-slide');
