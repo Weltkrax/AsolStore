@@ -34,6 +34,24 @@ window.PRODUCTOS_DB = {
         specs: [["Material","80% algodón, 20% poliéster"],["Tallas","S, M, L, XL"],["Color","Gris / Negro contrast"],["Lavado","A máquina 30°C"]],
         resenas: [{nombre:"Luis F.",stars:5,texto:"Calidad premium, se nota en el tacto."},{nombre:"Valeria T.",stars:5,texto:"Diseño único, muchos me preguntaron dónde lo conseguí."}]
     },
+    "gatillo-mobile-pro-metal": {
+        categoria: "AsolStore", categoriaSlug: "asolstore", slug: "gatillo-mobile-pro-metal",
+        titulo: "Gatillo Mobile Pro Metal", precio: 19.90, precioOld: null, descuento: null, ahorras: null, badge: "NUEVO", esNuevo: true, enStock: true,
+        descripcion: "Par de gatillos para móvil con cuerpo acrílico transparente y botones de metal plateado. Ajuste por rosca para cualquier smartphone. Ideal para shooters como COD Mobile y PUBG.",
+        imagen: "../assets/images/productos/asolstore-gatillo-pro-metal.jpg", galeria: ["../assets/images/productos/asolstore-gatillo-pro-metal.jpg"],
+        rating: 0, ratingCount: 0, variantes: ["Transparente / Metal"], stock: 30, marca: "AsolStore",
+        specs: [["Material","Acrílico + aluminio"],["Compatibilidad","iOS y Android"],["Ajuste","Rosca regulable"],["Incluye","Par de gatillos + caja plástica"],["Juegos recomendados","COD Mobile, PUBG, Free Fire"]],
+        resenas: []
+    },
+    "gatillo-plastico-gamer": {
+        categoria: "AsolStore", categoriaSlug: "asolstore", slug: "gatillo-plastico-gamer",
+        titulo: "Gatillo Plástico Gamer", precio: 14.90, precioOld: null, descuento: null, ahorras: null, badge: "NUEVO", esNuevo: true, enStock: true,
+        descripcion: "Par de gatillos para móvil en ABS resistente con detalles rojos. Clip universal compatible con la mayoría de smartphones. Respuesta rápida para mayor ventaja en partida.",
+        imagen: "../assets/images/productos/asolstore-gatillo-plastico-gamer.jpg", galeria: ["../assets/images/productos/asolstore-gatillo-plastico-gamer.jpg"],
+        rating: 0, ratingCount: 0, variantes: ["Negro / Rojo"], stock: 22, marca: "AsolStore",
+        specs: [["Material","ABS resistente"],["Compatibilidad","iOS y Android"],["Clip","Universal ajustable"],["Incluye","Par de gatillos + caja plástica"],["Juegos recomendados","COD Mobile, PUBG, Free Fire, Minecraft"]],
+        resenas: []
+    },
     "kit-gatillos-sarafox": {
         categoria: "Gaming", categoriaSlug: "gaming", slug: "kit-gatillos-sarafox",
         titulo: "Kit Gatillos Sarafox F6", precio: 55, precioOld: 65, descuento: "-15%", ahorras: 10, badge: "NUEVO", esNuevo: true, enStock: true,
