@@ -79,41 +79,14 @@ window.PRODUCTOS_DB = {
         specs: [["Modelo","Sarafox F6"],["Compatibilidad","iOS y Android"],["Botones","4 gatillos físicos"],["Material","ABS + aluminio"]],
         resenas: [{nombre:"Rodrigo C.",stars:5,texto:"Mejoré mucho en PUBG Mobile."},{nombre:"Sofía R.",stars:4,texto:"Buena calidad, fácil de instalar."}]
     },
-    "iphone-13-128gb": {
-        categoria: "Wabis", categoriaSlug: "wabis", slug: "iphone-13-128gb",
-        titulo: "iPhone 13 128GB", precio: 1899, precioOld: 2099, descuento: "-10%", ahorras: 200, badge: "-10%", esNuevo: false, enStock: true,
-        descripcion: "Midnight — SIM libre. Garantía oficial Apple. Chip A15 Bionic, cámara dual 12MP, pantalla Super Retina XDR 6.1\".",
-        imagen: "../assets/images/productos/acc-iphone13-midnight.jpg", galeria: ["../assets/images/productos/acc-iphone13-midnight.jpg"],
-        rating: 4.9, ratingCount: 8, variantes: ["128GB","256GB"], stock: 3, marca: "Apple",
-        specs: [["Chip","A15 Bionic"],["Pantalla","6.1\" Super Retina XDR"],["Cámara","Dual 12MP"],["Batería","3227 mAh"],["Almacenamiento","128 GB"]],
-        resenas: [{nombre:"Patricia L.",stars:5,texto:"Llegó sellado, original. La cámara es espectacular."}]
-    },
-    "anillo-senor-anillos": {
-        categoria: "Arte", categoriaSlug: "arte", slug: "anillo-senor-anillos",
-        titulo: "Anillo El Señor de los Anillos", precio: 45, precioOld: 53, descuento: "-15%", ahorras: 8, badge: "-15%", esNuevo: false, enStock: true,
-        descripcion: "Réplica coleccionable oficial. Incluye caja de presentación. Aleación premium con baño dorado.",
-        imagen: "../assets/images/productos/arte-pintura-gato-payaso.jpg", galeria: ["../assets/images/productos/arte-pintura-gato-payaso.jpg"],
-        rating: 4.5, ratingCount: 22, variantes: ["18mm","20mm","22mm"], stock: 10, marca: "Tolkien",
-        specs: [["Material","Aleación zinc + baño dorado"],["Incluye","Caja coleccionable"],["Inscripción","Élfico grabado"]],
-        resenas: [{nombre:"Jorge M.",stars:5,texto:"Regalo perfecto para fan de LOTR."},{nombre:"Carmen V.",stars:4,texto:"Bonita réplica, el grabado es claro."}]
-    },
     "gorra-snapback": {
         categoria: "Juve", categoriaSlug: "juve", slug: "gorra-snapback",
         titulo: "Gorra Snapback Logo", precio: 39, precioOld: 49, descuento: "-20%", ahorras: 10, badge: "-20%", esNuevo: false, enStock: true,
-        descripcion: "Edición exclusiva AsolStore. Ajustable, material premium 100% algodón. Logo bordado frontal.",
-        imagen: "../assets/images/productos/acc-ipad-pro.jpg", galeria: ["../assets/images/productos/acc-ipad-pro.jpg"],
-        rating: 4.8, ratingCount: 15, variantes: ["Talla única"], stock: 18, marca: "AsolStore",
+        descripcion: "Edición exclusiva Juve. Ajustable, material premium 100% algodón. Logo bordado frontal.",
+        imagen: "../assets/images/productos/juve-hoodie-gurunvani.jpg", galeria: ["../assets/images/productos/juve-hoodie-gurunvani.jpg"],
+        rating: 4.8, ratingCount: 15, variantes: ["Talla única"], stock: 18, marca: "Juve",
         specs: [["Material","100% algodón"],["Talla","Única ajustable"],["Color","Negro / Logo rojo"],["Cierre","Snapback plástico"]],
         resenas: [{nombre:"Kevin A.",stars:5,texto:"Calidad excelente, el bordado es nítido."}]
-    },
-    "samsung-s22-ultra": {
-        categoria: "Wabis", categoriaSlug: "wabis", slug: "samsung-s22-ultra",
-        titulo: "Samsung Galaxy S22 Ultra", precio: 2499, precioOld: 2799, descuento: "-11%", ahorras: 300, badge: "-11%", esNuevo: true, enStock: true,
-        descripcion: "Pantalla Dynamic AMOLED 6.8\", S Pen integrado, batería 5000mAh, cámara 108MP. Color Phantom Black.",
-        imagen: "../assets/images/productos/acc-samsung-s22-ultra.jpg", galeria: ["../assets/images/productos/acc-samsung-s22-ultra.jpg"],
-        rating: 4.7, ratingCount: 43, variantes: ["128GB","256GB","512GB"], stock: 5, marca: "Samsung",
-        specs: [["Pantalla","6.8\" Dynamic AMOLED 2X"],["Cámara","108MP principal"],["Batería","5000 mAh"],["S Pen","Integrado"]],
-        resenas: [{nombre:"Roberto S.",stars:5,texto:"El S Pen hace la diferencia."},{nombre:"Daniela M.",stars:4,texto:"Excelente teléfono, un poco grande pero se acostumbra."}]
     },
     "control-ps5": {
         categoria: "Gaming", categoriaSlug: "gaming", slug: "control-ps5",
@@ -151,51 +124,6 @@ window.PRODUCTOS_DB = {
         specs: [["Dimensiones","40 × 50 cm"],["Soporte","Lienzo canvas"],["Marco","Flotante negro"],["Certificado","Incluido"]],
         resenas: [{nombre:"Isabella R.",stars:5,texto:"Increíble calidad. El marco flotante le da un toque premium."}]
     },
-    "ipad-pro": {
-        categoria: "Wabis", categoriaSlug: "wabis", slug: "ipad-pro",
-        titulo: "iPad Pro 11 M2", precio: 3299, precioOld: 3799, descuento: "-13%", ahorras: 500, badge: "-13%", esNuevo: true, enStock: true,
-        descripcion: "Chip M2, pantalla Liquid Retina 11 pulgadas, compatible con Apple Pencil 2. Color Space Gray.",
-        imagen: "../assets/images/productos/acc-ipad-pro.jpg", galeria: ["../assets/images/productos/acc-ipad-pro.jpg"],
-        rating: 4.9, ratingCount: 12, variantes: ["128GB WiFi","256GB WiFi","128GB 5G"], stock: 3, marca: "Apple",
-        specs: [["Chip","Apple M2"],["Pantalla","11 pulg Liquid Retina"],["Cámara","12MP + 10MP Ultra Wide"],["Batería","~10 horas"]],
-        resenas: [{nombre:"Gabriela N.",stars:5,texto:"La pantalla es espectacular. Rápidísimo para trabajo creativo."}]
-    },
-    "sony-walkman": {
-        categoria: "Wabis", categoriaSlug: "wabis", slug: "sony-walkman",
-        titulo: "Sony Walkman NW-E394", precio: 189, precioOld: 229, descuento: "-17%", ahorras: 40, badge: "-17%", esNuevo: false, enStock: true,
-        descripcion: "Reproductor MP3 con 8GB de almacenamiento, auriculares incluidos. Batería hasta 35 horas.",
-        imagen: "../assets/images/productos/acc-sony-walkman.jpg", galeria: ["../assets/images/productos/acc-sony-walkman.jpg"],
-        rating: 4.4, ratingCount: 29, variantes: ["8GB Negro"], stock: 11, marca: "Sony",
-        specs: [["Almacenamiento","8 GB"],["Batería","35 horas"],["Formatos","MP3, WMA, AAC"],["Incluye","Auriculares Sony"]],
-        resenas: [{nombre:"Felipe O.",stars:4,texto:"Sonido limpio, batería dura mucho. Ideal para el gym."}]
-    },
-    "bateria-pdp": {
-        categoria: "Wabis", categoriaSlug: "wabis", slug: "bateria-pdp",
-        titulo: "Batería PDP Afro Negro", precio: 1299, precioOld: 1599, descuento: "-19%", ahorras: 300, badge: "-19%", esNuevo: true, enStock: true,
-        descripcion: "Kit de batería acústica profesional 5 piezas. Color negro mate. Incluye platillos y hardware completo.",
-        imagen: "../assets/images/productos/acc-bateria-pdp-negro.jpg", galeria: ["../assets/images/productos/acc-bateria-pdp-negro.jpg"],
-        rating: 4.7, ratingCount: 8, variantes: ["5 piezas"], stock: 2, marca: "PDP",
-        specs: [["Piezas","Bombo 22, 2 toms, floor tom, caja"],["Platillos","Hi-hat 14 + crash 16"],["Color","Negro mate"],["Garantía","12 meses"]],
-        resenas: [{nombre:"Omar S.",stars:5,texto:"Excelente calidad para el precio. Sonido profesional."}]
-    },
-    "guitarra-bajo": {
-        categoria: "Wabis", categoriaSlug: "wabis", slug: "guitarra-bajo",
-        titulo: "Guitarra Bajo Eléctrico Auburn", precio: 899, precioOld: 1099, descuento: "-18%", ahorras: 200, badge: "-18%", esNuevo: false, enStock: true,
-        descripcion: "Bajo eléctrico Auburn Jazz Bass 4 cuerdas. Color negro con pickguard blanco. Incluye cable y correa.",
-        imagen: "../assets/images/productos/acc-guitarra-bajo.jpg", galeria: ["../assets/images/productos/acc-guitarra-bajo.jpg"],
-        rating: 4.6, ratingCount: 15, variantes: ["4 cuerdas Negro"], stock: 3, marca: "Auburn",
-        specs: [["Cuerdas","4"],["Pastillas","2x Jazz Bass split"],["Madera cuerpo","Tilo"],["Incluye","Cable + correa"]],
-        resenas: [{nombre:"Sebastián M.",stars:5,texto:"Acción baja, fácil de tocar. Excelente para principiantes."}]
-    },
-    "yamaha-rydeen": {
-        categoria: "Wabis", categoriaSlug: "wabis", slug: "yamaha-rydeen",
-        titulo: "Yamaha Rydeen Drum Kit", precio: 2199, precioOld: 2699, descuento: "-19%", ahorras: 500, badge: "-19%", esNuevo: false, enStock: true,
-        descripcion: "Batería acústica Yamaha Rydeen 5 piezas. Color Surf Green. Incluye platillos Zildjian y hardware.",
-        imagen: "../assets/images/productos/acc-yamaha-rydeen.jpg", galeria: ["../assets/images/productos/acc-yamaha-rydeen.jpg"],
-        rating: 4.8, ratingCount: 11, variantes: ["Surf Green"], stock: 1, marca: "Yamaha",
-        specs: [["Piezas","5 piezas + platillos"],["Platillos","Zildjian ZBT"],["Color","Surf Green"],["Garantía","24 meses Yamaha"]],
-        resenas: [{nombre:"Laura B.",stars:5,texto:"La calidad Yamaha se nota desde el primer golpe."}]
-    }
 };
 
 /* Corrige rutas de imágenes cuando la página está en la raíz (no en /pages/) */
