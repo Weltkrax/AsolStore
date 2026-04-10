@@ -34,6 +34,24 @@ window.PRODUCTOS_DB = {
         specs: [["Material","80% algodón, 20% poliéster"],["Tallas","S, M, L, XL"],["Color","Gris / Negro contrast"],["Lavado","A máquina 30°C"]],
         resenas: [{nombre:"Luis F.",stars:5,texto:"Calidad premium, se nota en el tacto."},{nombre:"Valeria T.",stars:5,texto:"Diseño único, muchos me preguntaron dónde lo conseguí."}]
     },
+    "llavero-gizmo": {
+        categoria: "Wabis", categoriaSlug: "wabis", slug: "llavero-gizmo",
+        titulo: "Llavero Gizmo Needle Felting", precio: 45, precioOld: null, descuento: null, ahorras: null, badge: "NUEVO", esNuevo: true, enStock: true,
+        descripcion: "Llavero artesanal hecho a mano con técnica needle felting sobre lana. Pieza única — cada uno es diferente. Diseño Gizmo de Gremlins.",
+        imagen: "../assets/images/productos/wabis-llavero-gizmo.jpg", galeria: ["../assets/images/productos/wabis-llavero-gizmo.jpg"],
+        rating: 0, ratingCount: 0, variantes: ["Único"], stock: 1, marca: "Wabi Sabi Studio",
+        specs: [["Técnica","Needle felting"],["Material","Lana natural"],["Incluye","Mosquetón metálico"],["Tipo","Pieza única artesanal"]],
+        resenas: []
+    },
+    "bandeja-nube-carebear": {
+        categoria: "Wabis", categoriaSlug: "wabis", slug: "bandeja-nube-carebear",
+        titulo: "Bandeja Nube Care Bear", precio: 55, precioOld: null, descuento: null, ahorras: null, badge: "NUEVO", esNuevo: true, enStock: true,
+        descripcion: "Bandeja artesanal en forma de nube elaborada en resina. Incluye figura Care Bear. Perfecta para llaves, joyas o decoración.",
+        imagen: "../assets/images/productos/wabis-bandeja-nube-carebear.jpg", galeria: ["../assets/images/productos/wabis-bandeja-nube-carebear.jpg"],
+        rating: 0, ratingCount: 0, variantes: ["Azul"], stock: 1, marca: "Wabi Sabi Studio",
+        specs: [["Material","Resina artesanal"],["Incluye","Figura Care Bear"],["Uso","Organizador / decoración"],["Tipo","Pieza única artesanal"]],
+        resenas: []
+    },
     "gatillo-mobile-pro-metal": {
         categoria: "AsolStore", categoriaSlug: "asolstore", slug: "gatillo-mobile-pro-metal",
         titulo: "Gatillo Mobile Pro Metal", precio: 19.90, precioOld: null, descuento: null, ahorras: null, badge: "NUEVO", esNuevo: true, enStock: true,
