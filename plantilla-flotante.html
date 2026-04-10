@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plantilla Flotante — AsolStore</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #111;
+    color: #ccc;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    gap: 32px;
+  }
+
+  h1 {
+    font-size: 22px;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+
+  .subtitle {
+    color: #555;
+    font-size: 13px;
+    margin-top: -24px;
+    text-align: center;
+  }
+
+  /* ── CONTROLES ── */
+  .panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    max-width: 860px;
+    width: 100%;
+  }
+
+  .control-group {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 160px;
+  }
+
+  .control-group label {
+    font-size: 11px;
+    color: #666;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .control-group input[type="range"] {
+    accent-color: #e63946;
+    cursor: pointer;
+  }
+
+  .control-group select {
+    background: #222;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  .control-group input[type="color"] {
+    width: 100%;
+    height: 32px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: none;
+  }
+
+  .val {
+    font-size: 12px;
+    color: #e63946;
+    font-weight: 700;
+    text-align: right;
+  }
+
+  /* ── ZONA DE CARGA ── */
+  .upload-zone {
+    border: 2px dashed #333;
+    border-radius: 14px;
+    padding: 28px 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    min-width: 220px;
+  }
+
+  .upload-zone:hover {
+    border-color: #e63946;
+    background: #1a0a0a;
+  }
+
+  .upload-zone input { display: none; }
+  .upload-zone .icon { font-size: 28px; margin-bottom: 8px; }
+  .upload-zone p { font-size: 13px; color: #555; }
+  .upload-zone span { color: #e63946; font-weight: 700; }
+
+  /* ── CANVAS DE EXPORTACIÓN ── */
+  .export-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  /* ── RESULTADO VISUAL ── */
+  .result-frame {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px #2a2a2a;
+  }
+
+  canvas#previewCanvas {
+    display: block;
+  }
+
+  /* ── BOTONES ── */
+  .btn-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  button {
+    padding: 10px 22px;
+    border-radius: 8px;
+    border: none;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  button:hover { opacity: 0.85; }
+
+  .btn-primary { background: #e63946; color: #fff; }
+  .btn-secondary { background: #222; color: #fff; border: 1px solid #333; }
+
+  /* ── INSTRUCCIONES ── */
+  .instrucciones {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    padding: 16px 22px;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.8;
+    max-width: 860px;
+    width: 100%;
+  }
+
+  .instrucciones strong { color: #aaa; }
+</style>
+</head>
+<body>
+
+<h1>Plantilla Objeto Flotante</h1>
+<p class="subtitle">Carga cualquier foto · Fondo blanco automático · Efecto flotante con sombra</p>
+
+<!-- ZONA DE CARGA -->
+<div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+  <input type="file" id="fileInput" accept="image/*" onchange="cargarImagen(event)">
+  <div class="icon">📷</div>
+  <p>Haz clic o arrastra una foto aquí</p>
+  <p><span>Acepta JPG, PNG, WEBP</span></p>
+</div>
+
+<!-- CONTROLES -->
+<div class="panel" id="controles" style="display:none">
+
+  <div class="control-group">
+    <label>Fondo</label>
+    <select id="tipoBg" onchange="renderizar()">
+      <option value="blanco">Blanco puro</option>
+      <option value="gris">Gris claro</option>
+      <option value="oscuro">Oscuro gaming</option>
+      <option value="degradado">Degradado</option>
+      <option value="color">Color personalizado</option>
+    </select>
+  </div>
+
+  <div class="control-group" id="grupoColor" style="display:none">
+    <label>Color de fondo</label>
+    <input type="color" id="colorBg" value="#1a0000" onchange="renderizar()">
+  </div>
+
+  <div class="control-group">
+    <label>Formato</label>
+    <select id="formato" onchange="renderizar()">
+      <option value="cuadrado">Cuadrado 1:1</option>
+      <option value="stories">Stories 9:16</option>
+      <option value="banner">Banner 16:9</option>
+    </select>
+  </div>
+
+  <div class="control-group">
+    <label>Tamaño objeto <span class="val" id="valZoom">75%</span></label>
+    <input type="range" id="zoom" min="30" max="95" value="75" oninput="document.getElementById('valZoom').textContent=this.value+'%'; renderizar()">
+  </div>
+
+  <div class="control-group">
+    <label>Posición vertical <span class="val" id="valPos">50%</span></label>
+    <input type="range" id="posY" min="10" max="90" value="50" oninput="document.getElementById('valPos').textContent=this.value+'%'; renderizar()">
+  </div>
+
+  <div class="control-group">
+    <label>Intensidad sombra <span class="val" id="valSombra">60%</span></label>
+    <input type="range" id="sombra" min="0" max="100" value="60" oninput="document.getElementById('valSombra').textContent=this.value+'%'; renderizar()">
+  </div>
+
+  <div class="control-group">
+    <label>Umbral fondo blanco <span class="val" id="valUmbral">240</span></label>
+    <input type="range" id="umbral" min="150" max="255" value="240" oninput="document.getElementById('valUmbral').textContent=this.value; renderizar()">
+  </div>
+
+  <div class="control-group">
+    <label>Texto (opcional)</label>
+    <input type="text" id="textoProducto" placeholder="Ej: S/ 19.90" oninput="renderizar()"
+      style="background:#222;border:1px solid #333;border-radius:6px;color:#fff;padding:5px 10px;font-size:13px;">
+  </div>
+
+</div>
+
+<!-- CANVAS RESULTADO -->
+<div class="export-wrap" id="exportWrap" style="display:none">
+  <div class="result-frame">
+    <canvas id="previewCanvas"></canvas>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn-primary" onclick="descargar()">⬇ Descargar imagen</button>
+    <button class="btn-secondary" onclick="copiarPortapapeles()">📋 Copiar al portapapeles</button>
+  </div>
+</div>
+
+<!-- INSTRUCCIONES -->
+<div class="instrucciones">
+  <strong>Cómo funciona:</strong><br>
+  1. Carga una foto del producto — funciona mejor con <strong>fondo blanco o claro</strong><br>
+  2. Ajusta el <strong>umbral de fondo blanco</strong> para eliminar más o menos el fondo (subir = elimina más)<br>
+  3. Elige formato: <strong>Cuadrado</strong> para feed · <strong>Stories</strong> para TikTok/Instagram · <strong>Banner</strong> para Marketplace<br>
+  4. Descarga o copia directo al portapapeles para pegar en WhatsApp o redes<br><br>
+  <strong>Tip:</strong> Si el fondo no desaparece del todo, primero usa <strong>remove.bg</strong> y luego carga esa imagen aquí para el efecto flotante.
+</div>
+
+<script>
+  let imagenOriginal = null
+  let imgElement = null
+
+  // ── CARGAR IMAGEN ──
+  function cargarImagen(e) {
+    const file = e.target.files[0]
+    if (!file) return
+
+    const reader = new FileReader()
+    reader.onload = ev => {
+      imgElement = new Image()
+      imgElement.onload = () => {
+        imagenOriginal = imgElement
+        document.getElementById('controles').style.display = 'flex'
+        document.getElementById('exportWrap').style.display = 'flex'
+        renderizar()
+      }
+      imgElement.src = ev.target.result
+    }
+    reader.readAsDataURL(file)
+  }
+
+  // ── CONTROLES ──
+  document.getElementById('tipoBg').addEventListener('change', function() {
+    document.getElementById('grupoColor').style.display =
+      this.value === 'color' ? 'flex' : 'none'
+    renderizar()
+  })
+
+  // ── RENDER PRINCIPAL ──
+  function renderizar() {
+    if (!imagenOriginal) return
+
+    const canvas = document.getElementById('previewCanvas')
+    const ctx = canvas.getContext('2d')
+
+    // Tamaño del canvas según formato
+    const formato = document.getElementById('formato').value
+    let cW, cH
+    if (formato === 'cuadrado') { cW = 600; cH = 600 }
+    else if (formato === 'stories') { cW = 400; cH = 711 }
+    else { cW = 711; cH = 400 }
+
+    canvas.width = cW
+    canvas.height = cH
+
+    // ── FONDO ──
+    const tipoBg = document.getElementById('tipoBg').value
+    if (tipoBg === 'blanco') {
+      ctx.fillStyle = '#ffffff'
+      ctx.fillRect(0, 0, cW, cH)
+    } else if (tipoBg === 'gris') {
+      ctx.fillStyle = '#f4f4f4'
+      ctx.fillRect(0, 0, cW, cH)
+    } else if (tipoBg === 'oscuro') {
+      const grad = ctx.createLinearGradient(0, 0, cW, cH)
+      grad.addColorStop(0, '#0f0f1a')
+      grad.addColorStop(1, '#1a0505')
+      ctx.fillStyle = grad
+      ctx.fillRect(0, 0, cW, cH)
+    } else if (tipoBg === 'degradado') {
+      const grad = ctx.createRadialGradient(cW/2, cH/2, 0, cW/2, cH/2, cW*0.7)
+      grad.addColorStop(0, '#1a1a2e')
+      grad.addColorStop(1, '#0a0a0a')
+      ctx.fillStyle = grad
+      ctx.fillRect(0, 0, cW, cH)
+    } else if (tipoBg === 'color') {
+      ctx.fillStyle = document.getElementById('colorBg').value
+      ctx.fillRect(0, 0, cW, cH)
+    }
+
+    // ── IMAGEN SIN FONDO (canvas temporal) ──
+    const tmpCanvas = document.createElement('canvas')
+    tmpCanvas.width = imagenOriginal.width
+    tmpCanvas.height = imagenOriginal.height
+    const tmpCtx = tmpCanvas.getContext('2d')
+    tmpCtx.drawImage(imagenOriginal, 0, 0)
+
+    // Eliminar fondo claro por umbral
+    const umbral = parseInt(document.getElementById('umbral').value)
+    const imageData = tmpCtx.getImageData(0, 0, tmpCanvas.width, tmpCanvas.height)
+    const data = imageData.data
+    for (let i = 0; i < data.length; i += 4) {
+      const r = data[i], g = data[i+1], b = data[i+2]
+      if (r > umbral && g > umbral && b > umbral) {
+        data[i+3] = 0 // transparente
+      }
+    }
+    tmpCtx.putImageData(imageData, 0, 0)
+
+    // ── CALCULAR POSICIÓN Y TAMAÑO ──
+    const zoom = parseInt(document.getElementById('zoom').value) / 100
+    const posYpct = parseInt(document.getElementById('posY').value) / 100
+
+    const maxW = cW * zoom
+    const maxH = cH * zoom
+    const ratio = Math.min(maxW / tmpCanvas.width, maxH / tmpCanvas.height)
+    const dW = tmpCanvas.width * ratio
+    const dH = tmpCanvas.height * ratio
+    const dX = (cW - dW) / 2
+    const dY = (cH - dH) * posYpct
+
+    // ── SOMBRA ELIPSE (efecto flotante) ──
+    const sombraIntensidad = parseInt(document.getElementById('sombra').value) / 100
+    if (sombraIntensidad > 0) {
+      const sX = dX + dW * 0.1
+      const sY = dY + dH - (dH * 0.04)
+      const sW = dW * 0.8
+      const sH = dH * 0.08
+      const sGrad = ctx.createRadialGradient(sX + sW/2, sY + sH/2, 0, sX + sW/2, sY + sH/2, sW/2)
+      sGrad.addColorStop(0, `rgba(0,0,0,${sombraIntensidad * 0.5})`)
+      sGrad.addColorStop(1, 'rgba(0,0,0,0)')
+      ctx.fillStyle = sGrad
+      ctx.beginPath()
+      ctx.ellipse(sX + sW/2, sY + sH/2, sW/2, sH/2, 0, 0, Math.PI*2)
+      ctx.fill()
+    }
+
+    // ── SOMBRA DIFUSA DEL OBJETO ──
+    ctx.save()
+    ctx.shadowColor = 'rgba(0,0,0,' + (sombraIntensidad * 0.4) + ')'
+    ctx.shadowBlur = 40
+    ctx.shadowOffsetY = 20
+    ctx.drawImage(tmpCanvas, dX, dY, dW, dH)
+    ctx.restore()
+
+    // ── OBJETO ──
+    ctx.drawImage(tmpCanvas, dX, dY, dW, dH)
+
+    // ── TEXTO OPCIONAL ──
+    const texto = document.getElementById('textoProducto').value.trim()
+    if (texto) {
+      const esDark = ['oscuro','degradado','color'].includes(tipoBg)
+      ctx.font = `bold ${Math.round(cW * 0.065)}px Segoe UI`
+      ctx.fillStyle = esDark ? '#ffffff' : '#111111'
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'bottom'
+      // Sombra del texto
+      ctx.shadowColor = esDark ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.8)'
+      ctx.shadowBlur = 8
+      ctx.fillText(texto, cW / 2, cH - cH * 0.04)
+      ctx.shadowBlur = 0
+    }
+  }
+
+  // ── DESCARGAR ──
+  function descargar() {
+    const canvas = document.getElementById('previewCanvas')
+    const link = document.createElement('a')
+    link.download = 'producto-flotante.png'
+    link.href = canvas.toDataURL('image/png')
+    link.click()
+  }
+
+  // ── COPIAR AL PORTAPAPELES ──
+  async function copiarPortapapeles() {
+    const canvas = document.getElementById('previewCanvas')
+    canvas.toBlob(async blob => {
+      try {
+        await navigator.clipboard.write([
+          new ClipboardItem({ 'image/png': blob })
+        ])
+        alert('¡Imagen copiada! Pega con Ctrl+V donde quieras.')
+      } catch {
+        alert('Tu navegador no permite copiar imágenes. Usa el botón Descargar.')
+      }
+    })
+  }
+
+  // ── DRAG AND DROP ──
+  const zona = document.querySelector('.upload-zone')
+  zona.addEventListener('dragover', e => { e.preventDefault(); zona.style.borderColor = '#e63946' })
+  zona.addEventListener('dragleave', () => { zona.style.borderColor = '#333' })
+  zona.addEventListener('drop', e => {
+    e.preventDefault()
+    zona.style.borderColor = '#333'
+    const file = e.dataTransfer.files[0]
+    if (file && file.type.startsWith('image/')) {
+      const fakeEvent = { target: { files: [file] } }
+      cargarImagen(fakeEvent)
+    }
+  })
+</script>
+</body>
+</html>
