@@ -5,57 +5,186 @@
     <!-- ══ HEAD — metadatos y hojas de estilo ══ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gaming | AsolStore</title>
-    <meta name="description" content="Los mejores productos de gaming: consolas, controles y wabis.">
+    <title>Wabi Sabi Studio | AsolStore</title>
+    <meta name="description" content="Accesorios artesanales hechos a mano. Needle felting, resina y más. Piezas únicas a pedido.">
     <link rel="icon" type="image/svg+xml" href="../assets/logo.svg">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/pages.css">
     <link rel="stylesheet" href="../css/features.css">
     <link rel="stylesheet" href="../css/extras.css">
+    <style>
+        /* ══ WABIS — estilos específicos para la página de pedidos ══ */
+        .wabis-hero-tag { background: #c0392b; color: #fff; }
+        .wabis-cta {
+            display: inline-block;
+            background: #25D366;
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 15px;
+        }
+        .wabis-cta:hover { background: #1ebe5d; }
+
+        /* ══ Botón WhatsApp en tarjetas ══ */
+        .btn-wapi {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #25D366;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .btn-wapi:hover { background: #1ebe5d; }
+        .btn-wapi svg { width: 16px; height: 16px; fill: #fff; flex-shrink: 0; }
+
+        /* ══ Precio "Desde" ══ */
+        .price-desde {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+        .price-desde-label {
+            font-size: 10px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+        .price-desde-amount {
+            font-size: 18px;
+            font-weight: 800;
+            color: #1a1a1a;
+        }
+
+        /* ══ Sección ¿Cómo funciona? ══ */
+        .como-funciona {
+            background: #fafafa;
+            border-top: 1px solid #eee;
+            padding: 56px 24px;
+            text-align: center;
+        }
+        .como-funciona h2 {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+        .como-funciona .cf-sub {
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 15px;
+        }
+        .cf-steps {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+        .cf-step {
+            flex: 1;
+            min-width: 180px;
+            max-width: 220px;
+            background: #fff;
+            border: 1px solid #ebebeb;
+            border-radius: 16px;
+            padding: 28px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.05);
+        }
+        .cf-step-num {
+            width: 40px;
+            height: 40px;
+            background: #c0392b;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 900;
+            margin: 0 auto 14px;
+        }
+        .cf-step h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: #1a1a1a;
+        }
+        .cf-step p {
+            font-size: 13px;
+            color: #666;
+            margin: 0;
+        }
+        .cf-wapi-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #25D366;
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+        .cf-wapi-btn:hover { background: #1ebe5d; }
+        .cf-wapi-btn svg { width: 22px; height: 22px; fill: #fff; }
+    </style>
 </head>
 
 <body>
-    <!-- ══ NOSCRIPT — aviso cuando JS está desactivado ══ -->
+    <!-- ══ NOSCRIPT ══ -->
     <noscript><div style="position:fixed;top:0;left:0;right:0;background:#FF0D2A;color:#fff;text-align:center;padding:12px;font-family:sans-serif;font-size:14px;z-index:9999;">AsolStore requiere JavaScript para funcionar correctamente. Por favor, actívalo en tu navegador.</div></noscript>
 
-    <!-- ══ HEADER — barra de navegación principal inyectada por header.js ══ -->
+    <!-- ══ HEADER ══ -->
     <header id="mainHeader"></header>
     <script src="../js/header.js"></script>
 
-    <!-- ══ BREADCRUMB — ruta de navegación: Inicio › Wabis ══ -->
-    <div class="breadcrumb"><a href="../index.html">Inicio</a><span>›</span><span>Wabis</span></div>
+    <!-- ══ BREADCRUMB ══ -->
+    <div class="breadcrumb"><a href="../index.html">Inicio</a><span>›</span><span>Wabi Sabi Studio</span></div>
 
-    <!-- ══ HERO — carrusel de 2 slides para la sección de wabis ══ -->
+    <!-- ══ HERO — carrusel Wabi Sabi Studio ══ -->
     <div class="hero-carousel" id="heroCarousel" style="margin-bottom:0;">
         <div class="hero-slides">
-            <div class="hero-slide active" data-bg="ofertas">
+            <div class="hero-slide active" data-bg="arte">
                 <div class="hero-slide-shapes">
                     <div class="hs-circle c1"></div>
                     <div class="hs-circle c2"></div>
                 </div>
-                <div class="hero-text"><span class="hero-tag">ACCESORIOS</span>
-                    <div class="hero-title">Tecnología<br>de primera.</div>
-                    <div class="hero-sub">Smartphones, tablets y más con garantía</div><a
-                        href="categoria.html?cat=gaming" class="hero-cta">Ver todo →</a>
+                <div class="hero-text">
+                    <span class="hero-tag wabis-hero-tag">HECHO A MANO</span>
+                    <div class="hero-title">Piezas únicas,<br>solo para ti.</div>
+                    <div class="hero-sub">Needle felting, resina y más — cada pedido es irrepetible</div>
+                    <a href="https://wa.me/51991450553?text=Hola%2C%20quiero%20hacer%20un%20pedido%20de%20Wabi%20Sabi%20Studio%20%F0%9F%8C�" target="_blank" class="wabis-cta">Pedir por WhatsApp →</a>
                 </div>
                 <div class="hero-price">
                     <div class="hero-desde">Desde</div>
-                    <div class="hero-amount"><span class="hero-currency">S/</span>49</div>
+                    <div class="hero-amount"><span class="hero-currency">S/</span>45</div>
                 </div>
             </div>
-            <div class="hero-slide" data-bg="ofertas">
+            <div class="hero-slide" data-bg="arte">
                 <div class="hero-slide-shapes">
                     <div class="hs-circle c1"></div>
                     <div class="hs-circle c2"></div>
                 </div>
-                <div class="hero-text"><span class="hero-tag">TECNOLOGÍA</span>
-                    <div class="hero-title">Hasta 30%<br>de descuento.</div>
-                    <div class="hero-sub">Solo por tiempo limitado</div><a href="categoria.html?cat=gaming"
-                        class="hero-cta">Ver ofertas →</a>
+                <div class="hero-text">
+                    <span class="hero-tag wabis-hero-tag">ACCESORIOS</span>
+                    <div class="hero-title">Arte que<br>puedes llevar.</div>
+                    <div class="hero-sub">Llaveros, bandejas, figuras — pedidos a medida</div>
+                    <a href="https://wa.me/51991450553?text=Hola%2C%20quisiera%20ver%20el%20cat%C3%A1logo%20de%20Wabi%20Sabi%20Studio%20%F0%9F%8C8" target="_blank" class="wabis-cta">Ver catálogo →</a>
                 </div>
                 <div class="hero-price">
-                    <div class="hero-desde">Hasta</div>
-                    <div class="hero-amount" style="font-size:36px;">30% OFF</div>
+                    <div class="hero-desde">A pedido</div>
+                    <div class="hero-amount" style="font-size:28px;line-height:1.2;">100%<br>único</div>
                 </div>
             </div>
         </div>
@@ -64,19 +193,17 @@
         <div class="hero-dots"><span class="hero-dot active"></span><span class="hero-dot"></span></div>
     </div>
 
-    <!-- ══ CATEGORY PAGE — contenedor principal con toolbar y grid de productos ══ -->
+    <!-- ══ CATEGORY PAGE ══ -->
     <div class="category-page">
 
-        <!-- ══ TOOLBAR — filtros y selector de orden ══ -->
+        <!-- ══ TOOLBAR — filtros simplificados para pedidos ══ -->
         <div class="category-toolbar">
             <div class="category-filters">
                 <button class="filter-chip active" data-filter="all">Todos</button>
-                <button class="filter-chip" data-filter="oferta">En oferta</button>
                 <button class="filter-chip" data-filter="nuevo">Nuevos</button>
-                <button class="filter-chip" data-filter="stock">En stock</button>
             </div>
             <div style="display:flex;align-items:center;gap:12px;">
-                <span class="category-count" id="catCount">8 productos</span>
+                <span class="category-count" id="catCount">6 piezas</span>
                 <select class="sort-select" id="sortSelect">
                     <option value="default">Ordenar por</option>
                     <option value="price-asc">Precio: menor a mayor</option>
@@ -86,42 +213,199 @@
             </div>
         </div>
 
-        <!-- ══ GRID PRODUCTOS — productos reales Wabi Sabi Studio ══ -->
+        <!-- ══ GRID PRODUCTOS — catálogo Wabi Sabi Studio ══ -->
         <div class="category-grid" id="categoryGrid">
-            <div class="target-card" data-slug="llavero-gizmo" data-stock="true"><span
-                    class="badge-nuevo">NUEVO</span>
-                <div class="target-card-img-wrap bp-arte-card"><img
-                        src="../assets/images/productos/wabis-llavero-gizmo.jpg" alt="Llavero Gizmo Needle Felting"
-                        style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"></div>
+
+            <!-- Llavero Gizmo -->
+            <div class="target-card" data-slug="llavero-gizmo" data-filter="nuevo">
+                <span class="badge-nuevo">NUEVO</span>
+                <div class="target-card-img-wrap bp-arte-card">
+                    <img src="../assets/images/productos/wabis/wabis-llavero-gizmo.jpg" alt="Llavero Gizmo Needle Felting"
+                        style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
+                </div>
                 <div class="target-card-content">
                     <div class="target-card-brand">Wabi Sabi Studio</div>
                     <h3 class="target-card-title">Llavero Gizmo Needle Felting</h3>
                     <p class="target-card-desc">Hecho a mano · Aguja sobre lana · Pieza única</p>
-                    <div class="target-card-footer"><span class="target-card-price">S/ 45</span><button
-                            class="target-card-btn">Añadir</button></div>
+                    <div class="target-card-footer">
+                        <div class="price-desde">
+                            <span class="price-desde-label">Desde</span>
+                            <span class="price-desde-amount">S/ 45</span>
+                        </div>
+                        <a class="btn-wapi"
+                            href="https://wa.me/51991450553?text=Hola%2C%20quiero%20pedir%20el%20Llavero%20Gizmo%20Needle%20Felting%20%F0%9F%A7%B6"
+                            target="_blank">
+                            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.847L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.373l-.36-.214-3.732.974.998-3.642-.235-.374A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+                            Pedir
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div class="target-card" data-slug="bandeja-nube-carebear" data-stock="true"><span
-                    class="badge-nuevo">NUEVO</span>
-                <div class="target-card-img-wrap bp-arte-card"><img
-                        src="../assets/images/productos/wabis-bandeja-nube-carebear.jpg" alt="Bandeja Nube Care Bear"
-                        style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"></div>
+
+            <!-- Muñeco Payasito -->
+            <div class="target-card" data-slug="muneco-payasito" data-filter="nuevo">
+                <span class="badge-nuevo">NUEVO</span>
+                <div class="target-card-img-wrap bp-arte-card">
+                    <img src="../assets/images/productos/wabis/wabis-muneco-payasito.jpg" alt="Muñeco Payasito Needle Felting"
+                        style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
+                </div>
+                <div class="target-card-content">
+                    <div class="target-card-brand">Wabi Sabi Studio</div>
+                    <h3 class="target-card-title">Muñeco Payasito Needle Felting</h3>
+                    <p class="target-card-desc">Hecho a mano · Verde menta y fucsia · Pieza única</p>
+                    <div class="target-card-footer">
+                        <div class="price-desde">
+                            <span class="price-desde-label">Desde</span>
+                            <span class="price-desde-amount">S/ 45</span>
+                        </div>
+                        <a class="btn-wapi"
+                            href="https://wa.me/51991450553?text=Hola%2C%20quiero%20pedir%20el%20Mu%C3%B1eco%20Payasito%20Needle%20Felting%20%F0%9F%A4%A1"
+                            target="_blank">
+                            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.847L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.373l-.36-.214-3.732.974.998-3.642-.235-.374A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+                            Pedir
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Llavero Personalizado -->
+            <div class="target-card" data-slug="llavero-personalizado" data-filter="nuevo">
+                <span class="badge-nuevo">NUEVO</span>
+                <div class="target-card-img-wrap bp-arte-card">
+                    <img src="../assets/images/productos/wabis/wabis-llavero-personalizado.jpg" alt="Llavero Personalizado Needle Felting"
+                        style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
+                </div>
+                <div class="target-card-content">
+                    <div class="target-card-brand">Wabi Sabi Studio</div>
+                    <h3 class="target-card-title">Llavero Personalizado</h3>
+                    <p class="target-card-desc">Bag charm · Personaje a elección · Hecho a mano</p>
+                    <div class="target-card-footer">
+                        <div class="price-desde">
+                            <span class="price-desde-label">Desde</span>
+                            <span class="price-desde-amount">S/ 50</span>
+                        </div>
+                        <a class="btn-wapi"
+                            href="https://wa.me/51991450553?text=Hola%2C%20quiero%20pedir%20un%20Llavero%20Personalizado%20Needle%20Felting%20%F0%9F%8E%92"
+                            target="_blank">
+                            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.847L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.373l-.36-.214-3.732.974.998-3.642-.235-.374A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+                            Pedir
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pikachu x Charizard -->
+            <div class="target-card" data-slug="pikachu-charizard" data-filter="nuevo">
+                <span class="badge-nuevo">NUEVO</span>
+                <div class="target-card-img-wrap bp-arte-card">
+                    <img src="../assets/images/productos/wabis/wabis-pikachu-charizard.jpg" alt="Pikachu x Charizard Needle Felting"
+                        style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
+                </div>
+                <div class="target-card-content">
+                    <div class="target-card-brand">Wabi Sabi Studio</div>
+                    <h3 class="target-card-title">Pikachu x Charizard</h3>
+                    <p class="target-card-desc">Needle felting · Lana natural · Pieza de colección</p>
+                    <div class="target-card-footer">
+                        <div class="price-desde">
+                            <span class="price-desde-label">Desde</span>
+                            <span class="price-desde-amount">S/ 65</span>
+                        </div>
+                        <a class="btn-wapi"
+                            href="https://wa.me/51991450553?text=Hola%2C%20quiero%20pedir%20el%20Pikachu%20x%20Charizard%20Needle%20Felting%20%F0%9F%94%A5"
+                            target="_blank">
+                            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.847L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.373l-.36-.214-3.732.974.998-3.642-.235-.374A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+                            Pedir
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aretes Seta -->
+            <div class="target-card" data-slug="aretes-seta" data-filter="nuevo">
+                <span class="badge-nuevo">NUEVO</span>
+                <div class="target-card-img-wrap bp-arte-card">
+                    <img src="../assets/images/productos/wabis/wabis-aretes-seta.jpg" alt="Aretes Seta Needle Felting"
+                        style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
+                </div>
+                <div class="target-card-content">
+                    <div class="target-card-brand">Wabi Sabi Studio</div>
+                    <h3 class="target-card-title">Aretes Seta Needle Felting</h3>
+                    <p class="target-card-desc">Argolla dorada · Lana natural · Par de aretes</p>
+                    <div class="target-card-footer">
+                        <div class="price-desde">
+                            <span class="price-desde-label">Desde</span>
+                            <span class="price-desde-amount">S/ 40</span>
+                        </div>
+                        <a class="btn-wapi"
+                            href="https://wa.me/51991450553?text=Hola%2C%20quiero%20pedir%20los%20Aretes%20Seta%20Needle%20Felting%20%F0%9F%8D%84"
+                            target="_blank">
+                            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.847L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.373l-.36-.214-3.732.974.998-3.642-.235-.374A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+                            Pedir
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bandeja Nube Care Bear -->
+            <div class="target-card" data-slug="bandeja-nube-carebear" data-filter="nuevo">
+                <span class="badge-nuevo">NUEVO</span>
+                <div class="target-card-img-wrap bp-arte-card">
+                    <img src="../assets/images/productos/wabis/wabis-bandeja-nube-carebear.jpg" alt="Bandeja Nube Care Bear"
+                        style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
+                </div>
                 <div class="target-card-content">
                     <div class="target-card-brand">Wabi Sabi Studio</div>
                     <h3 class="target-card-title">Bandeja Nube Care Bear</h3>
                     <p class="target-card-desc">Resina artesanal · Figura incluida · Hecha a mano</p>
-                    <div class="target-card-footer"><span class="target-card-price">S/ 55</span><button
-                            class="target-card-btn">Añadir</button></div>
+                    <div class="target-card-footer">
+                        <div class="price-desde">
+                            <span class="price-desde-label">Desde</span>
+                            <span class="price-desde-amount">S/ 55</span>
+                        </div>
+                        <a class="btn-wapi"
+                            href="https://wa.me/51991450553?text=Hola%2C%20quiero%20pedir%20la%20Bandeja%20Nube%20Care%20Bear%20%F0%9F%8C%BC"
+                            target="_blank">
+                            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.847L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.373l-.36-.214-3.732.974.998-3.642-.235-.374A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+                            Pedir
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- ══ PAGINACIÓN — controles de paginación del listado ══ -->
-        <div class="pagination"><button class="page-btn active">1</button><button class="page-btn">2</button><button
-                class="page-btn">›</button></div>
+        </div>
+        <!-- sin paginación — catálogo pequeño a pedido -->
     </div>
 
-    <!-- ══ NEWSLETTER — formulario de suscripción por correo ══ -->
+    <!-- ══ ¿CÓMO FUNCIONA? — flujo de pedido ══ -->
+    <section class="como-funciona">
+        <h2>¿Cómo hacer un pedido?</h2>
+        <p class="cf-sub">Cada pieza se hace a mano, especialmente para ti.</p>
+        <div class="cf-steps">
+            <div class="cf-step">
+                <div class="cf-step-num">1</div>
+                <h3>Elige</h3>
+                <p>Escoge el accesorio que te gusta o pide uno personalizado.</p>
+            </div>
+            <div class="cf-step">
+                <div class="cf-step-num">2</div>
+                <h3>Personaliza</h3>
+                <p>Cuéntanos colores, personaje o detalles que quieras incluir.</p>
+            </div>
+            <div class="cf-step">
+                <div class="cf-step-num">3</div>
+                <h3>Recibe</h3>
+                <p>Tu pieza única llega a ti por delivery coordinado por WhatsApp.</p>
+            </div>
+        </div>
+        <a class="cf-wapi-btn"
+            href="https://wa.me/51991450553?text=Hola%2C%20quiero%20hacer%20un%20pedido%20personalizado%20en%20Wabi%20Sabi%20Studio%20%F0%9F%8C8"
+            target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.847L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.373l-.36-.214-3.732.974.998-3.642-.235-.374A9.818 9.818 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+            Hacer mi pedido ahora
+        </a>
+    </section>
+
+    <!-- ══ NEWSLETTER ══ -->
     <section class="newsletter-section">
         <div class="newsletter-inner">
             <div class="newsletter-title">No te pierdas nada 🔥</div>
@@ -131,7 +415,7 @@
         </div>
     </section>
 
-    <!-- ══ FOOTER — información de marca, enlaces y redes sociales ══ -->
+    <!-- ══ FOOTER ══ -->
     <footer class="footer-section">
         <div class="footer-content">
             <div class="footer-brand"><a href="../index.html"><img src="../assets/logo.svg" alt="AsolStore"
@@ -154,8 +438,7 @@
         </div>
     </footer>
 
-    <!-- ══ SCRIPTS — carga de módulos JS en el orden correcto ══ -->
-    </div>
+    <!-- ══ SCRIPTS ══ -->
     <script src="../js/car-buy.js"></script>
     <script src="../js/app.js" defer></script>
     <script src="../js/pages.js" defer></script>

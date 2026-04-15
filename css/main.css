@@ -1,39 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:wght@800;900&display=swap');
 
-/* ── Slider de productos relacionados — contenedor centrado de las flechas laterales ── */
-.carousel-arrow-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
-
-/* ── Flechas del slider de productos relacionados — botón circular con ícono de navegación ── */
-.carousel-arrow {
-    background: #fff;
-    border: 1.5px solid var(--border);
-    color: var(--red);
-    font-size: 2rem;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transition: var(--ease);
-    margin: 0 8px;
-    z-index: 2;
-}
-
-.carousel-arrow:hover {
-    background: var(--red);
-    color: #fff;
-    border-color: var(--red);
-    box-shadow: 0 4px 16px rgba(255, 13, 42, 0.12);
-    transform: scale(1.08);
-}
 
 /* ================================================================
    main.css — AsolStore Design System
@@ -1968,9 +1934,6 @@ button {
     gap: 8px;
 }
 
-.carousel-arrow-container {
-    flex-shrink: 0;
-}
 
 /* ── Offers product cards — tarjetas de producto adaptadas para el fondo oscuro de ofertas ── */
 .offers-redesign .target-card {

@@ -11,7 +11,7 @@ window.PRODUCTOS_DB = {
         categoria: "Gaming", categoriaSlug: "gaming", slug: "switch-joycon-neon",
         titulo: "Switch Joy-Con Neon", precio: 89, precioOld: 110, descuento: "-20%", ahorras: 21, badge: "-20%", esNuevo: false, enStock: true,
         descripcion: "Controles inalámbricos de alta precisión para Nintendo Switch. Incluye correa de muñeca, base de carga y guía de inicio rápido.",
-        imagen: "../assets/images/productos/gaming-nintendo-switch.jpg", galeria: ["../assets/images/productos/gaming-nintendo-switch.jpg"],
+        imagen: "../assets/images/productos/gaming/gaming-nintendo-switch.jpg", galeria: ["../assets/images/productos/gaming/gaming-nintendo-switch.jpg"],
         rating: 4.8, ratingCount: 127, variantes: ["Neon Rojo", "Neon Azul", "Negro", "Verde"], stock: 23, marca: "Nintendo",
         specs: [["Marca","Nintendo"],["Modelo","HAC-015/016"],["Conectividad","Bluetooth 3.0"],["Batería","525 mAh (~20h)"],["Garantía","12 meses"]],
         resenas: [{nombre:"Carlos M.",stars:5,texto:"Excelente producto, llegó en perfecto estado."},{nombre:"Lucía P.",stars:4,texto:"Muy buenos controles, la vibración HD se siente increíble."},{nombre:"Diego R.",stars:5,texto:"Compré el azul y el rojo. Funcionan perfecto."}]
@@ -20,7 +20,7 @@ window.PRODUCTOS_DB = {
         categoria: "Arte", categoriaSlug: "arte", slug: "poster-el-viajero",
         titulo: "Poster El Viajero 30x60cm", precio: 35, precioOld: 44, descuento: "-20%", ahorras: 9, badge: "-20%", esNuevo: false, enStock: true,
         descripcion: "Edición especial sin marco. Impresión de alta calidad en papel premium 250g. Arte digital exclusivo.",
-        imagen: "../assets/images/productos/arte-poster-viajero.jpg", galeria: ["../assets/images/productos/arte-poster-viajero.jpg"],
+        imagen: "../assets/images/productos/arte/arte-poster-viajero.jpg", galeria: ["../assets/images/productos/arte/arte-poster-viajero.jpg"],
         rating: 4.7, ratingCount: 54, variantes: ["30x60cm"], stock: 12, marca: "DeLaVegaGaming",
         specs: [["Dimensiones","30 × 60 cm"],["Material","Papel premium 250g"],["Acabado","Mate satinado"],["Marco","No incluido"]],
         resenas: [{nombre:"Ana G.",stars:5,texto:"Calidad de impresión increíble."},{nombre:"Marco P.",stars:4,texto:"Llegó bien embalado, sin daños."}]
@@ -29,7 +29,7 @@ window.PRODUCTOS_DB = {
         categoria: "Juve", categoriaSlug: "juve", slug: "hoodie-contrast-color",
         titulo: "Hoodie Contrast Color", precio: 120, precioOld: 140, descuento: "-15%", ahorras: 20, badge: "-15%", esNuevo: false, enStock: true,
         descripcion: "Patchwork premium diseño Guruvani. Material suave y resistente. Disponible en tallas S a XL.",
-        imagen: "../assets/images/productos/juve-hoodie-gurunvani.jpg", galeria: ["../assets/images/productos/juve-hoodie-gurunvani.jpg"],
+        imagen: "../assets/images/productos/juve/juve-hoodie-gurunvani.jpg", galeria: ["../assets/images/productos/juve/juve-hoodie-gurunvani.jpg"],
         rating: 4.9, ratingCount: 31, variantes: ["S","M","L","XL"], stock: 7, marca: "Gurunvani",
         specs: [["Material","80% algodón, 20% poliéster"],["Tallas","S, M, L, XL"],["Color","Gris / Negro contrast"],["Lavado","A máquina 30°C"]],
         resenas: [{nombre:"Luis F.",stars:5,texto:"Calidad premium, se nota en el tacto."},{nombre:"Valeria T.",stars:5,texto:"Diseño único, muchos me preguntaron dónde lo conseguí."}]
@@ -38,7 +38,7 @@ window.PRODUCTOS_DB = {
         categoria: "Wabis", categoriaSlug: "wabis", slug: "llavero-gizmo",
         titulo: "Llavero Gizmo Needle Felting", precio: 45, precioOld: null, descuento: null, ahorras: null, badge: "NUEVO", esNuevo: true, enStock: true,
         descripcion: "Llavero artesanal hecho a mano con técnica needle felting sobre lana. Pieza única — cada uno es diferente. Diseño Gizmo de Gremlins.",
-        imagen: "../assets/images/productos/wabis-llavero-gizmo.jpg", galeria: ["../assets/images/productos/wabis-llavero-gizmo.jpg"],
+        imagen: "../assets/images/productos/wabis/wabis-llavero-gizmo.jpg", galeria: ["../assets/images/productos/wabis/wabis-llavero-gizmo.jpg"],
         rating: 0, ratingCount: 0, variantes: ["Único"], stock: 1, marca: "Wabi Sabi Studio",
         specs: [["Técnica","Needle felting"],["Material","Lana natural"],["Incluye","Mosquetón metálico"],["Tipo","Pieza única artesanal"]],
         resenas: []
@@ -47,16 +47,52 @@ window.PRODUCTOS_DB = {
         categoria: "Wabis", categoriaSlug: "wabis", slug: "bandeja-nube-carebear",
         titulo: "Bandeja Nube Care Bear", precio: 55, precioOld: null, descuento: null, ahorras: null, badge: "NUEVO", esNuevo: true, enStock: true,
         descripcion: "Bandeja artesanal en forma de nube elaborada en resina. Incluye figura Care Bear. Perfecta para llaves, joyas o decoración.",
-        imagen: "../assets/images/productos/wabis-bandeja-nube-carebear.jpg", galeria: ["../assets/images/productos/wabis-bandeja-nube-carebear.jpg"],
+        imagen: "../assets/images/productos/wabis/wabis-bandeja-nube-carebear.jpg", galeria: ["../assets/images/productos/wabis/wabis-bandeja-nube-carebear.jpg"],
         rating: 0, ratingCount: 0, variantes: ["Azul"], stock: 1, marca: "Wabi Sabi Studio",
         specs: [["Material","Resina artesanal"],["Incluye","Figura Care Bear"],["Uso","Organizador / decoración"],["Tipo","Pieza única artesanal"]],
+        resenas: []
+    },
+    "muneco-payasito": {
+        categoria: "Wabis", categoriaSlug: "wabis", slug: "muneco-payasito",
+        titulo: "Muñeco Payasito Needle Felting", precio: 45, precioOld: null, descuento: null, ahorras: null, badge: "NUEVO", esNuevo: true, enStock: true,
+        descripcion: "Adorable muñequito payasito hecho a mano con técnica needle felting. Cuerpo verde menta con lunares y gorrito fucsia. Pieza única irrepetible.",
+        imagen: "../assets/images/productos/wabis/wabis-muneco-payasito.jpg", galeria: ["../assets/images/productos/wabis/wabis-muneco-payasito.jpg"],
+        rating: 0, ratingCount: 0, variantes: ["Único"], stock: 1, marca: "Wabi Sabi Studio",
+        specs: [["Técnica","Needle felting"],["Material","Lana natural"],["Colores","Verde menta y fucsia"],["Tipo","Pieza única artesanal"]],
+        resenas: []
+    },
+    "llavero-personalizado": {
+        categoria: "Wabis", categoriaSlug: "wabis", slug: "llavero-personalizado",
+        titulo: "Llavero Personalizado Needle Felting", precio: 50, precioOld: null, descuento: null, ahorras: null, badge: "NUEVO", esNuevo: true, enStock: true,
+        descripcion: "Llavero bag charm personalizado: puedes elegir el personaje, colores y detalles. Hecho a mano con aguja sobre lana. Perfecto como regalo o accesorio único para tu bolso.",
+        imagen: "../assets/images/productos/wabis/wabis-llavero-personalizado.jpg", galeria: ["../assets/images/productos/wabis/wabis-llavero-personalizado.jpg"],
+        rating: 0, ratingCount: 0, variantes: ["Personalizable"], stock: 5, marca: "Wabi Sabi Studio",
+        specs: [["Técnica","Needle felting"],["Material","Lana natural"],["Personalización","Personaje a elección"],["Incluye","Mosquetón metálico"]],
+        resenas: []
+    },
+    "pikachu-charizard": {
+        categoria: "Wabis", categoriaSlug: "wabis", slug: "pikachu-charizard",
+        titulo: "Pikachu x Charizard Needle Felting", precio: 65, precioOld: null, descuento: null, ahorras: null, badge: "NUEVO", esNuevo: true, enStock: true,
+        descripcion: "Pikachu disfrazado de Charizard, hecho a mano con técnica needle felting. Detalle de alas, cuernos y collar. Pieza de colección para fans de Pokémon.",
+        imagen: "../assets/images/productos/wabis/wabis-pikachu-charizard.jpg", galeria: ["../assets/images/productos/wabis/wabis-pikachu-charizard.jpg"],
+        rating: 0, ratingCount: 0, variantes: ["Único"], stock: 1, marca: "Wabi Sabi Studio",
+        specs: [["Técnica","Needle felting"],["Material","Lana natural"],["Personaje","Pikachu x Charizard"],["Tipo","Pieza de colección"]],
+        resenas: []
+    },
+    "aretes-seta": {
+        categoria: "Wabis", categoriaSlug: "wabis", slug: "aretes-seta",
+        titulo: "Aretes Seta Needle Felting", precio: 40, precioOld: null, descuento: null, ahorras: null, badge: "NUEVO", esNuevo: true, enStock: true,
+        descripcion: "Par de aretes con forma de seta kawaii hechos a mano con técnica needle felting. Argolla de metal dorado. Livianos y únicos para tu outfit.",
+        imagen: "../assets/images/productos/wabis/wabis-aretes-seta.jpg", galeria: ["../assets/images/productos/wabis/wabis-aretes-seta.jpg"],
+        rating: 0, ratingCount: 0, variantes: ["Dorado"], stock: 3, marca: "Wabi Sabi Studio",
+        specs: [["Técnica","Needle felting"],["Material","Lana natural"],["Argolla","Metal dorado"],["Tipo","Par de aretes"]],
         resenas: []
     },
     "gatillo-mobile-pro-metal": {
         categoria: "AsolStore", categoriaSlug: "asolstore", slug: "gatillo-mobile-pro-metal",
         titulo: "Gatillo Mobile Pro Metal", precio: 19.90, precioOld: null, descuento: null, ahorras: null, badge: "NUEVO", esNuevo: true, enStock: true,
         descripcion: "Par de gatillos para móvil con cuerpo acrílico transparente y botones de metal plateado. Ajuste por rosca para cualquier smartphone. Ideal para shooters como COD Mobile y PUBG.",
-        imagen: "../assets/images/productos/asolstore-gatillo-pro-metal.jpg", galeria: ["../assets/images/productos/asolstore-gatillo-pro-metal.jpg"],
+        imagen: "../assets/images/productos/asolstore/asolstore-gatillo-pro-metal.jpg", galeria: ["../assets/images/productos/asolstore/asolstore-gatillo-pro-metal.jpg"],
         rating: 0, ratingCount: 0, variantes: ["Transparente / Metal"], stock: 30, marca: "AsolStore",
         specs: [["Material","Acrílico + aluminio"],["Compatibilidad","iOS y Android"],["Ajuste","Rosca regulable"],["Incluye","Par de gatillos + caja plástica"],["Juegos recomendados","COD Mobile, PUBG, Free Fire"]],
         resenas: []
@@ -65,7 +101,7 @@ window.PRODUCTOS_DB = {
         categoria: "AsolStore", categoriaSlug: "asolstore", slug: "gatillo-plastico-gamer",
         titulo: "Gatillo Plástico Gamer", precio: 14.90, precioOld: null, descuento: null, ahorras: null, badge: "NUEVO", esNuevo: true, enStock: true,
         descripcion: "Par de gatillos para móvil en ABS resistente con detalles rojos. Clip universal compatible con la mayoría de smartphones. Respuesta rápida para mayor ventaja en partida.",
-        imagen: "../assets/images/productos/asolstore-gatillo-plastico-gamer.jpg", galeria: ["../assets/images/productos/asolstore-gatillo-plastico-gamer.jpg"],
+        imagen: "../assets/images/productos/asolstore/asolstore-gatillo-plastico-gamer.jpg", galeria: ["../assets/images/productos/asolstore/asolstore-gatillo-plastico-gamer.jpg"],
         rating: 0, ratingCount: 0, variantes: ["Negro / Rojo"], stock: 22, marca: "AsolStore",
         specs: [["Material","ABS resistente"],["Compatibilidad","iOS y Android"],["Clip","Universal ajustable"],["Incluye","Par de gatillos + caja plástica"],["Juegos recomendados","COD Mobile, PUBG, Free Fire, Minecraft"]],
         resenas: []
@@ -74,7 +110,7 @@ window.PRODUCTOS_DB = {
         categoria: "Gaming", categoriaSlug: "gaming", slug: "kit-gatillos-sarafox",
         titulo: "Kit Gatillos Sarafox F6", precio: 55, precioOld: 65, descuento: "-15%", ahorras: 10, badge: "NUEVO", esNuevo: true, enStock: true,
         descripcion: "4 botones + dedales gamer. Compatible con la mayoría de smartphones. Mejora tu puntería al instante.",
-        imagen: "../assets/images/productos/gaming-gatillos-belug.jpg", galeria: ["../assets/images/productos/gaming-gatillos-belug.jpg"],
+        imagen: "../assets/images/productos/gaming/gaming-gatillos-belug.jpg", galeria: ["../assets/images/productos/gaming/gaming-gatillos-belug.jpg"],
         rating: 4.6, ratingCount: 19, variantes: ["F6 Standard"], stock: 15, marca: "Belug",
         specs: [["Modelo","Sarafox F6"],["Compatibilidad","iOS y Android"],["Botones","4 gatillos físicos"],["Material","ABS + aluminio"]],
         resenas: [{nombre:"Rodrigo C.",stars:5,texto:"Mejoré mucho en PUBG Mobile."},{nombre:"Sofía R.",stars:4,texto:"Buena calidad, fácil de instalar."}]
@@ -83,7 +119,7 @@ window.PRODUCTOS_DB = {
         categoria: "Juve", categoriaSlug: "juve", slug: "gorra-snapback",
         titulo: "Gorra Snapback Logo", precio: 39, precioOld: 49, descuento: "-20%", ahorras: 10, badge: "-20%", esNuevo: false, enStock: true,
         descripcion: "Edición exclusiva Juve. Ajustable, material premium 100% algodón. Logo bordado frontal.",
-        imagen: "../assets/images/productos/juve-hoodie-gurunvani.jpg", galeria: ["../assets/images/productos/juve-hoodie-gurunvani.jpg"],
+        imagen: "../assets/images/productos/juve/juve-hoodie-gurunvani.jpg", galeria: ["../assets/images/productos/juve/juve-hoodie-gurunvani.jpg"],
         rating: 4.8, ratingCount: 15, variantes: ["Talla única"], stock: 18, marca: "Juve",
         specs: [["Material","100% algodón"],["Talla","Única ajustable"],["Color","Negro / Logo rojo"],["Cierre","Snapback plástico"]],
         resenas: [{nombre:"Kevin A.",stars:5,texto:"Calidad excelente, el bordado es nítido."}]
@@ -92,7 +128,7 @@ window.PRODUCTOS_DB = {
         categoria: "Gaming", categoriaSlug: "gaming", slug: "control-ps5",
         titulo: "Control DualSense PS5", precio: 299, precioOld: 349, descuento: "-14%", ahorras: 50, badge: "-14%", esNuevo: false, enStock: true,
         descripcion: "Control inalámbrico PS5 con haptic feedback y gatillos adaptativos. Color blanco original Sony.",
-        imagen: "../assets/images/productos/gaming-control-ps5.jpg", galeria: ["../assets/images/productos/gaming-control-ps5.jpg"],
+        imagen: "../assets/images/productos/gaming/gaming-control-ps5.jpg", galeria: ["../assets/images/productos/gaming/gaming-control-ps5.jpg"],
         rating: 4.9, ratingCount: 67, variantes: ["Blanco"], stock: 8, marca: "Sony",
         specs: [["Marca","Sony"],["Compatibilidad","PS5 / PC"],["Batería","1560 mAh (~12h)"],["Conectividad","Bluetooth 5.1"],["Garantía","12 meses"]],
         resenas: [{nombre:"Andrés V.",stars:5,texto:"La vibración háptica es increíble, se siente cada impacto."},{nombre:"María C.",stars:5,texto:"Exactamente igual al original. Llegó bien embalado."}]
@@ -101,7 +137,7 @@ window.PRODUCTOS_DB = {
         categoria: "Gaming", categoriaSlug: "gaming", slug: "ps4-slim-blanca",
         titulo: "PS4 Slim 1TB Blanca", precio: 899, precioOld: 1099, descuento: "-18%", ahorras: 200, badge: "-18%", esNuevo: false, enStock: true,
         descripcion: "Consola PS4 Slim 1TB color blanco glacier. Incluye mando DualShock 4 y cable HDMI.",
-        imagen: "../assets/images/productos/gaming-ps4-slim-blanca.jpg", galeria: ["../assets/images/productos/gaming-ps4-slim-blanca.jpg"],
+        imagen: "../assets/images/productos/gaming/gaming-ps4-slim-blanca.jpg", galeria: ["../assets/images/productos/gaming/gaming-ps4-slim-blanca.jpg"],
         rating: 4.7, ratingCount: 34, variantes: ["1TB Blanco"], stock: 4, marca: "Sony",
         specs: [["Almacenamiento","1 TB HDD"],["Resolución","1080p Full HD"],["Incluye","Mando DualShock 4 + HDMI"],["Garantía","12 meses"]],
         resenas: [{nombre:"Carlos T.",stars:5,texto:"Perfecta para los clásicos de PS4. Precio justo."},{nombre:"Ximena P.",stars:4,texto:"Llegó en buen estado, funciona perfecto."}]
@@ -110,7 +146,7 @@ window.PRODUCTOS_DB = {
         categoria: "Gaming", categoriaSlug: "gaming", slug: "playstation-classic",
         titulo: "PlayStation Classic Mini", precio: 189, precioOld: 249, descuento: "-24%", ahorras: 60, badge: "-24%", esNuevo: false, enStock: true,
         descripcion: "Consola retro con 20 juegos clásicos preinstalados. Incluye 2 mandos originales con cable.",
-        imagen: "../assets/images/productos/gaming-playstation-classic.jpg", galeria: ["../assets/images/productos/gaming-playstation-classic.jpg"],
+        imagen: "../assets/images/productos/gaming/gaming-playstation-classic.jpg", galeria: ["../assets/images/productos/gaming/gaming-playstation-classic.jpg"],
         rating: 4.3, ratingCount: 21, variantes: ["Edición clásica"], stock: 6, marca: "Sony",
         specs: [["Juegos incluidos","20 títulos clásicos"],["Puertos","2x USB, HDMI, micro-USB"],["Resolución","720p / 1080p"],["Garantía","6 meses"]],
         resenas: [{nombre:"Pedro M.",stars:4,texto:"Nostalgia pura. Los juegos son los clásicos de siempre."}]
@@ -119,7 +155,7 @@ window.PRODUCTOS_DB = {
         categoria: "Arte", categoriaSlug: "arte", slug: "cuadro-astronauta",
         titulo: "Cuadro Astronauta Digital", precio: 79, precioOld: 99, descuento: "-20%", ahorras: 20, badge: "-20%", esNuevo: true, enStock: true,
         descripcion: "Arte digital impreso en lienzo 40x50cm. Marco flotante negro incluido. Certificado de autenticidad.",
-        imagen: "../assets/images/productos/arte-cuadro-astronauta.jpg", galeria: ["../assets/images/productos/arte-cuadro-astronauta.jpg"],
+        imagen: "../assets/images/productos/arte/arte-cuadro-astronauta.jpg", galeria: ["../assets/images/productos/arte/arte-cuadro-astronauta.jpg"],
         rating: 4.8, ratingCount: 18, variantes: ["40x50cm"], stock: 9, marca: "AsolStore",
         specs: [["Dimensiones","40 × 50 cm"],["Soporte","Lienzo canvas"],["Marco","Flotante negro"],["Certificado","Incluido"]],
         resenas: [{nombre:"Isabella R.",stars:5,texto:"Increíble calidad. El marco flotante le da un toque premium."}]
